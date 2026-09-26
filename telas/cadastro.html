@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CADASTRO - EMPRESA</title>
+</head>
+<body>
+    <label for="ipt_nome_empresa">Nome da empresa:</label>
+    <br>
+    <input type="text" id="ipt_nome_empresa">
+    <br>
+    <label for="ipt_email_empresa">Email da empresa:</label>
+    <br>
+    <input type="text" id="ipt_email_empresa">
+    <br>
+    <label for="ipt_cnpj_empresa">CNPJ da empresa:</label>
+    <br>
+    <input type="text" id="ipt_cnpj_empresa">
+    <br>
+    <label for="ipt_senha_empresa">Senha para empresa:</label>
+    <br>
+    <input type="password" id="ipt_senha_empresa">
+    <br>
+    <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
+    <br>
+    <label for="ipt_senha_confirma_empresa">Confirme sua senha:</label>
+    <br>
+    <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()">
+    <br>
+    <div id="div_senha"></div>
+    <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+</body>
+</html>
+<script>
+    function cadastrar() {
+        let nome = ipt_nome_empresa.value;
+        let email = ipt_email_empresa.value;
+        let cnpj = ipt_cnpj_empresa.value;
+        let senha = ipt_senha_empresa.value;
+        let confirma = ipt_senha_confirma_empresa.value;
+        let mensagem = ``;
+        
+        if (senha.length < 8) {
+            alert(`A senha deve conter pelo menos 8 caracteres`);
+        }
+        if (!senha.includes('!', '@', '#', '*', '_',)) {
+            alert(`
+            A senha deve conter pelo menos um caractere especial.
+            !, @, #, *, _
+            `);
+        }
+    }
+
+    function verificar() {
+        let senha = ipt_senha_empresa.value;
+        let confirma = ipt_senha_confirma_empresa.value;
+        let mensagem = ``;
+
+        if (senha != confirma) {
+            mensagem = `<span style="color: red;">As senhas não coincidem</span>`;
+        }
+
+        div_senha.innerHTML = mensagem;
+    }
+</script>
