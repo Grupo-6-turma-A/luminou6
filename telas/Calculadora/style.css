@@ -13,8 +13,11 @@ header{
     display: grid;
     grid-template-columns: 50px auto 50px;
     grid-template-rows: auto;
-    background-color: #F3E5AB;
+    background-color: #FDEFD2;
 
+}
+body{
+    background-color: #FFF8E7;
 }
 #header{
     grid-column: 2;
@@ -61,4 +64,107 @@ header{
     border: solid 2px #7E8863;
     cursor: pointer;
     
+}
+
+
+#pagina{
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    grid-template-rows: auto;
+
+}
+#simulador{
+    grid-column: 2;
+    margin-top: 40px;
+}
+#algo{
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    margin: 40px 0px;
+    gap: 10px;
+}
+
+.card{
+    grid-row: 2;
+    grid-column: 2;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+
+}
+#card_inputs{
+    grid-column: 1;
+}
+#card_resultado{
+    grid-column: 2;
+}
+.input_card{
+    border: solid 2px lightgrey;   
+    border-radius: 10px; 
+    display: flex;
+    gap: 25px;  
+    align-items: center;
+    
+}
+
+.input_bloco{
+    padding: 20px;
+}
+
+.nome_input{
+    font-weight: bolder;
+    
+}
+.input_descricao{
+    font-weight: 300;
+    color: grey;
+    padding: 10px 0px 20px 0px;
+}
+.input{
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 1px lightgrey;
+    
+}
+#button{
+    background-color: #7E8863;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 12px;
+    font-weight: bolder;
+}
+
+#div_vermelha{
+    background-color: lightpink;
+    display: grid;
+    grid-template-columns: 50px  2fr 1fr;
+    border: solid 1px red;
+
+}
+
+.dinheiro{
+    color: red;
+    justify-self: center;
+}
+#div_branca{
+    display: grid;
+    grid-template-columns: 50px  2fr 1fr;
+}
+#div_verde{
+    background-color: lightgreen;
+    display: grid;
+    grid-template-columns: 50px  2fr 1fr;
+    border: solid 1px green;
+
+}
+.ganho{
+    color: green;
+    justify-self: center;
 }

@@ -32,14 +32,98 @@
 
     </header>
     
-    <h1>Calculadora financeira</h1>
-    <label for="inp_estufa">Quantidade de estufas:</label><br>
-    <i>É considerado a projeção média de uma estufa pequena tradicional (não adensada) de 50m2</i><br>
-    <input type="text" id="inp_estufa"><br><br>
-    <label for="inp_obra">Média anual gasta em mão de obra:</label><br>
+    <section id="pagina">
+
+        <div id="simulador">
+            <h1>Simulador financeira</h1>
+            <p>Calcule o impacto financeiro das perdas por luminosidade na sua produção de baunilha.</p>
+        </div>
+       
+        <section id="algo">
+            <section class="card" id="card_inputs">
+
+            <div>
+                <h2 class="nome_input">Insira os dados do cultivo</h2>
+                <p class="input_descricao">Preencha as informações abaixo para realizar a simulação.</p>
+            </div>
+            
+            <div class="input_card">
+
+                <img src="./img/ChatGPT Image 5 de set. de 2026, 12_05_41 1.ng" alt="">
+                <div class="input_bloco">
+                    <label class="nome_input" for="inp_estufa">Quantidade de estufas</label>
+                    <p class="input_descricao">É considerado a projeção média de uma estufa pequena tradicional (não adensada) de 50m².</p>
+                    <input class="input" type="text" id="inp_estufa" placeholder="Estufas">
+                </div>
+            </div>
+
+            <div class="input_card">
+                <img src="./img/ChatGPT Image 5 de set. de 2026, 12_05_41 1.ng" alt="">
+                <div class="input_bloco">
+                    <label class="nome_input" for="inp_estufa">Média anual gasta em mão de obra</label>
+                    <p class="input_descricao">Custo de toda mão de obra envolvida no processo.</p>
+                     <input class="input" type="text" id="inp_obra" placeholder="R$">
+                </div>
+            </div>
+
+            <button id="button"  onclick="analisar()">Analisar</button>
+             </section>
+
+            <section class="card" id="card_resultado">
+
+                    <div>
+                        <h2 class="nome_input">Resultados da Simulação</h2>
+                        <p class="input_descricao">Veja os principais indicadores fincairos do seu cultivo.</p>
+                    </div>
+
+                    <div class="input_card" id="div_vermelha">
+
+                        <img src="./img/ChatGPT Image 5 de set. de 2026, 12_05_41 1.ng" alt="">
+                        <div class="input_bloco">
+                            <p class="nome_input" for="inp_estufa">Perda mensal estimada</p>
+                            <p class="input_descricao">Sem Luminou6, você perderia R$ 84374.85 no ano.caso apenas 15% das suas estufas tivessem problemas relacionados à temperatura.</p>
+                            
+                        </div>
+                        <h2 class="dinheiro">R$7.031,24</h2>
+                    </div>
+
+                      <div class="input_card" id="div_branca">
+
+                        <img src="./img/ChatGPT Image 5 de set. de 2026, 12_05_41 1.ng" alt="">
+                        <div class="input_bloco">
+                            <p class="nome_input" for="inp_estufa">Valor final anual</p>
+                            <p class="input_descricao">Custo total estimadosem a Luminou6.</p>
+                            
+                        </div>
+                        <h2 class="">R$483.234,23</h2>
+                    </div>
+
+                      <div class="input_card" id="div_verde">
+
+                        <img src="./img/ChatGPT Image 5 de set. de 2026, 12_05_41 1.ng" alt="">
+                        <div class="input_bloco">
+                            <p class="nome_input" for="inp_estufa">Projeção de ganhos anuais</p>
+                            <p class="input_descricao">Com o Luminou6, a projeção de ganhos anuais da sua empresa seria de:</p>
+                            
+                        </div>
+                        <h2 class="ganho">R$7.031,24</h2>
+                    </div>
+            </section>
+
+        </section>
+    
+        
+    </section>
+   
+
+
+    <!-- <label for="inp_estufa">Quantidade de estufas:</label><br>
+    <i>É considerado a projeção média de uma estufa pequena tradicional (não adensada) de 50m2</i><br> -->
+    
+    <!-- <label for="inp_obra">Média anual gasta em mão de obra:</label><br>
     <i>Custo de toda mão de obra envolvida no processo</i><br>
-    <input type="text" id="inp_obra" placeholder="em R$"><br><br>
-    <button onclick="analisar()">Analisar</button><br>
+    <input type="text" id="inp_obra" placeholder="em R$"><br><br> -->
+    <br>
     <div id="div_msg"></div>
 </body>
 </html>
