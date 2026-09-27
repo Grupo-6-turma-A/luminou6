@@ -1,85 +1,150 @@
-CREATE DATABASE sprint2;
-USE sprint2;
+CREATE DATABASE bd_luminousix;
+USE  bd_luminousix;
 
-create table empresa(
-    id_empresa int primary key auto_increment,
-    nome_empresa VARCHAR(40) NOT NULL,
-    cnpj CHAR (30) UNIQUE NOT NULL,
-    telefone_corporativo VARCHAR(20)
+ CREATE TABLE cliente (
+idCliente INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (100),
+identificacao_fiscal VARCHAR(45) NOT NULL,
+email_contato VARCHAR(100) NOT NULL CONSTRAINT chkEmail_contato CHECK(email_contato LIKE '%@%'), 
+telefone VARCHAR(20) NOT NULL
 );
 
-INSERT INTO empresa (nome_empresa, cnpj, telefone_corporativo) VALUES
-('Orquídeas do Vale S.A.', '31.849.025/0001-44', '(11) 94025-1849'),
-('Baunilha Imperial Extratos', '50.642.119/0001-35', '(19) 96522-8103'),
-('Madagascar Soluções Agro', '15.398.241/0001-12', '(62) 98311-5744'),
-('Bourbon Flores e Sabores', '81.047.622/0001-90', '(21) 97155-3021'),
-('Cerrado Vanilla Orgânicos', '29.753.864/0001-78', '(31) 99204-6652');
+INSERT INTO cliente (nome, identificacao_fiscal, email_contato, telefone) VALUES
+('Baunilha Brasil Ltda', '12345678000190', 'contato@baunilhabrasil.com', '11987654321'),
+('Fazenda da Baunilha', '98765432000155', 'contato@fazendaBaunilha.com', '11976543210'),
+('Cultivo Vanilla', '45678912000133', 'contato@cultivovanilla.com', '11965432109');
 
-create table usuario(
-    id_usuario int primary key auto_increment,
-    fkEmpresa int,
-    nome_completo varchar(40),
-    email varchar(40) not null constraint chkEmail check(email like '%@%'),
-    senha VARCHAR(100) not null, 
-    cargo VARCHAR (100),
-    CONSTRAINT fk_usuario_empresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(id_empresa)
+CREATE TABLE usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100),
+email_cadastro VARCHAR(100) CONSTRAINT chkEmail_cadastro CHECK(email_cadastro LIKE '%@%'),
+senha_cadastro VARCHAR(100),
+cargo VARCHAR(100),
+cliente_idCliente INT NOT NULL,
+admin_fkUsuario INT,
+
+CONSTRAINT fk_usuarioCliente
+    FOREIGN KEY (cliente_idCliente)
+    REFERENCES cliente(idCliente),
+
+CONSTRAINT fk_usuarioAdmin
+    FOREIGN KEY (admin_fkUsuario)
+    REFERENCES usuario(idUsuario)
 );
 
-INSERT INTO usuario (fkEmpresa, nome_completo, email, senha, cargo) VALUES
-(1, 'Ricardo Fontes', 'ricardo.f89@orquideasvale.com', 'p@ss9102_X', 'Gestor de Estufas'),
-(2, 'Camila Schmidt', 'camila.s@baunilhaimperial.com', 'sec_mada99', 'Supervisora de Cura'),
-(3, 'Felipe Nogueira', 'felipe.nog@madagascaragro.com', 'Fe#2026_agro', 'Engenheiro de Campo'),
-(4, 'Juliana Meireles', 'jumeireles@bourbonflores.com', 'mudar@12345', 'Técnica Agrícola'),
-(5, 'Marcos Vinícius', 'marcos.v@cerradovanilla.com', 'orquidea!88', 'Polinizador Sênior');
+INSERT INTO usuario (nome, email_cadastro, senha_cadastro, cargo, cliente_idCliente, admin_fkUsuario) VALUES
+('Gabriel Silva', 'gabriel@baunilhabrasil.com', '123456', 'Administrador', 1, NULL),
+('João Santos', 'joao@baunilhabrasil.com', '123456', 'Técnico', 1, NULL),
+('Maria Oliveira', 'maria@fazendaBaunilha.com', '123456', 'Administrador', 2, NULL),
+('Pedro Souza', 'pedro@cultivovanilla.com', '123456', 'Técnico', 3, NULL);
 
-create table localizacao(
-    id_localizacao int primary key auto_increment,
-    local_alocado int,
-    latitude DECIMAL(10,2),
-    longitude DECIMAL (10,2),
-    ponto_referencia VARCHAR (100)
+CREATE TABLE estufa (
+idEstufa INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR (100),
+fase_planta VARCHAR(100),
+percentual_sombreamento VARCHAR(3),
+
+cliente_idCliente INT NOT NULL,
+CONSTRAINT fk_estufaCliente
+    FOREIGN KEY (cliente_idCliente)
+    REFERENCES cliente(idCliente)
 );
 
-INSERT INTO localizacao (local_alocado, latitude, longitude, ponto_referencia) VALUES
-(101, -16.45, -48.33, 'Próximo à cerca divisória do Setor Sul, sob sombrite 60%'),
-(112, -22.18, -46.74, 'Canteiro experimental de tutor vivo, perto da vala de drenagem'),
-(501, -20.03, -44.12, 'Estufa de mudas novas, ao lado da caixa dágua principal'),
-(340, -12.97, -38.51, 'Área de secagem outdoor, quadrante central B'),
-(889, -23.95, -47.20, 'Lote de orquídeas em floração, atrás do galpão de ferramentas');
+INSERT INTO estufa (nome, fase_planta, percentual_sombreamento, cliente_idCliente) VALUES
+('Estufa 01', 'Crescimento', '50', 1),
+('Estufa 02', 'Floração', '60', 1),
+('Estufa Principal', 'Crescimento', '40', 2),
+('Estufa A', 'Floração', '50', 3);
 
-create table sensor(
-    id_sensor int primary key auto_increment,
-    codigo_sensor int unique,
-    fkLocalizacao int,
-    intensidadeLuminosidade_ideal decimal(10,2) default 800.00 ,
-    statuss varchar(10),
-    luminosidade decimal(10,2),
-    data_leitura datetime default current_timestamp,
-    CONSTRAINT fk_sensor_localizacao FOREIGN KEY (fkLocalizacao) REFERENCES localizacao(id_localizacao)
+CREATE TABLE sensor (
+idSensor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+status_sensor VARCHAR(45) CONSTRAINT chkStatus CHECK(status_sensor in('Ativo', 'Inativo')),
+codigo_sensor VARCHAR(45) NOT NULL UNIQUE,
+estufa_idEstufa INT NOT NULL,
+
+CONSTRAINT fk_sensor_estufa
+    FOREIGN KEY (ESTUFA_idESTUFA)
+    REFERENCES ESTUFA(idESTUFA)
 );
 
-INSERT INTO sensor (codigo_sensor, fkLocalizacao, intensidadeLuminosidade_ideal, statuss, luminosidade) VALUES
-(9482, 1, 800.00, 'ativo', 764.20),
-(1105, 2, 750.00, 'ativo', 892.00),
-(3391, 3, 800.00, 'inativo', 0.00),
-(4820, 4, 400.00, 'ativo', 385.50),
-(2744, 5, 850.00, 'ativo', 841.10);
+INSERT INTO sensor (nome, status_sensor, codigo_sensor, estufa_idEstufa) VALUES
+('Sensor Luminosidade 01', 'Ativo', 'LUM001', 1),
+('Sensor Luminosidade 02', 'Ativo', 'LUM002', 1),
+('Sensor Luminosidade 03', 'Inativo', 'LUM003', 2),
+('Sensor Luminosidade 04', 'Ativo', 'LUM004', 3),
+('Sensor Luminosidade 05', 'Ativo', 'LUM005', 4);
 
-SELECT * FROM usuario 
-JOIN empresa
-ON fkEmpresa = id_empresa;
+CREATE TABLE leitura (
+idLeitura INT PRIMARY KEY AUTO_INCREMENT,
+valorADC INT NOT NULL,
+data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-SELECT * FROM sensor
-JOIN localizacao
-ON fkLocalizacao = id_localizacao;
+sensor_idSensor INT NOT NULL,
 
-SELECT 
-    e.nome_empresa AS nome,
-    u.nome_completo AS nome_usuario,
-    l.ponto_referencia AS localizacao,
-    s.luminosidade
+CONSTRAINT fk_leituraSensor
+    FOREIGN KEY (sensor_idSensor)
+    REFERENCES sensor(idSensor)
+);
+
+INSERT INTO leitura (valorADC, data_hora, sensor_idSensor) VALUES
+(420, '2026-09-25 08:00:00', 1),
+(580, '2026-09-25 10:00:00', 1),
+(720, '2026-09-25 12:00:00', 1),
+(650, '2026-09-25 14:00:00', 1),
+(500, '2026-09-25 16:00:00', 1),
+(380, '2026-09-25 08:30:00', 2),
+(550, '2026-09-25 10:30:00', 2),
+(690, '2026-09-25 12:30:00', 2),
+(610, '2026-09-25 14:30:00', 2),
+(450, '2026-09-25 16:30:00', 2),
+(460, '2026-09-25 09:00:00', 3),
+(620, '2026-09-25 11:00:00', 4),
+(750, '2026-09-25 13:00:00', 4),
+(570, '2026-09-25 15:00:00', 5);
+
+SELECT
+    cliente.nome AS cliente,
+    usuario.nome AS usuario,
+    usuario.email_cadastro,
+    usuario.cargo
+FROM cliente
+JOIN usuario
+ON cliente.idCliente = usuario.cliente_idCliente;
+
+SELECT
+    estufa.nome AS estufa,
+    estufa.fase_planta,
+    sensor.nome AS sensor,
+    sensor.status_sensor,
+    sensor.codigo_sensor
+FROM estufa
+JOIN sensor
+ON estufa.idEstufa = sensor.estufa_idEstufa;
+
+SELECT
+    sensor.nome AS sensor,
+    sensor.codigo_sensor,
+    leitura.valorADC,
+    leitura.data_hora
+FROM sensor
+JOIN leitura
+ON sensor.idSensor = leitura.sensor_idSensor;
+
+SELECT
+    c.nome AS nome_cliente,
+    u.nome AS nome_usuario,
+    e.nome AS nome_estufa,
+    s.nome AS nome_sensor,
+    s.status_sensor,
+    l.valorADC,
+    l.data_hora
 FROM usuario AS u
-JOIN empresa AS e ON u.fkEmpresa = e.id_empresa
+JOIN cliente AS c
+ON u.cliente_idCliente = c.idCliente
+JOIN estufa AS e
+ON e.cliente_idCliente = c.idCliente
 JOIN sensor AS s
-JOIN localizacao AS l ON s.fkLocalizacao = l.id_localizacao;
-
+ON s.estufa_idEstufa = e.idEstufa
+JOIN leitura AS l
+ON l.sensor_idSensor = s.idSensor;
