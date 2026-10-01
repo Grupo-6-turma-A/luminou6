@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #faf9f4;
+}
+
+/* Menu */
+
+header {
+    width: 100%;
+    padding: 20px;
+    background-color: #FDEFD2;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    width: 60px;
+    margin-left: 20px;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #7E8863;
+    font-weight: 600;
+}
+
+.nav-item.active a {
+    color: #3d4230;
+    border-bottom: 3px solid #3d4230;
+}
+
+.nav-buttons {
+    margin-right: 20px;
+    display: flex;
+    gap: 30px;
+}
+
+.btn-cadastra,
+.btn-login {
+    border-radius: 50px;
+    border: 2px solid #7E8863;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cadastra {
+    color: #7E8863;
+    background-color: #ffffff;
+}
+
+.btn-login {
+    color: #ffffff;
+    background-color: #7E8863;
+}
+
+/* Parte Home */
+
+.div-home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #faf9f4;
+    padding: 0 0 40px 80px;
+}  
+
+.img-home {
+    width: 850px;
+}
+
+.div-textoHome h3 {
+    font-size: 80px;
+    font-weight: 200;
+    color: #7E8863;
+}
+
+.div-textoHome p {
+    margin: 30px 0 50px 0;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.div-button {
+    display: flex;
+    gap: 30px;
+}
+
+.btn-sobre {
+    border-radius: 50px;
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    background-color: #E8C978;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-simulador {
+    border-radius: 50px;
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #7E8863;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Parte Sobre o Projeto */
+
+.img-sobre {
+    width: 100%;
+}
+
+.div-sobre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -56px;
+    margin-bottom: 50px;
+}
+
+.div-sobreInfo {
+    display: flex;
+    align-items: center;
+}
+
+.div-luminosidade,
+.div-desenvolvimento,
+.div-acompanhamento {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.div-luminosidade img,
+.div-desenvolvimento img,
+.div-acompanhamento img {
+    width: 110px;
+    background-color: #f3e5ab;
+    padding: 10px;
+    border-radius: 100%;
+}
+
+.div-luminosidade h3,
+.div-desenvolvimento h3,
+.div-acompanhamento h3 {
+    margin: 20px;
+}
+
+.div-luminosidade p,
+.div-desenvolvimento p,
+.div-acompanhamento p {
+    text-align: center;
+    font-weight: 300;
+    padding: 20px;
+}
+
+.problema {
+    font-weight: 400;
+    margin: 40px;
+}
+
+.div-sobreInfo h3 {
+    color: #7E8863;
+}
+
+/* Parte Como Funciona */
+
+.div-comoFunciona {
+    width: 100%;
+    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(imgs/bg2.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+}
+
+.div-comoFunciona p {
+    margin-bottom: 50px;
+}
+
+.div-mae {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+.seta {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-self: center;
+    
+}
+
+.div-filho {
+    flex: 1;
+    min-width: 0;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #F3E5AB;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.div-filho img {
+    width: 90px;
+    margin-top: 10px;
+}
+
+.div-filho h3 {
+    font-size: 25px;
+    margin: 30px;
+}
+
+.div-filho p {
+    margin-bottom: 20px;
+}
