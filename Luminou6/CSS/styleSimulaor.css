@@ -1,11 +1,12 @@
 *{
     margin: 0;
     padding: 0;
+        text-decoration: none;
 }
 
 
 
-img{
+#header img{
     width: 40px;
 }
 
@@ -131,7 +132,7 @@ body{
     border: solid 1px lightgrey;
     
 }
-.cadastra{
+#button{
     background-color: #7E8863;
     color: white;
     border: none;
@@ -139,15 +140,15 @@ body{
     cursor: pointer;
     padding: 11px;
     font-weight: bolder;
-    background-repeat: no-repeat;
-    background-size: 23px;
+    /* background-repeat: no-repeat;
+    background-size: 23px; */
     /* background-position: center;
     background-image: url('./img/Group.png'); */
     
 }
-#im2{
+/* #im2{
     width: 20px;
-}
+} */
 
 #div_vermelha{
     background-color: lightpink;
@@ -175,4 +176,35 @@ body{
 .ganho{
     color: green;
     justify-self: center;
+}
+
+
+#footer{
+
+    background-color: #7E8863;
+    height: 100%;
+}
+
+#navegacao{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+#lista_logo{
+    display: flex;
+    gap: 15px;
+}
+#lista_logo img{
+    height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+#lumi{
+    color: white;
+    font-weight: bold;
+}
+.lista{
+    display: flex;
+    flex-direction: column;
 }
