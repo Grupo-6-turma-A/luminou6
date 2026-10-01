@@ -31,6 +31,7 @@
     <div id="div_senha"></div>
     <br>
     <button onclick="cadastrar()">Cadastrar</button>
+    <div id="div_mensagemCadastro"></div>
 </body>
 </html>
 <script>
@@ -51,6 +52,14 @@
             !, @, #, *, _
             `);
         }
+
+        if (nome == `` || email == `` || cnpj == `` || cnpj == `` || senha == ``) {
+            mensagem = `<i>Todos os campos devem estar preenchidos</i>`;
+        } else {
+            alert(`Usuário cadastrado!`);
+        }
+
+        div_mensagemCadastro.innerHTML = mensagem;
     }
 
     function verificar() {

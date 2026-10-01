@@ -131,7 +131,7 @@ body{
     border: solid 1px lightgrey;
     
 }
-#button{
+.cadastra{
     background-color: #7E8863;
     color: white;
     border: none;
