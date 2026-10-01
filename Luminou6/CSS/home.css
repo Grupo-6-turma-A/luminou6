@@ -193,7 +193,7 @@ header {
 
 .div-comoFunciona {
     width: 100%;
-    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(imgs/bg2.png);
+    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -249,4 +249,36 @@ header {
 
 .div-filho p {
     margin-bottom: 20px;
+}
+
+/* Quem Somos */
+
+.div-quemSomos {
+    width: 100%;
+    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg3.png);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-quemSomos p {
+    margin-bottom: 50px;
+}
+
+.div-integrantes {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.div-membro {
+    display: flex;
+    flex-direction: column; 
+    text-align: center;
+    gap: 10px;
+}
+
+.div-membro img {
+    width: 200px;
+    border-radius: 20px;
 }
