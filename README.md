@@ -1,6 +1,7 @@
 ![Logo](blob:https://chatgpt.com/2993ee9c-3191-4d29-95a1-a83fb4136e7f)
 
 =================================================================================
+
 Projeto de monitoramento em estufas outdoor de vanilla planifolia(baunilha) .
 
 INTEGRANTES
