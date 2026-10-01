@@ -3,7 +3,9 @@
 </p>
 
 
-Projeto de monitoramento em estufas outdoor de vanilla planifolia(baunilha)
+PROJETO DE MONITORAMENTO EM ESTUFAS OUTDOOR DE VANILLA PLANIFOLIA (BAUNILHA)
+
+===============================================================================
 
 INTEGRANTES
 
