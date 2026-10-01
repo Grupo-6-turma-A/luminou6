@@ -1,0 +1,133 @@
+ /* ajustasmento da tela */
+ 
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+/* Aqui fica os ajustes sobre o fundo da pagina e os itens dentro dela*/
+body{
+    background-image:url(../imgs/fundo.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    /* Serve para aplicar estilo em alguma classe declarada no html */
+.login-card {
+    background-color: #ffffff;
+    padding: 45px;
+    border-radius: 1px;
+    width: 100%;
+    max-width: 470px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+
+
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Garante que o card não encoste nas bordas em telemóveis */
+}
+
+.imagem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.imagem img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+a {
+    color: #7E8863;
+    text-decoration: none;
+}
+
+input::placeholder {
+    color: #7E8863;
+}
+
+input{
+width: 100%;
+height: 30px;
+border: 1px solid#081004;
+border-radius: 8px;
+padding: 10px;
+}
+
+button{
+    width: 100%;
+    height: 33px;
+    background-color: #7E8863;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5F684A;
+    transition: 0.3s;
+}
+
+.texto-centralizado{
+    text-align: center;
+}
+
+.subtitulo {
+    color: #7E8863;
+    
+}
+
+/* container que serve como referência para posicionar o botão */
+.senha-container {
+    position: relative;
+    width: 100%;
+}
+/* configuração do input */
+.senha-container input {
+    width: 100%;
+    height: 30px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #081004;
+    border-radius: 8px;
+}
+/* posicionamento e configuração do botão do SVG */
+.senha-container button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+}
+/* tamanho do SVG/imagem */
+.senha-container button img {
+    width: 20px;
+    height: 20px;
+}

@@ -1,168 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../imgs/logoLogin.png" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/styleLogin.css">
     <title>Login</title>
-
-    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <main class="container">
-
-        <div class="card-login">
-
-            <div class="titulo">
-                <img src="../imgs/logo.png" alt="Logo Luminousix">
-                <h2>Login</h2>
-            </div>
-
-            <h5>
-                Entre com seus dados corretamente para acessar o sistema.
-            </h5>
-
-            <label for="ipt_email">
-                E-mail
-            </label>
-
-            <input type="text" id="ipt_email" placeholder="seu-email@provedor.com">
-
-            <label for="ipt_senha">
-                Senha
-            </label>
-
-            <div class="campo-senha">
-
-                <input type="password" id="ipt_senha" placeholder="Crie uma senha forte" oninput="verificarSenha()">
-
-                <button type="button" class="olho" onclick="mostrarSenha()">
-                    👁
-                </button>
-
-            </div>
-
-            <div id="div_mensagem_senha"></div>
-
-            <a href="#" class="esqueci">
-                Esqueci minha senha
-            </a>
-
-            <button class="btn-entrar" onclick="login()">
-                Entrar
-            </button>
-
-            <div id="div_mensagem"></div>
-
-            <p class="cadastro">
-                Não tem uma conta?
-                <a href="#">Crie uma!</a>
-            </p>
-
+    <main class="login-container">
+    <div class="login-card">
+        <div class="imagem">
+            <img src="../imgs/logoLogin.png" alt="Logo Luminous6">
+            <h1>Login</h1>
         </div>
 
+        <span class="subtitulo"> Entre com seus dados corretamente para acessar o sistema.</span>
+        <div>
+            <label for="ipt_e-mail"><b>E-mail</b></label>
+            <input type="text" id="ipt_e-mail" placeholder="seu-email@provedor.com">
+        </div>
+
+       <div class="campo">
+    <label for="ipt_senha"><b>Senha</b></label>
+
+           <div class="senha-container">
+        <input type="password" id="ipt_senha" placeholder="Crie uma senha forte">
+
+        <button type="button" onclick="mostrarSenha()">
+            <img src="../svg/LoginOlho.svg" alt="Mostrar senha">
+        </button>
+         </div>
+        </div>
+        
+        <span> <a href="cadastro.html" style="color: #7E8863;">Esqueci a senha</a></span>
+
+        <div>
+            <button onclick="calcular()">Entrar</button>
+        </div>
+
+        <div class="texto-centralizado">
+            <span>
+                Não tem uma conta?  <a href="cadastro.html" style="color: #7E8863;">Crie uma!</a>
+            </span>
+        </div>
+    </div>
     </main>
-
-    <script>
-
-        function verificarSenha() {
-
-            let senha = ipt_senha.value;
-
-            if (senha.length > 0 && senha.length < 8) {
-
-                div_mensagem_senha.innerHTML =
-                    `<span class="erro">
-                    A senha deve conter 8 ou mais caracteres
-                </span>`;
-
-            } else {
-
-                div_mensagem_senha.innerHTML = "";
-
-            }
-
-        }
-
-
-        function mostrarSenha() {
-
-            if (ipt_senha.type == "password") {
-
-                ipt_senha.type = "text";
-
-            } else {
-
-                ipt_senha.type = "password";
-
-            }
-
-        }
-
-
-        function login() {
-
-            let email = ipt_email.value;
-            let senha = ipt_senha.value;
-
-            let indiceArroba = email.indexOf("@");
-            let indicePonto = email.indexOf(".");
-
-            let temArroba = email.includes("@");
-
-            let pontoAposArroba =
-                indicePonto > indiceArroba;
-
-            let terminaComPonto =
-                email.endsWith(".");
-
-            if (
-                email == "" ||
-                senha == ""
-            ) {
-
-                div_mensagem.innerHTML =
-                    `<span class="erro">
-                    Preencha todos os campos
-                </span>`;
-
-            }
-
-            else if (
-                !temArroba ||
-                !pontoAposArroba ||
-                terminaComPonto
-            ) {
-
-                div_mensagem.innerHTML =
-                    `<span class="erro">
-                    Digite um e-mail válido
-                </span>`;
-
-            }
-
-            else if (senha.length < 8) {
-
-                div_mensagem.innerHTML =
-                    `<span class="erro">
-                    A senha precisa ter pelo menos 8 caracteres
-                </span>`;
-
-            }
-
-            else {
-
-                div_mensagem.innerHTML =
-                    `<span class="sucesso">
-                    Login válido!
-                </span>`;
-
-            }
-
-        }
-    </script>
 </body>
+<script>
 
-</html>
+    function mostrarSenha() {
+
+        if (ipt_senha.type == "password") {
+
+            ipt_senha.type = "text";
+
+        } else {
+
+            ipt_senha.type = "password";
+
+        }
+
+    }
+
+
+    function login() {
+
+        let email = document.getElementById("ipt_e-mail").value;
+        let senha = document.getElementById("ipt_senha").value;
+
+        let indiceArroba = email.indexOf("@");
+        let indicePonto = email.indexOf(".");
+
+        let temArroba = email.includes("@");
+
+        let pontoAposArroba =
+            indicePonto > indiceArroba;
+
+        let terminaComPonto =
+            email.endsWith(".");
+
+
+        if (
+            email == "" ||
+            senha == ""
+        ) {
+
+            alert("Preencha todos os campos");
+
+        }
+
+        else if (
+            !temArroba ||
+            !pontoAposArroba ||
+            terminaComPonto
+        ) {
+
+            alert("Digite um e-mail válido");
+
+        }
+
+        else if (senha.length < 8) {
+
+            alert("A senha precisa ter pelo menos 8 caracteres");
+
+        }
+
+        else {
+
+            alert("Login válido!");
+
+        }
+
+    }
+
+</script>
