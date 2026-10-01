@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/2993ee9c-3191-4d29-95a1-a83fb4136e7f.png" alt="Luminousix Banner" width="100%">
+  <img src="./assets/assets2993ee9c-3191-4d29-95a1-a83fb4136e7f.png" alt="Luminousix Banner" width="100%">
 </p>
 
 =================================================================================
