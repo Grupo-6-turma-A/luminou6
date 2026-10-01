@@ -1,4 +1,4 @@
-![Logo](blob:https://chatgpt.com/2993ee9c-3191-4d29-95a1-a83fb4136e7f)
+![Logo](file:///C:/Users/lucas/OneDrive/Imagens/Screenshots/2993ee9c-3191-4d29-95a1-a83fb4136e7f.png)
 
 =================================================================================
 
@@ -12,4 +12,5 @@ INTEGRANTES
 - Gabriel Barbosa da Silva
 - Gabriel dos Santos Figueiredo
 - Isabelle Silva Bacco
+
 =================================================================================
