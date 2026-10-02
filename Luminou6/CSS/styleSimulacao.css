@@ -1,0 +1,482 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    background-color: #FFF8E7;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    grid-template-rows: auto;
+    background-color: #FDEFD2;
+}
+
+#header {
+    grid-column: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+#header img {
+    width: 40px;
+}
+
+#navbar {
+    display: flex;
+    gap: 30px;
+}
+
+#navbar a {
+    color: #7E8863;
+    font-weight: bolder;
+}
+
+#navbar a:hover {
+    text-decoration: 2px underline;
+    text-underline-offset: 5px;
+    color: #7E8863;
+}
+
+#login {
+    background-color: white;
+    border-radius: 15px;
+    padding: 6px 20px;
+    color: #7E8863;
+    border: solid 2px #7E8863;
+    cursor: pointer;
+}
+
+#cadastra {
+    background-color: #7E8863;
+    border-radius: 15px;
+    padding: 6px 20px;
+    color: white;
+    border: solid 2px #7E8863;
+    cursor: pointer;
+}
+
+#pagina {
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    grid-template-rows: auto;
+}
+
+#simulador {
+    grid-column: 2;
+    margin-top: 40px;
+}
+
+#card_inputs {
+    grid-column: 1;
+}
+
+#card_resultado {
+    grid-column: 2;
+}
+
+.input_card {
+    border: solid 2px lightgrey;   
+    border-radius: 10px; 
+    display: flex;
+    align-items: center;
+}
+
+.input_bloco {
+    padding: 20px;
+}
+
+#algo {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 30px 0;
+}
+
+.card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.card_header {
+    margin-bottom: 8px;
+}
+
+.nome_input {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 6px;
+}
+
+.input_descricao {
+    font-size: 14px;
+    color: #888888;
+    font-weight: 400;
+}
+/* 
+CARD ESQUERDO */
+.input_card_wrapper {
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 18px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input_label {
+    font-weight: 700;
+    font-size: 15px;
+    color: #111827;
+}
+
+.input_subtexto {
+    font-size: 13px;
+    color: #6B7280;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.input_field_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #D1D5DB;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    border-color: #7E8863;
+}
+
+#button {
+    background-color: #7E8863;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+#button:hover {
+    background-color: #6a7452;
+}
+/* 
+CARD DIREITO */
+.result_card {
+    display: flex;
+    align-items: center;
+    padding: 20px 24px;
+    border-radius: 16px;
+    gap: 16px;
+}
+
+.card_perda {
+    background-color: #FDF2F2; 
+}
+
+.icon_perda {
+    background-color: #FDE8E8;
+}
+
+.valor_perda {
+    color: #E02424;
+}
+
+.card_neutro {
+    background-color: #FDFBF7; 
+    border: 1px solid #F3EFE6;
+}
+
+.icon_neutro {
+    background-color: #F7F0E1;
+}
+
+.valor_neutro {
+    color: #111827;
+}
+
+.card_ganho {
+    background-color: #EFFDF4;
+}
+
+.icon_ganho {
+    background-color: #DEF7EC;
+}
+
+.valor_ganho {
+    color: #0E9F6E;
+}
+
+.icon_box {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon_box img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+.result_info {
+    flex: 1;
+}
+
+.result_titulo {
+    font-size: 17px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.result_descricao {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.35;
+}
+
+.result_valor {
+    font-size: 18px;
+    font-weight: 800;
+    white-space: nowrap;
+    text-align: right;
+    margin-left: 10px;
+}
+.dinheiro_img {
+    align-self: center;
+}
+
+.input_card_wrapper {
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input_header_group {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.input_text_group {
+    flex: 1;
+}
+.icon_estufa {
+    background-color: #FEF3C7;
+}
+
+.icon_obra {
+    background-color: #F3E8FF; 
+}
+
+.input_label {
+    font-weight: 700;
+    font-size: 17px;
+    color: #111827;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.input_subtexto {
+    font-size: 15px;
+    color: #6B7280;
+    line-height: 1.4;
+}
+
+.input_field_box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 4px 6px 4px 12px;
+    background-color: #FFFFFF;
+    transition: border-color 0.2s;
+}
+
+.input_field_box:focus-within {
+    border-color: #7E8863;
+}
+
+.input_field_box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #111827;
+    background: transparent;
+}
+
+.input_suffix {
+    background-color: #F3F4F6;
+    color: #6B7280;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 8px;
+    user-select: none;
+}
+
+#button {
+    background-color: #7E8863;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.2s;
+    margin-top: 4px;
+}
+
+#button:hover {
+    background-color: #6a7452;
+}
+
+.btn_icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); 
+}
+
+.info_card_lampada {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: #FDFBF7;
+    border: 1px solid #F3EFE6;
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 8px;
+}
+
+.icon_lampada {
+    background-color: #FEF9C3;
+    min-width: 40px;
+    height: 40px;
+}
+
+.lampada_texto {
+    font-size: 12px;
+    color: #4B5563;
+    line-height: 1.4;
+}
+
+.lampada_texto strong {
+    color: #111827;
+    font-weight: 700;
+}
+
+.ganho {
+    color: green;
+    justify-self: center;
+}
+
+#footer {
+    background-color: #7E8863;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    grid-template-rows: auto;
+}
+
+#linha {
+    border-bottom: solid 1px white;
+    grid-column: 1/4;
+}
+
+#navegacao {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+    grid-column: 2;
+    margin-bottom: 20px;
+}
+
+#lista_logo {
+    display: flex;
+    gap: 15px;
+}
+
+#lista_logo img {
+    height: 55px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#lumi {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#moni {
+    color: white;
+    margin-top: 5px;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista h4 {
+    color: #E8C978;
+    font-size: 19px;
+}
+
+.lista a {
+    color: white;
+}
+
+#copi {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    grid-column: 2;
+    margin-bottom: 20px;
+}
+
+#copi p, #copi_texto {
+    color: white;
+}
