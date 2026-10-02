@@ -15,86 +15,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Parte Menu */
-
-header {
-    width: 100%;
-    padding: 20px;
-    background-color: #FDEFD2;
-    position: sticky;
-    top: 0;
-}
-
-.navbar {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-logo {
-    width: 60px;
-    margin-left: 20px;
-}
-
-.nav-list {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
-
-.nav-item a {
-    text-decoration: none;
-    position: relative;
-    color: #7E8863;
-    font-weight: 600;
-    padding-bottom: 6px;
-}
-
-.nav-item a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    background-color: #3d4230;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.nav-item a:hover::after {
-    transform: scaleX(1);
-}
-
-.nav-buttons {
-    margin-right: 20px;
-    display: flex;
-    gap: 30px;
-}
-
-.btn-cadastra,
-.btn-login {
-    border-radius: 50px;
-    border: 2px solid #7E8863;
-    padding: 12px 20px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
-}
-
-.btn-cadastra {
-    color: #7E8863;
-    background-color: #ffffff;
-}
-
-.btn-login {
-    color: #ffffff;
-    background-color: #7E8863;
-}
-
 /* Parte Home */
 
 .div-home {
@@ -324,6 +244,7 @@ header {
 }
 
 /* Parte Objetivo */
+
 .div-objetivo {
     width: 100%;
     background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png);
@@ -368,4 +289,247 @@ header {
 
 .informacao img {
     width: 90px;
+}
+
+/* Parte Fale Conosco */
+
+.div-pai {
+    width: 100%;
+    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg3.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+.div-cardFaleConosco {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 650px;
+    padding: 40px 50px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.div-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.div-header h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+}
+
+.div-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #79855b;
+    margin: 0;
+}
+
+.div-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.div-iptNome,
+.div-mensagem,
+.div-email,
+.div-whatsapp,
+.div-uf,
+.div-municipio {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.div-emailZap,
+.div-ufMunicipio {
+    display: flex;
+    gap: 15px;
+}
+
+.div-cardFaleConosco label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+.div-cardFaleConosco input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.div-cardFaleConosco input::placeholder {
+    color: #b0b0b0;
+}
+
+.div-cardFaleConosco input:focus {
+    border-color: #79855b;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.div-cardFaleConosco button {
+    background-color: #79855b;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: background-color 0.2s ease;
+}
+
+.div-cardFaleConosco button:hover {
+    background-color: #68734d;
+}
+
+.div-cardFaleConosco button {
+    font-size: 16px;
+}
+
+/* Parte Rodapé */
+
+.footer {
+    background-color: #79855b;
+    color: #e2e8d5;
+    padding: 50px 80px 30px 80px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 400px;
+}
+
+.footer-logo-box {
+    background-color: #fffde7;
+    border-radius: 18px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.footer-logo-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.footer-brand-text h2 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    letter-spacing: 0.5px;
+}
+
+.footer-brand-text p {
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0;
+    color: #dcdcdc;
+}
+
+.footer-columns {
+    display: flex;
+    gap: 60px;
+}
+
+.footer-col h4 {
+    color: #f2e29d;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col li {
+    margin-bottom: 10px;
+}
+
+.footer-col a {
+    color: #e2e8d5;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0 0 25px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 12px;
+    color: #dcdcdc;
+}
+
+.footer-info p {
+    margin: 4px 0;
+    line-height: 1.4;
+}
+
+.footer-rights p {
+    margin: 0;
 }

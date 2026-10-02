@@ -1,72 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 *{
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-        text-decoration: none;
+    text-decoration: none;
 }
 
-
-
-#header img{
-    width: 40px;
-}
-
-header{
-    display: grid;
-    grid-template-columns: 50px auto 50px;
-    grid-template-rows: auto;
-    background-color: #FDEFD2;
-
-}
 body{
     background-color: #FFF8E7;
 }
-#header{
-    grid-column: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px;
-}
-
-#navbar{
-    display: flex;
-    gap: 30px;
-    
-}
-#navbar a{
-    color: #7E8863;
-    text-decoration: none;
-    font-weight: bolder;
-   
-}
-
-#navbar a:hover{
-    text-decoration:2px underline;
-    text-underline-offset: 5px;
-    color: #7E8863;
-    
-}
-
-#login{
-    background-color: white;
-    border-radius:15px;
-    padding: 6px 20px;
-    color: #7E8863;
-    box-sizing: border-box;
-    border: solid 2px;
-    cursor: pointer;
-
-}
-#cadastra{
-    background-color: #7E8863;
-    border-radius:15px;
-    padding: 6px 20px;
-    color: white ;
-    border: solid 2px #7E8863;
-    cursor: pointer;
-    
-}
-
 
 #pagina{
     display: grid;
