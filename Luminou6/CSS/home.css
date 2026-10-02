@@ -287,6 +287,10 @@ html {
     margin-bottom: 20px;
 }
 
+.div-objetivoInfo h3 {
+    color: #7E8863;
+}
+
 .informacao img {
     width: 90px;
 }
