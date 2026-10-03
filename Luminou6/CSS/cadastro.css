@@ -1,23 +1,79 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-body{
-    display: flex;
-    height: 100%;
+body {
+    min-height: 100vh;
     width: 100%;
+
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    background-image: url("../imgs/fundo.png");
+    background-size: cover;
+    background-position: center;
     background-color: gray;
 }
 
-.classe_pai{
+.container_cadastro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.cadastro-card {
+    background-color: #ffffff;
+    padding: 45px;
+    border-radius: 13px;
+
+    width: 100%;
+    max-width: 470px;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
     display: flex;
     flex-direction: column;
-    padding: 10vh;
-    width: fit-content;
-    height: fit-content;
-    background-color: #fff;
+    gap: 15px;
+}
+
+.imagem {
+    text-align: center;
+}
+
+.imagem img {
+    max-width: 180px;
+}
+
+.Todos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Todos input {
+    width: 100%;
+    height: 40px;
+
+    border: 1px solid #081004;
+    border-radius: 8px;
+
+    padding: 10px;
+}
+
+input::placeholder {
+    color: #7E8863;
+}
+
+button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }

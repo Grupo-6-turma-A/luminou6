@@ -3,41 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../imgs/logoLogin.png" type="image/x-icon">
     <title>CADASTRO - EMPRESA</title>
     <link rel="stylesheet" href="../CSS/cadastro.css">
 </head>
 
 
 <body>
-    <div class="classe_pai">
-    <label for="ipt_nome_empresa">Nome da empresa:</label>
-    <br>
-    <input type="text" id="ipt_nome_empresa">
-    <br>
-    <label for="ipt_email_empresa">Email da empresa:</label>
-    <br>
-    <input type="text" id="ipt_email_empresa">
-    <br>
-    <label for="ipt_cnpj_empresa">CNPJ da empresa:</label>
-    <br>
-    <input type="text" id="ipt_cnpj_empresa">
-    <br>
-    <label for="ipt_senha_empresa">Senha para empresa:</label>
-    <br>
-    <input type="password" id="ipt_senha_empresa">
-    <br>
-    <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
-    <br>
-    <label for="ipt_senha_confirma_empresa">Confirme sua senha:</label>
-    <br>
-    <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()">
-    <br>
-    <div id="div_senha"></div>
-    <br>
-    <button onclick="cadastrar()">Cadastrar</button>
-    <div id="div_mensagemCadastro"></div>
-    </div>
+    <main class="container_cadastro">
+        <div class="cadastro-card">
+            
+        <div class="imagem">
+            <img src="../imgs/logoLogin.png" alt="Logo Luminous6">
+            <h1>Comece a monitorar!<h1>
+        </div>
+        <span>Crie seu cadastro gratuito e integre seus sensores arduino hoje mesmo.</span>
+
+        <div class="Todos">
+        <label for="ipt_nome_empresa"> <b>Nome da empresa:</b></label>  
+            <input type="text" id="ipt_nome_empresa">
+        </div>
+
+        <label for="ipt_email_empresa">Email da empresa:</label>
+        <div class="Todos">
+            <input type="text" id="ipt_email_empresa" PlaceHolder="Seu email@provedor.com">
+        </div>
+        
+        <div class="Todos">
+            <label for="ipt_cnpj_empresa">CNPJ da empresa:</label>    
+            <input type="text" id="ipt_cnpj_empresa" PlaceHolder="Seu ">
+        </div>
+        
+        <div class="Todos">
+            <label for="ipt_senha_empresa">Senha para empresa:</label>
+            <input type="password" id="ipt_senha_empresa">
+        </div>
+
+        <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
+        <div class="Todos">
+            <label for="ipt_senha_confirma_empresa">Confirme sua senha:</label>
+            <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()">    
+        </div>
+        
+        <div>
+            <button onclick="cadastrar()">Cadastrar</button>
+        </div>
+
+        <div id="div_mensagemCadastro"></div>
+        
+        <div id="div_senha"></div>
+        </div>
+    </main>
+    
+    
 </body>
 </html>
 <script>
@@ -79,4 +96,5 @@
 
         div_senha.innerHTML = mensagem;
     }
+
 </script>
