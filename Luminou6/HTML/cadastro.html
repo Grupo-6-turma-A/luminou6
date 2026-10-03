@@ -20,32 +20,32 @@
 
         <div class="Todos">
         <label for="ipt_nome_empresa"> <b>Nome da empresa:</b></label>  
-            <input type="text" id="ipt_nome_empresa">
+            <input type="text" id="ipt_nome_empresa" PlaceHolder="Baunilhas Outdoor S/A">
         </div>
 
-        <label for="ipt_email_empresa">Email da empresa:</label>
+        <label for="ipt_email_empresa"><b>Email da empresa:</b></label>
         <div class="Todos">
             <input type="text" id="ipt_email_empresa" PlaceHolder="Seu email@provedor.com">
         </div>
         
         <div class="Todos">
-            <label for="ipt_cnpj_empresa">CNPJ da empresa:</label>    
-            <input type="text" id="ipt_cnpj_empresa" PlaceHolder="Seu ">
+            <label for="ipt_cnpj_empresa"><b>Documento Fiscal:</b></label>    
+            <input type="text" id="ipt_cnpj_empresa" PlaceHolder="Seu CNPJ ou CPF">
         </div>
         
         <div class="Todos">
-            <label for="ipt_senha_empresa">Senha para empresa:</label>
-            <input type="password" id="ipt_senha_empresa">
+            <label for="ipt_senha_empresa"><b>Senha para empresa:</b></label>
+            <input type="password" id="ipt_senha_empresa" PlaceHolder="Sua senha">
         </div>
 
         <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
         <div class="Todos">
-            <label for="ipt_senha_confirma_empresa">Confirme sua senha:</label>
-            <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()">    
+            <label for="ipt_senha_confirma_empresa"><b>Confirme sua senha:</b></label>
+            <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()">
         </div>
         
         <div>
-            <button onclick="cadastrar()">Cadastrar</button>
+            <button class="btn-cadastro" onclick="cadastrar()">Cadastrar</button>
         </div>
 
         <div id="div_mensagemCadastro"></div>
