@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="input_field_box">
-            <input type="text" id="inp_estufa" placeholder="">
+            <input type="number" id="inp_estufa" placeholder="">
             <span class="input_suffix">estufas</span>
         </div>
     </div>
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="input_field_box">
-            <input type="text" id="inp_obra" placeholder="">
+            <input type="number" id="inp_obra" placeholder="">
             <span class="input_suffix">R$</span>
         </div>
     </div>
@@ -107,7 +107,7 @@
             </div>
             <div class="result_info">
                 <h3 class="result_titulo">Perda mensal estimada</h3>
-                <p class="result_descricao">Sem Luminou6, você perderia no ano caso apenas 15% das suas estufas tivessem problemas relacionados à temperatura.</p>
+                <p class="result_descricao">Sem Luminou6, você perderia no ano caso apenas 15% das suas estufas tivessem problemas relacionados à luminosidade.</p>
             </div>
             <div class="result_valor valor_perda" id="msg_perda"></div>
         </div>
@@ -120,7 +120,7 @@
                 <h3 class="result_titulo">Valor final anual</h3>
                 <p class="result_descricao">Custos totais estimados sem o Luminou6.</p>
             </div>
-            <div class="result_valor valor_neutro" id="mag_custo"></div>
+            <div class="result_valor valor_neutro" id="msg_custo"></div>
         </div>
 
         <div class="result_card card_ganho">
@@ -191,43 +191,43 @@
    function analisar() {
       let qtdEstufa = Number(inp_estufa.value);
       let custoMaodeobra = Number(inp_obra.value); // valor esperado por ano
-      let mediaFavaEstufa = qtdEstufa * 250; // quantidade média de mudas assumida em 10/estufa (tradicional, não adensada) - número de mudas que vai gerar de 200 a 300 favas por ano
-      let valorGeradoReais = (mediaFavaEstufa * (450 * 5)) - custoMaodeobra; // custo médio por fava vezes o custo do dólar
-      let valorGeradoReaisEstufaAno = valorGeradoReais / qtdEstufa; // valor total médio gerado por uma estufa ao ano já descontado da mão de obra
-      let percentualPerda = 0.15; // definindo possiveis perdas em 15%
-      let potencialPerda = valorGeradoReaisEstufaAno * percentualPerda; // simulação do prejuizo em caso de problema em x% das estufas
-      let potencialPerdaMes = potencialPerda / 12;
-      let totalAnual = valorGeradoReaisEstufaAno - potencialPerda;
 
-    //   let mensagem = ``;
+      let mediaFavaEstufa = 250; // quantidade média de mudas assumida em 10/estufa (tradicional, não adensada) - número de mudas que vai gerar de 200 a 300 favas por ano
+      let favasKg = 250; 
 
+      let valorGeradoReais = qtdEstufa * mediaFavaEstufa / favasKg;
+
+      let precoKgEmDolar = 450;
+      let cotacaoDolar = 5.2;
+      let precoReais = precoKgEmDolar * cotacaoDolar;
+
+      let faturamentoTotal = valorGeradoReais * precoReais; 
+
+      let percentualPerda = 0.15;
+      let perdaAnualTotal = faturamentoTotal * percentualPerda;
+      let perdaMensal = perdaAnualTotal / 12;
+
+      let faturamentoComPerdaSemLuminou = (faturamentoTotal - perdaAnualTotal) - custoMaodeobra;
+
+      let faturamentoComLuminou = faturamentoTotal - custoMaodeobra;
+
+      let mensagemPerda = ``;
+      let mensagemCusto = ``;
+      let mensagemGanho = ``;
+      
       if (qtdEstufa < 1) {
-         alert(`Insira um número de estufas válido`);
+         alert(`Insira um número de estufas válido.`);
+      } else if (custoMaodeobra < 1) {
+         alert(`Insira o custo de mão de obra válido`);
       }
 
-    //   mensagem = `
-    //   Sem Luminou6, você perderia R$${potencialPerda.toFixed(2)} no ano caso apenas ${percentualPerda*100}% das suas estufas tivessem problemas relacionados a temperatura.<br>
-    //   Valores:<br>
-    //   <span style="color: red;">Perda mensal: R$${potencialPerdaMes.toFixed(2)}</span><br>
-    //   Valor final anual: R$${totalAnual.toFixed(2)}
-    //   <br><br>
+      mensagemPerda = `R$${perdaMensal.toFixed(2)}`;
+      msg_perda.innerHTML= mensagemPerda;
 
-    //   <span style="color: green;">Com Luminou6, a projeção de ganhos anuais da sua empresa seria de R$${valorGeradoReaisEstufaAno.toFixed(2)}.</span><br>
-    //   `;
+      mensagemCusto = `R$$${perdaAnualTotal.toFixed(2)}`;
+      msg_custo.innerHTML = mensagemCusto;
 
-      msg_perda.innerHTML= `R$${potencialPerdaMes.toFixed(2)}`;
-      mag_custo.innerHTML = `R$$${totalAnual.toFixed(2)}`;
-      msg_ganho.innerHTML = `R$${valorGeradoReaisEstufaAno.toFixed(2)}`;
-
-      // input estufas -> madia(media de paltação que rende)  =qtdEstufas  * 0.75(media por fava por ano de 1 estufa) = dinheiro -> media * (450 (media do custo da fava em dolar)* 5,17(dolar)); 
-      // input mão ->  maoObra * 12   (calcular o ano)  
-      // EstufaUnitaria -> dinheiro / qtdEstufas (ver quanto cada estufa rende separadamente ao ano) + mãoObra 
-      // aoMEs = EstufaUnitaria / 12 
-      //
-      // prejuizo -> dinheiro + mão (ao ano) 
-      // economizar ->  dinheiro - mão (ao ano) 
-      //
-      // Sem luminou 6 - Com qtdEstufas caso de problema em (n) estufas sua empresa perderia um total de R$EstufaUnitaria, sendo uma perda de (aoMEs) por mes a acada estufa perdida. 
-      // Com luminou 6 - confiando a segurnaça de sua safra na Luminou 6  o lucro da sua empresa seria de (aoMEs), e (economixs) ao ano
+      mensagemGanho = `R$${valorGeradoReais.toFixed(2)}`;
+      msg_ganho.innerHTML = mensagemGanho;
    }
 </script>
