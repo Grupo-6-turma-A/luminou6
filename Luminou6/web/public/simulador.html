@@ -1,81 +1,233 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Simulador</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="./CSS/styleSimulacao.css">
+    <link rel="stylesheet" href="./CSS/header.css">
+    <title>Simulador Financeiro</title>
 </head>
-
 <body>
+    
+    <header>
+      <nav class="navbar">
+        <img src="./imgs/logo.png" alt="Logo Luminou6" class="nav-logo" />
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="./HTML/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html #sobre">Sobre o Projeto</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html #comofunciona">Como Funciona</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html #quemsomos">Quem Somos</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html #objetivo">Objetivo</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html #faleconosco">Fale Conosco</a>
+          </li>
+        </ul>
+        <div class="nav-buttons">
+          <a href="cadastro.html">
+            <button class="btn-cadastra">Cadastrar-se</button>
+          </a>
+          <a href="login.html">
+            <button class="btn-login">Fazer Login</button>
+          </a>
+        </div>
+      </nav>
+    </header>
+    
+    <section id="pagina">
+        <div id="simulador">
+            <h1>Simulador financeira</h1>
+            <p>Calcule o impacto financeiro das perdas por luminosidade na sua produção de baunilha.</p>
+        </div>
 
-    <!--header inicio-->
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="./index.html">Inicial</a>
-                </li>
-                <li class="agora">Simulador</li>
-                <li>|</li>
-                <li>
-                    <a href="./login.html">Login</a>
-                </li>
-                <li>
-                    <a href="./login.html">Cadastro</a>
-                </li>
-            </ul>
+        <section id="algo">
+    <section class="card" id="card_inputs">
+    <div class="card_header">
+        <h2 class="nome_input">Insira os Dados de Cultivo</h2>
+        <p class="input_descricao">Preencha as informações abaixo para realizar a simulação.</p>
+    </div>
+
+    <div class="input_card_wrapper">
+        <div class="input_header_group">
+            <div class="icon_box icon_estufa">
+                <img src="./imgs/estufa.png" alt="Ícone Estufa">
+            </div>
+            <div class="input_text_group">
+                <label class="input_label" for="inp_estufa">Quantidade de estufas</label>
+                <p class="input_subtexto">É considerado a projeção média de uma estufa pequena tradicional (não adensada) de 50m².</p>
+            </div>
+        </div>
+        <div class="input_field_box">
+            <input type="number" id="inp_estufa" placeholder="">
+            <span class="input_suffix">estufas</span>
         </div>
     </div>
 
-
-    <!-- simulador inicio -->
-    <div class="simulador">
-        <div class="container">
-            <h2>Simulador</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-                dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-                laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-                reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-
+    <div class="input_card_wrapper">
+        <div class="input_header_group">
+            <div class="icon_box icon_obra">
+                <img src="./imgs/custo-de-mao-de-obra.png" alt="Ícone Mão de Obra">
+            </div>
+            <div class="input_text_group">
+                <label class="input_label" for="inp_obra">Média anual gasta em mão de obra (R$)</label>
+                <p class="input_subtexto">Custo de toda mão de obra envolvida no processo.</p>
+            </div>
+        </div>
+        <div class="input_field_box">
+            <input type="number" id="inp_obra" placeholder="">
+            <span class="input_suffix">R$</span>
         </div>
     </div>
-    <!-- simulador fim -->
 
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
+    <button id="button" onclick="analisar()">
+        <img src="./imgs/calculadora.png" alt="Ícone Analisar" class="btn_icon">
+        <span>Analisar</span>
+    </button>
+
+
+    </section>
+    <section class="card" id="card_resultado">
+        <div class="card_header">
+            <h2 class="nome_input">Resultados da Simulação</h2>
+            <p class="input_descricao">Veja os principais indicadores financeiros do seu cultivo.</p>
         </div>
-    </div>
-    <!--footer fim-->
 
+        <div class="result_card card_perda">
+            <div class="icon_box icon_perda">
+                <img src="./imgs/broke.png" alt="Ícone Perda">
+            </div>
+            <div class="result_info">
+                <h3 class="result_titulo">Perda mensal estimada</h3>
+                <p class="result_descricao">Sem Luminou6, você perderia no ano caso apenas 15% das suas estufas tivessem problemas relacionados à luminosidade.</p>
+            </div>
+            <div class="result_valor valor_perda" id="msg_perda"></div>
+        </div>
+
+        <div class="result_card card_neutro">
+            <div class="icon_box icon_neutro">
+                <img src="./imgs/save-money.png" alt="Ícone Valor Final">
+            </div>
+            <div class="result_info">
+                <h3 class="result_titulo">Valor final anual</h3>
+                <p class="result_descricao">Custos totais estimados sem o Luminou6.</p>
+            </div>
+            <div class="result_valor valor_neutro" id="msg_custo"></div>
+        </div>
+
+        <div class="result_card card_ganho">
+            <div class="icon_box icon_ganho">
+                <img src="./imgs/dollar.png" alt="Ícone Ganhos">
+            </div>
+            <div class="result_info">
+                <h3 class="result_titulo">Projeção de ganhos anuais</h3>
+                <p class="result_descricao">Com o Luminou6, a projeção de ganhos anuais da sua empresa seria de:</p>
+            </div>
+            <div class="result_valor valor_ganho" id="msg_ganho"></div>
+        </div>
+    </section>
+</section>
+    </section>
+
+    <!-- <div id="div_msg"></div> -->
+
+    <footer id="footer">
+        <section id="navegacao">
+            <div id="lista_logo">
+                <img src="./imgs/logo.png" alt="logo">
+                <div>
+                    <h4 id="lumi">LUMINOU6</h4>
+                    <p id="moni">Monitoramento inteligente da luminosidade <br> para o cultivo de baunilha.</p>
+                </div>
+            </div>
+
+            <div class="lista">
+                <h4>Navegação</h4>
+                <a href="">Home</a>
+                <a href="">Sobre</a>
+                <a href="">Como funciona</a>
+                <a href="">Quem somos</a>
+                <a href="">Objetivo</a>
+            </div>
+
+            <div class="lista">
+                <h4>O projeto</h4>
+                <a href="">Simulador financeiro</a>
+                <a href="">Sensor LDR + Arduino</a>
+                <a href="">Dashboard de dados</a>
+                <a href="">Cultivo da baunilha</a>
+            </div>
+
+            <div class="lista">
+                <h4>Equipe</h4>
+                <a href="">Turma 1ADSA</a>
+                <a href="">Projeto integrador</a>
+                <a href="">Acessar Monitoramento</a>
+            </div>
+        </section>
+
+        <div id="linha"></div>
+
+        <section id="copi">
+            <div id="copi_texto">
+                <p>© 2026 LUMINOUI — Monitoramento Inteligente para Cultivo de Baunilha</p>
+                <p>Projeto desenvolvido por estudantes da SPTech - turma 1ADSA — Programação, Eletrônica e Agricultura.</p>
+            </div>
+            <p>Todos os direitos reservados.</p>
+        </section>
+    </footer>
 
 </body>
-
 </html>
+<script>
+   function analisar() {
+      let qtdEstufa = Number(inp_estufa.value);
+      let custoMaodeobra = Number(inp_obra.value); // valor esperado por ano
+
+      let mediaFavaEstufa = 250; // quantidade média de mudas assumida em 10/estufa (tradicional, não adensada) - número de mudas que vai gerar de 200 a 300 favas por ano
+      let favasKg = 250; 
+
+      let valorGeradoReais = qtdEstufa * mediaFavaEstufa / favasKg;
+
+      let precoKgEmDolar = 450;
+      let cotacaoDolar = 5.2;
+      let precoReais = precoKgEmDolar * cotacaoDolar;
+
+      let faturamentoTotal = valorGeradoReais * precoReais; 
+
+      let percentualPerda = 0.15;
+      let perdaAnualTotal = faturamentoTotal * percentualPerda;
+      let perdaMensal = perdaAnualTotal / 12;
+
+      let faturamentoComPerdaSemLuminou = (faturamentoTotal - perdaAnualTotal) - custoMaodeobra;
+
+      let faturamentoComLuminou = faturamentoTotal - custoMaodeobra;
+
+      let mensagemPerda = ``;
+      let mensagemCusto = ``;
+      let mensagemGanho = ``;
+      
+      if (qtdEstufa < 1) {
+         alert(`Insira um número de estufas válido.`);
+      } else if (custoMaodeobra < 1) {
+         alert(`Insira o custo de mão de obra válido`);
+      }
+
+      mensagemPerda = `R$${perdaMensal.toFixed(2)}`;
+      msg_perda.innerHTML= mensagemPerda;
+
+      mensagemCusto = `R$$${perdaAnualTotal.toFixed(2)}`;
+      msg_custo.innerHTML = mensagemCusto;
+
+      mensagemGanho = `R$${valorGeradoReais.toFixed(2)}`;
+      msg_ganho.innerHTML = mensagemGanho;
+   }
+</script>

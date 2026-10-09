@@ -1,158 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AquaTech | Login</title>
-
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="./imgs/logoLogin.png" type="image/x-icon">
+    <link rel="stylesheet" href="./CSS/styleLogin.css">
+    <title>Login</title>
 </head>
-
 <body>
+    <main class="login-container">
+    <div class="login-card">
+        <div class="imagem">
+            <img src="./imgs/logoLogin.png" alt="Logo Luminous6">
+            <h1>Login</h1>
+        </div>
 
-    <!--Header-->
+        <span class="subtitulo"> Entre com seus dados corretamente para acessar o sistema.</span>
+        <div>
+            <label for="ipt_e-mail"><b>E-mail</b></label>
+            <input type="text" id="ipt_e-mail" placeholder="seu-email@provedor.com">
+        </div>
 
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">AquaTech</h1>
-            <ul class="navbar">
-                <li>
-                    <a href="index.html">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>|</li>
-                <li class="agora">
-                    <a href="#">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </ul>
+       <div class="campo">
+    <label for="ipt_senha"><b>Senha</b></label>
+
+           <div class="senha-container">
+        <input type="password" id="ipt_senha" placeholder="Crie uma senha forte">
+
+        <button type="button" onclick="mostrarSenha()">
+            <img src="./svg/LoginOlho.svg" alt="Mostrar senha">
+        </button>
+         </div>
+        </div>
+        
+        <span> <a href="cadastro.html" style="color: #7E8863;">Esqueci a senha</a></span>
+
+        <div>
+            <button onclick="calcular()">Entrar</button>
+        </div>
+
+        <div class="texto-centralizado">
+            <span>
+                Não tem uma conta?  <a href="cadastro.html" style="color: #7E8863;">Crie uma!</a>
+            </span>
         </div>
     </div>
-
-
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card card-login">
-                <h2>Olá de volta!</h2>
-                <div class="formulario">
-                    <div class="campo">
-                        <span>E-mail:</span>
-                        <input id="email_input" type="text" placeholder="Login">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="entrar()">Entrar</button>
-                </div>
-
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
-
-                <div id="div_erros_login"></div>
-            </div>
-        </div>
-    </div>
-
-    <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023-2026</h4>
-        </div>
-    </div>
-    <!--footer fim-->
-
+    </main>
 </body>
-
-</html>
-
 <script>
 
+    function mostrarSenha() {
 
-    function entrar() {
-        aguardar();
+        if (ipt_senha.type == "password") {
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+            ipt_senha.type = "text";
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
-        }
-        else {
-            setInterval(sumirMensagem, 5000)
+        } else {
+
+            ipt_senha.type = "password";
+
         }
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
-
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
-
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
+
+    function login() {
+
+        let email = document.getElementById("ipt_e-mail").value;
+        let senha = document.getElementById("ipt_senha").value;
+
+        let indiceArroba = email.indexOf("@");
+        let indicePonto = email.indexOf(".");
+
+        let temArroba = email.includes("@");
+
+        let pontoAposArroba =
+            indicePonto > indiceArroba;
+
+        let terminaComPonto =
+            email.endsWith(".");
+
+
+        if (
+            email == "" ||
+            senha == ""
+        ) {
+
+            alert("Preencha todos os campos");
+
+        }
+
+        else if (
+            !temArroba ||
+            !pontoAposArroba ||
+            terminaComPonto
+        ) {
+
+            alert("Digite um e-mail válido");
+
+        }
+
+        else if (senha.length < 8) {
+
+            alert("A senha precisa ter pelo menos 8 caracteres");
+
+        }
+
+        else {
+
+            alert("Login válido!");
+
+        }
+
     }
 
 </script>
