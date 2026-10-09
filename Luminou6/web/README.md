@@ -6,7 +6,7 @@ _Implementação de Referência para o seu Projeto de Primeiro Semestre_
 
 <hr>
 
-# Como usar
+# Como usar 
 
 1. Clone este repositório em sua máquina.
 
