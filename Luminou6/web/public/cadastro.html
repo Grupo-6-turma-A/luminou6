@@ -63,13 +63,21 @@
 </html>
 <script>
     function cadastrar() {
-        let nome = ipt_nome_empresa.value;
-        let email = ipt_email_empresa.value;
+        // let nome = ipt_nome_empresa.value;
+        // let email = ipt_email_empresa.value;
+        // let senha = ipt_senha_empresa.value;
+        // let confirma = ipt_senha_confirma_empresa.value;
+        // let mensagem = ``;
         let cnpj = ipt_cnpj_empresa.value;
-        let senha = ipt_senha_empresa.value;
-        let confirma = ipt_senha_confirma_empresa.value;
-        let mensagem = ``;
         
+        var nomeVar = ipt_nome_empresa.value;
+        var emailVar = ipt_email_empresa.value;
+        var senhaVar = ipt_senha_empresa.value;
+        var confirmacaoSenhaVar = ipt_senha_confirma_empresa.value;
+        // var codigoVar = codigo_input.value;
+        var idEmpresaVincular
+
+
         if (senha.length < 8) {
             alert(`A senha deve conter pelo menos 8 caracteres`);
         }
@@ -98,7 +106,7 @@
             mensagem = `<span style="color: red;">As senhas não coincidem</span>`;
         }
 
-            // Enviando o valor da nova input
+    // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
