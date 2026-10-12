@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/styleSimulacao.css">
     <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="shortcut icon" href="../imgs/logoLogin.png" type="image/x-icon" />
     <title>Simulador Financeiro</title>
 </head>
 <body>
@@ -14,22 +15,22 @@
         <img src="../imgs/logo.png" alt="Logo Luminou6" class="nav-logo" />
         <ul class="nav-list">
           <li class="nav-item">
-            <a href="../HTML/home.html">Home</a>
+            <a href="../HTML/index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a href="home.html #sobre">Sobre o Projeto</a>
+            <a href="../HTML/index.html #sobre">Sobre o Projeto</a>
           </li>
           <li class="nav-item">
-            <a href="home.html #comofunciona">Como Funciona</a>
+            <a href="../HTML/index.html #comofunciona">Como Funciona</a>
           </li>
           <li class="nav-item">
-            <a href="home.html #quemsomos">Quem Somos</a>
+            <a href="../HTML/index.html #quemsomos">Quem Somos</a>
           </li>
           <li class="nav-item">
-            <a href="home.html #objetivo">Objetivo</a>
+            <a href="../HTML/index.html #objetivo">Objetivo</a>
           </li>
           <li class="nav-item">
-            <a href="home.html #faleconosco">Fale Conosco</a>
+            <a href="../HTML/index.html #faleconosco">Fale Conosco</a>
           </li>
         </ul>
         <div class="nav-buttons">
@@ -139,50 +140,57 @@
 
     <!-- <div id="div_msg"></div> -->
 
-    <footer id="footer">
-        <section id="navegacao">
-            <div id="lista_logo">
-                <img src="../imgs/logo.png" alt="logo">
-                <div>
-                    <h4 id="lumi">LUMINOU6</h4>
-                    <p id="moni">Monitoramento inteligente da luminosidade <br> para o cultivo de baunilha.</p>
-                </div>
+    <footer class="footer">
+    <div class="footer-top">
+        <div class="footer-brand">
+            <div class="footer-logo-box">
+                <img src="../imgs/logoLogin.png" alt="Logo Luminou6">
             </div>
-
-            <div class="lista">
+            <div class="footer-brand-text">
+                <h2>LUMINOU6</h2>
+                <p>Monitoramento inteligente da luminosidade para o cultivo de baunilha.</p>
+            </div>
+        </div>
+        <div class="footer-columns">
+            <div class="footer-col">
                 <h4>Navegação</h4>
-                <a href="">Home</a>
-                <a href="">Sobre</a>
-                <a href="">Como funciona</a>
-                <a href="">Quem somos</a>
-                <a href="">Objetivo</a>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre o Projeto</a></li>
+                    <li><a href="#comofunciona">Como Funciona</a></li>
+                    <li><a href="#quemsomos">Quem Somos</a></li>
+                    <li><a href="#objetivo">Objetivo</a></li>
+                </ul>
             </div>
-
-            <div class="lista">
-                <h4>O projeto</h4>
-                <a href="">Simulador financeiro</a>
-                <a href="">Sensor LDR + Arduino</a>
-                <a href="">Dashboard de dados</a>
-                <a href="">Cultivo da baunilha</a>
+            <div class="footer-col">
+                <h4>O Projeto</h4>
+                <ul>
+                    <li><a href="index_Calculadora.html">Simulador financeiro</a></li>
+                    <li><a href="#">Sensor LDR + Arduino</a></li>
+                    <li><a href="#">Dashboard de dados</a></li>
+                    <li><a href="#">Cultivo de baunilha</a></li>
+                </ul>
             </div>
-
-            <div class="lista">
+            <div class="footer-col">
                 <h4>Equipe</h4>
-                <a href="">Turma 1ADSA</a>
-                <a href="">Projeto integrador</a>
-                <a href="">Acessar Monitoramento</a>
+                <ul>
+                    <li><a href="#quemsomos">Turma 1ADSA</a></li>
+                    <li><a href="#">Projeto Integrador</a></li>
+                    <li><a href="login.html">Acessar Monitoramento</a></li>
+                </ul>
             </div>
-        </section>
-
-        <div id="linha"></div>
-
-        <section id="copi">
-            <div id="copi_texto">
-                <p>© 2026 LUMINOUI — Monitoramento Inteligente para Cultivo de Baunilha</p>
-                <p>Projeto desenvolvido por estudantes da SPTech - turma 1ADSA — Programação, Eletrônica e Agricultura.</p>
-            </div>
+        </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+        <div class="footer-info">
+            <p>&copy; 2026 LUMINOUS &mdash; Monitoramento Inteligente para Cultivo de Baunilha</p>
+            <p>Projeto desenvolvido por estudantes da SPTech - turma 1ADSA &mdash; Programação, Eletrônica e Agricultura.</p>
+        </div>
+        <div class="footer-rights">
             <p>Todos os direitos reservados.</p>
-        </section>
+        </div>
+    </div>
     </footer>
 
 </body>
@@ -205,7 +213,7 @@
 
       let percentualPerda = 0.15;
       let perdaAnualTotal = faturamentoTotal * percentualPerda;
-      let perdaMensal = perdaAnualTotal / 12;
+      let perdaMensal = faturamentoTotal / 12;
 
       let faturamentoComPerdaSemLuminou = (faturamentoTotal - perdaAnualTotal) - custoMaodeobra;
 
@@ -214,20 +222,21 @@
       let mensagemPerda = ``;
       let mensagemCusto = ``;
       let mensagemGanho = ``;
-      
+
       if (qtdEstufa < 1) {
          alert(`Insira um número de estufas válido.`);
       } else if (custoMaodeobra < 1) {
          alert(`Insira o custo de mão de obra válido`);
       }
 
-      mensagemPerda = `R$${perdaMensal.toFixed(2)}`;
-      msg_perda.innerHTML= mensagemPerda;
+      mensagemPerda = `R$ ${perdaMensal.toFixed(2)}`;
+      msg_perda.innerHTML = mensagemPerda;
 
-      mensagemCusto = `R$$${perdaAnualTotal.toFixed(2)}`;
+      mensagemCusto = `R$ ${faturamentoTotal.toFixed(2)}`;
       msg_custo.innerHTML = mensagemCusto;
 
-      mensagemGanho = `R$${valorGeradoReais.toFixed(2)}`;
+      mensagemGanho = `R$ ${faturamentoComLuminou.toFixed(2)}`;
       msg_ganho.innerHTML = mensagemGanho;
+
    }
 </script>
