@@ -1,7 +1,7 @@
 CREATE DATABASE bd_luminousix;
 USE  bd_luminousix;
 
- CREATE TABLE cliente (
+CREATE TABLE cliente (
 idCliente INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR (100),
 identificacao_fiscal VARCHAR(45) NOT NULL,
