@@ -76,11 +76,11 @@
         if (senha.length < 8) {
             alert(`A senha deve conter pelo menos 8 caracteres`);
         }
-        else if (!senha.includes('!', '@', '#', '*', '_',)) {
-            alert(`
-            A senha deve conter pelo menos um caractere especial.
-            !, @, #, *, _
-            `);
+        else if (!senha.includes('!') && !senha.includes('@') && !senha.includes('#') && !senha.includes('*') && !senha.includes('_')) {
+        alert(`
+        A senha deve conter pelo menos um caractere especial.
+        !, @, #, *, _
+        `);
         }
 
         else if (nome == `` || email == `` || cnpj == `` || confirma == `` || senha == `` || codigo == ``) {
