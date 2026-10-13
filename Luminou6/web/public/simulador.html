@@ -313,10 +313,10 @@
       msg_faturamento.innerHTML = `R$ ${faturamentoTotal.toFixed(2)}`;
 
       // Selecionando o 3º cartão da lista de resultados de forma segura pelas classes
-      let todosOsCards = document.querySelectorAll('.result_card');
-      let cardSemLum = todosOsCards[2]; // O 3º cartão (índice 2)
-      let iconSemLum = cardSemLum.querySelector('.icon_box');
-      let msgSemLum = document.getElementById('msg_sem_luminou');
+      let todosOsCards = document.querySelectorAll('.result_card'); // Procura pelo HTML inteiro por .result_card
+      let cardSemLum = todosOsCards[2]; // Pega o índice do 3º cartão (índice 2)
+      let iconSemLum = cardSemLum.querySelector('.icon_box'); // Procura pelo .icon_box dentro do card
+      let msgSemLum = document.getElementById('msg_sem_luminou'); // Localiza o elemento que tem id = msg_sem_luminou
 
       // Exibição e alteração dinâmica da cor do 3º card baseado no valor
       if (resultadoSemLuminou >= 0) {
