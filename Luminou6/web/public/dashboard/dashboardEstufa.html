@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/dashboardEstufa.css" />
+    <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon" />
+    <title>Estufas</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../imgs/logoLuminou6.png" alt="Logo Luminou6" />
+      </div>
+
+      <nav>
+        <div>
+          <img src="../imgs/VectorCasa.png" alt="" />
+          <a href="#">Home</a>
+        </div>
+
+        <div>
+          <img src="../imgs/VectorLupa.png" alt="" />
+          <a href="#">Visão Geral</a>
+        </div>
+
+        <div>
+          <img src="../imgs/vectorCasa2.png" alt="" />
+          <a href="#">Estufas</a>
+        </div>
+
+        <div>
+          <img src="../imgs/VectorEstrela.png" alt="" />
+          <a href="#">Sensores</a>
+        </div>
+
+        <div>
+          <img src="../imgs/VectorSino.png" alt="" />
+          <a href="#">Alertas</a>
+        </div>
+
+        <div>
+          <img src="../imgs/VectorEstrela2.png" alt="" />
+          <a href="#">Configurações</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="conteudo-principal">
+
+      <div class="barra-superior">
+
+        <div class="filtros">
+
+          <div class="filtro">
+            <img
+              class="icone-filtro"
+              src="../imgs/VectorCalendario.png"
+              alt=""
+            />
+
+            <div class="filtro-texto">
+              <label for="periodo">Período</label>
+
+              <select id="periodo">
+                <option value="24h">Últimas 24 horas</option>
+                <option value="7d">Últimos 7 dias</option>
+                <option value="30d">Últimos 30 dias</option>
+                <option value="1ano">Último 1 ano</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filtro">
+            <img
+              class="icone-filtro"
+              src="../imgs/vectorCasa2.png"
+              alt=""
+            />
+
+            <div class="filtro-texto">
+              <label for="estufa">Estufa</label>
+
+              <select id="estufa">
+                <option value="todas">Todas as estufas</option>
+                <option value="estufa1">Estufa 1</option>
+                <option value="estufa2">Estufa 2</option>
+                <option value="estufa3">Estufa 3</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ultima-atualizacao">
+          <span class="indicador"></span>
+
+          <div class="atualizacao-texto">
+            <span>Última atualização</span>
+            <strong id="data-atualizacao">13/10/2026 16:04</strong>
+          </div>
+        </div>
+
+        <button
+          class="botao-notificacao"
+          type="button"
+          aria-label="Notificações"
+        >
+          <img src="../imgs/VectorSino.png" alt="" />
+        </button>
+
+        <button
+          class="avatar"
+          type="button"
+          aria-label="Perfil do usuário"
+        >
+          A
+        </button>
+
+      </div>
+
+      <div class="titulo-estufas">
+    <h2>Estufas</h2>
+    <p>Compare a luz recebida por cada estufa ao longo do dia.</p>
+    </div>
+    
+    </main>
+  </body>
+</html>
