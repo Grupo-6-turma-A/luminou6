@@ -11,8 +11,10 @@ body {
     display: flex;
     gap: 15px;
     background-color: #FFF8E7;
+    color: #171A12;
 }
 
+/* MENU LATERAL */
 header {
     display: flex;
     flex-direction: column;
@@ -58,6 +60,12 @@ nav img {
 nav a {
     text-decoration: none;
     color: #080040;
+    font-size: 14px;
+}
+
+nav .menu-ativo {
+    background-color: #F5E4B9;
+    border-radius: 8px;
 }
 
 /* CONTEÚDO PRINCIPAL */
@@ -75,7 +83,6 @@ nav a {
     width: 100%;
 }
 
-/* FILTROS */
 .filtros {
     display: flex;
     align-items: center;
@@ -165,7 +172,7 @@ nav a {
     white-space: nowrap;
 }
 
-/* SINO */
+/* NOTIFICAÇÕES */
 .botao-notificacao {
     display: flex;
     align-items: center;
@@ -203,22 +210,148 @@ nav a {
     flex-shrink: 0;
 }
 
+/* TÍTULO */
 .titulo-estufas {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-     margin-top: 35px;
+    margin-top: 35px;
+    margin-bottom: 22px;
 }
 
 .titulo-estufas h2 {
     margin: 0;
+    font-size: 24px;
 }
-
 
 .titulo-estufas p {
     color: gray;
     margin: 0;
-     line-height: 1.2;
+    line-height: 1.4;
+    font-size: 13px;
+}
+
+/* GRADE DOS CARDS */
+.lista-estufas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: stretch;
+}
+
+/* CARD DA ESTUFA */
+.card-estufa {
+    min-width: 0;
+    padding: 14px;
+    background-color: #FFF9E8;
+    border: 1px solid #E9DFC6;
+    border-radius: 16px;
+}
+
+.card-estufa[hidden] {
+    display: none;
+}
+
+/* CABEÇALHO */
+.cabecalho-estufa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.cabecalho-estufa h2 {
+    margin: 0;
+    font-size: 13px;
+    color: #171A12;
+}
+
+/* STATUS */
+.status {
+    display: inline-block;
+    background-color: #E8EDCF;
+    color: #71834C;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 9px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-alerta {
+    background-color: #FBECCB;
+    color: #B87913;
+}
+
+.status-sem-sinal {
+    background-color: #EEEBDD;
+    color: #858474;
+}
+
+/* LUMINOSIDADE */
+.valor-luz {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    margin-top: 8px;
+}
+
+.valor-luz strong {
+    font-size: 28px;
+    line-height: 1.1;
+    color: #171A12;
+}
+
+.valor-luz span {
+    font-size: 9px;
+    font-weight: 600;
+    color: #696D5C;
+}
+
+/* ÚLTIMA LEITURA */
+.ultima-leitura {
+    margin: 3px 0 0;
+    color: #777965;
+    font-size: 9px;
+}
+
+/* GRÁFICOS */
+.grafico-estufa {
+    position: relative;
+    width: 100%;
+    height: 65px;
+    margin-top: 8px;
+}
+
+.grafico-estufa canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* INDICADORES */
+.indicadores-estufa {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.indicadores-estufa div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.indicadores-estufa span {
+    font-size: 9px;
+    color: #777965;
+}
+
+.indicadores-estufa strong {
+    font-size: 12px;
+    color: #171A12;
 }
 

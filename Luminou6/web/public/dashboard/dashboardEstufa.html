@@ -1,15 +1,19 @@
-
 <!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="../CSS/dashboardEstufa.css" />
     <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon" />
-    <title>Estufas</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Estufas | Luminou6</title>
   </head>
 
   <body>
+    <!-- MENU LATERAL -->
     <header>
       <div class="logo">
         <img src="../imgs/logoLuminou6.png" alt="Logo Luminou6" />
@@ -26,7 +30,7 @@
           <a href="#">Visão Geral</a>
         </div>
 
-        <div>
+        <div class="menu-ativo">
           <img src="../imgs/vectorCasa2.png" alt="" />
           <a href="#">Estufas</a>
         </div>
@@ -48,12 +52,11 @@
       </nav>
     </header>
 
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo-principal">
-
+      <!-- BARRA SUPERIOR -->
       <div class="barra-superior">
-
         <div class="filtros">
-
           <div class="filtro">
             <img
               class="icone-filtro"
@@ -74,24 +77,19 @@
           </div>
 
           <div class="filtro">
-            <img
-              class="icone-filtro"
-              src="../imgs/vectorCasa2.png"
-              alt=""
-            />
+            <img class="icone-filtro" src="../imgs/vectorCasa2.png" alt="" />
 
             <div class="filtro-texto">
               <label for="estufa">Estufa</label>
 
               <select id="estufa">
                 <option value="todas">Todas as estufas</option>
-                <option value="estufa1">Estufa 1</option>
-                <option value="estufa2">Estufa 2</option>
-                <option value="estufa3">Estufa 3</option>
+                <option value="A">Estufa A</option>
+                <option value="B">Estufa B</option>
+                <option value="C">Estufa C</option>
               </select>
             </div>
           </div>
-
         </div>
 
         <div class="ultima-atualizacao">
@@ -111,21 +109,223 @@
           <img src="../imgs/VectorSino.png" alt="" />
         </button>
 
-        <button
-          class="avatar"
-          type="button"
-          aria-label="Perfil do usuário"
-        >
+        <button class="avatar" type="button" aria-label="Perfil do usuário">
           A
         </button>
-
       </div>
 
+      <!-- TÍTULO -->
       <div class="titulo-estufas">
-    <h2>Estufas</h2>
-    <p>Compare a luz recebida por cada estufa ao longo do dia.</p>
-    </div>
-    
+        <h2>Estufas</h2>
+        <p>Compare a luz recebida por cada estufa ao longo do dia.</p>
+      </div>
+
+      <!-- CARDS DAS ESTUFAS -->
+      <section class="lista-estufas">
+        <!-- ESTUFA A -->
+        <article class="card-estufa" data-estufa="A">
+          <div class="cabecalho-estufa">
+            <h2>Estufa A</h2>
+            <span class="status">Na faixa</span>
+          </div>
+
+          <div class="valor-luz">
+            <strong>192</strong>
+            <span>µmol/m²/s</span>
+          </div>
+
+          <div class="grafico-estufa">
+            <canvas id="graficoA"></canvas>
+          </div>
+
+          <div class="indicadores-estufa">
+            <div>
+              <span>Cobertura</span>
+              <strong>95%</strong>
+            </div>
+
+            <div>
+              <span>DLI hoje</span>
+              <strong>18,7</strong>
+            </div>
+
+            <div>
+              <span>Na faixa</span>
+              <strong>96%</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- ESTUFA B -->
+        <article class="card-estufa" data-estufa="B">
+          <div class="cabecalho-estufa">
+            <h2>Estufa B</h2>
+            <span class="status status-alerta"> Abaixo da faixa </span>
+          </div>
+
+          <div class="valor-luz">
+            <strong>49</strong>
+            <span>µmol/m²/s</span>
+          </div>
+
+          <div class="grafico-estufa">
+            <canvas id="graficoB"></canvas>
+          </div>
+
+          <div class="indicadores-estufa">
+            <div>
+              <span>Cobertura</span>
+              <strong>94%</strong>
+            </div>
+
+            <div>
+              <span>DLI hoje</span>
+              <strong>11,2</strong>
+            </div>
+
+            <div>
+              <span>Na faixa</span>
+              <strong>84%</strong>
+            </div>
+          </div>
+        </article>
+
+        <!-- ESTUFA C -->
+        <article class="card-estufa" data-estufa="C">
+          <div class="cabecalho-estufa">
+            <h2>Estufa C</h2>
+            <span class="status status-sem-sinal"> Sem sinal </span>
+          </div>
+
+          <div class="valor-luz">
+            <strong>—</strong>
+            <span>µmol/m²/s</span>
+          </div>
+
+          <p class="ultima-leitura">Última leitura às 13:50</p>
+
+          <div class="grafico-estufa">
+            <canvas id="graficoC"></canvas>
+          </div>
+
+          <div class="indicadores-estufa">
+            <div>
+              <span>Cobertura</span>
+              <strong>—</strong>
+            </div>
+
+            <div>
+              <span>DLI hoje</span>
+              <strong>—</strong>
+            </div>
+
+            <div>
+              <span>Na faixa</span>
+              <strong>—</strong>
+            </div>
+          </div>
+        </article>
+      </section>
     </main>
+
+    <!-- JAVASCRIPT DOS GRÁFICOS -->
+    <script>
+      const configuracoes = [
+        {
+          id: "graficoA",
+          valores: [80, 80, 110, 140, 160, 190, 180, 192],
+          cor: "#879461",
+          fundo: "#F5E8B8",
+        },
+        {
+          id: "graficoB",
+          valores: [20, 20, 35, 50, 65, 75, 95, 100, 98, 96, 70, 49],
+          cor: "#C68112",
+          fundo: "#F9E5B5",
+        },
+        {
+          id: "graficoC",
+          valores: [30, 30, 45, 60, 75, 90, 100, 115, 110, 120, 118, 125, 115],
+          cor: "#999887",
+          fundo: "#E8E4D2",
+        },
+      ];
+
+      configuracoes.forEach(function (config) {
+        const canvas = document.getElementById(config.id);
+
+        new Chart(canvas, {
+          type: "line",
+
+          data: {
+            labels: [
+              "8h",
+              "9h",
+              "10h",
+              "11h",
+              "12h",
+              "13h",
+              "14h",
+              "15h",
+              "16h",
+              "17h",
+              "18h",
+              "19h",
+              "20h",
+            ].slice(0, config.valores.length),
+
+            datasets: [
+              {
+                data: config.valores,
+                borderColor: config.cor,
+                backgroundColor: config.fundo,
+                fill: true,
+                tension: 0.3,
+                pointRadius: 0,
+                borderWidth: 1.5,
+              },
+            ],
+          },
+
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+
+            plugins: {
+              legend: {
+                display: false,
+              },
+
+              tooltip: {
+                enabled: true,
+              },
+            },
+
+            scales: {
+              x: {
+                display: false,
+              },
+
+              y: {
+                display: false,
+              },
+            },
+          },
+        });
+      });
+
+      // FILTRO DE ESTUFAS
+      const filtroEstufa = document.getElementById("estufa");
+
+      filtroEstufa.addEventListener("change", function () {
+        const cards = document.querySelectorAll(".card-estufa");
+
+        cards.forEach(function (card) {
+          card.hidden =
+            this.value !== "todas" && card.dataset.estufa !== this.value;
+        }, this);
+      });
+    </script>
   </body>
 </html>
