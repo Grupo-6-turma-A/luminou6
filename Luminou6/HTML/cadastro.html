@@ -20,6 +20,11 @@
         <span>Crie seu cadastro gratuito e integre seus sensores arduino hoje mesmo.</span>
 
         <div class="Todos">
+            <label><b>Código de ativação:</b></label>
+            <input id="ipt_codigo" type="text" placeholder="Insira aqui seu código" />
+          </div>
+        
+        <div class="Todos">
         <label for="ipt_nome_empresa"> <b>Nome da empresa:</b></label>  
             <input type="text" id="ipt_nome_empresa" PlaceHolder="Baunilhas Outdoor S/A">
         </div>
@@ -65,19 +70,20 @@
         let cnpj = ipt_cnpj_empresa.value;
         let senha = ipt_senha_empresa.value;
         let confirma = ipt_senha_confirma_empresa.value;
+        let codigo = ipt_codigo.value
         let mensagem = ``;
         
         if (senha.length < 8) {
             alert(`A senha deve conter pelo menos 8 caracteres`);
         }
-        if (!senha.includes('!', '@', '#', '*', '_',)) {
+        else if (!senha.includes('!', '@', '#', '*', '_',)) {
             alert(`
             A senha deve conter pelo menos um caractere especial.
             !, @, #, *, _
             `);
         }
 
-        if (nome == `` || email == `` || cnpj == `` || cnpj == `` || senha == ``) {
+        else if (nome == `` || email == `` || cnpj == `` || confirma == `` || senha == `` || codigo == ``) {
             mensagem = `<i>Todos os campos devem estar preenchidos</i>`;
         } else {
             alert(`Usuário cadastrado!`);
