@@ -10,10 +10,10 @@ telefone VARCHAR(20) NOT NULL,
 codigo_ativacao VARCHAR(45)
 );
 
-INSERT INTO cliente (nome, identificacao_fiscal, email_contato, telefone) VALUES
-('Baunilha Brasil Ltda', '12345678000190', 'contato@baunilhabrasil.com', '11987654321'),
-('Fazenda da Baunilha', '98765432000155', 'contato@fazendaBaunilha.com', '11976543210'),
-('Cultivo Vanilla', '45678912000133', 'contato@cultivovanilla.com', '11965432109');
+INSERT INTO cliente (nome, identificacao_fiscal, email_contato, telefone, codigo_ativacao) VALUES
+('Baunilha Brasil Ltda', '12345678000190', 'contato@baunilhabrasil.com', '11987654321','Urubu100'),
+('Fazenda da Baunilha', '98765432000155', 'contato@fazendaBaunilha.com', '11976543210','sptech100'),
+('Cultivo Vanilla', '45678912000133', 'contato@cultivovanilla.com', '11965432109','Sptech');
 
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -65,8 +65,8 @@ codigo_sensor VARCHAR(45) NOT NULL UNIQUE,
 estufa_idEstufa INT NOT NULL,
 
 CONSTRAINT fk_sensor_estufa
-    FOREIGN KEY (ESTUFA_idESTUFA)
-    REFERENCES ESTUFA(idESTUFA)
+FOREIGN KEY (estufa_idEstufa)
+REFERENCES estufa(idEstufa)
 );
 
 INSERT INTO sensor (nome, status_sensor, codigo_sensor, estufa_idEstufa) VALUES
@@ -149,3 +149,5 @@ JOIN sensor AS s
 ON s.estufa_idEstufa = e.idEstufa
 JOIN leitura AS l
 ON l.sensor_idSensor = s.idSensor;
+
+
