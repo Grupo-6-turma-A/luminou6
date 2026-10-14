@@ -6,7 +6,8 @@ idCliente INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR (100),
 identificacao_fiscal VARCHAR(45) NOT NULL,
 email_contato VARCHAR(100) NOT NULL CONSTRAINT chkEmail_contato CHECK(email_contato LIKE '%@%'), 
-telefone VARCHAR(20) NOT NULL
+telefone VARCHAR(20) NOT NULL,
+codigo_ativacao VARCHAR(45)
 );
 
 INSERT INTO cliente (nome, identificacao_fiscal, email_contato, telefone) VALUES
