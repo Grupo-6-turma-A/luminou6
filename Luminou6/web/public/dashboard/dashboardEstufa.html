@@ -226,7 +226,63 @@
           </div>
         </article>
       </section>
+    
+<!-- HISTÓRICO DE LEITURAS -->
+<section class="historico">
+  <h3>Histórico de leituras</h3>
+
+  <div class="tabela-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Data e hora</th>
+          <th>Estufa</th>
+          <th>PPFD (µmol/m²/s)</th>
+          <th>Status</th>
+          <th>Sensor</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>12/10/2026 · 14:37</td>
+          <td>Estufa A</td>
+          <td>179</td>
+          <td><span class="status-tabela">Na faixa</span></td>
+          <td>LDR-A01</td>
+        </tr>
+
+        <tr>
+          <td>12/10/2026 · 14:37</td>
+          <td>Estufa B</td>
+          <td>49</td>
+          <td><span class="status-tabela alerta">Abaixo da faixa</span></td>
+          <td>LDR-B01</td>
+        </tr>
+
+        <tr>
+          <td>12/10/2026 · 13:50</td>
+          <td>Estufa C</td>
+          <td>—</td>
+          <td><span class="status-tabela sem-sinal">Sem sinal</span></td>
+          <td>LDR-C01</td>
+        </tr>
+
+        <tr>
+          <td>12/10/2026 · 14:27</td>
+          <td>Estufa A</td>
+          <td>100</td>
+          <td><span class="status-tabela">Na faixa</span></td>
+          <td>LDR-A01</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+```
     </main>
+</body>
+
 
     <!-- JAVASCRIPT DOS GRÁFICOS -->
     <script>
@@ -327,5 +383,4 @@
         }, this);
       });
     </script>
-  </body>
 </html>

@@ -355,3 +355,75 @@ nav .menu-ativo {
     color: #171A12;
 }
 
+
+/* HISTÓRICO DE LEITURAS */
+.historico {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #FFF8E7;
+    border: 1px solid #F0E2B5;
+    border-radius: 12px;
+}
+
+.historico h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.historico table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    text-align: left;
+}
+
+.historico thead {
+    background-color: #F2E4AC;
+}
+
+.historico th {
+    padding: 9px;
+    font-weight: 600;
+}
+
+.historico th:first-child {
+    border-radius: 7px 0 0 7px;
+}
+
+.historico th:last-child {
+    border-radius: 0 7px 7px 0;
+}
+
+.historico td {
+    padding: 9px;
+    border-bottom: 1px solid #F0E2B5;
+}
+
+.historico tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.status-tabela {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 20px;
+    background-color: #E5EBCB;
+    color: #687A43;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.status-tabela.alerta {
+    background-color: #FBE7B2;
+    color: #93600B;
+}
+
+.status-tabela.sem-sinal {
+    background-color: #E9E6D9;
+    color: #777568;
+}
