@@ -9,7 +9,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <title>Estufas | Luminou6</title>
+    <title>Estufas</title>
   </head>
 
   <body>
@@ -130,7 +130,7 @@
           </div>
 
           <div class="valor-luz">
-            <strong>192</strong>
+            <strong>420</strong>
             <span>µmol/m²/s</span>
           </div>
 
@@ -146,7 +146,7 @@
 
             <div>
               <span>DLI hoje</span>
-              <strong>18,7</strong>
+              <strong>24,5</strong>
             </div>
 
             <div>
@@ -164,7 +164,7 @@
           </div>
 
           <div class="valor-luz">
-            <strong>49</strong>
+            <strong>180</strong>
             <span>µmol/m²/s</span>
           </div>
 
@@ -185,7 +185,7 @@
 
             <div>
               <span>Na faixa</span>
-              <strong>84%</strong>
+              <strong>40%</strong>
             </div>
           </div>
         </article>
@@ -226,161 +226,320 @@
           </div>
         </article>
       </section>
-    
-<!-- HISTÓRICO DE LEITURAS -->
-<section class="historico">
-  <h3>Histórico de leituras</h3>
 
-  <div class="tabela-container">
-    <table>
-      <thead>
-        <tr>
-          <th>Data e hora</th>
-          <th>Estufa</th>
-          <th>PPFD (µmol/m²/s)</th>
-          <th>Status</th>
-          <th>Sensor</th>
-        </tr>
-      </thead>
+      <!-- GRÁFICO GERAL DE PPFD -->
+      <section class="grafico-geral">
+        <div class="cabecalho-grafico">
+          <h3>PPFD por estufa — últimas 24 horas</h3>
 
-      <tbody>
-        <tr>
-          <td>12/10/2026 · 14:37</td>
-          <td>Estufa A</td>
-          <td>179</td>
-          <td><span class="status-tabela">Na faixa</span></td>
-          <td>LDR-A01</td>
-        </tr>
+          <div class="legenda-grafico">
+            <span><i class="ponto estufa-a"></i>Estufa A</span>
+            <span><i class="ponto estufa-b"></i>Estufa B</span>
+            <span><i class="ponto estufa-c"></i>Estufa C</span>
+            <span><i class="ponto faixa-ideal"></i>Faixa ideal (340-620)</span>
+          </div>
+        </div>
 
-        <tr>
-          <td>12/10/2026 · 14:37</td>
-          <td>Estufa B</td>
-          <td>49</td>
-          <td><span class="status-tabela alerta">Abaixo da faixa</span></td>
-          <td>LDR-B01</td>
-        </tr>
+        <div class="area-grafico-geral">
+          <canvas id="graficoGeral"></canvas>
+        </div>
+      </section>
+      <!-- HISTÓRICO DE LEITURAS -->
+      <section class="historico">
+        <h3>Histórico de leituras</h3>
 
-        <tr>
-          <td>12/10/2026 · 13:50</td>
-          <td>Estufa C</td>
-          <td>—</td>
-          <td><span class="status-tabela sem-sinal">Sem sinal</span></td>
-          <td>LDR-C01</td>
-        </tr>
+        <div class="tabela-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Data e hora</th>
+                <th>Estufa</th>
+                <th>PPFD (µmol/m²/s)</th>
+                <th>Status</th>
+                <th>Sensor</th>
+              </tr>
+            </thead>
 
-        <tr>
-          <td>12/10/2026 · 14:27</td>
-          <td>Estufa A</td>
-          <td>100</td>
-          <td><span class="status-tabela">Na faixa</span></td>
-          <td>LDR-A01</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-```
+            <tbody>
+              <tr>
+                <td>12/10/2026 · 14:37</td>
+                <td>Estufa A</td>
+                <td>420</td>
+                <td><span class="status-tabela">Na faixa</span></td>
+                <td>LDR-A01</td>
+              </tr>
+
+              <tr>
+                <td>12/10/2026 · 14:37</td>
+                <td>Estufa B</td>
+                <td>180</td>
+                <td>
+                  <span class="status-tabela alerta">Abaixo da faixa</span>
+                </td>
+                <td>LDR-B01</td>
+              </tr>
+
+              <tr>
+                <td>12/10/2026 · 13:50</td>
+                <td>Estufa C</td>
+                <td>—</td>
+                <td><span class="status-tabela sem-sinal">Sem sinal</span></td>
+                <td>LDR-C01</td>
+              </tr>
+
+              <tr>
+                <td>12/10/2026 · 14:27</td>
+                <td>Estufa A</td>
+                <td>380</td>
+                <td><span class="status-tabela">Na faixa</span></td>
+                <td>LDR-A01</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
-</body>
+  </body>
 
+  <!-- JAVASCRIPT DOS GRÁFICOS -->
+  <script>
+    const configuracoes = [
+      {
+        id: "graficoA",
+        valores: [200, 250, 310, 360, 400, 430, 410, 420],
+        cor: "#879461",
+        fundo: "#F5E8B8",
+      },
+      {
+        id: "graficoB",
+        valores: [80, 90, 110, 130, 150, 170, 190, 180, 175, 170, 150, 120],
+        cor: "#C68112",
+        fundo: "#F9E5B5",
+      },
+      {
+        id: "graficoC",
+        valores: [
+          100, 120, 150, 180, 210, 240, 270, 300, 290, 310, 305, 320, 300,
+        ],
+        cor: "#999887",
+        fundo: "#E8E4D2",
+      },
+    ];
 
-    <!-- JAVASCRIPT DOS GRÁFICOS -->
-    <script>
-      const configuracoes = [
-        {
-          id: "graficoA",
-          valores: [80, 80, 110, 140, 160, 190, 180, 192],
-          cor: "#879461",
-          fundo: "#F5E8B8",
+    configuracoes.forEach(function (config) {
+      const canvas = document.getElementById(config.id);
+
+      new Chart(canvas, {
+        type: "line",
+
+        data: {
+          labels: [
+            "8h",
+            "9h",
+            "10h",
+            "11h",
+            "12h",
+            "13h",
+            "14h",
+            "15h",
+            "16h",
+            "17h",
+            "18h",
+            "19h",
+            "20h",
+          ].slice(0, config.valores.length),
+
+          datasets: [
+            {
+              data: config.valores,
+              borderColor: config.cor,
+              backgroundColor: config.fundo,
+              fill: true,
+              tension: 0.3,
+              pointRadius: 0,
+              borderWidth: 1.5,
+            },
+          ],
         },
-        {
-          id: "graficoB",
-          valores: [20, 20, 35, 50, 65, 75, 95, 100, 98, 96, 70, 49],
-          cor: "#C68112",
-          fundo: "#F9E5B5",
+
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: false,
+
+          plugins: {
+            legend: {
+              display: false,
+            },
+
+            tooltip: {
+              enabled: true,
+            },
+          },
+
+          scales: {
+            x: {
+              display: false,
+            },
+
+            y: {
+              display: false,
+            },
+          },
         },
-        {
-          id: "graficoC",
-          valores: [30, 30, 45, 60, 75, 90, 100, 115, 110, 120, 118, 125, 115],
-          cor: "#999887",
-          fundo: "#E8E4D2",
-        },
-      ];
+      });
+    });
 
-      configuracoes.forEach(function (config) {
-        const canvas = document.getElementById(config.id);
+    // FILTRO DE ESTUFAS
+    const filtroEstufa = document.getElementById("estufa");
 
-        new Chart(canvas, {
-          type: "line",
+    filtroEstufa.addEventListener("change", function () {
+      const cards = document.querySelectorAll(".card-estufa");
 
-          data: {
-            labels: [
-              "8h",
-              "9h",
-              "10h",
-              "11h",
-              "12h",
-              "13h",
-              "14h",
-              "15h",
-              "16h",
-              "17h",
-              "18h",
-              "19h",
-              "20h",
-            ].slice(0, config.valores.length),
+      cards.forEach(function (card) {
+        card.hidden =
+          this.value !== "todas" && card.dataset.estufa !== this.value;
+      }, this);
+    });
 
-            datasets: [
-              {
-                data: config.valores,
-                borderColor: config.cor,
-                backgroundColor: config.fundo,
-                fill: true,
-                tension: 0.3,
-                pointRadius: 0,
-                borderWidth: 1.5,
-              },
+    const canvasGeral = document.getElementById("graficoGeral");
+
+    new Chart(canvasGeral, {
+      type: "line",
+
+      data: {
+        labels: [
+          "00:00",
+          "02:00",
+          "04:00",
+          "06:00",
+          "08:00",
+          "10:00",
+          "12:00",
+          "14:00",
+          "16:00",
+          "18:00",
+          "20:00",
+          "22:00",
+        ],
+
+        datasets: [
+          {
+            label: "Estufa A",
+            data: [0, 0, 0, 0, 150, 320, 430, 420, 380, 200, 0, 0],
+            borderColor: "#879461",
+            backgroundColor: "#879461",
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.35,
+            spanGaps: false,
+          },
+          {
+            label: "Estufa B",
+            data: [0, 0, 0, 0, 80, 150, 200, 180, 0, 0, 0, 0],
+            borderColor: "#C68112",
+            backgroundColor: "#C68112",
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.35,
+            spanGaps: false,
+          },
+          {
+            label: "Estufa C",
+            data: [
+              null,
+              null,
+              null,
+              null,
+              120,
+              250,
+              320,
+              300,
+              null,
+              null,
+              null,
+              null,
             ],
+            borderColor: "#999887",
+            backgroundColor: "#999887",
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.35,
+            spanGaps: false,
+          },
+        ],
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+
+        plugins: {
+          legend: {
+            display: false,
           },
 
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: false,
+          tooltip: {
+            enabled: true,
+          },
+        },
 
-            plugins: {
-              legend: {
-                display: false,
-              },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
 
-              tooltip: {
-                enabled: true,
+            ticks: {
+              color: "#777568",
+              maxTicksLimit: 7,
+              font: {
+                size: 10,
               },
             },
 
-            scales: {
-              x: {
-                display: false,
-              },
-
-              y: {
-                display: false,
-              },
+            border: {
+              display: false,
             },
           },
-        });
-      });
 
-      // FILTRO DE ESTUFAS
-      const filtroEstufa = document.getElementById("estufa");
+          y: {
+            beginAtZero: true,
+            max: 700,
 
-      filtroEstufa.addEventListener("change", function () {
-        const cards = document.querySelectorAll(".card-estufa");
+            title: {
+              display: true,
+              text: "PPFD (µmol/m²/s)",
+              color: "#777568",
+              font: {
+                size: 10,
+              },
+            },
 
-        cards.forEach(function (card) {
-          card.hidden =
-            this.value !== "todas" && card.dataset.estufa !== this.value;
-        }, this);
-      });
-    </script>
+            ticks: {
+              stepSize: 100,
+              color: "#777568",
+              font: {
+                size: 10,
+              },
+            },
+
+            grid: {
+              color: "#F0E2B5",
+            },
+
+            border: {
+              display: false,
+            },
+          },
+        },
+      },
+    });
+  </script>
 </html>
