@@ -16,38 +16,38 @@
             <img src="../imgs/logoLuminou6.png" alt="" class="luminou6">
             <ul class="side_items">
                 <li class="item-lateral">
-                    <a href="">
-                        <img src="../imgs/VectorCasa.png" alt="" />
+                    <a href="../index.html">
+                        <img src="../imgs/VectorCasa.svg" alt="" />
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="item-lateral">
-                    <a href="">
-                        <img src="../imgs/VectorLupa.png" alt="" />
+                    <a href="#">
+                        <img src="../imgs/VectorLupa.svg" alt="" />
                         <span>Visão Geral</span>
                     </a>
                 </li>
                 <li class="item-lateral">
-                    <a href="">
-                        <img src="../imgs/vectorCasa2.png" alt="" />
+                    <a href="dashboardEstufa.html">
+                        <img src="../imgs/VectorCasa2.svg" alt="" />
                         <span>Estufas</span>
                     </a>
                 </li>
                 <li class="item-lateral">
                     <a href="">
-                        <img src="../imgs/VectorEstrela.png" alt="" />
+                        <img src="../imgs/VectorEstrela.svg" alt="" />
                         <span>Sensores</span>
                     </a>
                 </li>
                 <li class="item-lateral">
                     <a href="">
-                        <img src="../imgs/VectorSino.png" alt="" />
+                        <img src="../imgs/VectorSino.svg" alt="" />
                         <span>Alertas</span>
                     </a>
                 </li>
                 <li class="item-lateral">
-                    <a href="">
-                        <img src="../imgs/VectorEstrela2.png" alt="" />
+                    <a href="dashboardConfigs.html">
+                        <img src="../imgs/VectorConfig.svg" alt="" />
                         <span>Configurações</span>
                     </a>
                 </li>
@@ -57,7 +57,7 @@
     <main class="main-content">
         <header class="header-pai">
             <div class="div-mae">
-                <span class="icon-calendar">📅</span>
+                <img src="../imgs/VectorCalendario.png" alt="">
                 <div class="div-filho">
                     <small>Período</small>
                     <select id="periodo">
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="div-mae">
-                <span class="icon-estufa">🏠</span>
+                <img src="../imgs/vectorCasa2.png" alt="">
                 <div class="div-filho">
                     <small>Estufa</small>
                     <select id="periodo">
@@ -81,7 +81,7 @@
         <section class="dashboard1">
             <div class="dash-card">
                 <div class="card-header-title">
-                    <span>☀️</span> <span>PPFD Atual</span>
+                    <img src="../imgs/VectorSol.png" alt=""> <span>PPFD Atual</span>
                 </div>
                 <div class="card-body-row">
                     <div class="card-main-value">200 <small>µmol/m²/s</small></div>
@@ -90,16 +90,7 @@
             </div>
             <div class="dash-card">
                 <div class="card-header-title">
-                    <span>🏠</span> <span>Cobertura dos Dados</span>
-                </div>
-                <div class="card-main-value">
-                    <span>92%</span>
-                </div>
-                <span class="card-footer-text">Nas últimas 24h</span>
-            </div>
-            <div class="dash-card">
-                <div class="card-header-title">
-                    <span>🏠</span> <span>Leituras Suspeitas</span>
+                    <img src="../imgs/VectorAviso.png" alt=""> <span>Leituras Suspeitas</span>
                 </div>
                 <div class="card-main-value">
                     <span>2%</span>
@@ -108,7 +99,7 @@
             </div>
             <div class="dash-card">
                 <div class="card-header-title">
-                    <span>☀️</span> <span>DLI Estimado</span>
+                    <img src="../imgs/VectorFolha.png" alt=""> <span>DLI Estimado</span>
                 </div>
                 <div class="card-body-row">
                     <div class="card-main-value">18,7 <small>mol/m²/s</small></div>
@@ -116,11 +107,19 @@
                 <span class="card-footer-text">Meta 12-20</span>
             </div>
         </section>
-        <div class="card">
-            <div class="grafico">
-                <canvas id="myChart"></canvas>
+        <section class="graficoLuz">
+            <div class="chart-container-clean">
+                <div class="chart-top-bar">
+                    <img src="../imgs/VectorSol.png" alt="">
+                    <h2 class="chart-main-title">Série Temporal de Luminosidade</h2>
+                </div>
+                <div class="card">
+                    <div class="grafico">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 </body>
 
@@ -135,9 +134,8 @@
             datasets: [
                 {
                     label: "Luminosidade",
-                    data: [0, 9, 13, 25, 22, 23],
+                    data: [0, 200, 300, 600, 758, 589],
                     borderColor: "#7C8A5C",
-                    backgroundColor: "#7C8A5C",
                     borderWidth: 2,
                     tension: 0.5,
                 },
@@ -147,8 +145,14 @@
             scales: {
                 y: {
                     beginAtZero: true,
+                    min: 1,
+                    max: 1023,
+                    grid: { color: "#EAEAEA" }
                 },
+                x: {
+                    grid: { color: "#EAEAEA" }
+                }
             },
-        },
+        }
     });
 </script>
