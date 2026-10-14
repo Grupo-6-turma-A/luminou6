@@ -56,26 +56,14 @@
     <main class="conteudo-principal">
       <!-- BARRA SUPERIOR -->
       <div class="barra-superior">
+        <!-- TÍTULO -->
+        <div class="titulo-estufas">
+          <h2>Estufas</h2>
+          <p>Compare a luz recebida por cada estufa ao longo do dia.</p>
+        </div>
+
+        <!-- FILTRO -->
         <div class="filtros">
-          <div class="filtro">
-            <img
-              class="icone-filtro"
-              src="../imgs/VectorCalendario.png"
-              alt=""
-            />
-
-            <div class="filtro-texto">
-              <label for="periodo">Período</label>
-
-              <select id="periodo">
-                <option value="24h">Últimas 24 horas</option>
-                <option value="7d">Últimos 7 dias</option>
-                <option value="30d">Últimos 30 dias</option>
-                <option value="1ano">Último 1 ano</option>
-              </select>
-            </div>
-          </div>
-
           <div class="filtro">
             <img class="icone-filtro" src="../imgs/VectorCasa2.svg" alt="" />
 
@@ -91,35 +79,7 @@
             </div>
           </div>
         </div>
-
-        <div class="ultima-atualizacao">
-          <span class="indicador"></span>
-
-          <div class="atualizacao-texto">
-            <span>Última atualização</span>
-            <strong id="data-atualizacao">13/10/2026 16:04</strong>
-          </div>
-        </div>
-
-        <button
-          class="botao-notificacao"
-          type="button"
-          aria-label="Notificações"
-        >
-          <img src="../imgs/VectorSino.png" alt="" />
-        </button>
-
-        <button class="avatar" type="button" aria-label="Perfil do usuário">
-          A
-        </button>
       </div>
-
-      <!-- TÍTULO -->
-      <div class="titulo-estufas">
-        <h2>Estufas</h2>
-        <p>Compare a luz recebida por cada estufa ao longo do dia.</p>
-      </div>
-
       <!-- CARDS DAS ESTUFAS -->
       <section class="lista-estufas">
         <!-- ESTUFA A -->
@@ -262,7 +222,7 @@
 
             <tbody>
               <tr>
-                <td>12/10/2026 · 14:37</td>
+                <td>12/10/2026 · 15:00</td>
                 <td>Estufa A</td>
                 <td>420</td>
                 <td><span class="status-tabela">Na faixa</span></td>
@@ -270,7 +230,7 @@
               </tr>
 
               <tr>
-                <td>12/10/2026 · 14:37</td>
+                <td>12/10/2026 · 15:00</td>
                 <td>Estufa B</td>
                 <td>180</td>
                 <td>
@@ -288,9 +248,9 @@
               </tr>
 
               <tr>
-                <td>12/10/2026 · 14:27</td>
+                <td>12/10/2026 · 14:00</td>
                 <td>Estufa A</td>
-                <td>380</td>
+                <td>410</td>
                 <td><span class="status-tabela">Na faixa</span></td>
                 <td>LDR-A01</td>
               </tr>
@@ -303,240 +263,171 @@
 
   <!-- JAVASCRIPT DOS GRÁFICOS -->
   <script>
-    const configuracoes = [
-      {
-        id: "graficoA",
-        valores: [200, 250, 310, 360, 400, 430, 410, 420],
-        cor: "#879461",
-        fundo: "#F5E8B8",
-      },
-      {
-        id: "graficoB",
-        valores: [80, 90, 110, 130, 150, 170, 190, 180, 175, 170, 150, 120],
-        cor: "#C68112",
-        fundo: "#F9E5B5",
-      },
-      {
-        id: "graficoC",
-        valores: [
-          100, 120, 150, 180, 210, 240, 270, 300, 290, 310, 305, 320, 300,
+    const ctxA = document.getElementById("graficoA");
+
+    new Chart(ctxA, {
+      type: "line",
+      data: {
+        labels: ["8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa A",
+            data: [200, 250, 310, 360, 400, 430, 410, 420],
+            backgroundColor: "#879461",
+            borderColor: "#879461",
+            borderWidth: 2,
+          },
         ],
-        cor: "#999887",
-        fundo: "#E8E4D2",
       },
-    ];
-
-    configuracoes.forEach(function (config) {
-      const canvas = document.getElementById(config.id);
-
-      new Chart(canvas, {
-        type: "line",
-
-        data: {
-          labels: [
-            "8h",
-            "9h",
-            "10h",
-            "11h",
-            "12h",
-            "13h",
-            "14h",
-            "15h",
-            "16h",
-            "17h",
-            "18h",
-            "19h",
-            "20h",
-          ].slice(0, config.valores.length),
-
-          datasets: [
-            {
-              data: config.valores,
-              borderColor: config.cor,
-              backgroundColor: config.fundo,
-              fill: true,
-              tension: 0.3,
-              pointRadius: 0,
-              borderWidth: 1.5,
-            },
-          ],
-        },
-
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animation: false,
-
-          plugins: {
-            legend: {
-              display: false,
-            },
-
-            tooltip: {
-              enabled: true,
-            },
-          },
-
-          scales: {
-            x: {
-              display: false,
-            },
-
-            y: {
-              display: false,
-            },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
           },
         },
-      });
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    const ctxB = document.getElementById("graficoB");
+
+    new Chart(ctxB, {
+      type: "line",
+      data: {
+        labels: ["8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa B",
+            data: [80, 90, 110, 130, 150, 170, 190, 180],
+            backgroundColor: "#C68112",
+            borderColor: "#C68112",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            display: true, //esconde o eixo horizontal, incluindo os horários e suas marcações.
+          },
+          y: {
+            display: true, // esconde o eixo vertical, incluindo os números e suas marcações.
+            beginAtZero: true, // define que o eixo vertical começa em zero, mas não tem efeito visual quando o eixo está escondido.
+          },
+        },
+      },
+    });
+
+    const ctxC = document.getElementById("graficoC");
+
+    new Chart(ctxC, {
+      type: "line",
+      data: {
+        labels: ["8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa C",
+            data: [null, null, null, null, null, null, null, null],
+            backgroundColor: "#999887",
+            borderColor: "#999887",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            beginAtZero: true,
+          },
+        },
+      },
     });
 
     // FILTRO DE ESTUFAS
+
     const filtroEstufa = document.getElementById("estufa");
 
     filtroEstufa.addEventListener("change", function () {
       const cards = document.querySelectorAll(".card-estufa");
 
       cards.forEach(function (card) {
-        card.hidden =
-          this.value !== "todas" && card.dataset.estufa !== this.value;
-      }, this);
+        if (
+          filtroEstufa.value === "todas" ||
+          card.dataset.estufa === filtroEstufa.value
+        ) {
+          card.hidden = false;
+        } else {
+          card.hidden = true;
+        }
+      });
     });
 
-    const canvasGeral = document.getElementById("graficoGeral");
+    // GRÁFICO GERAL
 
-    new Chart(canvasGeral, {
+    const ctxGeral = document.getElementById("graficoGeral");
+
+    new Chart(ctxGeral, {
       type: "line",
-
       data: {
-        labels: [
-          "00:00",
-          "02:00",
-          "04:00",
-          "06:00",
-          "08:00",
-          "10:00",
-          "12:00",
-          "14:00",
-          "16:00",
-          "18:00",
-          "20:00",
-          "22:00",
-        ],
-
+        labels: ["07h", "08h", "09h", "10h", "11h", "12h", "13h", "14h", "15h"],
         datasets: [
           {
             label: "Estufa A",
-            data: [0, 0, 0, 0, 150, 320, 430, 420, 380, 200, 0, 0],
-            borderColor: "#879461",
+            data: [0, 0, 200, 250, 310, 360, 400, 410, 420, 0, 0],
             backgroundColor: "#879461",
+            borderColor: "#879461",
             borderWidth: 2,
-            pointRadius: 0,
-            tension: 0.35,
-            spanGaps: false,
           },
           {
             label: "Estufa B",
-            data: [0, 0, 0, 0, 80, 150, 200, 180, 0, 0, 0, 0],
-            borderColor: "#C68112",
+            data: [0, 80, 90, 110, 130, 150, 170, 190, 180, 0, 0, 0],
             backgroundColor: "#C68112",
+            borderColor: "#C68112",
             borderWidth: 2,
-            pointRadius: 0,
-            tension: 0.35,
-            spanGaps: false,
           },
           {
             label: "Estufa C",
-            data: [
-              null,
-              null,
-              null,
-              null,
-              120,
-              250,
-              320,
-              300,
-              null,
-              null,
-              null,
-              null,
-            ],
-            borderColor: "#999887",
+            data: [null, null, null, null, null, null, null, null, null, null, null, null],
             backgroundColor: "#999887",
+            borderColor: "#999887",
             borderWidth: 2,
-            pointRadius: 0,
-            tension: 0.35,
-            spanGaps: false,
           },
         ],
       },
-
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        animation: false,
-
-        interaction: {
-          intersect: false,
-          mode: "index",
-        },
-
-        plugins: {
-          legend: {
-            display: false,
-          },
-
-          tooltip: {
-            enabled: true,
-          },
-        },
-
         scales: {
-          x: {
-            grid: {
-              display: false,
-            },
-
-            ticks: {
-              color: "#777568",
-              maxTicksLimit: 7,
-              font: {
-                size: 10,
-              },
-            },
-
-            border: {
-              display: false,
-            },
-          },
-
           y: {
             beginAtZero: true,
-            max: 700,
-
-            title: {
-              display: true,
-              text: "PPFD (µmol/m²/s)",
-              color: "#777568",
-              font: {
-                size: 10,
-              },
-            },
-
-            ticks: {
-              stepSize: 100,
-              color: "#777568",
-              font: {
-                size: 10,
-              },
-            },
-
-            grid: {
-              color: "#F0E2B5",
-            },
-
-            border: {
-              display: false,
-            },
           },
         },
       },
