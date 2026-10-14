@@ -103,6 +103,10 @@ body {
     gap: 12px;
 }
 
+.estufa-casa {
+    width: 30px;
+}
+
 .div-filho {
     display: flex;
     flex-direction: column;
