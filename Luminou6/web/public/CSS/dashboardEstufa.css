@@ -83,8 +83,6 @@ nav .menu-ativo {
   width: 100%;
 }
 
-
-
 .filtros {
     display: flex;
     align-items: center;
@@ -95,18 +93,18 @@ nav .menu-ativo {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 191px;
-    height: 38px;
+    width: 230px;
+    height: 47px;
     padding: 5px 12px;
-    border: 1px solid #879461;
+    border: 1px solid #000000;
     border-radius: 24px;
-    background-color: #FFF9E8;
+    background-color: #FFF8DD;
     flex-shrink: 0;
 }
 
 .icone-filtro {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 30px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -117,12 +115,12 @@ nav .menu-ativo {
     justify-content: center;
     flex: 1;
     min-width: 0;
-    gap: 1px;
+    gap: 0px;
 }
 
 .filtro-texto label {
-    font-size: 9px;
-    color: #777965;
+    font-size: 13px;
+    color: #555648;
 }
 
 .filtro-texto select {
@@ -133,84 +131,11 @@ nav .menu-ativo {
     background: transparent;
     color: #171A12;
     font-family: inherit;
-    font-size: 10px;
+    font-size: 17px;
     font-weight: 700;
     cursor: pointer;
 }
 
-/* ÚLTIMA ATUALIZAÇÃO */
-.ultima-atualizacao {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-    padding-right: 14px;
-    border-right: 1px solid #E9DFC6;
-}
-
-.indicador {
-    width: 9px;
-    height: 9px;
-    background-color: #71834C;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.atualizacao-texto {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.atualizacao-texto span {
-    font-size: 9px;
-    color: #777965;
-    white-space: nowrap;
-}
-
-.atualizacao-texto strong {
-    font-size: 10px;
-    color: #171A12;
-    white-space: nowrap;
-}
-
-/* NOTIFICAÇÕES */
-.botao-notificacao {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 34px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-
-.botao-notificacao img {
-    width: 19px;
-    height: 19px;
-    object-fit: contain;
-}
-
-/* PERFIL */
-.avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border: none;
-    border-radius: 50%;
-    background-color: #81915D;
-    color: white;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    flex-shrink: 0;
-}
 
 /* TÍTULO */
 .titulo-estufas {
@@ -224,30 +149,30 @@ nav .menu-ativo {
 
 .titulo-estufas h2 {
     margin: 0;
-    font-size: 24px;
+    font-size: 35px;
 }
 
 .titulo-estufas p {
-    color: gray;
+    color: rgb(74, 73, 73);
     margin: 0;
     line-height: 1.4;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 /* GRADE DOS CARDS */
 .lista-estufas {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
     align-items: stretch;
 }
 
 /* CARD DA ESTUFA */
 .card-estufa {
     min-width: 0;
-    padding: 14px;
-    background-color: #FFF9E8;
-    border: 1px solid #E9DFC6;
+    padding: 20px;
+    background-color: #FFF8DD;
+    border: 1px solid #080040;
     border-radius: 16px;
 }
 
@@ -265,30 +190,30 @@ nav .menu-ativo {
 
 .cabecalho-estufa h2 {
     margin: 0;
-    font-size: 13px;
+    font-size: 17px;
     color: #171A12;
 }
 
 /* STATUS */
 .status {
     display: inline-block;
-    background-color: #E8EDCF;
-    color: #71834C;
+    background-color: #dce6b0;
+    color: #4c5834;
     padding: 5px 10px;
     border-radius: 15px;
-    font-size: 9px;
+    font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
 }
 
 .status-alerta {
-    background-color: #FBECCB;
-    color: #B87913;
+    background-color: #fad990;
+    color: #603f0b;
 }
 
 .status-sem-sinal {
-    background-color: #EEEBDD;
-    color: #858474;
+    background-color: #e1ded0;
+    color: #515046;
 }
 
 /* LUMINOSIDADE */
@@ -306,23 +231,16 @@ nav .menu-ativo {
 }
 
 .valor-luz span {
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 600;
     color: #696D5C;
-}
-
-/* ÚLTIMA LEITURA */
-.ultima-leitura {
-    margin: 3px 0 0;
-    color: #777965;
-    font-size: 9px;
 }
 
 /* GRÁFICOS */
 .grafico-estufa {
     position: relative;
     width: 100%;
-    height: 65px;
+    height: 185px;
     margin-top: 8px;
 }
 
@@ -332,44 +250,18 @@ nav .menu-ativo {
     height: 100% ;
 }
 
-/* INDICADORES */
-.indicadores-estufa {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.indicadores-estufa div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-}
-
-.indicadores-estufa span {
-    font-size: 9px;
-    color: #777965;
-}
-
-.indicadores-estufa strong {
-    font-size: 12px;
-    color: #171A12;
-}
-
-
 /* HISTÓRICO DE LEITURAS */
 .historico {
     margin-top: 15px;
     padding: 12px;
-    background-color: #FFF8E7;
-    border: 1px solid #F0E2B5;
+    background-color: #FFF8DD;
+    border: 1px solid #080040;
     border-radius: 12px;
 }
 
 .historico h3 {
-    margin: 0 0 10px;
-    font-size: 16px;
+    margin: 0 0 14px;
+    font-size: 20px;
 }
 
 .tabela-container {
@@ -380,7 +272,7 @@ nav .menu-ativo {
 .historico table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
 }
 
@@ -390,19 +282,11 @@ nav .menu-ativo {
 
 .historico th {
     padding: 9px;
-    font-weight: 600;
-}
-
-.historico th:first-child {
-    border-radius: 7px 0 0 7px;
-}
-
-.historico th:last-child {
-    border-radius: 0 7px 7px 0;
-}
+    font-weight: 800;
+}   
 
 .historico td {
-    padding: 9px;
+    padding: 13px;
     border-bottom: 1px solid #F0E2B5;
 }
 
@@ -414,20 +298,20 @@ nav .menu-ativo {
     display: inline-block;
     padding: 4px 9px;
     border-radius: 20px;
-    background-color: #E5EBCB;
-    color: #687A43;
-    font-size: 11px;
+    background-color: #d0dd95;
+    color: #2f371f;
+    font-size: 13px;
     white-space: nowrap;
 }
 
 .status-tabela.alerta {
-    background-color: #FBE7B2;
-    color: #93600B;
+    background-color: #fbe19c;
+    color: #7b510a;
 }
 
 .status-tabela.sem-sinal {
-    background-color: #E9E6D9;
-    color: #777568;
+    background-color: #e5e1d2;
+    color: #4f4d45;
 }
 
 
@@ -435,8 +319,8 @@ nav .menu-ativo {
 .grafico-geral {
     margin-top: 15px;
     padding: 12px;
-    background-color: #FFF8E7;
-    border: 1px solid #F0E2B5;
+    background-color: #FFF8DD;
+    border: 1px solid #080040;
     border-radius: 12px;
 }
 
@@ -465,13 +349,13 @@ nav .menu-ativo {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 11px;
-    color: #777568;
+    font-size: 13px;
+    color: #080040;
 }
 
 .ponto {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
 }
@@ -495,7 +379,7 @@ nav .menu-ativo {
 .area-grafico-geral {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 300px;
 }
 
 header nav div {
