@@ -51,22 +51,22 @@
 
         <div class="Todos">
         <label for="nome_input"> <b>Nome da empresa:</b></label>  
-            <input type="text" id="nome_input" PlaceHolder="Baunilhas Outdoor S/A">
+            <input type="text" id="nome_input" PlaceHolder="Baunilhas Outdoor S/A" value="kevin">
         </div>
 
         <label for="email_input"><b>Email da empresa:</b></label>
         <div class="Todos">
-            <input type="text" id="email_input" PlaceHolder="Seu email@provedor.com">
+            <input type="text" id="email_input" PlaceHolder="Seu email@provedor.com" value="email@email.com">
         </div>
         
         <div class="Todos">
             <label for="codigo_input"><b>Codigo da empresa:</b></label>    
-            <input type="text" id="codigo_input" PlaceHolder="###">
+            <input type="text" id="codigo_input" PlaceHolder="###" value="Urubu100">
         </div>
         
         <div class="Todos">
             <label for="senha_input"><b>Senha para empresa:</b></label>
-            <input type="password" id="senha_input" PlaceHolder="Sua senha">
+            <input type="password" id="senha_input" PlaceHolder="Sua senha" value="12345kevin#">
         </div>
 
         <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
@@ -77,7 +77,7 @@
           </div>
         <div class="Todos">
             <label for="confirmacao_senha_input"><b>Confirme sua senha:</b></label>
-            <input type="password" id="confirmacao_senha_input" oninput="verificar()">
+            <input type="password" id="confirmacao_senha_input" value="12345kevin#">
         </div>
         
         <div>
@@ -183,7 +183,7 @@
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao === codigoVar) {
         idEmpresaVincular = listaEmpresasCadastradas[i].id
         console.log("Código de ativação válido.");
         break;
