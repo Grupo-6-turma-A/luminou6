@@ -184,14 +184,15 @@
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao === codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
+        idEmpresaVincular = listaEmpresasCadastradas[i].idCliente;
         break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "Codigo invalido";
-        finalizarAguardar();
       }
+    }
+    if (!idEmpresaVincular) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Codigo invalido";
+      finalizarAguardar();
+      return false;
     }
 
     // Enviando o valor da nova input
