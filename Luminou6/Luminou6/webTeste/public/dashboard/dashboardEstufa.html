@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../CSS/dashboardEstufa.css" />
+    <link rel="shortcut icon" href="../../imgs/logo.png" type="image/x-icon" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Estufas</title>
+  </head>
+
+  <body>
+    <!-- MENU LATERAL -->
+    <header>
+      <div class="logo">
+        <img src="../../imgs/logoLuminou6.png" alt="Logo Luminou6" />
+      </div>
+
+      <nav>
+        <div>
+          <img src="../../imgs/VectorCasa.svg" alt="" />
+          <a href="../index.html">Home</a>
+        </div>
+
+        <div>
+          <img src="../../imgs/VectorLupa.svg" alt="" />
+          <a href="dashboardVisaoGeral.html">Visão Geral</a>
+        </div>
+
+        <div class="menu-ativo">
+          <img src="../../imgs/VectorCasa2.svg" alt="" />
+          <a href="#">Estufas</a>
+        </div>
+
+        <div>
+          <img src="../../imgs/VectorEstrela.svg" alt="" />
+          <a href="dashboard sensores.html">Sensores</a>
+        </div>
+
+        <div>
+          <img src="../../imgs/VectorSino.svg" alt="" />
+          <a href="#">Alertas</a>
+        </div>
+
+        <div>
+          <img src="../../imgs/VectorConfig.svg" alt="" />
+          <a href="dashboardConfigs.html">Configurações</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo-principal">
+      <!-- BARRA SUPERIOR -->
+      <div class="barra-superior">
+        <!-- TÍTULO -->
+        <div class="titulo-estufas">
+          <h2>Estufas</h2>
+          <p>Compare a luminosidade recebida por cada estufa ao longo do dia.</p>
+        </div>
+
+        <!-- FILTRO -->
+        <div class="filtros">
+          <div class="filtro">
+            <img class="icone-filtro" src="../../imgs/VectorCasa2.svg" alt="" />
+
+            <div class="filtro-texto">
+              <label for="estufa">Estufa</label>
+
+              <select id="estufa">
+                <option value="todas">Todas as estufas</option>
+                <option value="A">Estufa A</option>
+                <option value="B">Estufa B</option>
+                <option value="C">Estufa C</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CARDS DAS ESTUFAS -->
+      <section class="lista-estufas">
+        <!-- ESTUFA A -->
+        <article class="card-estufa" data-estufa="A">
+          <div class="cabecalho-estufa">
+            <h2>Estufa A</h2>
+            <span class="status">Na faixa</span>
+          </div>
+
+          <div class="valor-luz">
+            <strong>420</strong>
+            <span>µmol/m²/s</span>
+          </div>
+
+          <div class="grafico-estufa">
+            <canvas id="graficoA"></canvas>
+          </div>
+        </article>
+
+        <!-- ESTUFA B -->
+        <article class="card-estufa" data-estufa="B">
+          <div class="cabecalho-estufa">
+            <h2>Estufa B</h2>
+            <span class="status status-alerta"> Abaixo da faixa </span>
+          </div>
+
+          <div class="valor-luz">
+            <strong>180</strong>
+            <span>µmol/m²/s</span>
+          </div>
+
+          <div class="grafico-estufa">
+            <canvas id="graficoB"></canvas>
+          </div>
+        </article>
+
+        <!-- ESTUFA C -->
+        <article class="card-estufa" data-estufa="C">
+          <div class="cabecalho-estufa">
+            <h2>Estufa C</h2>
+            <span class="status status-sem-sinal"> Sem sinal </span>
+          </div>
+
+          <div class="valor-luz">
+            <strong>—</strong>
+            <span>µmol/m²/s</span>
+          </div>
+
+
+          <div class="grafico-estufa">
+            <canvas id="graficoC"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <!-- GRÁFICO GERAL DE PPFD -->
+      <section class="grafico-geral">
+        <div class="cabecalho-grafico">
+          <h3>PPFD por estufa — últimas 24 horas</h3>
+
+          <div class="legenda-grafico">
+            <span><i class="ponto estufa-a"></i>Estufa A</span>
+            <span><i class="ponto estufa-b"></i>Estufa B</span>
+            <span><i class="ponto estufa-c"></i>Estufa C</span>
+            <span><i class="ponto faixa-ideal"></i>Faixa ideal (340-620)</span>
+          </div>
+        </div>
+
+        <div class="area-grafico-geral">
+          <canvas id="graficoGeral"></canvas>
+        </div>
+      </section>
+      <!-- HISTÓRICO DE LEITURAS -->
+      <section class="historico">
+        <h3>Histórico de leituras</h3>
+
+        <div class="tabela-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Data e hora</th>
+                <th>Estufa</th>
+                <th>PPFD (µmol/m²/s)</th>
+                <th>Status</th>
+                <th>Sensor</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>12/10/2026 · 15:00</td>
+                <td>Estufa A</td>
+                <td>420</td>
+                <td><span class="status-tabela">Na faixa</span></td>
+                <td>LDR-A01</td>
+              </tr>
+
+              <tr>
+                <td>12/10/2026 · 15:00</td>
+                <td>Estufa B</td>
+                <td>180</td>
+                <td>
+                  <span class="status-tabela alerta">Abaixo da faixa</span>
+                </td>
+                <td>LDR-B01</td>
+              </tr>
+
+              <tr>
+                <td>12/10/2026 · 13:50</td>
+                <td>Estufa C</td>
+                <td>—</td>
+                <td><span class="status-tabela sem-sinal">Sem sinal</span></td>
+                <td>LDR-C01</td>
+              </tr>
+
+              <tr>
+                <td>12/10/2026 · 14:00</td>
+                <td>Estufa A</td>
+                <td>410</td>
+                <td><span class="status-tabela">Na faixa</span></td>
+                <td>LDR-A01</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <!-- JAVASCRIPT DOS GRÁFICOS -->
+  <script>
+    const ctxA = document.getElementById("graficoA");
+
+    new Chart(ctxA, {
+      type: "line",
+      data: {
+        labels: ["8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa A",
+            data: [200, 250, 310, 360, 400, 430, 410, 420],
+            backgroundColor: "#879461",
+            borderColor: "#879461",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    const ctxB = document.getElementById("graficoB");
+
+    new Chart(ctxB, {
+      type: "line",
+      data: {
+        labels: ["8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa B",
+            data: [80, 90, 110, 130, 150, 170, 190, 180],
+            backgroundColor: "#C68112",
+            borderColor: "#C68112",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            display: true, //esconde o eixo horizontal, incluindo os horários e suas marcações.
+          },
+          y: {
+            display: true, // esconde o eixo vertical, incluindo os números e suas marcações.
+            beginAtZero: true, // define que o eixo vertical começa em zero, mas não tem efeito visual quando o eixo está escondido.
+          },
+        },
+      },
+    });
+
+    const ctxC = document.getElementById("graficoC");
+
+    new Chart(ctxC, {
+      type: "line",
+      data: {
+        labels: ["8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa C",
+            data: [null, null, null, null, null, null, null, null],
+            backgroundColor: "#999887",
+            borderColor: "#999887",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+    // FILTRO DE ESTUFAS
+
+    const filtroEstufa = document.getElementById("estufa");
+
+    filtroEstufa.addEventListener("change", function () {
+      const cards = document.querySelectorAll(".card-estufa");
+
+      cards.forEach(function (card) {
+        if (
+          filtroEstufa.value === "todas" ||
+          card.dataset.estufa === filtroEstufa.value
+        ) {
+          card.hidden = false;
+        } else {
+          card.hidden = true;
+        }
+      });
+    });
+
+    // GRÁFICO GERAL
+
+    const ctxGeral = document.getElementById("graficoGeral");
+
+    new Chart(ctxGeral, {
+      type: "line",
+      data: {
+        labels: ["07h", "08h", "09h", "10h", "11h", "12h", "13h", "14h", "15h"],
+        datasets: [
+          {
+            label: "Estufa A",
+            data: [0, 0, 200, 250, 310, 360, 400, 410, 420, 0, 0],
+            backgroundColor: "#879461",
+            borderColor: "#879461",
+            borderWidth: 2,
+          },
+          {
+            label: "Estufa B",
+            data: [0, 80, 90, 110, 130, 150, 170, 190, 180, 0, 0, 0],
+            backgroundColor: "#C68112",
+            borderColor: "#C68112",
+            borderWidth: 2,
+          },
+          {
+            label: "Estufa C",
+            data: [null, null, null, null, null, null, null, null, null, null, null, null],
+            backgroundColor: "#999887",
+            borderColor: "#999887",
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  </script>
+</html>
