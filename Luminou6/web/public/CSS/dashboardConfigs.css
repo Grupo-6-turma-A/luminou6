@@ -99,8 +99,8 @@ nav .menu-ativo {
     display: flex;
     align-items: center;
     gap: 15px;
-    background-color: white;
-    padding: 20px;
+    background-color: transparent;
+    padding: 0;
     border-radius: 10px;
     margin-bottom: 25px;
 }
@@ -124,7 +124,7 @@ nav .menu-ativo {
 
 .filtro-texto select {
     padding: 9px;
-    border: 1px solid #D8CFBC;
+    border: 1px solid #82915F;
     border-radius: 5px;
     background-color: #FFF8E7;
     font-family: inherit;
@@ -133,16 +133,16 @@ nav .menu-ativo {
 /* SEÇÕES DE CONFIGURAÇÃO */
 
 .secao-config {
-    background-color: white;
-    border: 1px solid #E9DFC9;
-    border-radius: 10px;
-    padding: 25px;
-    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid #F5DFA0;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 15px;
 }
 
 .secao-config h2 {
     font-size: 18px;
-    color: #080040;
+    color: #171A12;
     margin: 0 0 22px;
 }
 
@@ -156,32 +156,33 @@ nav .menu-ativo {
 
 .campos {
     display: flex;
-    gap: 25px;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
 .campo {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
     margin-bottom: 0;
+    width: 250px;
 }
 
 .campo label {
-    font-size: 14px;
-    color: #171A12;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666656;
 }
 
 .input-unidade {
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 320px;
-    max-width: 100%;
+    width: 100%;
     padding: 0 12px;
-    border: 1px solid #D8CFBC;
-    border-radius: 6px;
-    background-color: #FFF8E7;
+    border: 1px solid #F0B94D;
+    border-radius: 10px;
+    background-color: #FFFFFF;
 }
 
 .input-unidade input {
@@ -193,6 +194,8 @@ nav .menu-ativo {
     background: transparent;
     font-family: inherit;
     font-size: 14px;
+    font-weight: 600;
+    color: #171A12;
 }
 
 .input-unidade span {
@@ -202,7 +205,7 @@ nav .menu-ativo {
 }
 
 .titulo-dli {
-    margin-top: 25px !important;
+    margin-top: 28px !important;
 }
 
 /* NOTIFICAÇÕES */
@@ -212,8 +215,8 @@ nav .menu-ativo {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    padding: 15px 0;
-    border-bottom: 1px solid #E9DFC9;
+    padding: 12px 0;
+    border-bottom: 1px solid #F5DFA0;
 }
 
 .opcao:last-child {
@@ -223,23 +226,15 @@ nav .menu-ativo {
 
 .opcao h3 {
     font-size: 14px;
-    margin: 0 0 8px;
+    margin: 0 0 5px;
     color: #171A12;
 }
 
 .opcao p {
-    font-size: 13px;
+    font-size: 12px;
     color: #777365;
     margin: 0;
     line-height: 1.5;
-}
-
-.opcao input {
-    width: 18px;
-    height: 18px;
-    accent-color: #82915F;
-    cursor: pointer;
-    flex-shrink: 0;
 }
 
 /* TELAS MENORES */
@@ -253,11 +248,11 @@ nav .menu-ativo {
         gap: 20px;
     }
 
-    .input-unidade {
+    .campo {
         width: 100%;
     }
 
-    .campo {
+    .input-unidade {
         width: 100%;
     }
 }
