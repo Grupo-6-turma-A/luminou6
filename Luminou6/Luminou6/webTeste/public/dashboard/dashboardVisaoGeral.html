@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../CSS/dashvg.css" />
+    <link rel="shortcut icon" href="../../imgs/logo.png" type="image/x-icon" />
+    <title>Visão Geral</title>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-content">
+            <img src="../../imgs/logoLuminou6.png" alt="" class="luminou6">
+            <ul class="side_items">
+                <li class="item-lateral">
+                    <a href="../index.html">
+                        <img src="../../imgs/VectorCasa.svg" alt="" />
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="item-lateral">
+                    <a href="#">
+                        <img src="../../imgs/VectorLupa.svg" alt="" />
+                        <span>Visão Geral</span>
+                    </a>
+                </li>
+                <li class="item-lateral">
+                    <a href="dashboardEstufa.html">
+                        <img src="../../imgs/VectorCasa2.svg" alt="" />
+                        <span>Estufas</span>
+                    </a>
+                </li>
+                <li class="item-lateral">
+                    <a href="dashboard sensores.html">
+                        <img src="../../imgs/VectorEstrela.svg" alt="" />
+                        <span>Sensores</span>
+                    </a>
+                </li>
+                <li class="item-lateral">
+                    <a href="">
+                        <img src="../../imgs/VectorSino.svg" alt="" />
+                        <span>Alertas</span>
+                    </a>
+                </li>
+                <li class="item-lateral">
+                    <a href="dashboardConfigs.html">
+                        <img src="../../imgs/VectorConfig.svg" alt="" />
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="main-content">
+        <header class="header-pai">
+            <div class="div-mae">
+                <img src="../../imgs/VectorCalendario.png" alt="">
+                <div class="div-filho">
+                    <small>Período</small>
+                    <select id="periodo">
+                        <option value="24h">Últimas 24 horas</option>
+                        <option value="7d">Últimos 7 dias</option>
+                    </select>
+                </div>
+            </div>
+            <div class="div-mae">
+                <img src="../../imgs/VectorCasa2.svg" alt="" class="estufa-casa">
+                <div class="div-filho">
+                    <small>Estufa</small>
+                    <select id="periodo">
+                        <option value="todas">Todas as estufas</option>
+                        <option value="a">Estufa A</option>
+                        <option value="b">Estufa B</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+        <section class="dashboard1">
+            <div class="dash-card">
+                <div class="card-header-title">
+                    <img src="../../imgs/VectorSol.png" alt=""> <span>PPFD Atual</span>
+                </div>
+                <div class="card-body-row">
+                    <div class="card-main-value">200 <small>µmol/m²/s</small></div>
+                </div>
+                <span class="card-footer-text">Horário: 14:37</span>
+            </div>
+            <div class="dash-card">
+                <div class="card-header-title">
+                    <img src="../../imgs/VectorAviso.png" alt=""> <span>Leituras Suspeitas</span>
+                </div>
+                <div class="card-main-value">
+                    <span>2%</span>
+                </div>
+                <span class="card-footer-text">Descartados do cálculo</span>
+            </div>
+            <div class="dash-card">
+                <div class="card-header-title">
+                    <img src="../../imgs/VectorFolha.png" alt=""> <span>DLI Estimado</span>
+                </div>
+                <div class="card-body-row">
+                    <div class="card-main-value">18,7 <small>mol/m²/s</small></div>
+                </div>
+                <span class="card-footer-text">Meta 12-20</span>
+            </div>
+        </section>
+        <section class="graficoLuz">
+            <div class="chart-container-clean">
+                <div class="chart-top-bar">
+                    <img src="../../imgs/VectorSol.png" alt="">
+                    <h2 class="chart-main-title">Série Temporal de Luminosidade</h2>
+                </div>
+                <div class="card">
+                    <div class="grafico">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
+<script>
+    const linha = document.getElementById("myChart");
+
+    new Chart(linha, {
+        type: "line",
+        data: {
+            labels: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
+            datasets: [
+                {
+                    label: "Luminosidade",
+                    data: [0, 200, 300, 600, 758, 589],
+                    borderColor: "#7C8A5C",
+                    borderWidth: 2,
+                    tension: 0.5,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 1,
+                    max: 1023,
+                    grid: { color: "#EAEAEA" }
+                },
+                x: {
+                    grid: { color: "#EAEAEA" }
+                }
+            },
+        }
+    });
+</script>
