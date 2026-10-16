@@ -89,9 +89,3 @@ button {
     border-radius: 8px;
     cursor: pointer;
 }
-#mensagem_erro{
-    color: red;
-}
-#mensagem_login{
-    color: #7E8863;
-}

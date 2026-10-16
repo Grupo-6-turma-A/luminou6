@@ -50,23 +50,28 @@
         <span>Crie seu cadastro gratuito e integre seus sensores arduino hoje mesmo.</span>
 
         <div class="Todos">
+            <label for="codigo_input"><b>Codigo da empresa:</b></label>    
+            <input type="text" id="codigo_input" PlaceHolder="###" >
+        </div>
+        
+        <div class="Todos">
         <label for="nome_input"> <b>Nome da empresa:</b></label>  
-            <input type="text" id="nome_input" PlaceHolder="Baunilhas Outdoor S/A" value="kevin">
+            <input type="text" id="nome_input" PlaceHolder="Baunilhas Outdoor S/A">
         </div>
 
         <label for="email_input"><b>Email da empresa:</b></label>
         <div class="Todos">
-            <input type="text" id="email_input" PlaceHolder="Seu email@provedor.com" value="email@email.com">
+            <input type="text" id="email_input" PlaceHolder="Seu email@provedor.com">
         </div>
         
         <div class="Todos">
-            <label for="codigo_input"><b>Codigo da empresa:</b></label>    
-            <input type="text" id="codigo_input" PlaceHolder="###" value="Urubu100">
+            <label for="codigo_input"><b>Identificação fiscal:</b></label>    
+            <input type="text" id="cpf_input" PlaceHolder="000.000.000.00" >
         </div>
-        
+
         <div class="Todos">
-            <label for="senha_input"><b>Senha para empresa:</b></label>
-            <input type="password" id="senha_input" PlaceHolder="Sua senha" value="12345kevin#">
+            <label for="senha_input"><b>Senha:</b></label>
+            <input type="password" id="senha_input" PlaceHolder="Sua senha" >
         </div>
 
         <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
@@ -77,7 +82,7 @@
           </div>
         <div class="Todos">
             <label for="confirmacao_senha_input"><b>Confirme sua senha:</b></label>
-            <input type="password" id="confirmacao_senha_input" value="12345kevin#">
+            <input type="password" id="confirmacao_senha_input">
         </div>
         
         <div>
@@ -161,6 +166,7 @@
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
     var codigoVar = codigo_input.value;
+    var cpfVar = cpf_input.value;
     var idEmpresaVincular
 
     // Verificando se há algum campo em branco
@@ -169,7 +175,8 @@
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
-      codigoVar == ""
+      codigoVar == "" ||
+      cpfVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -207,6 +214,7 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
+        cpfServer: cpfVar,
         idEmpresaVincularServer: idEmpresaVincular
       }),
     })
