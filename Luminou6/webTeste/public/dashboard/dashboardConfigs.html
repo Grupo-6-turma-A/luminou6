@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -52,14 +53,10 @@
 
     <main class="conteudo">
 
-
         <div class="filtro">
-
-            <img
-                class="icone-filtro"
-                src="../imgs/VectorCasa2.svg"
-                alt=""
-            >
+            <img class="icone-filtro"
+                 src="../imgs/VectorCasa2.svg"
+                 alt="">
 
             <div class="filtro-texto">
                 <label for="estufa">Estufa</label>
@@ -69,33 +66,72 @@
                     <option value="2">Estufa 02</option>
                 </select>
             </div>
-
         </div>
+
         <div class="cabecalho">
             <h1>Configurações</h1>
             <p>Configure os parâmetros da sua estufa.</p>
         </div>
 
+        <!-- PARÂMETROS DE CULTIVO -->
+
         <div class="secao-config">
 
-            <h2>Parâmetros de cultivo</h2>
+            <h2>Faixa ideal de PPFD</h2>
 
-            <div class="campo">
-                <label for="ppfdMin">PPFD mínimo</label>
-                <input type="number" id="ppfdMin" placeholder="Ex.: 200">
+            <p class="descricao">
+                Valores no pico do dia; a faixa acompanha o sol.
+            </p>
+
+            <div class="campos">
+
+                <div class="campo">
+                    <label for="ppfdMin">Mínimo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="ppfdMin" value="300">
+                        <span>µmol/m²/s</span>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="ppfdMax">Máximo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="ppfdMax" value="800">
+                        <span>µmol/m²/s</span>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="campo">
-                <label for="ppfdMax">PPFD máximo</label>
-                <input type="number" id="ppfdMax" placeholder="Ex.: 600">
-            </div>
+            <h2 class="titulo-dli">Meta de DLI</h2>
 
-            <div class="campo">
-                <label for="dli">Meta diária de luz (DLI)</label>
-                <input type="number" id="dli" placeholder="Ex.: 20">
+            <div class="campos">
+
+                <div class="campo">
+                    <label for="dliMin">Mínimo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="dliMin" value="12">
+                        <span>mol/m²/dia</span>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="dliMax">Máximo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="dliMax" value="20">
+                        <span>mol/m²/dia</span>
+                    </div>
+                </div>
+
             </div>
 
         </div>
+
+        <!-- NOTIFICAÇÕES -->
 
         <div class="secao-config">
 
@@ -103,23 +139,25 @@
 
             <div class="opcao">
                 <div>
-                    <h3>Alertas dos sensores</h3>
-                    <p>Receber avisos quando os parâmetros estiverem fora dos limites.</p>
+                    <h3>Alerta de PPFD abaixo da faixa</h3>
+                    <p>Aviso no app e por e-mail após 15 min.</p>
                 </div>
-
-                <input type="checkbox" id="alertas" checked>
             </div>
 
-        </div>
+            <div class="opcao">
+                <div>
+                    <h3>Alerta de sensor sem sinal</h3>
+                    <p>Aviso após 30 min sem leitura.</p>
+                </div>
+            </div>
 
-        <div class="botoes">
-            <button type="button" class="btn-cancelar">
-                Cancelar
-            </button>
+            <div class="opcao">
+                <div>
+                    <h3>Resumo diário por e-mail</h3>
+                    <p>Enviado todo dia às 18:00.</p>
+                </div>
+            </div>
 
-            <button type="button" class="btn-salvar">
-                Salvar alterações
-            </button>
         </div>
 
     </main>
