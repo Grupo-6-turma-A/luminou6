@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
@@ -145,14 +146,24 @@ nav .menu-ativo {
     margin: 0 0 22px;
 }
 
+/* PARÂMETROS DE CULTIVO */
+
+.descricao {
+    font-size: 12px;
+    color: #777365;
+    margin: -14px 0 20px;
+}
+
+.campos {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
 .campo {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 20px;
-}
-
-.campo:last-child {
     margin-bottom: 0;
 }
 
@@ -161,18 +172,37 @@ nav .menu-ativo {
     color: #171A12;
 }
 
-.campo input {
-    width: 100%;
-    max-width: 400px;
-    padding: 12px;
+.input-unidade {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 320px;
+    max-width: 100%;
+    padding: 0 12px;
     border: 1px solid #D8CFBC;
     border-radius: 6px;
+    background-color: #FFF8E7;
+}
+
+.input-unidade input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 0;
+    border: none;
+    outline: none;
+    background: transparent;
     font-family: inherit;
     font-size: 14px;
 }
 
-.campo input:focus {
-    outline: 1px solid #080040;
+.input-unidade span {
+    font-size: 11px;
+    color: #777365;
+    white-space: nowrap;
+}
+
+.titulo-dli {
+    margin-top: 25px !important;
 }
 
 /* NOTIFICAÇÕES */
@@ -182,6 +212,13 @@ nav .menu-ativo {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #E9DFC9;
+}
+
+.opcao:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .opcao h3 {
@@ -200,45 +237,9 @@ nav .menu-ativo {
 .opcao input {
     width: 18px;
     height: 18px;
+    accent-color: #82915F;
     cursor: pointer;
     flex-shrink: 0;
-}
-
-/* BOTÕES */
-
-.botoes {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 25px;
-}
-
-.botoes button {
-    padding: 12px 20px;
-    border-radius: 7px;
-    font-family: inherit;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.btn-cancelar {
-    background-color: transparent;
-    border: 1px solid #D8CFBC;
-    color: #080040;
-}
-
-.btn-salvar {
-    background-color: #080040;
-    border: 1px solid #080040;
-    color: white;
-}
-
-.btn-cancelar:hover {
-    background-color: #F5E4B9;
-}
-
-.btn-salvar:hover {
-    background-color: #24205F;
 }
 
 /* TELAS MENORES */
@@ -248,7 +249,15 @@ nav .menu-ativo {
         padding: 15px;
     }
 
-    .botoes {
-        flex-wrap: wrap;
+    .campos {
+        gap: 20px;
+    }
+
+    .input-unidade {
+        width: 100%;
+    }
+
+    .campo {
+        width: 100%;
     }
 }
