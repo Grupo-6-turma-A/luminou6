@@ -18,9 +18,11 @@
             
         <div class="imagem">
             <img src="./imgs/logo.png" alt="Logo Luminous6">
-            <h1>Comece a monitorar!<h1>
+            <h2>Comece a monitorar!<h2>
         </div>
-        <span>Crie seu cadastro gratuito e integre seus sensores arduino hoje mesmo.</span>
+        <div class="crie-seu-cadastro">
+          <span>Crie seu cadastro gratuito e integre seus sensores arduino hoje mesmo.</span>
+        </div>
 
         <div class="Todos">
             <label><b>Código de ativação:</b></label>
@@ -32,8 +34,8 @@
             <input type="text" id="ipt_nome_empresa" PlaceHolder="Baunilhas Outdoor S/A">
         </div>
 
-        <label for="ipt_email_empresa"><b>Email da empresa:</b></label>
         <div class="Todos">
+          <label for="ipt_email_empresa"><b>Email da empresa:</b></label>
             <input type="text" id="ipt_email_empresa" PlaceHolder="Seu email@provedor.com">
         </div>
         
@@ -46,11 +48,12 @@
             <label for="ipt_senha_empresa"><b>Senha para empresa:</b></label>
             <input type="password" id="ipt_senha_empresa" PlaceHolder="Sua senha">
         </div>
-
-        <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais</i>
         <div class="Todos">
-            <label for="ipt_senha_confirma_empresa"><b>Confirme sua senha:</b></label>
-            <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()">
+          <label for="ipt_senha_confirma_empresa"><b>Confirme sua senha:</b></label>
+          <input type="password" id="ipt_senha_confirma_empresa" oninput="verificar()" placeholder="Confirme sua senha">
+        </div>
+        <div class="sua-senha-deve">
+          <i>Sua senha deve conter pelo menos 8 caracteres e possuir caracteres especiais.</i>
         </div>
         
         <div>
