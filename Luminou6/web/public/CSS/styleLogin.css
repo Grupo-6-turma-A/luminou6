@@ -113,3 +113,24 @@ button:hover {
     border-radius: 8px;
 }
 
+/* posicionamento e configuração do botão do SVG */
+.senha-container button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+}
+/* tamanho do SVG/imagem */
+.senha-container button img {
+    width: 20px;
+    height: 20px;
+}
