@@ -31,9 +31,6 @@
            <div class="senha-container">
         <input type="password" id="ipt_senha" placeholder="Crie uma senha forte">
 
-        <button type="button" onclick="mostrarSenha()">
-            <img src="./svg/LoginOlho.svg" alt="Mostrar senha">
-        </button>
          </div>
         </div>
         
@@ -52,21 +49,6 @@
     </main>
 </body>
 <script>
-
-    function mostrarSenha() {
-
-        if (ipt_senha.type == "password") {
-
-            ipt_senha.type = "text";
-
-        } else {
-
-            ipt_senha.type = "password";
-
-        }
-
-    }
-
 
     function login() {
 
