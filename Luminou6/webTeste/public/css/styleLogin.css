@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
  
  /* ajustasmento da tela */
  
@@ -10,7 +10,7 @@
 }
 /* Aqui fica os ajustes sobre o fundo da pagina e os itens dentro dela*/
 body{
-    background-image:url(../assets/imgs/fundo.png);
+    background-image:url(../imgs/fundo.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -112,6 +112,7 @@ button:hover {
     border: 1px solid #081004;
     border-radius: 8px;
 }
+
 /* posicionamento e configuração do botão do SVG */
 .senha-container button {
     position: absolute;
