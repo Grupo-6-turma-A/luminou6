@@ -4,21 +4,21 @@ USE  bd_luminousix;
 CREATE TABLE cliente (
 idCliente INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR (100),
-identificacao_fiscal VARCHAR(45) NOT NULL,
 email_contato VARCHAR(100) NOT NULL CONSTRAINT chkEmail_contato CHECK(email_contato LIKE '%@%'), 
 telefone VARCHAR(20) NOT NULL,
 codigo_ativacao VARCHAR(45)
 );
 
 INSERT INTO cliente (nome, identificacao_fiscal, email_contato, telefone, codigo_ativacao) VALUES
-('Baunilha Brasil Ltda', '12345678000190', 'contato@baunilhabrasil.com', '11987654321','Urubu100'),
-('Fazenda da Baunilha', '98765432000155', 'contato@fazendaBaunilha.com', '11976543210','sptech100'),
-('Cultivo Vanilla', '45678912000133', 'contato@cultivovanilla.com', '11965432109','Sptech');
+('Baunilha Brasil Ltda','contato@baunilhabrasil.com', '11987654321','Urubu100'),
+('Fazenda da Baunilha', 'contato@fazendaBaunilha.com', '11976543210','sptech100'),
+('Cultivo Vanilla', 'contato@cultivovanilla.com', '11965432109','Sptech');
 
 CREATE TABLE usuario (
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100),
 email_cadastro VARCHAR(100) CONSTRAINT chkEmail_cadastro CHECK(email_cadastro LIKE '%@%'),
+identificacao_fiscal VARCHAR(45) NOT NULL UNIQUE,
 senha_cadastro VARCHAR(100),
 cargo VARCHAR(100),
 cliente_idCliente INT NOT NULL,
@@ -33,11 +33,11 @@ CONSTRAINT fk_usuarioAdmin
     REFERENCES usuario(idUsuario)
 );
 
-INSERT INTO usuario (nome, email_cadastro, senha_cadastro, cargo, cliente_idCliente, admin_fkUsuario) VALUES
-('Gabriel Silva', 'gabriel@baunilhabrasil.com', '123456', 'Administrador', 1, NULL),
-('João Santos', 'joao@baunilhabrasil.com', '123456', 'Técnico', 1, NULL),
-('Maria Oliveira', 'maria@fazendaBaunilha.com', '123456', 'Administrador', 2, NULL),
-('Pedro Souza', 'pedro@cultivovanilla.com', '123456', 'Técnico', 3, NULL);
+INSERT INTO usuario (nome, email_cadastro, identificacao_fiscal, senha_cadastro, cargo, cliente_idCliente, admin_fkUsuario) VALUES
+('Gabriel Silva', 'gabriel@baunilhabrasil.com', '99966633312', '123456', 'Administrador', 1, NULL),
+('João Santos', 'joao@baunilhabrasil.com', '12345678910', '123456', 'Técnico', 1, NULL),
+('Maria Oliveira', 'maria@fazendaBaunilha.com', '98765432101', '123456', 'Administrador', 2, NULL),
+('Pedro Souza', 'pedro@cultivovanilla.com', '03264846820', '123456', 'Técnico', 3, NULL);
 
 CREATE TABLE estufa (
 idEstufa INT PRIMARY KEY AUTO_INCREMENT,
