@@ -198,11 +198,18 @@ body {
     margin-top: 10px;
 }
 
+.chart-container-clean {
+    position: relative;
+}
+
 .chart-top-bar {
+    position: absolute;
+    left: 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 12px;
+    margin: 0;
+    z-index: 1;
 }
 
 .graficoLuz {

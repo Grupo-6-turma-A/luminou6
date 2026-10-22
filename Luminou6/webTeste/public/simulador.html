@@ -174,8 +174,8 @@
           </div>
 
           <!-- Card 3: Resultado Sem o Luminou6 (Com IDs adicionados para controle dinâmico) -->
-          <div class="result_card card_sem_lum_container">
-            <div class="icon_box icon_sem_lum_box">
+          <div id="containerSemLum" class="result_card card_sem_lum_container">
+            <div id="iconsemLum" class="icon_box icon_sem_lum_box">
               <img src="./assets/imgs/broke.png" alt="Ícone Sem Luminou6" />
             </div>
             <div class="result_info">
@@ -312,26 +312,20 @@
       msg_perda.innerHTML = `R$ ${perdaMensal.toFixed(2)}`;
       msg_faturamento.innerHTML = `R$ ${faturamentoTotal.toFixed(2)}`;
 
-      // Selecionando o 3º cartão da lista de resultados de forma segura pelas classes
-      let todosOsCards = document.querySelectorAll('.result_card'); // Procura pelo HTML inteiro por .result_card
-      let cardSemLum = todosOsCards[2]; // Pega o índice do 3º cartão (índice 2)
-      let iconSemLum = cardSemLum.querySelector('.icon_box'); // Procura pelo .icon_box dentro do card
-      let msgSemLum = document.getElementById('msg_sem_luminou'); // Localiza o elemento que tem id = msg_sem_luminou
-
       // Exibição e alteração dinâmica da cor do 3º card baseado no valor
       if (resultadoSemLuminou >= 0) {
         // Se for positivo, muda para o verde mais claro/moderado
-        cardSemLum.className = "result_card card_positivo_moderado";
-        iconSemLum.className = "icon_box icon_positivo_moderado";
-        msgSemLum.className = "result_valor valor_positivo_moderado";
+        containerSemLum.className = "result_card card_positivo_moderado";
+        iconsemLum.className = "icon_box icon_positivo_moderado";
+        msg_sem_luminou.className = "result_valor valor_positivo_moderado";
       } else {
         // Se for negativo, muda para vermelho de alerta
-        cardSemLum.className = "result_card card_perda";
-        iconSemLum.className = "icon_box icon_perda";
-        msgSemLum.className = "result_valor valor_perda";
+        containerSemLum.className = "result_card card_perda";
+        iconsemLum.className = "icon_box icon_perda";
+        msg_sem_luminou.className = "result_valor valor_perda";
       }
 
-      msgSemLum.innerHTML = `R$ ${resultadoSemLuminou.toFixed(2)}`;
+      msg_sem_luminou.innerHTML = `R$ ${resultadoSemLuminou.toFixed(2)}`;
 
       let mensagemGanho = `R$ ${resultadoComLuminou.toFixed(2)}`;
       msg_ganho.innerHTML = mensagemGanho;
