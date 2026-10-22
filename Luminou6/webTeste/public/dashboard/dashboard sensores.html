@@ -1,0 +1,361 @@
+<<!DOCTYPE html>
+    <html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../../imgs/logo.png">
+        <title>Sensores</title>
+        <link rel="stylesheet" href="../css/dashboardSensores.css">
+    </head>
+
+    <body>
+        <div class="navbar_lateral">
+            <img src="../imgs/logoLuminou6.png" class="nav_logo" alt="Luminous">
+            <nav class="nav_botoes">
+                <div class="nav_item">
+                    <a href="../index.html" class="img_nav">
+                        <img src="../imgs/VectorCasa.svg" alt="">
+                        <span>Home</span>
+                    </a>
+                </div>
+                <div class="nav_item">
+                    <a href="dashboardVisaoGeral.html" class="img_nav">
+                        <img src="../imgs/VectorLupa.svg" alt="">
+                        <span>Visão Geral</span>
+                    </a>
+                </div>
+                <div class="nav_item">
+                    <a href="dashboardEstufa.html" class="img_nav">
+                        <img src="../imgs/VectorCasa2.svg" alt="">
+                        <span>Estufas</span>
+                    </a>
+                </div>
+                <div class="nav_item ativo">
+                    <div class="img_nav">
+                        <img src="../imgs/VectorEstrela.svg" alt="">
+                        <span>Sensores</span>
+                    </div>
+                </div>
+                <div class="nav_item">
+                    <a href="dashboardAavisos.html" class="img_nav">
+                        <img src="../imgs/VectorSino.svg" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </div>
+                <div class="nav_item">
+                    <a href="dashboardConfigs.html" class="img_nav">
+                        <img src="../imgs/VectorConfig.svg" alt="">
+                        <span>Configurações</span>
+                    </a>
+                </div>
+        </div>
+        </nav>
+        </div>
+        <main class="conteudo">
+
+            <header class="header">
+                <div class="filtro">
+                    <img src="../imgs/VectorCalendario.png" alt="">
+                    <div>
+                        Período
+                        <select id="select_periodo">
+                            <option value="0">Últimas 24 horas</option>
+                            <option value="1">Últimos 7 dias</option>
+                            <option value="2">Últimos 30 dias</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filtro">
+                    <img src="../imgs/VectorCasa2.svg" alt="">
+                    <div>
+                        Estufa
+                        <select id="select_estufas">
+                            <option value="todas">Todas as estufas</option>
+                            <option value="A">Estufa A</option>
+                            <option value="B">Estufa B</option>
+                            <option value="C">Estufa C</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <div>
+                <h1 class="titulo">Sensores</h1>
+                <p class="subtitulo">Quanto dá para confiar nos dados. Aqui mede-se o sistema, não a luz.</p>
+            </div>
+
+            <section class="cards">
+                <div class="card">
+                    <div class="card_titulo">
+                        Sensores ativos
+                    </div>
+                    <h1 id="kpi_ativos">2 de 3</h1>
+                    <span id="kpi_ativos_sub">1 sem sinal</span>
+                </div>
+
+                <div class="card">
+                    <div class="card_titulo">
+                        Cobertura média
+                    </div>
+                    <h1 id="kpi_cobertura">92%</h1>
+                    <span id="kpi_cobertura_sub">Últimas 24h</span>
+                </div>
+
+                <div class="card">
+                    <div class="card_titulo">
+                        Leituras suspeitas
+                    </div>
+                    <h1 id="kpi_suspeitas">2%</h1>
+                    <span>Descartadas</span>
+                </div>
+
+                <div class="card">
+                    <div class="card_titulo">
+                        Última leitura
+                    </div>
+                    <h1 id="kpi_ultima">14:37</h1>
+                    <span id="kpi_ultima_sub">Estufa A e B</span>
+                </div>
+            </section>
+
+            <section class="painel">
+                <h2>Sensores instalados</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sensor</th>
+                            <th>Estufa</th>
+                            <th>Última leitura</th>
+                            <th>ADC bruto</th>
+                            <th>PPFD estimado</th>
+                            <th>Cobertura 24h</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela_sensores">
+                        <tr>
+                            <td>LDR-A01</td>
+                            <td>Estufa A</td>
+                            <td>14:37</td>
+                            <td>2.310</td>
+                            <td>620 µmol/m²/s</td>
+                            <td>95%</td>
+                            <td><span class="status ok">Em operação</span></td>
+                        </tr>
+                        <tr>
+                            <td>LDR-B01</td>
+                            <td>Estufa B</td>
+                            <td>14:37</td>
+                            <td>1.480</td>
+                            <td>410 µmol/m²/s</td>
+                            <td>94%</td>
+                            <td><span class="status ok">Em operação</span></td>
+                        </tr>
+                        <tr>
+                            <td>LDR-C01</td>
+                            <td>Estufa C</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--- µmol/m²/s</td>
+                            <td>--</td>
+                            <td><span class="status off">Sem sinal</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="grid_inferior">
+
+                <div class="painel">
+                    <h2>Cobertura por sensor</h2>
+
+                    <div id="lista_cobertura">
+                        <div class="barra_item">
+                            <div class="barra_info"><span>LDR-A01</span><span>95%</span></div>
+                            <div class="barra">
+                                <div class="barra_preenchida" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div class="barra_item">
+                            <div class="barra_info"><span>LDR-B01</span><span>94%</span></div>
+                            <div class="barra">
+                                <div class="barra_preenchida" style="width: 94%"></div>
+                            </div>
+                        </div>
+
+                        <div class="barra_item">
+                            <div class="barra_info"><span>LDR-C01</span><span>0%</span></div>
+                            <div class="barra">
+                                <div class="barra_preenchida" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="painel">
+                    <h2>Lacunas e leituras suspeitas</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Horário</th>
+                                <th>Sensor</th>
+                                <th>Ocorrência</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela_ocorrencias">
+                            <tr>
+                                <td>13:50 – agora</td>
+                                <td>LDR-C01</td>
+                                <td>Sem atualização há mais de 1 dia</td>
+                            </tr>
+                            <tr>
+                                <td>09:12 – 09:14</td>
+                                <td>LDR-A01</td>
+                                <td>Lacuna de 2 min</td>
+                            </tr>
+                            <tr>
+                                <td>11:40</td>
+                                <td>LDR-B01</td>
+                                <td>Leitura suspeita descartada</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+        </main>
+    </body>
+
+    </html>
+    <script>
+        let sensores = ["LDR-A01", "LDR-B01", "LDR-C01"];
+        let estufas = ["A", "B", "C"];
+        let ultimaLeitura = ["14:37", "14:37", "--"];
+        let adcBruto = ["2.310", "1.480", "--"];
+        let ppfd = [620, 410, 0];
+        let cobertura = [95, 94, 0];
+
+        let lacunaHorario = ["13:50 – agora", "09:12 – 09:14", "11:40"];
+        let lacunaSensor = ["LDR-C01", "LDR-A01", "LDR-B01"];
+        let lacunaEstufa = ["C", "A", "B"];
+        let lacunaTexto = [
+            "Sem atualização há mais de 1 dia",
+            "Lacuna de 2 min",
+            "Leitura suspeita descartada"
+        ];
+
+        let totalLeituras = 150;
+        let descartadas = 3;
+
+        function atualizarDashboard() {
+            let filtro = document.getElementById("select_estufas").value;
+
+            let linhasSensores = "";
+            let barras = "";
+            let total = 0;
+            let ativos = 0;
+            let somaCobertura = 0;
+            let ultima = "";
+
+            let i = 0;
+            while (i < sensores.length) {
+                if (filtro == "todas" || estufas[i] == filtro) {
+                    total++;
+                    let temSinal = ultimaLeitura[i] != "--";
+                    let classe = "ok";
+                    let textoStatus = "Em operação";
+                    let textoPpfd = ppfd[i] + " µmol/m²/s";
+                    let textoCobertura = cobertura[i] + "%";
+
+                    if (temSinal) {
+                        ativos++;
+                        somaCobertura = somaCobertura + cobertura[i];
+                        if (ultima == "" || ultimaLeitura[i] > ultima) {
+                            ultima = ultimaLeitura[i];
+                        }
+                    } else {
+                        classe = "off";
+                        textoStatus = "Sem sinal";
+                        textoPpfd = "--- µmol/m²/s";
+                        textoCobertura = "--";
+                    }
+
+        
+                    linhasSensores = linhasSensores + "<tr>" +
+                        "<td>" + sensores[i] + "</td>" +
+                        "<td>Estufa " + estufas[i] + "</td>" +
+                        "<td>" + ultimaLeitura[i] + "</td>" +
+                        "<td>" + adcBruto[i] + "</td>" +
+                        "<td>" + textoPpfd + "</td>" +
+                        "<td>" + textoCobertura + "</td>" +
+                        "<td><span class='status " + classe + "'>" + textoStatus + "</span></td>"
+                        "</tr>";
+
+        
+                    barras = barras + "<div class='barra_item'>" +
+                        "<div class='barra_info'><span>" + sensores[i] + "</span><span>" + cobertura[i] + "%</span></div>" +
+                        "<div class='barra'><div class='barra_preenchida' style='width:" + cobertura[i] + "%'></div></div>" +
+                        "</div>";
+                }
+                i++;
+            }
+
+            // Lógica para mapear as estufas que compartilham o horário da última leitura
+            let textoEstufasUltima = "";
+            let quantas = 0;
+            i = 0;
+            while (i < sensores.length) {
+                if ((filtro == "todas" || estufas[i] == filtro) && ultimaLeitura[i] == ultima) {
+                    if (quantas == 0) {
+                        textoEstufasUltima = "Estufa " + estufas[i];
+                    } else {
+                        textoEstufasUltima = textoEstufasUltima + " e " + estufas[i];
+                    }
+                    quantas++;
+                }
+                i++;
+            }
+
+            // Filtro e montagem da tabela de lacunas/ocorrências
+            let linhasLacunas = "";
+            i = 0;
+            while (i < lacunaSensor.length) {
+                if (filtro == "todas" || lacunaEstufa[i] == filtro) {
+                    linhasLacunas = linhasLacunas + "<tr>" +
+                        "<td>" + lacunaHorario[i] + "</td>" +
+                        "<td>" + lacunaSensor[i] + "</td>" +
+                        "<td>" + lacunaTexto[i] + "</td>" +
+                        "</tr>";
+                }
+                i++;
+            }
+
+
+            let coberturaMedia = 0;
+            if (ativos > 0) {
+                coberturaMedia = Math.round(somaCobertura / ativos);
+            }
+            let porcentagemSuspeitas = Math.round((descartadas / totalLeituras) * 100);
+
+            let textoUltima = ultima;
+            if (ultima == "") {
+                textoUltima = "--";
+                textoEstufasUltima = "Sem leituras";
+            }
+            document.getElementById("kpi_ativos").innerHTML = ativos + " de " + total;
+            document.getElementById("kpi_ativos_sub").innerHTML = (total - ativos) + " sem sinal";
+            document.getElementById("kpi_cobertura").innerHTML = coberturaMedia + "%";
+            document.getElementById("kpi_suspeitas").innerHTML = porcentagemSuspeitas + "%";
+            document.getElementById("kpi_ultima").innerHTML = textoUltima;
+            document.getElementById("kpi_ultima_sub").innerHTML = textoEstufasUltima;
+            document.getElementById("tabela_sensores").innerHTML = linhasSensores;
+            document.getElementById("lista_cobertura").innerHTML = barras;
+            document.getElementById("tabela_ocorrencias").innerHTML = linhasLacunas;
+        }
+        document.getElementById("select_estufas").addEventListener("change", atualizarDashboard);
+        atualizarDashboard();
+    </script>
