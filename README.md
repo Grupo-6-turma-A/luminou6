@@ -17,7 +17,7 @@ Este projeto tem como foco evitar que o excesso ou déficit de luz comprometa a 
 O desenvolvimento de um protótipo IoT para atuar na prevenção de quebras de safra. O sistema realiza:
 - **Captura de Dados:** Utiliza um microcontrolador Arduino Uno R3 integrado a um sensor de luminosidade (fotoresistor LDR) posicionado na altura do dossel das plantas.
 - **Processamento e Histórico:** Os dados são enviados para um banco de dados e exibidos em formato de gráficos em uma interface web.
-- **Alertas Inteligentes:** A plataforma web emite um alerta em tempo real sempre que a luminosidade ultrapassar a faixa ideal (10.000 a 30.000 Lux), indicando possíveis rasgos ou desgastes na tela de sombreamento.
+- **Alertas Inteligentes:** A plataforma web emite um alerta em tempo real sempre que a luminosidade ultrapassar a faixa ideal (300 a 600 Lux), indicando possíveis rasgos ou desgastes na tela de sombreamento.
 
 ## 👥 Equipe Desenvolvedora
 Projeto desenvolvido por alunos do curso de Análise e Desenvolvimento de Sistemas (São Paulo Tech School):
