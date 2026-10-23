@@ -77,7 +77,7 @@ INSERT INTO sensor (nome, status_sensor, codigo_sensor, estufa_idEstufa) VALUES
 
 CREATE TABLE leitura (
 idLeitura INT PRIMARY KEY AUTO_INCREMENT,
-valorADC INT NOT NULL,
+valorPPFD INT NOT NULL,
 data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
 
 sensor_idSensor INT NOT NULL,

@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../CSS/dashboardConfigs.css">
+    <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon">
+
+    <title>Configurações</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../imgs/logoLuminou6.png" alt="Logo Luminou6">
+        </div>
+
+        <nav>
+            <div>
+                <img src="../imgs/VectorCasa.svg" alt="">
+                <a href="../index.html">Home</a>
+            </div>
+
+            <div>
+                <img src="../imgs/VectorLupa.svg" alt="">
+                <a href="dashboardVisaoGeral.html">Visão Geral</a>
+            </div>
+
+            <div>
+                <img src="../imgs/VectorCasa2.svg" alt="">
+                <a href="dashboardEstufa.html">Estufas</a>
+            </div>
+
+            <div>
+                <img src="../imgs/VectorEstrela.svg" alt="">
+                <a href="dashboard sensores.html">Sensores</a>
+            </div>
+
+            <div>
+                <img src="../imgs/VectorSino.svg" alt="">
+                <a href="dashboardAavisos.html">Alertas</a>
+            </div>
+
+            <div class="menu-ativo">
+                <img src="../imgs/VectorConfig.svg" alt="">
+                <a href="dashboardConfigs.html">Configurações</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="conteudo">
+
+        <div class="filtro">
+            <img class="icone-filtro"
+                 src="../imgs/VectorCasa2.svg"
+                 alt="">
+
+            <div class="filtro-texto">
+                <label for="estufa">Estufa</label>
+
+                <select id="estufa">
+                    <option value="1">Estufa A</option>
+                    <option value="2">Estufa B</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="cabecalho">
+            <h1>Configurações</h1>
+            <p>Configure os parâmetros da sua estufa.</p>
+        </div>
+
+        <!-- PARÂMETROS DE CULTIVO -->
+
+        <div class="secao-config">
+
+            <h2>Faixa ideal de PPFD</h2>
+
+            <p class="descricao">
+                Valores no pico do dia; a faixa acompanha o sol.
+            </p>
+
+            <div class="campos">
+
+                <div class="campo">
+                    <label for="ppfdMin">Mínimo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="ppfdMin" value="300">
+                        <span>µmol/m²/s</span>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="ppfdMax">Máximo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="ppfdMax" value="800">
+                        <span>µmol/m²/s</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="titulo-dli">Meta de DLI</h2>
+
+            <div class="campos">
+
+                <div class="campo">
+                    <label for="dliMin">Mínimo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="dliMin" value="12">
+                        <span>mol/m²/dia</span>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="dliMax">Máximo</label>
+
+                    <div class="input-unidade">
+                        <input type="number" id="dliMax" value="20">
+                        <span>mol/m²/dia</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- NOTIFICAÇÕES -->
+
+        <div class="secao-config">
+
+            <h2>Notificações</h2>
+
+            <div class="opcao">
+                <div>
+                    <h3>Alerta de PPFD abaixo da faixa</h3>
+                    <p>Aviso no app e por e-mail após 15 min.</p>
+                </div>
+            </div>
+
+            <div class="opcao">
+                <div>
+                    <h3>Alerta de sensor sem sinal</h3>
+                    <p>Aviso após 30 min sem leitura.</p>
+                </div>
+            </div>
+
+            <div class="opcao">
+                <div>
+                    <h3>Resumo diário por e-mail</h3>
+                    <p>Enviado todo dia às 18:00.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
