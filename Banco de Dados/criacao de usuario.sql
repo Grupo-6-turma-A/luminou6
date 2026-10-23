@@ -7,3 +7,9 @@ CREATE USER 'user_api'@'localhost' IDENTIFIED BY 'luminou6@2026';
 
 -- Garantindo as permissões necessárias para o usuário
 GRANT INSERT, SELECT ON bd_luminousix.* TO 'user_api'@'localhost';
+
+-- Usuário de inserção do data acquino
+CREATE USER 'user_datacquino'@'localhost' IDENTIFIED BY 'luminou6@2026';
+
+-- Garantindo as permissões necessárias para o usuário
+GRANT INSERT bd_luminousix.* TO 'user_datacquino'@'localhost';
