@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #faf9f4;
+    background-color: #FFFFFF;
 }
 
 html {
@@ -60,7 +60,7 @@ header {
     bottom: 0;
     width: 100%;
     height: 4px;
-    background-color: #3d4230;
+    background-color: #7E8863;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease;
