@@ -21,7 +21,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #faf9f4;
+    background-color: #FFFFFF;
     padding: 0 0 40px 80px;
 }  
 
@@ -83,9 +83,11 @@ html {
     margin-bottom: 50px;
 }
 
-.div-sobreInfo {
+.div-sobreInfo{
     display: flex;
     align-items: center;
+    background-color: #79855b;
+    color: white;
 }
 
 .div-luminosidade,
@@ -128,9 +130,6 @@ html {
     margin: 40px;
 }
 
-.div-sobreInfo h3 {
-    color: #7E8863;
-}
 
 /* Parte Como Funciona */
 
@@ -178,11 +177,12 @@ html {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: #F3E5AB;
+    background-color: #79855b;
     border-radius: 20px;
     padding: 10px;
     font-size: 16px;
     font-weight: 300;
+    color: white;
 }
 
 .div-filho img {
@@ -299,7 +299,7 @@ html {
 
 .div-pai {
     width: 100%;
-    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg3.png);
+    background-color: #79855b;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -424,12 +424,15 @@ html {
 /* Parte Rodapé */
 
 .footer {
-    background-color: #79855b;
+    background-color: #FFFFFF;
     color: #e2e8d5;
     padding: 50px 80px 30px 80px;
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     width: 100%;
+    color: black;
+    box-sizing: border-box;
+    border-top: solid #79855b 2px;
 }
 
 .footer-top {
@@ -448,7 +451,6 @@ html {
 }
 
 .footer-logo-box {
-    background-color: #fffde7;
     border-radius: 18px;
     padding: 12px;
     display: flex;
@@ -467,7 +469,6 @@ html {
 }
 
 .footer-brand-text h2 {
-    color: #ffffff;
     font-size: 26px;
     font-weight: 700;
     margin: 0 0 6px 0;
@@ -478,7 +479,7 @@ html {
     font-size: 13px;
     line-height: 1.4;
     margin: 0;
-    color: #dcdcdc;
+
 }
 
 .footer-columns {
@@ -487,7 +488,7 @@ html {
 }
 
 .footer-col h4 {
-    color: #f2e29d;
+    color: #79855b;
     font-size: 16px;
     font-weight: 600;
     margin: 0 0 16px 0;
@@ -504,20 +505,19 @@ html {
 }
 
 .footer-col a {
-    color: #e2e8d5;
+    color: #000000;
     text-decoration: none;
     font-size: 13px;
     transition: color 0.2s;
 }
 
 .footer-col a:hover {
-    color: #ffffff;
     text-decoration: underline;
 }
 
 .footer-divider {
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid #79855b;
     margin: 0 0 25px 0;
 }
 
@@ -526,7 +526,7 @@ html {
     justify-content: space-between;
     align-items: flex-end;
     font-size: 12px;
-    color: #dcdcdc;
+    color: #000000;
 }
 
 .footer-info p {

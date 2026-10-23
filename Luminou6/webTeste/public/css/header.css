@@ -20,9 +20,11 @@ html {
 header {
     width: 100%;
     padding: 20px;
-    background-color: #FDEFD2;
+    background-color: #FFFFFF;
     position: sticky;
     top: 0;
+    box-sizing: border-box;
+    border: solid #7E8863 2px;
 }
 
 .navbar {
