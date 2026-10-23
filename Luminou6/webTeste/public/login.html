@@ -101,15 +101,15 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
-                    setTimeout(function () {
-                        window.location = "./dashboard/dashboardVisaoGeral.html";
-                    }, 1000); // apenas para exibir o loading
+                    alert(`Login realizado, redirecionando usuário ${json.nome}!`);
 
                 });
 
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
+
+                alert("Email ou senha inválidos. Tente novamente.");
 
                 resposta.text().then(texto => {
                     console.error(texto);
