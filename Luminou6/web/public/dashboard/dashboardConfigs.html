@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../CSS/dashboardConfigs.css" />
     <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon" />
-    <title>Configurações - Luminous</title>
+    <title>Configurações - Luminou6</title>
   </head>
 
   <body>
@@ -78,9 +78,9 @@
                 <label for="fase">Fase de desenvolvimento</label>
 
                 <select id="fase">
-                  <option value="crescimento">Crescimento</option>
                   <option value="enraizamento">Enraizamento</option>
                   <option value="brotamento">Brotamento</option>
+                  <option value="crescimento">Crescimento</option>
                   <option value="floracao">Floração</option>
                 </select>
               </div>
@@ -113,29 +113,6 @@
                 <input type="number" id="dliMeta" value="30"/>
               </div>
             </div>
-
-            <div class="campos-linha">
-              <div class="campo">
-                <label for="tempoAlerta"> Tempo para disparar alerta </label>
-
-                <select id="tempoAlerta" name="tempoAlerta">
-                  <option value="10">10 minutos</option>
-                  <option value="15">15 minutos</option>
-                  <option value="30">30 minutos</option>
-                </select>
-              </div>
-
-              <div class="campo">
-                <label for="semDados">Sem dados após</label>
-
-                <select id="semDados" name="semDados">
-                  <option value="3">3 minutos</option>
-                  <option value="5">5 minutos</option>
-                  <option value="10">10 minutos</option>
-                </select>
-              </div>
-            </div>
-
             <div class="botoes-acao">
               <button type="button" class="btn-salvar" id="btnSalvar">
                 Salvar parâmetros
@@ -143,10 +120,6 @@
 
               <button type="button" class="btn-secundario" id="btnRestaurar">
                 Restaurar padrão da fase
-              </button>
-
-              <button type="button" class="btn-personalizado">
-                Parâmetros personalizados
               </button>
             </div>
           </section>
@@ -160,9 +133,8 @@
               <h3>01 · Limites de PPFD</h3>
 
               <p>
-                O sistema compara as leituras com os limites da estufa. O alerta
-                é criado após o tempo de persistência configurado, evitando
-                avisos por oscilações momentâneas.
+                O sistema compara as leituras com os limites configurados da estufa. Assim podendo 
+                avisá-lo quando a planta estiver recebendo uma incidência luminosa diferente das adequadas.
               </p>
             </div>
 
@@ -170,28 +142,16 @@
               <h3>02 · DLI acumulado</h3>
 
               <p>
-                O DLI é estimado integrando as leituras de PPFD ao longo do dia.
-                Intervalos sem dados não devem ser tratados como luminosidade
-                zero; períodos incompletos precisam ser sinalizados.
+                O DLI é estimado integrando as leituras de PPFD ao longo do dia.  
               </p>
             </div>
-
             <div class="item-regra">
-              <h3>03 · Alertas previstos</h3>
-
-              <p>
-                PPFD alto ou baixo, meta diária de DLI, ausência de dados,
-                oscilações suspeitas e possível falha do sensor.
-              </p>
-            </div>
-
-            <div class="item-regra">
-              <h3>04 · Fases disponíveis</h3>
+              <h3>03 · Fases disponíveis</h3>
 
               <div class="tags-fases">
                 <span class="tag">Enraizamento</span>
-                <span class="tag">Crescimento</span>
                 <span class="tag">Brotamento</span>
+                <span class="tag">Crescimento</span>
                 <span class="tag">Floração</span>
               </div>
             </div>
