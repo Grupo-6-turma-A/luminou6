@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #faf9f4;
+    background-color: #FFFFFF;
 }
 
 html {
@@ -86,8 +86,8 @@ html {
 .div-sobreInfo{
     display: flex;
     align-items: center;
-    background-color: #79855b;
-    color: white;
+    background-color: #FFFFFF;
+    color: black;
 }
 
 .div-luminosidade,
@@ -100,7 +100,7 @@ html {
 }
 
 .luminosidade {
-    background-color: #f3e5ab;
+    background-color: #79855b;
     border-radius: 100%;
     padding: 20px;
     display: flex;
@@ -135,7 +135,7 @@ html {
 
 .div-comoFunciona {
     width: 100%;
-    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png);
+    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -143,6 +143,7 @@ html {
     align-items: center;
     flex-direction: column;
     padding: 50px;
+    background-color:#FFFFFF;
 }
 
 .div-comoFunciona h1 {
@@ -203,7 +204,7 @@ html {
 
 .div-quemSomos {
     width: 100%;
-    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg3.png);
+    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg3.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -247,7 +248,7 @@ html {
 
 .div-objetivo {
     width: 100%;
-    background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png);
+    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -281,15 +282,15 @@ html {
 }
 
 .div-imgObjetivo {
-    background-color: #F3E5AB;
+    background-color: #79855b;
     border-radius: 50%;
     padding: 20px;
     margin-bottom: 20px;
 }
-
+/* 
 .div-objetivoInfo h3 {
     color: #7E8863;
-}
+} */
 
 .informacao img {
     width: 90px;

@@ -252,7 +252,7 @@
       <div class="footer-bottom">
         <div class="footer-info">
           <p>
-            &copy; 2026 LUMINOUS &mdash; Monitoramento Inteligente para Cultivo
+            &copy; 2026 LUMINOU6 &mdash; Monitoramento Inteligente para Cultivo
             de Baunilha
           </p>
           <p>
@@ -298,18 +298,27 @@
     } else if (precoReais < 1300) {
       alert(`O preço mínimo de mercado para a baunilha é de R$ 1.300,00 (US$ 250,00) por quilo.`);
     } else {
-      let faturamentoTotal = valorGeradoReais * precoReais;
+      let faturamentoTotal = valorGeradoReais * precoReais; // cálculo do faturamento mensal
 
       let percentualPerda = 0.15;
-      let perdaAnualTotal = faturamentoTotal * percentualPerda;
-      let perdaMensal = perdaAnualTotal / 12;
+      let perdaAnualTotal = faturamentoTotal * percentualPerda; // 15% do valor do faturamento
+      let perdaDoMes = perdaAnualTotal / 12;
+      let perdaMensal = [];
+      let somaPerdaMes = 0;
 
+      for (let mes = 1; mes <= 12; mes++) {
+        somaPerdaMes += perdaDoMes;
+        perdaMensal.push(somaPerdaMes);
+        console.log(mes);
+        console.log(somaPerdaMes);
+      }
+      
       let resultadoSemLuminou = faturamentoTotal - perdaAnualTotal - custoMaodeobra;
 
       let resultadoComLuminou = faturamentoTotal - custoMaodeobra;
 
       // Exibição dos dois primeiros cards
-      msg_perda.innerHTML = `R$ ${perdaMensal.toFixed(2)}`;
+      msg_perda.innerHTML = `R$ ${perdaMensal[11].toFixed(2)}`;
       msg_faturamento.innerHTML = `R$ ${faturamentoTotal.toFixed(2)}`;
 
       // Exibição e alteração dinâmica da cor do 3º card baseado no valor
