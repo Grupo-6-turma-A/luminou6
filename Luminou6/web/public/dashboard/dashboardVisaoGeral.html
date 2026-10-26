@@ -300,22 +300,22 @@
                     <div class="bloco-grafico" id="blocoTodas" data-estufa="todas">
                         <canvas id="graficoTodas"></canvas>
                     </div>
-                    <div class="bloco-grafico" data-estufa="1">
+                    <div class="bloco-grafico" data-estufa="1" hidden>
                         <canvas id="grafico1"></canvas>
                     </div>
-                    <div class="bloco-grafico" data-estufa="2">
+                    <div class="bloco-grafico" data-estufa="2" hidden>
                         <canvas id="grafico2"></canvas>
                     </div>
-                    <div class="bloco-grafico" data-estufa="3">
+                    <div class="bloco-grafico" data-estufa="3" hidden>
                         <canvas id="grafico3"></canvas>
                     </div>
-                    <div class="bloco-grafico" data-estufa="4">
+                    <div class="bloco-grafico" data-estufa="4" hidden>
                         <canvas id="grafico4"></canvas>
                     </div>
-                    <div class="bloco-grafico" data-estufa="5">
+                    <div class="bloco-grafico" data-estufa="5" hidden>
                         <canvas id="grafico5"></canvas>
                     </div>
-                    <div class="bloco-grafico" data-estufa="6">
+                    <div class="bloco-grafico" data-estufa="6" hidden>
                         <canvas id="grafico6"></canvas>
                     </div>
                 </div>
@@ -342,27 +342,27 @@
 
                     <tbody>
                         <tr>
-                            <td><button class="botao-estufa" data-estufa="1" onclick="selecionarEstufa('1')"><i class="ponto cor-1"></i>Estufa 1<span class="marca-foco" data-estufa="1" hidden>em foco</span></button></td>
+                            <td><button class="botao-estufa" data-estufa="1" onclick="selecionarEstufa('1')"><i class="ponto cor-1"></i>Estufa 1<span id="foco1" class="marca-foco" data-estufa="1" hidden>em foco</span></button></td>
                             <td>356</td><td>Brotamento</td><td><span class="status status-ok">OK</span></td><td>10:24</td>
                         </tr>
                         <tr>
-                            <td><button class="botao-estufa" data-estufa="2" onclick="selecionarEstufa('2')"><i class="ponto cor-2"></i>Estufa 2<span class="marca-foco" data-estufa="2" hidden>em foco</span></button></td>
+                            <td><button class="botao-estufa" data-estufa="2" onclick="selecionarEstufa('2')"><i class="ponto cor-2"></i>Estufa 2<span id="foco2" class="marca-foco" data-estufa="2" hidden>em foco</span></button></td>
                             <td>128</td><td>Crescimento</td><td><span class="status status-baixo">BAIXO</span></td><td>10:22</td>
                         </tr>
                         <tr>
-                            <td><button class="botao-estufa" data-estufa="3" onclick="selecionarEstufa('3')"><i class="ponto cor-3"></i>Estufa 3<span class="marca-foco" data-estufa="3" hidden>em foco</span></button></td>
+                            <td><button class="botao-estufa" data-estufa="3" onclick="selecionarEstufa('3')"><i class="ponto cor-3"></i>Estufa 3<span id="foco3" class="marca-foco" data-estufa="3" hidden>em foco</span></button></td>
                             <td>674</td><td>Floração</td><td><span class="status status-alto">ALTO</span></td><td>10:23</td>
                         </tr>
                         <tr>
-                            <td><button class="botao-estufa" data-estufa="4" onclick="selecionarEstufa('4')"><i class="ponto cor-4"></i>Estufa 4<span class="marca-foco" data-estufa="4" hidden>em foco</span></button></td>
+                            <td><button class="botao-estufa" data-estufa="4" onclick="selecionarEstufa('4')"><i class="ponto cor-4"></i>Estufa 4<span id="foco4" class="marca-foco" data-estufa="4" hidden>em foco</span></button></td>
                             <td>412</td><td>Crescimento</td><td><span class="status status-ok">OK</span></td><td>10:24</td>
                         </tr>
                         <tr>
-                            <td><button class="botao-estufa" data-estufa="5" onclick="selecionarEstufa('5')"><i class="ponto cor-5"></i>Estufa 5<span class="marca-foco" data-estufa="5" hidden>em foco</span></button></td>
+                            <td><button class="botao-estufa" data-estufa="5" onclick="selecionarEstufa('5')"><i class="ponto cor-5"></i>Estufa 5<span id="foco5" class="marca-foco" data-estufa="5" hidden>em foco</span></button></td>
                             <td>298</td><td>Brotamento</td><td><span class="status status-ok">OK</span></td><td>10:24</td>
                         </tr>
                         <tr>
-                            <td><button class="botao-estufa" data-estufa="6" onclick="selecionarEstufa('6')"><i class="ponto cor-6"></i>Estufa 6<span class="marca-foco" data-estufa="6" hidden>em foco</span></button></td>
+                            <td><button class="botao-estufa" data-estufa="6" onclick="selecionarEstufa('6')"><i class="ponto cor-6"></i>Estufa 6<span id="foco6" class="marca-foco" data-estufa="6" hidden>em foco</span></button></td>
                             <td>—</td><td>Enraizamento</td><td><span class="status status-sem-dados">SEM DADOS</span></td><td>—</td>
                         </tr>
                     </tbody>
@@ -374,3 +374,290 @@
 </body>
 </html>
 <script>
+    
+    // Leituras de exemplo de luminosidade (PPFD) para cada estufa.
+let dadosEstufas = [
+  [400,380,395,430,405,430,445,430,440,470,505,500,490,500,490,510,500,535,565,530,510,490,480,490,510,510,515,525,515],
+  [240,250,230,240,245,235,220,205,195,200,205,210,205,200,210,220,250,270,230,220,215,225,210,220,210,205,215,210,205],
+  [300,295,290,285,300,310,295,305,320,325,315,305,290,300,310,320,330,340,350,365,355,350,355,360,370,365,370,365,360],
+  [190,200,195,205,198,210,200,205,195,205,200,210,220,250,280,320,360,355,350,360,345,335,325,315,305,320,310,315,330],
+  [340,345,350,360,355,330,315,325,320,330,325,315,300,285,270,255,245,235,225,215,220,225,215,225,210,220,215,205,200],
+  [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+];
+
+let periodo = "30 min";
+let estufaSelecionada = "todas";
+
+// Decide quantos pontos aparecem no gráfico.
+function escolherQuantidade() {
+  let quantidade = 29;
+
+  if (periodo == "15 min") {
+    quantidade = 4;
+  } else if (periodo == "30 min") {
+    quantidade = 7;
+  } else if (periodo == "1 hora") {
+    quantidade = 13;
+  } else if (periodo == "24 horas") {
+    quantidade = 13;
+  }
+
+  return quantidade;    
+}
+
+// Decide o intervalo entre os pontos do gráfico.
+function escolherIntervalo() {
+  let intervalo = 1;
+
+  if (periodo == "15 min") {
+    intervalo = 5;
+  } else if (periodo == "30 min") {
+    intervalo = 5;
+  } else if (periodo == "1 hora") {
+    intervalo = 5;
+  } else if (periodo == "24 horas") {
+    intervalo = 120;
+  }
+
+  return intervalo;
+}
+
+// Monta os textos que aparecem embaixo do gráfico.
+function montarRotulos(quantidade, intervalo) {
+  let rotulos = [];
+  let contador = 0;
+
+  while (contador < quantidade) {
+    let tempo = (quantidade - 1 - contador) * intervalo;
+
+    if (periodo == "24 horas") {
+      rotulos[contador] = tempo / 60 + " h";
+    } else {
+      rotulos[contador] = tempo + " min";
+    }
+
+    contador = contador + 1;
+  }
+
+  return rotulos;
+}
+
+// Escolhe os valores para o período selecionado.
+function montarLeituras(numeroEstufa, quantidade) {
+  let leituras = [];
+  let contador = 0;
+
+  while (contador < quantidade) {
+    let posicao;
+
+    if (periodo == "15 min") {
+      // Usa as leituras mais recentes, em intervalos de 5 minutos.
+      posicao = 13 + contador * 5;
+    } else {
+      posicao = Math.round(contador * 28 / (quantidade - 1));
+    }
+    leituras[contador] = dadosEstufas[numeroEstufa][posicao];
+    contador = contador + 1;
+  }
+
+  return leituras;
+}
+
+// Cria o gráfico Chart.js no canvas de visão geral.
+let quantidadeInicial = escolherQuantidade();
+let intervaloInicial = escolherIntervalo();
+
+let grafico = new Chart(graficoTodas, {
+  type: "line",
+  data: {
+    labels: montarRotulos(quantidadeInicial, intervaloInicial),
+    datasets: [
+      { label: "Estufa 1", data: montarLeituras(0, quantidadeInicial), borderColor: "#397c42", backgroundColor: "#397c42", borderWidth: 2, pointRadius: 2, tension: 0.25},
+      { label: "Estufa 2", data: montarLeituras(1, quantidadeInicial), borderColor: "#c5a12e", backgroundColor: "#c5a12e", borderWidth: 2, pointRadius: 2, tension: 0.25},
+      { label: "Estufa 3", data: montarLeituras(2, quantidadeInicial), borderColor: "#743d8e", backgroundColor: "#743d8e", borderWidth: 2, pointRadius: 2, tension: 0.25},
+      { label: "Estufa 4", data: montarLeituras(3, quantidadeInicial), borderColor: "#287ab7", backgroundColor: "#287ab7", borderWidth: 2, pointRadius: 2, tension: 0.25},
+      { label: "Estufa 5", data: montarLeituras(4, quantidadeInicial), borderColor: "#e08325", backgroundColor: "#e08325", borderWidth: 2, pointRadius: 2, tension: 0.25},
+      { label: "Estufa 6", data: montarLeituras(5, quantidadeInicial), borderColor: "#8b918e", backgroundColor: "#8b918e", borderWidth: 2, pointRadius: 2, tension: 0.25, hidden: true}
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: "right", labels: { usePointStyle: true } }
+    },
+    scales: {
+      y: {
+        min: 0,
+        max: 700,
+        title: { display: true, text: "PPFD (µmol/m²/s)" }
+      }
+    }
+  }
+});
+
+// Atualiza horários e leituras do gráfico.
+function atualizarGrafico() {
+  let quantidade = escolherQuantidade();
+  let intervalo = escolherIntervalo();
+  grafico.data.labels = montarRotulos(quantidade, intervalo);
+
+  let contador = 0;
+  while (contador < 6) {
+    grafico.data.datasets[contador].data = montarLeituras(contador, quantidade);
+
+    if (estufaSelecionada == "todas") {
+      if (contador == 5) {
+        grafico.data.datasets[contador].hidden = true;
+      } else {
+        grafico.data.datasets[contador].hidden = false;
+      }
+    } else if (contador == Number(estufaSelecionada) - 1) {
+      grafico.data.datasets[contador].hidden = false;
+    } else {
+      grafico.data.datasets[contador].hidden = true;
+    }
+
+    contador = contador + 1;
+  }
+
+  grafico.update();
+}
+
+// Esta função é chamada pelos onclick dos botões de período.
+function selecionarPeriodo(novoPeriodo) {
+  periodo = novoPeriodo;
+
+  if (periodo == "15 min") {
+    periodo15.className = "botao-periodo ativo";
+    periodo30.className = "botao-periodo";
+    periodoHora.className = "botao-periodo";
+    periodoDia.className = "botao-periodo";
+  } else if (periodo == "30 min") {
+    periodo15.className = "botao-periodo";
+    periodo30.className = "botao-periodo ativo";
+    periodoHora.className = "botao-periodo";
+    periodoDia.className = "botao-periodo";
+  } else if (periodo == "1 hora") {
+    periodo15.className = "botao-periodo";
+    periodo30.className = "botao-periodo";
+    periodoHora.className = "botao-periodo ativo";
+    periodoDia.className = "botao-periodo";
+  } else if (periodo == "24 horas") {
+    periodo15.className = "botao-periodo";
+    periodo30.className = "botao-periodo";
+    periodoHora.className = "botao-periodo";
+    periodoDia.className = "botao-periodo ativo";
+  }
+
+  atualizarGrafico();
+}
+
+// Esta função é chamada pelos onclick das estufas e do botão "Ver todas".
+function selecionarEstufa(numero) {
+  estufaSelecionada = numero;
+
+  if (numero == "todas") {
+    kpiTodas.hidden = false;
+    kpi1.hidden = true;
+    kpi2.hidden = true;
+    kpi3.hidden = true;
+    kpi4.hidden = true;
+    kpi5.hidden = true;
+    kpi6.hidden = true;
+    foco1.hidden = true;
+    foco2.hidden = true;
+    foco3.hidden = true;
+    foco4.hidden = true;
+    foco5.hidden = true;
+    foco6.hidden = true;
+  } else if (numero == "1") {
+    kpiTodas.hidden = true;
+    kpi1.hidden = false;
+    kpi2.hidden = true;
+    kpi3.hidden = true;
+    kpi4.hidden = true;
+    kpi5.hidden = true;
+    kpi6.hidden = true;
+    foco1.hidden = false;
+    foco2.hidden = true;
+    foco3.hidden = true;
+    foco4.hidden = true;
+    foco5.hidden = true;
+    foco6.hidden = true;
+  } else if (numero == "2") {
+    kpiTodas.hidden = true;
+    kpi1.hidden = true;
+    kpi2.hidden = false;
+    kpi3.hidden = true;
+    kpi4.hidden = true;
+    kpi5.hidden = true;
+    kpi6.hidden = true;
+    foco1.hidden = true;
+    foco2.hidden = false;
+    foco3.hidden = true;
+    foco4.hidden = true;
+    foco5.hidden = true;
+    foco6.hidden = true;
+  } else if (numero == "3") {
+    kpiTodas.hidden = true;
+    kpi1.hidden = true;
+    kpi2.hidden = true;
+    kpi3.hidden = false;
+    kpi4.hidden = true;
+    kpi5.hidden = true;
+    kpi6.hidden = true;
+    foco1.hidden = true;
+    foco2.hidden = true;
+    foco3.hidden = false;
+    foco4.hidden = true;
+    foco5.hidden = true;
+    foco6.hidden = true;
+  } else if (numero == "4") {
+    kpiTodas.hidden = true;
+    kpi1.hidden = true;
+    kpi2.hidden = true;
+    kpi3.hidden = true;
+    kpi4.hidden = false;
+    kpi5.hidden = true;
+    kpi6.hidden = true;
+    foco1.hidden = true;
+    foco2.hidden = true;
+    foco3.hidden = true;
+    foco4.hidden = false;
+    foco5.hidden = true;
+    foco6.hidden = true;
+  } else if (numero == "5") {
+    kpiTodas.hidden = true;
+    kpi1.hidden = true;
+    kpi2.hidden = true;
+    kpi3.hidden = true;
+    kpi4.hidden = true;
+    kpi5.hidden = false;
+    kpi6.hidden = true;
+    foco1.hidden = true;
+    foco2.hidden = true;
+    foco3.hidden = true;
+    foco4.hidden = true;
+    foco5.hidden = false;
+    foco6.hidden = true;
+  } else if (numero == "6") {
+    kpiTodas.hidden = true;
+    kpi1.hidden = true;
+    kpi2.hidden = true;
+    kpi3.hidden = true;
+    kpi4.hidden = true;
+    kpi5.hidden = true;
+    kpi6.hidden = false;
+    foco1.hidden = true;
+    foco2.hidden = true;
+    foco3.hidden = true;
+    foco4.hidden = true;
+    foco5.hidden = true;
+    foco6.hidden = false;
+  }
+
+  atualizarGrafico();
+}
+</script>
+
