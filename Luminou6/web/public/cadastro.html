@@ -181,6 +181,29 @@
       setInterval(sumirMensagem, 5000);
     }
 
+   
+  // Verificando se a senha tem menos de 8 caracteres //
+   if (senhaVar.length < 8) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = "A senha deve conter pelo menos 8 caracteres!";
+    return false;
+}
+
+// Verificando se as senhas coincidem //
+if (senhaVar != confirmacaoSenhaVar) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = "As senhas não coincidem!";
+    return false;
+}
+
+// Verificando se as senhas contem caracteres especiais //
+if (!/[!@#$%^&*(),.?":{}|<>]/.test(senhaVar)) {
+    cardErro.style.display = "block";
+    mensagem_erro.innerHTML = "A senha deve conter pelo menos um caractere especial!";
+    return false;
+}
+
+
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao === codigoVar) {
