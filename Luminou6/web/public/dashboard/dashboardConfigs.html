@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/dashboardConfigs.css" />
+    <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon" />
+    <title>Configurações - Luminous</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../imgs/LogoLuminouBranca.svg" alt="Logo Luminous" />
+      </div>
+
+      <nav>
+        <div>
+          <img src="../imgs/VectorCasa.svg" alt=""/>
+          <a href="../index.html">Home</a>
+        </div>
+
+        <div>
+          <img src="../imgs/VectorLupa.svg" alt="" />
+          <a href="dashboardVisaoGeral.html">Visão geral</a>
+        </div>
+
+        <div class="menu-ativo">
+          <img src="../imgs/VectorConfig.svg" alt="" />
+          <a href="dashboardConfigs.html" aria-current="page">
+            Configurações
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="area-principal">
+      <main class="conteudo">
+        <section class="cabecalho">
+          <div class="titulo-com-icone">
+            <h1>Configurações</h1>
+          </div>
+
+          <p class="subtitulo-principal">
+            Parâmetros por estufa e fase de desenvolvimento
+          </p>
+
+          <p class="descricao-topo">
+            Personalize os limites de luminosidade e a meta diária de cada
+            estufa, de acordo com a fase de desenvolvimento.
+          </p>
+        </section>
+
+        <div class="grid-layout">
+          <section class="secao-config">
+            <h2>Parâmetros de luminosidade</h2>
+
+            <p class="descricao">
+              Os valores sugeridos são demonstrativos. Valide os parâmetros
+              agronômicos antes de usar o sistema em um cultivo real.
+            </p>
+
+            <div class="campos-linha">
+              <div class="campo">
+                <label for="estufa">Estufa</label>
+
+                <select id="estufa">
+                  <option value="1">Estufa 1</option>
+                  <option value="2">Estufa 2</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="fase">Fase de desenvolvimento</label>
+
+                <select id="fase">
+                  <option value="crescimento">Crescimento</option>
+                  <option value="enraizamento">Enraizamento</option>
+                  <option value="brotamento">Brotamento</option>
+                  <option value="floracao">Floração</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="campos-linha">
+              <div class="campo">
+                <label for="ppfdMin"> PPFD mínimo (µmol/m²/s) </label>
+
+                <input type="number" id="ppfdMin" value="200"/>
+              </div>
+
+              <div class="campo">
+                <label for="ppfdAlvo"> PPFD alvo (µmol/m²/s) </label>
+
+                <input type="number" id="ppfdAlvo" value="350"/>
+              </div>
+            </div>
+
+            <div class="campos-linha">
+              <div class="campo">
+                <label for="ppfdMax"> PPFD máximo (µmol/m²/s) </label>
+
+                <input type="number" id="ppfdMax" value="600"/>
+            </div>
+
+              <div class="campo">
+                <label for="dliMeta"> Meta diária de DLI (mol/m²/dia) </label>
+
+                <input type="number" id="dliMeta" value="30"/>
+              </div>
+            </div>
+
+            <div class="campos-linha">
+              <div class="campo">
+                <label for="tempoAlerta"> Tempo para disparar alerta </label>
+
+                <select id="tempoAlerta" name="tempoAlerta">
+                  <option value="10">10 minutos</option>
+                  <option value="15">15 minutos</option>
+                  <option value="30">30 minutos</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="semDados">Sem dados após</label>
+
+                <select id="semDados" name="semDados">
+                  <option value="3">3 minutos</option>
+                  <option value="5">5 minutos</option>
+                  <option value="10">10 minutos</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="botoes-acao">
+              <button type="button" class="btn-salvar" id="btnSalvar">
+                Salvar parâmetros
+              </button>
+
+              <button type="button" class="btn-secundario" id="btnRestaurar">
+                Restaurar padrão da fase
+              </button>
+
+              <button type="button" class="btn-personalizado">
+                Parâmetros personalizados
+              </button>
+            </div>
+          </section>
+
+          <section class="secao-info">
+            <h2>Como funciona</h2>
+
+            <p class="descricao-info">Regras aplicadas ao monitoramento</p>
+
+            <div class="item-regra">
+              <h3>01 · Limites de PPFD</h3>
+
+              <p>
+                O sistema compara as leituras com os limites da estufa. O alerta
+                é criado após o tempo de persistência configurado, evitando
+                avisos por oscilações momentâneas.
+              </p>
+            </div>
+
+            <div class="item-regra">
+              <h3>02 · DLI acumulado</h3>
+
+              <p>
+                O DLI é estimado integrando as leituras de PPFD ao longo do dia.
+                Intervalos sem dados não devem ser tratados como luminosidade
+                zero; períodos incompletos precisam ser sinalizados.
+              </p>
+            </div>
+
+            <div class="item-regra">
+              <h3>03 · Alertas previstos</h3>
+
+              <p>
+                PPFD alto ou baixo, meta diária de DLI, ausência de dados,
+                oscilações suspeitas e possível falha do sensor.
+              </p>
+            </div>
+
+            <div class="item-regra">
+              <h3>04 · Fases disponíveis</h3>
+
+              <div class="tags-fases">
+                <span class="tag">Enraizamento</span>
+                <span class="tag">Crescimento</span>
+                <span class="tag">Brotamento</span>
+                <span class="tag">Floração</span>
+              </div>
+            </div>
+
+            <div class="nota-tecnica">
+              <h3>Nota técnica</h3>
+
+              <p>
+                Esta demonstração usa uma conversão simplificada de ADC para
+                PPFD:
+                <strong>PPFD estimado = ADC / 1023 × 700</strong>. Não é uma
+                calibração científica do LDR e não substitui um sensor quântico
+                calibrado.
+              </p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

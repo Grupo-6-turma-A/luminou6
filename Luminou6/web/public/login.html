@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./imgs/logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./imgs/logoLogin.png" type="image/x-icon">
+    <link rel="stylesheet" href="./CSS/styleLogin.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <main class="login-container">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+        <div class="login-card">
+            <div class="imagem">
+                <img src="./imgs/logoLogin.png" alt="Logo Luminous6">
+                <h1>Login</h1>
+            </div>
+
+            <span class="subtitulo"> Entre com seus dados corretamente para acessar o sistema.</span>
+            <div>
+                <label for="ipt_e-mail"><b>E-mail</b></label>
+                <input type="text" id="ipt_email" placeholder="seu-email@provedor.com">
+            </div>
+
+            <div class="campo">
+                <label for="ipt_senha"><b>Senha</b></label>
+
+                <div class="senha-container">
+                    <input type="password" id="ipt_senha" placeholder="Crie uma senha forte">
+
+                    <button type="button" onclick="mostrarSenha()">
+                        <img src="./imgs/olhoTelaLogin.png" alt="Mostrar senha">
+                    </button>
+
+                </div>
+            </div>
+
+            <span> <a href="cadastro.html" style="color: #7E8863;">Esqueci a senha</a></span>
+
+            <div>
+                <button onclick="login()">Entrar</button>
+            </div>
+
+            <div class="texto-centralizado">
+                <span>
+                    Não tem uma conta? <a href="cadastro.html" style="color: #7E8863;">Crie uma!</a>
+                </span>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    function mostrarSenha() {
+
+        if (ipt_senha.type == "password") {
+            ipt_senha.type = "text";
+        } else {
+            ipt_senha.type = "password";
+        }
+    }
+
+    function login() {
+
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/dashboardVisaoGeral.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+</script>
