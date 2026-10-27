@@ -1,91 +1,94 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Graphics</title>
-    <link rel="stylesheet" href="../dat-acqu-ino/styleDat-acqu-ino.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
 
-  <body>
-    <main class="container">
-      <div class="cabecalho">
-        <img src="../web/public/imgs/logo.png" alt="Logo" />
-        <h1>Luminosidade</h1>
-      </div>
+<head>
+  <title>Graphics</title>
+  <link rel="stylesheet" href="../dat-acqu-ino/styleDat-acqu-ino.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-      <div class="grafico">
-        <canvas id="sensorLuminosidade"></canvas>
-      </div>
-    </main>
+</head>
 
-    <script>
-      var sensorLuminosidade = new Chart(
-        document.getElementById("sensorLuminosidade").getContext("2d"),
-        {
-          type: "line",
-          data: {
-            datasets: [
-              {
-                label: "µmol/m²/s de PPFD",
-                borderColor: "#63B1BC",
-                backgroundColor: "#ED145B",
+<body>
+  <main class="container">
+    <div class="cabecalho">
+      <img src="../web/public/imgs/logo.png" alt="Logo" />
+      <h1>Luminosidade</h1>
+    </div>
+
+    <div class="grafico">
+      <canvas id="sensorLuminosidade"></canvas>
+    </div>
+  </main>
+
+  <script>
+    var sensorLuminosidade = new Chart(
+      document.getElementById("sensorLuminosidade").getContext("2d"),
+      {
+        type: "line",
+        data: {
+          datasets: [
+            {
+              label: "µmol/m²/s de PPFD",
+              borderColor: "#63B1BC",
+              backgroundColor: "#ED145B",
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              min: 0,
+              max: 700,
+              title: {
+                display: true,
               },
-            ],
-          },
-          options: {
-            scales: {
-              x: {
-                beginAtZero: true,
-              },
-              y: {
-                title: {
-                  display: true,
-                },
-                beginAtZero: true,
-              },
+              beginAtZero: true,
             },
           },
         },
-      );
+      });
+    var paginacao = {};
+    var tempo = {};
 
-      var paginacao = {};
-      var tempo = {};
+    function obterDados(grafico, endpoint) {
+      fetch("http://localhost:3300/sensores/" + endpoint)
+        .then((response) => response.json())
+        .then((valores) => {
+          if (paginacao[endpoint] == null) {
+            paginacao[endpoint] = 0;
+          }
+          if (tempo[endpoint] == null) {
+            tempo[endpoint] = 0;
+          }
 
-      function obterDados(grafico, endpoint) {
-        fetch("http://localhost:3300/sensores/" + endpoint)
-          .then((response) => response.json())
-          .then((valores) => {
-            if (paginacao[endpoint] == null) {
-              paginacao[endpoint] = 0;
+          var ultimaPaginacao = paginacao[endpoint];
+          paginacao[endpoint] = valores.length;
+          valores = valores.slice(ultimaPaginacao);
+
+          valores.forEach((valor) => {
+            if (
+              grafico.data.labels.length == 10 &&
+              grafico.data.datasets[0].data.length == 10
+            ) {
+              grafico.data.labels.shift();
+              grafico.data.datasets[0].data.shift();
             }
-            if (tempo[endpoint] == null) {
-              tempo[endpoint] = 0;
-            }
 
-            var ultimaPaginacao = paginacao[endpoint];
-            paginacao[endpoint] = valores.length;
-            valores = valores.slice(ultimaPaginacao);
+            grafico.data.labels.push(tempo[endpoint]++);
+            grafico.data.datasets[0].data.push(parseFloat(valor));
+            grafico.update();
+          });
+        })
+        .catch((error) => console.error("Erro ao obter dados:", error));
+    }
 
-            valores.forEach((valor) => {
-              if (
-                grafico.data.labels.length == 10 &&
-                grafico.data.datasets[0].data.length == 10
-              ) {
-                grafico.data.labels.shift();
-                grafico.data.datasets[0].data.shift();
-              }
+    setInterval(() => {
+      obterDados(sensorLuminosidade, "");
+    }, 1000);
+  </script>
+</body>
 
-              grafico.data.labels.push(tempo[endpoint]++);
-              grafico.data.datasets[0].data.push(parseFloat(valor));
-              grafico.update();
-            });
-          })
-          .catch((error) => console.error("Erro ao obter dados:", error));
-      }
-
-      setInterval(() => {
-        obterDados(sensorLuminosidade, "");
-      }, 1000);
-    </script>
-  </body>
 </html>
