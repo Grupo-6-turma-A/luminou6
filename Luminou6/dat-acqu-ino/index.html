@@ -1,29 +1,13 @@
 <!doctype html>
 <html>
-<<<<<<< HEAD
 
 <head>
   <title>Graphics</title>
   <link rel="stylesheet" href="../dat-acqu-ino/styleDat-acqu-ino.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-=======
-  <head>
-    <title>Graphics</title>
-    <link rel="stylesheet" href="../dat-acqu-ino/styleDat-acqu-ino.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="shortcut icon" href="../web/public/imgs/logo.png" type="image/x-icon">
-  </head>
-  
-    <main class="container">
-      <div class="cabecalho">
-        <img src="../web/public/imgs/logo.png" alt="Logo" />
-        <h1>Luminosidade</h1>
-      </div>
->>>>>>> 63f1a77ef2a2df476250638ccbf58a170daaa3a6
 
 </head>
 
-<<<<<<< HEAD
 <body>
   <main class="container">
     <div class="cabecalho">
@@ -60,36 +44,6 @@
               max: 700,
               title: {
                 display: true,
-=======
-    <script>
-      var sensorLuminosidade = new Chart(
-        document.getElementById("sensorLuminosidade").getContext("2d"),
-        {
-          type: "line",
-          data: {
-            datasets: [
-              {
-                label: "µmol/m²/s de PPFD",
-                data: [
-                  100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650,
-                  700,
-                ],
-                borderColor: "#63B1BC",
-                backgroundColor: "#ED145B",
-              },
-            ],
-          },
-          options: {
-            scales: {
-              x: {
-                beginAtZero: true,
-              },
-              y: {
-                title: {
-                  display: true,
-                },
-                beginAtZero: true,
->>>>>>> 63f1a77ef2a2df476250638ccbf58a170daaa3a6
               },
               beginAtZero: true,
             },
