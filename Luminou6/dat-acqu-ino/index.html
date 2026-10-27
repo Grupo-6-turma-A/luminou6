@@ -1,83 +1,92 @@
 <!doctype html>
 <html>
-
-<head>
+  <head>
     <title>Graphics</title>
+    <link rel="stylesheet" href="../dat-acqu-ino/styleDat-acqu-ino.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
+    <main class="container">
+      <div class="cabecalho">
+        <img src="../web/public/imgs/logo.png" alt="Logo" />
+        <h1>Luminosidade</h1>
+      </div>
 
-    <h1>Graphics</h1>
-    <div style="display: flex;">
-        <div style="width: 50%;">
-            <canvas id="sensorLuminosidade"></canvas>
-        </div>
-    </div>
+      <div class="grafico">
+    <canvas id="sensorLuminosidade"></canvas>
+</div>
+    </main>
 
     <script>
-        var sensorLuminosidade = new Chart(document.getElementById('sensorLuminosidade').getContext('2d'), {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: 'Luminosidade',
-                    borderColor: '#63B1BC',
-                    backgroundColor: '#ED145B'
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: '(%)'
-                        },
-                        beginAtZero: true,
-                    },
+      var sensorLuminosidade = new Chart(
+        document.getElementById("sensorLuminosidade").getContext("2d"),
+        {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "µmol/m²/s de PPFD",
+                borderColor: "#63B1BC",
+                backgroundColor: "#ED145B",
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                beginAtZero: true,
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "(%)",
                 },
+                beginAtZero: true,
+              },
+            },
+          },
+        },
+      );
+
+      var paginacao = {};
+      var tempo = {};
+
+      function obterDados(grafico, endpoint) {
+        fetch("http://localhost:3300/sensores/" + endpoint)
+          .then((response) => response.json())
+          .then((valores) => {
+            if (paginacao[endpoint] == null) {
+              paginacao[endpoint] = 0;
             }
-        });
+            if (tempo[endpoint] == null) {
+              tempo[endpoint] = 0;
+            }
 
-        var paginacao = {};
-        var tempo = {};
+            var ultimaPaginacao = paginacao[endpoint];
+            paginacao[endpoint] = valores.length;
+            valores = valores.slice(ultimaPaginacao);
 
-        function obterDados(grafico, endpoint) {
-            fetch('http://localhost:3300/sensores/' + endpoint)
-                .then(response => response.json())
-                .then(valores => {
-                    if (paginacao[endpoint] == null) {
-                        paginacao[endpoint] = 0;
-                    }
-                    if (tempo[endpoint] == null) {
-                        tempo[endpoint] = 0;
-                    }
+            valores.forEach((valor) => {
+              if (
+                grafico.data.labels.length == 10 &&
+                grafico.data.datasets[0].data.length == 10
+              ) {
+                grafico.data.labels.shift();
+                grafico.data.datasets[0].data.shift();
+              }
 
-                    var ultimaPaginacao = paginacao[endpoint];
-                    paginacao[endpoint] = valores.length;
-                    valores = valores.slice(ultimaPaginacao);
+              grafico.data.labels.push(tempo[endpoint]++);
+              grafico.data.datasets[0].data.push(parseFloat(valor));
+              grafico.update();
+            });
+          })
+          .catch((error) => console.error("Erro ao obter dados:", error));
+      }
 
-                    valores.forEach((valor) => {
-                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-                            grafico.data.labels.shift();
-                            grafico.data.datasets[0].data.shift();
-                        }
-
-                        grafico.data.labels.push(tempo[endpoint]++);
-                        grafico.data.datasets[0].data.push(parseFloat(valor));
-                        grafico.update();
-                    });
-                })
-                .catch(error => console.error('Erro ao obter dados:', error));
-        }
-
-        setInterval(() => {
-            obterDados(sensorLuminosidade, 'luminosidade');
-        }, 1000);
-
+      setInterval(() => {
+        obterDados(sensorLuminosidade, "");
+      }, 1000);
     </script>
-</body>
-
+  </body>
 </html>
