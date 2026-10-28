@@ -182,26 +182,23 @@
     }
 
    
-  // Verificando se a senha tem menos de 8 caracteres //
-   if (senhaVar.length < 8) {
-    cardErro.style.display = "block";
+ if (senhaVar.length < 8) {
     mensagem_erro.innerHTML = "A senha deve conter pelo menos 8 caracteres!";
-    return false;
-}
 
-// Verificando se as senhas coincidem //
-if (senhaVar != confirmacaoSenhaVar) {
-    cardErro.style.display = "block";
+} else if (senhaVar != confirmacaoSenhaVar) {
     mensagem_erro.innerHTML = "As senhas não coincidem!";
-    return false;
-}
 
-// Verificando se as senhas contem caracteres especiais //
-if (!/[!@#$%^&*(),.?":{}|<>]/.test(senhaVar)) {
-    cardErro.style.display = "block";
-    mensagem_erro.innerHTML = "A senha deve conter pelo menos um caractere especial!";
-    return false;
-}
+} else if (
+    senhaVar.includes("!") || senhaVar.includes("@") || senhaVar.includes("#") || senhaVar.includes("*") || senhaVar.includes("%") || senhaVar.includes("$") ){
+      mensagem_erro.innerHTML = "A senha deve conter pelo menos um caractere especial!";}
+
+
+ else {
+    mensagem_erro.innerHTML = "";
+ }
+
+    // Código para realizar o cadastro
+
 
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
