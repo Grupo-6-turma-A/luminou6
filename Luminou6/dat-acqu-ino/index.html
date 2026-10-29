@@ -11,6 +11,7 @@
 <body>
   <main class="container">
     <div class="cabecalho">
+      
       <img src="../web/public/imgs/logo.png" alt="Logo" />
       <h1>Luminosidade</h1>
     </div>
@@ -26,9 +27,11 @@
       {
         type: "line",
         data: {
+          labels: [],
           datasets: [
             {
               label: "µmol/m²/s de PPFD",
+              data: [],
               borderColor: "#63B1BC",
               backgroundColor: "#ED145B",
             },
@@ -86,7 +89,7 @@
     }
 
     setInterval(() => {
-      obterDados(sensorLuminosidade, "");
+      obterDados(sensorLuminosidade, "luminosidade");
     }, 1000);
   </script>
 </body>

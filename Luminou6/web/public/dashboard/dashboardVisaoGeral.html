@@ -2,748 +2,439 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/dashboardVisaoGeral.css" />
-    <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/dashboardVisaoGeral.css" />
+  <link rel="shortcut icon" href="../imgs/logo.png" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <title>Visão geral - Luminou6</title>
+  <title>Visão geral - Luminou6</title>
 </head>
 
 <body>
-    <header>
-        <div class="logo"><img src="../imgs/image 57.svg"></div>
+  <header>
+    <div class="logo"><img src="../imgs/image 57.svg"></div>
 
-        <nav>
-            <a href="../index.html"><img src="../imgs/VectorCasa.svg">Home</a>
-            <a href="#" class="menu-ativo"><img src="../imgs/VectorLupa.svg">Visão geral</a>
-            <a href="dashboardConfigs.html"><img src="../imgs/VectorConfig.svg">Configurações</a>
-        </nav>
-    </header>
+    <nav>
+      <a href="../index.html"><img src="../imgs/VectorCasa.svg">Home</a>
+      <a href="#" class="menu-ativo"><img src="../imgs/VectorLupa.svg">Visão geral</a>
+      <a href="dashboardConfigs.html"><img src="../imgs/VectorConfig.svg">Configurações</a>
+    </nav>
+  </header>
 
-    <main class="conteudo-principal">
-        <div class="titulo">
-            <div>
-                <h2>Visão geral</h2>
-                <p>Monitoramento de luminosidade em estufas de vanilla planifolia</p>
-            </div>
+  <main class="conteudo-principal">
+    <div class="titulo">
+      <span class="titulo-icone">☼</span>
+      <div>
+        <h2>Visão geral</h2>
+        <p>Monitoramento de luminosidade em estufas de vanilla planifolia</p>
+      </div>
+    </div>
+
+    <section class="grupo-kpi" id="kpiTodas" data-estufa="todas">
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD médio atual</h3>
+          <div class="kpi-valor"><strong id="ppfdMedio">374</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao"><b class="sobe">↑ 12%</b>vs 30 minutos atrás</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png">
+        </div>
+        <div class="kpi-corpo">
+          <h3>Estufas adequadas</h3>
+          <div class="kpi-valor"><strong id="estufasAdequadas">3/6</strong></div>
+          <p class="kpi-texto">dentro dos parâmetros</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 83%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png">
+        </div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado (hoje)</h3>
+          <div class="kpi-valor"><strong>18,7</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 62%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+          <div class="kpi kpi-alertas">
+        <div class="kpi-icone"><span class="icone-alerta">⚠</span></div>
+        <div class="kpi-corpo">
+          <h3>Alertas</h3>
+          <div class="kpi-valor"><strong id="totalAlertas">2</strong></div>
+          <p class="kpi-variacao"><b class="alerta-seta">↑ 1</b>vs. ontem</p>
+        </div>
+      </div></section>
+
+    <section class="grupo-kpi" id="kpi1" data-estufa="1" hidden>
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD atual · Estufa 1</h3>
+          <div class="kpi-valor"><strong id="ppfdKpi1">356</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao"><b class="sobe">↑ 8%</b>vs 30 minutos atrás</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png"></div>
+        <div class="kpi-corpo">
+          <h3>Situação da Estufa 1</h3>
+          <div class="kpi-valor"><strong id="statusKpi4">OK</strong></div>
+          <p class="kpi-texto">dentro dos parâmetros</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado · Estufa 1</h3>
+          <div class="kpi-valor"><strong>19,4</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 65%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grupo-kpi" id="kpi2" data-estufa="2" hidden>
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD atual · Estufa 2</h3>
+          <div class="kpi-valor"><strong id="ppfdKpi2">128</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao"><b class="desce">↓ 15%</b>vs 30 minutos atrás</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png"></div>
+        <div class="kpi-corpo">
+          <h3>Situação da Estufa 2</h3>
+          <div class="kpi-valor"><strong id="statusKpi2">BAIXO</strong></div>
+          <p class="kpi-texto">abaixo da faixa (250–650)</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 20%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado · Estufa 2</h3>
+          <div class="kpi-valor"><strong>7,2</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 24%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grupo-kpi" id="kpi3" data-estufa="3" hidden>
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD atual · Estufa 3</h3>
+          <div class="kpi-valor"><strong id="ppfdKpi3">674</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao"><b class="sobe">↑ 5%</b>vs 30 minutos atrás</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png"></div>
+        <div class="kpi-corpo">
+          <h3>Situação da Estufa 3</h3>
+          <div class="kpi-valor"><strong id="statusKpi3">ALTO</strong></div>
+          <p class="kpi-texto">acima da faixa (250–650)</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado · Estufa 3</h3>
+          <div class="kpi-valor"><strong>31,8</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 100%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grupo-kpi" id="kpi4" data-estufa="4" hidden>
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD atual · Estufa 4</h3>
+          <div class="kpi-valor"><strong id="ppfdKpi4">412</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao"><b class="sobe">↑ 22%</b>vs 30 minutos atrás</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png"></div>
+        <div class="kpi-corpo">
+          <h3>Situação da Estufa 4</h3>
+          <div class="kpi-valor"><strong id="statusKpi4">OK</strong></div>
+          <p class="kpi-texto">dentro dos parâmetros</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado · Estufa 4</h3>
+          <div class="kpi-valor"><strong>22,6</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 75%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grupo-kpi" id="kpi5" data-estufa="5" hidden>
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD atual · Estufa 5</h3>
+          <div class="kpi-valor"><strong id="ppfdKpi5">298</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao"><b class="sobe">↑ 3%</b>vs 30 minutos atrás</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png"></div>
+        <div class="kpi-corpo">
+          <h3>Situação da Estufa 5</h3>
+          <div class="kpi-valor"><strong id="statusKpi4">OK</strong></div>
+          <p class="kpi-texto">dentro dos parâmetros</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado · Estufa 5</h3>
+          <div class="kpi-valor"><strong>16,1</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 54%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grupo-kpi" id="kpi6" data-estufa="6" hidden>
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
+        <div class="kpi-corpo">
+          <h3>PPFD atual · Estufa 6</h3>
+          <div class="kpi-valor"><strong id="ppfdKpi6">—</strong><span>µmol/m²/s</span></div>
+          <p class="kpi-variacao">sem leituras nos últimos 30 minutos</p>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/plant.png"></div>
+        <div class="kpi-corpo">
+          <h3>Situação da Estufa 6</h3>
+          <div class="kpi-valor"><strong>—</strong></div>
+          <p class="kpi-texto">sem dados do sensor</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
+        <div class="kpi-corpo">
+          <h3>DLI acumulado · Estufa 6</h3>
+          <div class="kpi-valor"><strong>—</strong></div>
+          <p class="kpi-texto">mol/m²/dia</p>
+          <div class="barra">
+            <div class="barra-preenchida" style="width: 0%"></div>
+          </div>
+          <p class="meta">Meta: 30,00</p>
+        </div>
+      </div>
+    </section>
+    <section class="area-central">
+      <div class="card-grafico">
+        <div class="cabecalho-card">
+          <h3>〽 Luminosidade por estufa</h3>
+
+          <div class="botoes-periodo">
+            <button id="periodo15" class="botao-periodo" onclick="selecionarPeriodo('15 min')">15 min</button>
+            <button id="periodo30" class="botao-periodo ativo" onclick="selecionarPeriodo('30 min')">30 min</button>
+            <button id="periodoHora" class="botao-periodo" onclick="selecionarPeriodo('1 hora')">1 hora</button>
+            <button id="periodoDia" class="botao-periodo" onclick="selecionarPeriodo('24 horas')">24 horas</button>
+          </div>
         </div>
 
-        <section class="grupo-kpi" id="kpiTodas" data-estufa="todas">
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD médio atual</h3>
-                    <div class="kpi-valor"><strong id="ppfdMedio">374</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao"><b class="sobe">↑ 12%</b>vs 30 minutos atrás</p>
-                </div>
-            </div>
+        <div class="area-grafico">
+          <div class="bloco-grafico" id="blocoTodas" data-estufa="todas">
+            <canvas id="graficoTodas"></canvas>
+          </div>
+          <div class="bloco-grafico" data-estufa="1" hidden>
+            <canvas id="grafico1"></canvas>
+          </div>
+          <div class="bloco-grafico" data-estufa="2" hidden>
+            <canvas id="grafico2"></canvas>
+          </div>
+          <div class="bloco-grafico" data-estufa="3" hidden>
+            <canvas id="grafico3"></canvas>
+          </div>
+          <div class="bloco-grafico" data-estufa="4" hidden>
+            <canvas id="grafico4"></canvas>
+          </div>
+          <div class="bloco-grafico" data-estufa="5" hidden>
+            <canvas id="grafico5"></canvas>
+          </div>
+          <div class="bloco-grafico" data-estufa="6" hidden>
+            <canvas id="grafico6"></canvas>
+          </div>
+        </div>
+      </div>
 
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png">
-                </div>
-                <div class="kpi-corpo">
-                    <h3>Estufas adequadas</h3>
-                    <div class="kpi-valor"><strong id="estufasAdequadas">3/6</strong></div>
-                    <p class="kpi-texto">dentro dos parâmetros</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 83%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png">
-                </div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado (hoje)</h3>
-                    <div class="kpi-valor"><strong>18,7</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 62%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
+            <div class="coluna-direita">
+        <section class="card-historico">
+          <div class="cabecalho-card">
+            <h3><span class="icone-relogio">◷</span> Histórico de leituras</h3>
+            <select class="filtro-historico" aria-label="Período do histórico">
+              <option>Últimas 24 horas</option><option>Últimos 7 dias</option>
+            </select>
+          </div>
+          <div class="historico-wrapper">
+            <table class="tabela-historico">
+              <thead><tr><th>Horário</th><th>Estufa</th><th>PPFD<small>(µmol/m²/s)</small></th><th>Status</th><th>Ação</th></tr></thead>
+              <tbody>
+                <tr><td>10:23</td><td>Estufa 3</td><td>674</td><td><span class="status status-alto">ALTO</span></td><td><button class="botao-resolver" onclick="resolverAlerta(this)">Resolver</button></td></tr>
+                <tr><td>10:22</td><td>Estufa 2</td><td>128</td><td><span class="status status-baixo">BAIXO</span></td><td><button class="botao-resolver" onclick="resolverAlerta(this)">Resolver</button></td></tr>
+                <tr><td>10:21</td><td>Estufa 1</td><td>356</td><td><span class="status status-ok">OK</span></td><td><button class="botao-resolver desabilitado" disabled>Resolver</button></td></tr>
+                <tr><td>10:20</td><td>Estufa 4</td><td>412</td><td><span class="status status-ok">OK</span></td><td><button class="botao-resolver desabilitado" disabled>Resolver</button></td></tr>
+                <tr><td>10:19</td><td>Estufa 5</td><td>298</td><td><span class="status status-ok">OK</span></td><td><button class="botao-resolver desabilitado" disabled>Resolver</button></td></tr>
+                <tr><td>10:18</td><td>Estufa 3</td><td>660</td><td><span class="status status-alto">ALTO</span></td><td><button class="botao-resolver desabilitado" disabled>Resolvido</button></td></tr>
+              </tbody>
+            </table>
+          </div>
         </section>
-
-        <section class="grupo-kpi" id="kpi1" data-estufa="1" hidden>
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD atual · Estufa 1</h3>
-                    <div class="kpi-valor"><strong id="ppfdKpi1">356</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao"><b class="sobe">↑ 8%</b>vs 30 minutos atrás</p>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png"></div>
-                <div class="kpi-corpo">
-                    <h3>Situação da Estufa 1</h3>
-                    <div class="kpi-valor"><strong id="statusKpi1">OK</strong></div>
-                    <p class="kpi-texto">dentro dos parâmetros</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 100%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado · Estufa 1</h3>
-                    <div class="kpi-valor"><strong>19,4</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 65%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="grupo-kpi" id="kpi2" data-estufa="2" hidden>
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD atual · Estufa 2</h3>
-                    <div class="kpi-valor"><strong id="ppfdKpi2">128</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao"><b class="desce">↓ 15%</b>vs 30 minutos atrás</p>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png"></div>
-                <div class="kpi-corpo">
-                    <h3>Situação da Estufa 2</h3>
-                    <div class="kpi-valor"><strong id="statusKpi2">BAIXO</strong></div>
-                    <p class="kpi-texto">abaixo da faixa (250–650)</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 20%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado · Estufa 2</h3>
-                    <div class="kpi-valor"><strong>7,2</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 24%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="grupo-kpi" id="kpi3" data-estufa="3" hidden>
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD atual · Estufa 3</h3>
-                    <div class="kpi-valor"><strong id="ppfdKpi3">674</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao"><b class="sobe">↑ 5%</b>vs 30 minutos atrás</p>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png"></div>
-                <div class="kpi-corpo">
-                    <h3>Situação da Estufa 3</h3>
-                    <div class="kpi-valor"><strong id="statusKpi3">ALTO</strong></div>
-                    <p class="kpi-texto">acima da faixa (250–650)</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 100%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado · Estufa 3</h3>
-                    <div class="kpi-valor"><strong>31,8</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 100%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="grupo-kpi" id="kpi4" data-estufa="4" hidden>
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD atual · Estufa 4</h3>
-                    <div class="kpi-valor"><strong id="ppfdKpi4">412</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao"><b class="sobe">↑ 22%</b>vs 30 minutos atrás</p>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png"></div>
-                <div class="kpi-corpo">
-                    <h3>Situação da Estufa 4</h3>
-                    <div class="kpi-valor"><strong id="statusKpi1">OK</strong></div>
-                    <p class="kpi-texto">dentro dos parâmetros</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 100%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado · Estufa 4</h3>
-                    <div class="kpi-valor"><strong>22,6</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 75%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="grupo-kpi" id="kpi5" data-estufa="5" hidden>
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD atual · Estufa 5</h3>
-                    <div class="kpi-valor"><strong id="ppfdKpi5">298</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao"><b class="sobe">↑ 3%</b>vs 30 minutos atrás</p>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png"></div>
-                <div class="kpi-corpo">
-                    <h3>Situação da Estufa 5</h3>
-                    <div class="kpi-valor"><strong id="statusKpi1">OK</strong></div>
-                    <p class="kpi-texto">dentro dos parâmetros</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 100%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado · Estufa 5</h3>
-                    <div class="kpi-valor"><strong>16,1</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 54%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="grupo-kpi" id="kpi6" data-estufa="6" hidden>
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/contrast.png"></div>
-                <div class="kpi-corpo">
-                    <h3>PPFD atual · Estufa 6</h3>
-                    <div class="kpi-valor"><strong id="ppfdKpi6">—</strong><span>µmol/m²/s</span></div>
-                    <p class="kpi-variacao">sem leituras nos últimos 30 minutos</p>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/plant.png"></div>
-                <div class="kpi-corpo">
-                    <h3>Situação da Estufa 6</h3>
-                    <div class="kpi-valor"><strong>—</strong></div>
-                    <p class="kpi-texto">sem dados do sensor</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 0%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="kpi">
-                <div class="kpi-icone"><img src="../imgs/sunrise.png"></div>
-                <div class="kpi-corpo">
-                    <h3>DLI acumulado · Estufa 6</h3>
-                    <div class="kpi-valor"><strong>—</strong></div>
-                    <p class="kpi-texto">mol/m²/dia</p>
-                    <div class="barra">
-                        <div class="barra-preenchida" style="width: 0%"></div>
-                    </div>
-                    <p class="meta">Meta: 30,00</p>
-                </div>
-            </div>
-        </section>
-        <section class="area-central">
-            <div class="card-grafico">
-                <div class="cabecalho-card">
-                    <h3>〽 Luminosidade por estufa</h3>
-
-                    <div class="botoes-periodo">
-                        <button id="periodo15" class="botao-periodo" onclick="selecionarPeriodo('15 min')">15 min</button>
-                        <button id="periodo30" class="botao-periodo ativo" onclick="selecionarPeriodo('30 min')">30 min</button>
-                        <button id="periodoHora" class="botao-periodo" onclick="selecionarPeriodo('1 hora')">1 hora</button>
-                        <button id="periodoDia" class="botao-periodo" onclick="selecionarPeriodo('24 horas')">24 horas</button>
-                    </div>
-                </div>
-
-                <div class="area-grafico">
-                    <div class="bloco-grafico" id="blocoTodas" data-estufa="todas">
-                        <canvas id="graficoTodas"></canvas>
-                    </div>
-                    <div class="bloco-grafico" data-estufa="1" hidden>
-                        <canvas id="grafico1"></canvas>
-                    </div>
-                    <div class="bloco-grafico" data-estufa="2" hidden>
-                        <canvas id="grafico2"></canvas>
-                    </div>
-                    <div class="bloco-grafico" data-estufa="3" hidden>
-                        <canvas id="grafico3"></canvas>
-                    </div>
-                    <div class="bloco-grafico" data-estufa="4" hidden>
-                        <canvas id="grafico4"></canvas>
-                    </div>
-                    <div class="bloco-grafico" data-estufa="5" hidden>
-                        <canvas id="grafico5"></canvas>
-                    </div>
-                    <div class="bloco-grafico" data-estufa="6" hidden>
-                        <canvas id="grafico6"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-tabela">
-                <div class="cabecalho-card">
-                    <h3><img class="img-estufa"src="../imgs/estufa.png"> Estufas monitoradas</h3>
-                    <button id="ver-todas" onclick="selecionarEstufa('todas')">Ver todas</button>
-                </div>
-
-                <p class="dica">Clique no nome de uma estufa para isolá-la no gráfico e nos KPIs.</p>
-                <div class="tabela-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Estufa</th>
-                            <th>PPFD atual<small>µmol/m²/s</small></th>
-                            <th>Fase</th>
-                            <th>Status</th>
-                            <th>Última leitura</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td><button class="botao-estufa" data-estufa="1" onclick="selecionarEstufa('1')"><i class="ponto cor-1"></i>Estufa 1<span id="foco1" class="marca-foco" data-estufa="1" hidden>em foco</span></button></td>
-                            <td id="ppfdTabela1">356</td><td>Brotamento</td><td><span id="statusTabela1" class="status-ok">OK</span></td><td>10:24</td>
-                        </tr>
-                        <tr>
-                            <td><button class="botao-estufa" data-estufa="2" onclick="selecionarEstufa('2')"><i class="ponto cor-2"></i>Estufa 2<span id="foco2" class="marca-foco" data-estufa="2" hidden>em foco</span></button></td>
-                            <td id="ppfdTabela2">128</td><td>Crescimento</td><td><span id="statusTabela2" class="status-baixo">BAIXO</span></td><td>10:22</td>
-                        </tr>
-                        <tr>
-                            <td><button class="botao-estufa" data-estufa="3" onclick="selecionarEstufa('3')"><i class="ponto cor-3"></i>Estufa 3<span id="foco3" class="marca-foco" data-estufa="3" hidden>em foco</span></button></td>
-                            <td id="ppfdTabela3">674</td><td>Floração</td><td><span id="statusTabela3" class="status-alto">ALTO</span></td><td>10:23</td>
-                        </tr>
-                        <tr>
-                            <td><button class="botao-estufa" data-estufa="4" onclick="selecionarEstufa('4')"><i class="ponto cor-4"></i>Estufa 4<span id="foco4" class="marca-foco" data-estufa="4" hidden>em foco</span></button></td>
-                            <td id="ppfdTabela4">412</td><td>Crescimento</td><td><span id="statusTabela4" class="status-ok">OK</span></td><td>10:24</td>
-                        </tr>
-                        <tr>
-                            <td><button class="botao-estufa" data-estufa="5" onclick="selecionarEstufa('5')"><i class="ponto cor-5"></i>Estufa 5<span id="foco5" class="marca-foco" data-estufa="5" hidden>em foco</span></button></td>
-                            <td id="ppfdTabela5">298</td><td>Brotamento</td><td><span id="statusTabela5" class="status-ok">OK</span></td><td>10:24</td>
-                        </tr>
-                        <tr>
-                            <td><button class="botao-estufa" data-estufa="6" onclick="selecionarEstufa('6')"><i class="ponto cor-6"></i>Estufa 6<span id="foco6" class="marca-foco" data-<script>
-<script>    
-    // Leituras de exemplo de luminosidade (PPFD) para cada estufa.
-let dadosEstufas = [
-  [400,380,395,430,405,430,445,430,440,470,505,500,490,500,490,510,500,535,565,530,510,490,470,450,430,410,390,370,356],
-  [240,250,230,240,245,235,220,205,195,200,205,210,205,200,210,220,250,270,230,220,215,225,210,195,180,165,150,138,128],
-  [300,295,290,285,300,310,295,305,320,325,315,305,290,300,310,320,330,340,350,365,355,350,390,440,500,560,610,650,674],
-  [190,200,195,205,198,210,200,205,195,205,200,210,220,250,280,320,360,355,350,360,345,350,365,380,390,400,406,410,412],
-  [340,345,350,360,355,330,315,325,320,330,325,315,300,285,270,255,245,235,225,215,220,225,235,245,255,265,275,285,298],
-  [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
-];
-
-let periodo = "30 min";
-let estufaSelecionada = "todas";
-
-// Decide quantos pontos aparecem no gráfico.
-function escolherQuantidade() {
-  let quantidade = 29;
-
-  if (periodo == "15 min") {
-    quantidade = 4;
-  } else if (periodo == "30 min") {
-    quantidade = 7;
-  } else if (periodo == "1 hora") {
-    quantidade = 13;
-  } else if (periodo == "24 horas") {
-    quantidade = 13;
-  }
-
-  return quantidade;    
-}
-
-// Decide o intervalo entre os pontos do gráfico.
-function escolherIntervalo() {
-  let intervalo = 1;
-
-  if (periodo == "15 min") {
-    intervalo = 5;
-  } else if (periodo == "30 min") {
-    intervalo = 5;
-  } else if (periodo == "1 hora") {
-    intervalo = 5;
-  } else if (periodo == "24 horas") {
-    intervalo = 120;
-  }
-
-  return intervalo;
-}
-
-// Monta os textos que aparecem embaixo do gráfico.
-function montarRotulos(quantidade, intervalo) {
-  let rotulos = [];
-  let contador = 0;
-
-  while (contador < quantidade) {
-    let tempo = (quantidade - 1 - contador) * intervalo;
-
-    if (periodo == "24 horas") {
-      rotulos[contador] = tempo / 60 + " h";
-    } else {
-      rotulos[contador] = tempo + " min";
-    }
-
-    contador = contador + 1;
-  }
-
-  return rotulos;
-}
-
-// Escolhe os valores para o período selecionado.
-function montarLeituras(numeroEstufa, quantidade) {
-  let leituras = [];
-  let contador = 0;
-
-  while (contador < quantidade) {
-    let posicao;
-
-    if (periodo == "15 min") {
-      // Usa as leituras mais recentes, em intervalos de 5 minutos.
-      posicao = 13 + contador * 5;
-    } else {
-      posicao = Math.round(contador * 28 / (quantidade - 1));
-    }
-    leituras[contador] = dadosEstufas[numeroEstufa][posicao];
-    contador = contador + 1;
-  }
-
-  return leituras;
-}
-
-// Cria o gráfico Chart.js no canvas de visão geral.
-let quantidadeInicial = escolherQuantidade();
-let intervaloInicial = escolherIntervalo();
-
-let grafico = new Chart(graficoTodas, {
-  type: "line",
-  data: {
-    labels: montarRotulos(quantidadeInicial, intervaloInicial),
-    datasets: [
-      { label: "Estufa 1", data: montarLeituras(0, quantidadeInicial), borderColor: "#397c42", backgroundColor: "#397c42", borderWidth: 2, pointRadius: 2, tension: 0.25},
-      { label: "Estufa 2", data: montarLeituras(1, quantidadeInicial), borderColor: "#c5a12e", backgroundColor: "#c5a12e", borderWidth: 2, pointRadius: 2, tension: 0.25},
-      { label: "Estufa 3", data: montarLeituras(2, quantidadeInicial), borderColor: "#743d8e", backgroundColor: "#743d8e", borderWidth: 2, pointRadius: 2, tension: 0.25},
-      { label: "Estufa 4", data: montarLeituras(3, quantidadeInicial), borderColor: "#287ab7", backgroundColor: "#287ab7", borderWidth: 2, pointRadius: 2, tension: 0.25},
-      { label: "Estufa 5", data: montarLeituras(4, quantidadeInicial), borderColor: "#e08325", backgroundColor: "#e08325", borderWidth: 2, pointRadius: 2, tension: 0.25},
-      { label: "Estufa 6", data: montarLeituras(5, quantidadeInicial), borderColor: "#8b918e", backgroundColor: "#8b918e", borderWidth: 2, pointRadius: 2, tension: 0.25, hidden: true}
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { position: "right", labels: { usePointStyle: true } }
-    },
-    scales: {
-      y: {
-        min: 0,
-        max: 700,
-        title: { display: true, text: "PPFD (µmol/m²/s)" }
-      }
-    }
-  }
-});
-
-// Atualiza horários e leituras do gráfico. 
-function atualizarGrafico() {
-  let quantidade = escolherQuantidade();
-  let intervalo = escolherIntervalo();
-  grafico.data.labels = montarRotulos(quantidade, intervalo);
-
-  let contador = 0;
-  while (contador < 6) {
-    grafico.data.datasets[contador].data = montarLeituras(contador, quantidade);
-
-    if (estufaSelecionada == "todas") {
-      if (contador == 5) {
-        grafico.data.datasets[contador].hidden = true;
-      } else {
-        grafico.data.datasets[contador].hidden = false;
-      }
-    } else if (contador == Number(estufaSelecionada) - 1) {
-      grafico.data.datasets[contador].hidden = false;
-    } else {
-      grafico.data.datasets[contador].hidden = true;
-    }
-
-    contador = contador + 1;
-  }
-
-  grafico.update();
-}
-
-// Esta função é chamada pelos onclick dos botões de período.
-function selecionarPeriodo(novoPeriodo) {
-  periodo = novoPeriodo;
-
-  if (periodo == "15 min") {
-    periodo15.className = "botao-periodo ativo";
-    periodo30.className = "botao-periodo";
-    periodoHora.className = "botao-periodo";
-    periodoDia.className = "botao-periodo";
-  } else if (periodo == "30 min") {
-    periodo15.className = "botao-periodo";
-    periodo30.className = "botao-periodo ativo";
-    periodoHora.className = "botao-periodo";
-    periodoDia.className = "botao-periodo";
-  } else if (periodo == "1 hora") {
-    periodo15.className = "botao-periodo";
-    periodo30.className = "botao-periodo";
-    periodoHora.className = "botao-periodo ativo";
-    periodoDia.className = "botao-periodo";
-  } else if (periodo == "24 horas") {
-    periodo15.className = "botao-periodo";
-    periodo30.className = "botao-periodo";
-    periodoHora.className = "botao-periodo";
-    periodoDia.className = "botao-periodo ativo";
-  }
-
-  atualizarGrafico();
-}
-
-// Esta função é chamada pelos onclick das estufas e do botão "Ver todas".
-function selecionarEstufa(numero) {
-  estufaSelecionada = numero;
-
-  if (numero == "todas") {
-    kpiTodas.hidden = false;
-    kpi1.hidden = true;
-    kpi2.hidden = true;
-    kpi3.hidden = true;
-    kpi4.hidden = true;
-    kpi5.hidden = true;
-    kpi6.hidden = true;
-    foco1.hidden = true;
-    foco2.hidden = true;
-    foco3.hidden = true;
-    foco4.hidden = true;
-    foco5.hidden = true;
-    foco6.hidden = true;
-  } else if (numero == "1") {
-    kpiTodas.hidden = true;
-    kpi1.hidden = false;
-    kpi2.hidden = true;
-    kpi3.hidden = true;
-    kpi4.hidden = true;
-    kpi5.hidden = true;
-    kpi6.hidden = true;
-    foco1.hidden = false;
-    foco2.hidden = true;
-    foco3.hidden = true;
-    foco4.hidden = true;
-    foco5.hidden = true;
-    foco6.hidden = true;
-  } else if (numero == "2") {
-    kpiTodas.hidden = true;
-    kpi1.hidden = true;
-    kpi2.hidden = false;
-    kpi3.hidden = true;
-    kpi4.hidden = true;
-    kpi5.hidden = true;
-    kpi6.hidden = true;
-    foco1.hidden = true;
-    foco2.hidden = false;
-    foco3.hidden = true;
-    foco4.hidden = true;
-    foco5.hidden = true;
-    foco6.hidden = true;
-  } else if (numero == "3") {
-    kpiTodas.hidden = true;
-    kpi1.hidden = true;
-    kpi2.hidden = true;
-    kpi3.hidden = false;
-    kpi4.hidden = true;
-    kpi5.hidden = true;
-    kpi6.hidden = true;
-    foco1.hidden = true;
-    foco2.hidden = true;
-    foco3.hidden = false;
-    foco4.hidden = true;
-    foco5.hidden = true;
-    foco6.hidden = true;
-  } else if (numero == "4") {
-    kpiTodas.hidden = true;
-    kpi1.hidden = true;
-    kpi2.hidden = true;
-    kpi3.hidden = true;
-    kpi4.hidden = false;
-    kpi5.hidden = true;
-    kpi6.hidden = true;
-    foco1.hidden = true;
-    foco2.hidden = true;
-    foco3.hidden = true;
-    foco4.hidden = false;
-    foco5.hidden = true;
-    foco6.hidden = true;
-  } else if (numero == "5") {
-    kpiTodas.hidden = true;
-    kpi1.hidden = true;
-    kpi2.hidden = true;
-    kpi3.hidden = true;
-    kpi4.hidden = true;
-    kpi5.hidden = false;
-    kpi6.hidden = true;
-    foco1.hidden = true;
-    foco2.hidden = true;
-    foco3.hidden = true;
-    foco4.hidden = true;
-    foco5.hidden = false;
-    foco6.hidden = true;
-  } else if (numero == "6") {
-    kpiTodas.hidden = true;
-    kpi1.hidden = true;
-    kpi2.hidden = true;
-    kpi3.hidden = true;
-    kpi4.hidden = true;
-    kpi5.hidden = true;
-    kpi6.hidden = false;
-    foco1.hidden = true;
-    foco2.hidden = true;
-    foco3.hidden = true;
-    foco4.hidden = true;
-    foco5.hidden = true;
-    foco6.hidden = false;
-  }
-
-  atualizarGrafico();
-}
-
-// Retorna o texto e a classe visual a partir da mesma leitura de PPFD.
-function atualizarStatusPPFD(leitura, numero) {
-  let textoStatus = "OK";
-  let classeStatus = "status status-ok";
-
-  if (leitura == null) {
-    textoStatus = "SEM DADOS";
-    classeStatus = "status status-sem-dados";
-  } else if (leitura < 250) {
-    textoStatus = "BAIXO";
-    classeStatus = "status status-baixo";
-  } else if (leitura > 650) {
-    textoStatus = "ALTO";
-    classeStatus = "status status-alto";
-  }
-
-  if (numero == 1) {
-    statusTabela1.innerHTML = textoStatus;
-    statusTabela1.className = classeStatus;
-    statusKpi1.innerHTML = textoStatus;
-  } else if (numero == 2) {
-    statusTabela2.innerHTML = textoStatus;
-    statusTabela2.className = classeStatus;
-    statusKpi2.innerHTML = textoStatus;
-  } else if (numero == 3) {
-    statusTabela3.innerHTML = textoStatus;
-    statusTabela3.className = classeStatus;
-    statusKpi3.innerHTML = textoStatus;
-  } else if (numero == 4) {
-    statusTabela4.innerHTML = textoStatus;
-    statusTabela4.className = classeStatus;
-    statusKpi4.innerHTML = textoStatus;
-  } else if (numero == 5) {
-    statusTabela5.innerHTML = textoStatus;
-    statusTabela5.className = classeStatus;
-    statusKpi5.innerHTML = textoStatus;
-  } else if (numero == 6) {
-    statusTabela6.innerHTML = textoStatus;
-    statusTabela6.className = classeStatus;
-  }
-}
-
-// Atualiza cartões, tabela e média com os últimos pontos do próprio gráfico.
-function atualizarLeiturasAtuais() {
-  let somaPPFD = 0;
-  let leiturasValidas = 0;
-  let estufasAdequadasAtual = 0;
-
-  for (let i = 0; i < 6; i++) {
-    let leituraAtual = dadosEstufas[i][28];
-    let leituraExibida = leituraAtual;
-
-    if (leituraAtual != null) {
-      somaPPFD = somaPPFD + leituraAtual;
-      leiturasValidas = leiturasValidas + 1;
-
-      if (leituraAtual >= 250 && leituraAtual <= 650) {
-        estufasAdequadasAtual = estufasAdequadasAtual + 1;
-      }
-    } else {
-      leituraExibida = "—";
-    }
-
-    if (i == 0) {
-      ppfdKpi1.innerHTML = leituraExibida;
-      ppfdTabela1.innerHTML = leituraExibida;
-    } else if (i == 1) {
-      ppfdKpi2.innerHTML = leituraExibida;
-      ppfdTabela2.innerHTML = leituraExibida;
-    } else if (i == 2) {
-      ppfdKpi3.innerHTML = leituraExibida;
-      ppfdTabela3.innerHTML = leituraExibida;
-    } else if (i == 3) {
-      ppfdKpi4.innerHTML = leituraExibida;
-      ppfdTabela4.innerHTML = leituraExibida;
-    } else if (i == 4) {
-      ppfdKpi5.innerHTML = leituraExibida;
-      ppfdTabela5.innerHTML = leituraExibida;
-    } else if (i == 5) {
-      ppfdKpi6.innerHTML = leituraExibida;
-      ppfdTabela6.innerHTML = leituraExibida;
-    }
-
-    atualizarStatusPPFD(leituraAtual, i + 1);
-  }
-
-  if (leiturasValidas > 0) {
-    ppfdMedio.innerHTML = Math.round(somaPPFD / leiturasValidas);
-  }
-
-  estufasAdequadas.innerHTML = estufasAdequadasAtual + "/6";
-}
-
-atualizarLeiturasAtuais();</script>
-</body>
+      <div class="card-tabela">
+        <div class="cabecalho-card">
+          <h3><img class="img-estufa" src="../imgs/estufa.png"> Estufas monitoradas</h3>
+          <button id="ver-todas" onclick="selecionarEstufa('todas')">Ver todas</button>
+        </div>
+
+        <p class="dica">Clique no nome de uma estufa para isolá-la no gráfico e nos KPIs.</p>
+        <div class="tabela-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Estufa</th>
+                <th>PPFD atual<small>µmol/m²/s</small></th>
+                <th>Fase</th>
+                <th>Status</th>
+                <th>Última leitura</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><button class="botao-estufa" data-estufa="1" onclick="selecionarEstufa('1')"><i
+                      class="ponto cor-1"></i>Estufa 1<span id="foco1" class="marca-foco" data-estufa="1" hidden>em
+                      foco</span></button></td>
+                <td id="ppfdTabela1">356</td>
+                <td>Brotamento</td>
+                <td><span id="statusTabela1" class="status-ok">OK</span></td>
+                <td>10:24</td>
+              </tr>
+              <tr>
+                <td><button class="botao-estufa" data-estufa="2" onclick="selecionarEstufa('2')"><i
+                      class="ponto cor-2"></i>Estufa 2<span id="foco2" class="marca-foco" data-estufa="2" hidden>em
+                      foco</span></button></td>
+                <td id="ppfdTabela2">128</td>
+                <td>Crescimento</td>
+                <td><span id="statusTabela2" class="status-baixo">BAIXO</span></td>
+                <td>10:22</td>
+              </tr>
+              <tr>
+                <td><button class="botao-estufa" data-estufa="3" onclick="selecionarEstufa('3')"><i
+                      class="ponto cor-3"></i>Estufa 3<span id="foco3" class="marca-foco" data-estufa="3" hidden>em
+                      foco</span></button></td>
+                <td id="ppfdTabela3">674</td>
+                <td>Floração</td>
+                <td><span id="statusTabela3" class="status-alto">ALTO</span></td>
+                <td>10:23</td>
+              </tr>
+              <tr>
+                <td><button class="botao-estufa" data-estufa="4" onclick="selecionarEstufa('4')"><i
+                      class="ponto cor-4"></i>Estufa 4<span id="foco4" class="marca-foco" data-estufa="4" hidden>em
+                      foco</span></button></td>
+                <td id="ppfdTabela4">412</td>
+                <td>Crescimento</td>
+                <td><span id="statusTabela4" class="status-ok">OK</span></td>
+                <td>10:24</td>
+              </tr>
+              <tr>
+                <td><button class="botao-estufa" data-estufa="5" onclick="selecionarEstufa('5')"><i
+                      class="ponto cor-5"></i>Estufa 5<span id="foco5" class="marca-foco" data-estufa="5" hidden>em
+                      foco</span></button></td>
+                <td id="ppfdTabela5">298</td>
+                <td>Brotamento</td>
+                <td><span id="statusTabela5" class="status-ok">OK</span></td>
+                <td>10:24</td>
+              </tr>
+              <tr>
+                <td>
+                  <button class="botao-estufa" data-estufa="6" onclick="selecionarEstufa('6')">
+                    <i class="ponto cor-6"></i>Estufa 6
+                    <span id="foco6" class="marca-foco" data-estufa="6" hidden>em foco</span>
+                  </button>
+                </td>
+                <td id="ppfdTabela6">—</td>
+                <td>—</td>
+                <td><span id="statusTabela6">Sem dados</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+          </div>
+</section>
+  </main>
+  <script>
+  </script></body>
 </html>
-
-
