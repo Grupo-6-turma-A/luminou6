@@ -32,11 +32,11 @@ CONSTRAINT fk_usuarioAdmin
     REFERENCES usuario(idUsuario)
 );
 
-INSERT INTO usuario (nome, email_cadastro, senha_cadastro, cargo, cliente_idCliente, admin_fkUsuario) VALUES
-('Gabriel Silva', 'gabriel@baunilhabrasil.com', '99966633312', '123456', 'Administrador', 1, NULL),
-('João Santos', 'joao@baunilhabrasil.com', '12345678910', '123456', 'Técnico', 1, NULL),
-('Maria Oliveira', 'maria@fazendaBaunilha.com', '98765432101', '123456', 'Administrador', 2, NULL),
-('Pedro Souza', 'pedro@cultivovanilla.com', '03264846820', '123456', 'Técnico', 3, NULL);
+INSERT INTO usuario (nome, email_cadastro, senha_cadastro, cliente_idCliente, admin_fkUsuario) VALUES
+('Gabriel Silva', 'gabriel@baunilhabrasil.com', '123456', 1, NULL),
+('João Santos', 'joao@baunilhabrasil.com', '123456', 1, NULL),
+('Maria Oliveira', 'maria@fazendaBaunilha.com', '123456', 2, NULL),
+('Pedro Souza', 'pedro@cultivovanilla.com', '123456', 3, NULL);
 
 CREATE TABLE estufa (
 idEstufa INT PRIMARY KEY AUTO_INCREMENT,
