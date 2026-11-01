@@ -37,7 +37,9 @@ body{
 
 }
 
-
+.card_erro {
+    margin-top: 10px;
+}
 
 .login-container {
     width: 100%;

@@ -12,15 +12,12 @@
 
 <body>
     <main class="login-container">
-        <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-        </div>
         <div class="login-card">
             <div class="imagem">
                 <a href="index.html">
                     <img src="./imgs/logoLogin.png" alt="Logo Luminous6">
                 </a>
-                    <h1>Login</h1>
+                <h1>Login</h1>
             </div>
 
             <span class="subtitulo"> Entre com seus dados corretamente para acessar o sistema.</span>
@@ -40,9 +37,10 @@
                     </button>
 
                 </div>
+                <div class="card_erro" id="cardErro">
+                    <span id="mensagem_erro"></span>
+                </div>
             </div>
-
-            <span> <a href="cadastro.html" style="color: #7E8863;">Esqueci a senha</a></span>
 
             <div>
                 <button onclick="login()">Entrar</button>
@@ -73,7 +71,7 @@
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = `<span style="color: red;">Preencha os campos corretamente</span>`;
             finalizarAguardar();
             return false;
         }
