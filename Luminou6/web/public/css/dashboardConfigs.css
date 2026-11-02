@@ -1,296 +1,493 @@
-/* ===== Base ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --verde-escuro: #4d5e35;
-  --verde-texto: #4a5a33;
-  --fundo: #e9eee6;
-  --card: #ffffff;
-  --verde-claro: #e6ebdc;
-  --texto: #111111;
-  --cinza: #666666;
-  --borda: #cfd4c9;
+    --verde-sidebar:   #55643e;
+    --verde-fundo:     #ebf0e6;
+    --branco:          #ffffff;
+    --cinza-borda:     #e5e7eb;
+    --texto-principal: #1f2937;
+    --texto-secundario:#6b7280;
+
+    --sombra-card: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+    --raio-card:   14px;
 }
 
+/* A página inteira ocupa exatamente a tela e não rola */
 html,
 body {
-  height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  background: var(--fundo);
-  color: var(--texto);
-  overflow: hidden;
+    background-color: var(--verde-fundo);
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
+/* ============================================================
+   BARRA LATERAL (igual à Visão geral)
+   ============================================================ */
+.barra-lateral {
+    width: 180px;
+    background-color: var(--verde-sidebar);
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    height: 100%;
 }
 
-/* ===== Menu lateral ===== */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 150px;
-  height: 100vh;
-  background: var(--verde-escuro);
-  border-radius: 0 22px 22px 0;
-  padding: 18px 12px;
-  color: #ffffff;
+.sidebar-topo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sidebar-rodape {
+    padding-top: 16px;
+}
+
+.sidebar-rodape p {
+    font-size: 10px;
+    color: #cad7c0;
+    line-height: 1.4;
+}
+
+.sidebar-rodape strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.logo {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo img {
-  width: 125px;
-  display: block;
+    width: 140px;
+    height: auto;
 }
 
-nav {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.barra-lateral nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
 }
 
-nav div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 10px;
-  border-radius: 8px;
+.barra-lateral nav a {
+    text-decoration: none;
+    color: #e2e8db;
+    width: 100%;
 }
 
-nav div img {
-  width: 18px;
-  height: 18px;
+.barra-lateral nav a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.82);
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
 }
 
-nav a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 12px;
+.barra-lateral nav a div:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
 }
 
-nav div:hover {
-  background: rgba(255, 255, 255, 0.12);
+.barra-lateral nav a div img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
 }
 
-nav div.menu-ativo {
-  background: #eef1e9;
+/* Item do menu ativo */
+.barra-lateral nav a div.menu-ativo {
+    background-color: #ffffff;
+    color: var(--verde-sidebar);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-nav div.menu-ativo a {
-  color: var(--verde-texto);
+.barra-lateral nav a div.menu-ativo img {
+    filter: none;
+    opacity: 1;
 }
 
-nav div.menu-ativo img {
-  filter: brightness(0) saturate(100%) invert(33%) sepia(15%) saturate(900%) hue-rotate(40deg);
-}
-
-/* ===== Área principal ===== */
+/* ============================================================
+   ÁREA PRINCIPAL (ocupa a altura da tela, sem scroll)
+   ============================================================ */
 .area-principal {
-  margin-left: 150px;
-  height: 100vh;
-  padding: 14px 20px 16px 18px;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 20px 28px 20px 32px;
+    background-color: var(--verde-fundo);
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .conteudo {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
 }
 
-/* ===== Cabeçalho da página ===== */
-.cabecalho h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--verde-texto);
-  line-height: 1.1;
+/* ============================================================
+   CABEÇALHO DA PÁGINA
+   ============================================================ */
+.cabecalho {
+    flex-shrink: 0;
+}
+
+.titulo-com-icone h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.3px;
+    margin-bottom: 2px;
 }
 
 .subtitulo-principal {
-  font-size: 13px;
-  font-weight: 600;
-  color: #2f3b20;
-  margin-top: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--texto-secundario);
 }
 
 .descricao-topo {
-  font-size: 11px;
-  color: #444444;
-  margin-top: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--texto-secundario);
+    margin-top: 2px;
 }
 
-/* ===== Layout em duas colunas ===== */
+/* ============================================================
+   LAYOUT EM 2 COLUNAS (preenche a altura que sobra na tela)
+   ============================================================ */
 .grid-layout {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 18px;
-  align-items: start; /* cada card tem a altura do próprio conteúdo */
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
 }
 
-.secao-config,
-.secao-info {
-  background: var(--card);
-  border-radius: 18px;
-  padding: 22px 26px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  min-height: 0;
-  max-height: 100%;
-  overflow: auto;
+/* ============================================================
+   CARD PARÂMETROS
+   Rola por dentro (só na vertical) quando o conteúdo é maior
+   ============================================================ */
+.secao-config {
+    flex: 1.3;
+    min-width: 0;
+    min-height: 0;
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    padding: 20px 24px 0;
+    box-shadow: var(--sombra-card);
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.secao-config h2,
-.secao-info h2 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #2f3b20;
+.secao-config h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.2px;
+    margin-bottom: 4px;
 }
 
-.descricao,
-.descricao-info {
-  font-size: 11px;
-  color: var(--cinza);
-  margin-top: 4px;
-  margin-bottom: 14px;
-  line-height: 1.4;
+.secao-config .descricao {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    margin-bottom: 16px;
 }
 
-/* ===== Formulário ===== */
 .campos-linha {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 20px;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 12px;
 }
 
 .campo {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .campo label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #333333;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-principal);
 }
 
+/* width 100% evita que os campos criem scroll horizontal */
 .campo input,
 .campo select {
-  width: 100%;
-  padding: 12px 14px;
-  font-family: inherit;
-  font-size: 14px;
-  color: var(--texto);
-  background: #f6f9f4;
-  border: 1px solid var(--borda);
-  border-radius: 8px;
-  outline: none;
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #dce2d6;
+    border-radius: 10px;
+    background-color: #f7f9f5;
+    font-size: 13px;
+    color: #333333;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background-color 0.2s;
 }
 
 .campo input:focus,
 .campo select:focus {
-  border-color: var(--verde-escuro);
-  box-shadow: 0 0 0 3px rgba(77, 94, 53, 0.15);
+    border-color: var(--verde-sidebar);
+    background-color: #ffffff;
 }
 
-/* ===== Botões ===== */
+/* Botões ficam fixos no rodapé do card enquanto o resto rola */
 .botoes-acao {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 12px 0 18px;
+    background-color: var(--branco);
 }
 
 .btn-salvar {
-  background: var(--verde-escuro);
-  color: #ffffff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 11px 20px;
-  border-radius: 8px;
+    background-color: var(--verde-sidebar);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(85, 100, 62, 0.2);
+    transition: background-color 0.2s ease;
 }
 
 .btn-salvar:hover {
-  background: #3d4c29;
+    background-color: #455231;
 }
 
 .btn-secundario {
-  background: var(--verde-claro);
-  color: var(--verde-texto);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 11px 20px;
-  border-radius: 8px;
+    background-color: #e2e8dc;
+    color: #445330;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .btn-secundario:hover {
-  background: #d6dec9;
+    background-color: #d1dcce;
 }
 
-/* ===== Como funciona ===== */
+/* ============================================================
+   CARD COMO FUNCIONA
+   ============================================================ */
+.secao-info {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    padding: 20px 24px;
+    box-shadow: var(--sombra-card);
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.secao-info h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.2px;
+    margin-bottom: 4px;
+}
+
+.descricao-info {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    margin-bottom: 16px;
+}
+
 .item-regra {
-  background: #f4f5f1;
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 12px;
+    background-color: #f6f8f4;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
 }
 
 .item-regra h3 {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--verde-texto);
-  margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    margin-bottom: 4px;
 }
 
 .item-regra p {
-  font-size: 12px;
-  color: #444444;
-  line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #555e4e;
 }
 
 .tags-fases {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
 }
 
 .tag {
-  background: var(--verde-claro);
-  color: var(--verde-texto);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
+    background-color: #e8eee4;
+    color: #4a5836;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
 }
 
 .nota-tecnica {
-  background: #fff6dc;
-  border-left: 4px solid #e8c978;
-  border-radius: 8px;
-  padding: 14px 16px;
+    background-color: #fff9ea;
+    border-left: 4px solid #f6c043;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 14px;
 }
 
 .nota-tecnica h3 {
-  font-size: 12px;
-  font-weight: 700;
-  color: #7a5a10;
-  margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #8c671b;
+    margin-bottom: 4px;
 }
 
 .nota-tecnica p {
-  font-size: 11px;
-  color: #5a4a20;
-  line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #785a1a;
+}
+
+.nota-tecnica strong {
+    color: #5d4511;
+}
+
+/* Barra de rolagem discreta (igual à Visão geral) */
+.secao-config::-webkit-scrollbar,
+.secao-info::-webkit-scrollbar {
+    width: 6px;
+}
+
+.secao-config::-webkit-scrollbar-thumb,
+.secao-info::-webkit-scrollbar-thumb {
+    background-color: #c9d1c0;
+    border-radius: 99px;
+}
+
+.secao-config::-webkit-scrollbar-track,
+.secao-info::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   Em telas pequenas (estreitas ou baixas demais) a página volta a rolar.
+   ============================================================ */
+@media (max-width: 1200px), (max-height: 680px) {
+    html,
+    body {
+        height: auto;
+        overflow: auto;
+    }
+
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .barra-lateral {
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .area-principal {
+        height: auto;
+        overflow: visible;
+    }
+
+    .conteudo {
+        height: auto;
+    }
+
+    .grid-layout {
+        flex: none;
+        flex-direction: column;
+    }
+
+    .secao-config,
+    .secao-info {
+        flex: none;
+        overflow: visible;
+    }
+}
+
+@media (max-width: 900px) {
+    .area-principal {
+        padding: 20px 18px;
+    }
+
+    .barra-lateral {
+        width: 60px;
+        padding: 16px 8px;
+    }
+
+    .barra-lateral nav a div {
+        font-size: 0;
+        gap: 0;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 36px;
+    }
+
+    .campos-linha {
+        flex-direction: column;
+    }
 }

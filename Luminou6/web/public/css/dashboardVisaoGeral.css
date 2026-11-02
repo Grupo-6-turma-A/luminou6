@@ -1,538 +1,757 @@
-/* ===== Base ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
-  --verde-escuro: #4d5e35;
-  --verde-texto: #4a5a33;
-  --fundo: #e9eee6;
-  --card: #ffffff;
-  --verde-claro: #e6ebdc;
-  --verde-barra: #1fa63a;
-  --vermelho: #e0262a;
-  --texto: #111111;
-  --cinza: #666666;
+    --verde-sidebar:   #55643e;
+    --verde-escuro:    #3d4a2c;
+    --verde-fundo:     #ebf0e6;
+    --verde-ativo:     #4a5c32;
+    --branco:          #ffffff;
+    --cinza-texto:     #6b7280;
+    --cinza-borda:     #e5e7eb;
+    --cinza-fundo:     #f9fafb;
+    --texto-principal: #1f2937;
+    --texto-secundario:#6b7280;
+
+    /* Status */
+    --cor-ok:          #22c55e;
+    --cor-ok-bg:       #dcfce7;
+    --cor-alto:        #ef4444;
+    --cor-alto-bg:     #fee2e2;
+    --cor-baixo:       #f59e0b;
+    --cor-baixo-bg:    #fef3c7;
+    --cor-vazio-bg:    #f3f4f6;
+    --cor-vazio:       #9ca3af;
+
+    --sombra-card: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+    --raio-card:   14px;
+
+    /* Altura do cabeçalho fixo dentro dos cards com scroll */
+    --altura-cabecalho-painel: 52px;
 }
 
+/* A página inteira ocupa exatamente a tela e não rola */
 html,
 body {
-  height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  background: var(--fundo);
-  color: var(--texto);
-  overflow: hidden;
+    background-color: var(--verde-fundo);
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
 }
 
-[hidden] {
-  display: none !important;
+/* ============================================================
+   BARRA LATERAL
+   ============================================================ */
+.barra-lateral {
+    width: 180px;
+    background-color: var(--verde-sidebar);
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    height: 100%;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
+.sidebar-topo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-/* ===== Menu lateral ===== */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 150px;
-  height: 100vh;
-  background: var(--verde-escuro);
-  border-radius: 0 22px 22px 0;
-  padding: 18px 12px;
-  color: #ffffff;
+.sidebar-rodape {
+    padding-top: 16px;
+}
+
+.sidebar-rodape p {
+    font-size: 10px;
+    color: #cad7c0;
+    line-height: 1.4;
+}
+
+.sidebar-rodape strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.logo {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo img {
-  width: 125px;
-  display: block;
+    width: 140px;
+    height: auto;
 }
 
-nav {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.barra-lateral nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
 }
 
-nav a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 10px;
-  border-radius: 8px;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 12px;
+.barra-lateral nav a {
+    text-decoration: none;
+    color: #e2e8db;
+    width: 100%;
 }
 
-nav a img {
-  width: 18px;
-  height: 18px;
+.barra-lateral nav a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.82);
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
 }
 
-nav a:hover {
-  background: rgba(255, 255, 255, 0.12);
+.barra-lateral nav a div:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
 }
 
-nav a.menu-ativo {
-  background: #eef1e9;
-  color: var(--verde-texto);
+.barra-lateral nav a div img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
 }
 
-nav a.menu-ativo img {
-  filter: brightness(0) saturate(100%) invert(33%) sepia(15%) saturate(900%) hue-rotate(40deg);
+/* Item ativo */
+.barra-lateral nav a div.menu-ativo {
+    background-color: #ffffff;
+    color: var(--verde-sidebar);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Conteúdo principal ===== */
-.conteudo-principal {
-  margin-left: 150px;
-  height: 100vh;
-  padding: 12px 20px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.barra-lateral nav a div.menu-ativo img {
+    filter: none;
+    opacity: 1;
 }
 
-/* ===== Título ===== */
-.titulo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-left: 4px;
+/* ============================================================
+   ÁREA PRINCIPAL (ocupa a altura da tela, sem scroll)
+   ============================================================ */
+.area-principal {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 20px 28px 20px 32px;
+    background-color: var(--verde-fundo);
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-.titulo-icone {
-  font-size: 40px;
-  line-height: 1;
-  color: var(--verde-texto);
-  font-weight: 300;
+.conteudo {
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
 }
 
-.titulo h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--verde-texto);
-  line-height: 1.1;
+/* ============================================================
+   CABEÇALHO DA PÁGINA
+   ============================================================ */
+.cabecalho {
+    flex-shrink: 0;
 }
 
-.titulo p {
-  font-size: 11px;
-  color: #444444;
-  margin-top: 4px;
+.titulo-com-icone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
 }
 
-/* ===== KPIs ===== */
-.grupo-kpi {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+.titulo-com-icone h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.3px;
 }
 
-/* telas de uma estufa só têm 3 KPIs */
-.grupo-kpi:not(#kpiTodas) {
-  grid-template-columns: repeat(3, 1fr);
+.subtitulo-principal {
+    font-size: 13px;
+    color: var(--texto-secundario);
+    font-weight: 400;
 }
 
-.kpi {
-  position: relative;
-  background: var(--card);
-  border-radius: 18px;
-  padding: 14px 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  min-height: 116px;
+/* ============================================================
+   GRID DE KPIs (compacto)
+   ============================================================ */
+.grid-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    flex-shrink: 0;
 }
 
-.kpi-icone {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--verde-claro);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card-kpi {
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    padding: 14px 18px;
+    box-shadow: var(--sombra-card);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
 }
 
-.kpi-icone img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+.kpi-topo h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.icone-alerta {
-  font-size: 22px;
-  color: #5a6b3c;
+.kpi-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
 }
 
-.kpi-corpo h3 {
-  font-size: 13px;
-  font-weight: 700;
-  padding-left: 50px;
-  min-height: 34px;
-  display: flex;
-  align-items: center;
+.kpi-valor-grupo {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
 }
 
 .kpi-valor {
-  margin-top: 2px;
-  display: flex;
-  flex-direction: column;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    line-height: 1.1;
+    letter-spacing: -1px;
 }
 
-.kpi-valor strong {
-  font-size: 34px;
-  font-weight: 700;
-  line-height: 1.05;
+.kpi-valor-texto {
+    font-size: 24px;
+    letter-spacing: -0.5px;
 }
 
-.kpi-valor span {
-  font-size: 10px;
-  color: var(--cinza);
+.kpi-subtexto {
+    font-size: 12px;
+    color: var(--texto-secundario);
 }
 
-.kpi-texto {
-  font-size: 10px;
-  color: var(--cinza);
+.kpi-subtexto.alerta {
+    color: var(--cor-alto);
+    font-weight: 500;
 }
 
-.kpi-variacao {
-  margin-top: 6px;
-  font-size: 9px;
-  color: var(--cinza);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+/* Ícone decorativo à direita do card */
+.kpi-icone-direita {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--cinza-fundo);
 }
 
-.kpi-variacao b {
-  font-size: 11px;
+.kpi-icone-direita.verde  { background-color: var(--cor-ok-bg); }
+.kpi-icone-direita.vermelho { background-color: var(--cor-alto-bg); }
+
+/* Barra de progresso nos KPIs */
+.kpi-progresso-container {
+    margin-top: 2px;
 }
 
-.sobe {
-  color: var(--verde-barra);
+.kpi-barra-fundo {
+    width: 100%;
+    height: 6px;
+    background-color: var(--cinza-borda);
+    border-radius: 99px;
+    overflow: hidden;
 }
 
-.desce,
-.alerta-seta {
-  color: var(--vermelho);
+.kpi-barra-preenchida {
+    height: 100%;
+    background-color: var(--cor-ok);
+    border-radius: 99px;
+    transition: width 0.4s ease;
 }
 
-.kpi-alertas .kpi-variacao {
-  justify-content: flex-start;
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    width: fit-content;
+    white-space: nowrap;
 }
 
-.barra {
-  margin-top: 4px;
-  width: 100%;
-  height: 6px;
-  background: #ffffff;
-  border: 1px solid #c9cfc2;
-  border-radius: 10px;
-  overflow: hidden;
+.badge-ok {
+    background-color: var(--cor-ok-bg);
+    color: #15803d;
 }
 
-.barra-preenchida {
-  height: 100%;
-  background: var(--verde-barra);
-  border-radius: 10px;
+.badge-alto {
+    background-color: var(--cor-alto-bg);
+    color: #b91c1c;
 }
 
-.meta {
-  font-size: 9px;
-  color: var(--cinza);
-  text-align: right;
-  margin-top: -22px;
-  position: relative;
-  top: -10px;
+.badge-baixo {
+    background-color: var(--cor-baixo-bg);
+    color: #b45309;
 }
 
-/* ===== Área central ===== */
-.area-central {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 18px;
+.badge-vazio {
+    background-color: var(--cor-vazio-bg);
+    color: var(--cor-vazio);
 }
 
-.cabecalho-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
+/* Badge sólido (usado no KPI de UV) */
+.badge-solido {
+    background-color: var(--cor-alto);
+    color: #ffffff;
+    padding: 3px 12px;
+    font-size: 11px;
 }
 
-.cabecalho-card h3 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #2f3b20;
+/* ============================================================
+   LAYOUT DUAS COLUNAS (ocupa todo o espaço que sobra na tela)
+   Gráfico mais estreito à esquerda, tabelas mais largas à direita
+   ============================================================ */
+.layout-duas-colunas {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(560px, 42%);
+    grid-template-rows: minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
 }
 
-/* ===== Gráfico ===== */
-.card-grafico {
-  background: var(--card);
-  border-radius: 18px;
-  padding: 14px 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
+/* ============================================================
+   CARDS DE PAINEL
+   ============================================================ */
+.card-painel {
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    box-shadow: var(--sombra-card);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
 }
 
-.botoes-periodo {
-  display: flex;
-  gap: 8px;
+.cabecalho-painel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.botao-periodo {
-  background: #eef0ea;
-  color: #333333;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 7px 14px;
-  border-radius: 8px;
+.painel-titulo-icone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.botao-periodo:hover {
-  background: #dfe4d8;
+.painel-titulo-icone h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.2px;
 }
 
-.botao-periodo.ativo {
-  background: var(--verde-escuro);
-  color: #ffffff;
+.subtitulo-painel {
+    font-size: 11px;
+    color: var(--texto-secundario);
+    margin-top: -6px;
 }
 
-.area-grafico {
-  flex: 1;
-  min-height: 0;
-  position: relative;
+/* ============================================================
+   BOTÕES DE FILTRO DE TEMPO
+   ============================================================ */
+.grupo-filtros-tempo {
+    display: flex;
+    gap: 4px;
+    background-color: var(--cinza-fundo);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--cinza-borda);
 }
 
-.bloco-grafico {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #f6f9f4;
-  border-radius: 8px;
-  padding: 6px;
+.btn-tempo {
+    padding: 5px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
 }
 
-/* ===== Coluna da direita ===== */
+.btn-tempo:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: var(--texto-principal);
+}
+
+.btn-tempo.ativo {
+    background-color: var(--verde-sidebar);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   ÁREA DO GRÁFICO (cresce para preencher o card)
+   ============================================================ */
+.container-grafico {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.area-canvas {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* O canvas fica "solto" dentro da área para o gráfico se ajustar
+   ao tamanho dela e não empurrar o layout */
+.area-canvas canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Legenda lateral do gráfico */
+.legenda-lateral-grafico {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px 0;
+    min-width: 100px;
+    justify-content: center;
+}
+
+.item-legenda {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--texto-principal);
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: 6px;
+    transition: background-color 0.15s;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.item-legenda:hover {
+    background-color: var(--cinza-fundo);
+}
+
+.ponto-cor {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.traco-limite {
+    width: 16px;
+    height: 2px;
+    border-top: 2px dashed #9ca3af;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+/* ============================================================
+   COLUNA DIREITA (histórico + estufas)
+   Os dois cards dividem a altura igualmente e rolam por dentro
+   ============================================================ */
 .coluna-direita {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+    min-width: 0;
 }
 
-.card-historico,
-.card-tabela {
-  background: var(--card);
-  border-radius: 18px;
-  padding: 12px 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
+.coluna-direita .card-painel {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 0;
+    padding-bottom: 14px;
 }
 
-.card-historico {
-  flex: 1;
+/* Título do card fica fixo no topo enquanto a tabela rola */
+.coluna-direita .cabecalho-painel {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    flex-wrap: nowrap;
+    height: var(--altura-cabecalho-painel);
+    flex-shrink: 0;
+    background-color: var(--branco);
 }
 
-.card-tabela {
-  flex: 1.1;
+/* Barra de rolagem discreta */
+.coluna-direita .card-painel::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
 
-.card-historico .cabecalho-card h3,
-.card-tabela .cabecalho-card h3 {
-  font-size: 14px;
+.coluna-direita .card-painel::-webkit-scrollbar-thumb {
+    background-color: #c9d1c0;
+    border-radius: 99px;
 }
 
-.icone-relogio {
-  font-size: 20px;
-  color: var(--verde-texto);
+.coluna-direita .card-painel::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-.img-estufa {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
+/* ============================================================
+   TABELAS
+   ============================================================ */
+.tabela-dashboard {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
 }
 
-.filtro-historico {
-  font-size: 10px;
-  padding: 4px 8px;
-  border: 1px solid #cfd4c9;
-  border-radius: 6px;
-  background: #ffffff;
-  color: #333333;
+.tabela-dashboard thead tr {
+    border-bottom: 1px solid var(--cinza-borda);
 }
 
-#ver-todas {
-  background: var(--verde-claro);
-  color: var(--verde-texto);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 6px;
+/* Cabeçalho da tabela fica fixo logo abaixo do título do card */
+.tabela-dashboard th {
+    position: sticky;
+    top: var(--altura-cabecalho-painel);
+    z-index: 2;
+    background-color: var(--branco);
+    box-shadow: inset 0 -1px 0 var(--cinza-borda);
+    text-align: left;
+    padding: 6px 6px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: normal;
+    line-height: 1.25;
+    vertical-align: bottom;
 }
 
-#ver-todas:hover {
-  background: #d6dec9;
+.tabela-dashboard tbody tr {
+    border-bottom: 1px solid var(--cinza-borda);
+    transition: background-color 0.15s;
 }
 
-.dica {
-  font-size: 9px;
-  color: var(--cinza);
-  margin-bottom: 4px;
+.tabela-dashboard tbody tr:last-child {
+    border-bottom: none;
 }
 
-/* ===== Tabelas ===== */
-.historico-wrapper,
-.tabela-wrapper {
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
+.tabela-dashboard tbody tr:hover {
+    background-color: #f8faf6;
+    cursor: pointer;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 10px;
+/* nowrap evita "Estufa 3" quebrar em duas linhas */
+.tabela-dashboard td {
+    padding: 7px 6px;
+    color: var(--texto-principal);
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
-thead tr {
-  background: #f4f5f1;
+/* Célula com ponto de cor da estufa */
+.celula-estufa {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 500;
 }
 
-th {
-  text-align: left;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 7px 8px;
-  color: #333333;
+/* ============================================================
+   BOTÕES DE AÇÃO NAS TABELAS
+   ============================================================ */
+.btn-acao {
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: none;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
 }
 
-th small {
-  display: block;
-  font-weight: 400;
-  font-size: 7px;
-  color: var(--cinza);
+.btn-acao:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
 }
 
-td {
-  padding: 7px 8px;
-  border-bottom: 1px solid #eef0ea;
-  color: #222222;
+.btn-acao.resolver {
+    background-color: var(--verde-sidebar);
+    color: #ffffff;
 }
 
-.card-tabela td:nth-child(2) {
-  font-weight: 700;
+/* Botão link (ex: "Ver todas") */
+.btn-link {
+    background: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--verde-sidebar);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.15s;
 }
 
-/* ===== Status ===== */
-.status,
-.status-ok,
-.status-baixo,
-.status-alto {
-  display: inline-block;
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-size: 9px;
-  font-weight: 700;
+.btn-link:hover {
+    background-color: rgba(85, 100, 62, 0.08);
 }
 
-.status-ok {
-  background: #d7efd9;
-  color: #2e7d32;
+/* ============================================================
+   RESPONSIVIDADE
+   Em telas pequenas (estreitas ou baixas demais) não dá para caber
+   tudo sem scroll, então a página volta a rolar normalmente.
+   ============================================================ */
+@media (max-width: 1200px), (max-height: 680px) {
+    html,
+    body {
+        height: auto;
+        overflow: auto;
+    }
+
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .barra-lateral {
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .area-principal {
+        height: auto;
+        overflow: visible;
+    }
+
+    .conteudo {
+        height: auto;
+    }
+
+    .layout-duas-colunas {
+        flex: none;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .card-painel {
+        min-height: auto;
+    }
+
+    .container-grafico {
+        flex: none;
+    }
+
+    .area-canvas {
+        min-height: 280px;
+    }
+
+    .coluna-direita .card-painel {
+        flex: none;
+        max-height: 340px;
+    }
 }
 
-.status-baixo {
-  background: #fde7b0;
-  color: #b9770e;
+@media (max-width: 900px) {
+    .grid-kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .area-principal {
+        padding: 20px 18px;
+    }
+
+    .barra-lateral {
+        width: 60px;
+        padding: 16px 8px;
+    }
+
+    .barra-lateral nav a div span,
+    .barra-lateral nav a div {
+        font-size: 0;
+        gap: 0;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 36px;
+    }
 }
 
-.status-alto {
-  background: #fbd5d5;
-  color: #c0392b;
-}
+@media (max-width: 600px) {
+    .grid-kpis {
+        grid-template-columns: 1fr;
+    }
 
-#statusTabela6 {
-  font-size: 9px;
-  color: var(--cinza);
-}
-
-/* ===== Botões da tabela ===== */
-.botao-resolver {
-  background: var(--verde-escuro);
-  color: #ffffff;
-  font-size: 9px;
-  font-weight: 600;
-  padding: 5px 11px;
-  border-radius: 6px;
-}
-
-.botao-resolver:hover {
-  background: #3d4c29;
-}
-
-.botao-resolver.desabilitado {
-  background: #e3e5e0;
-  color: #a5a8a1;
-  cursor: not-allowed;
-}
-
-.botao-estufa {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  font-size: 10px;
-  font-weight: 700;
-  color: #222222;
-  padding: 2px 0;
-}
-
-.botao-estufa:hover {
-  color: var(--verde-texto);
-}
-
-.ponto {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.cor-1 { background: #3f7a2a; }
-.cor-2 { background: #d4a017; }
-.cor-3 { background: #7b2cbf; }
-.cor-4 { background: #1e9be0; }
-.cor-5 { background: #f5a142; }
-.cor-6 { background: #f08a00; }
-
-.marca-foco {
-  background: var(--verde-escuro);
-  color: #ffffff;
-  font-size: 7px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 10px;
+    .grupo-filtros-tempo {
+        flex-wrap: wrap;
+    }
 }
