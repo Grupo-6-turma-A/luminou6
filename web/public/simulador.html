@@ -71,16 +71,15 @@
               <img src="./assets/imgs/estufa.png" alt="Ícone Estufa" />
             </div>
             <div class="input_text_group">
-              <label class="input_label" for="inp_estufa">Quantidade de estufas</label>
+              <label class="input_label" for="inp_m2">Metros² de área de cultivo</label>
               <p class="input_subtexto">
-                É considerado a projeção média de uma estufa pequena
-                tradicional (não adensada) de 50m².
+                Extensão total da área de cultivo em m².
               </p>
             </div>
           </div>
           <div class="input_field_box">
-            <input type="number" id="inp_estufa" placeholder="" />
-            <span class="input_suffix">estufas</span>
+            <input type="number" id="inp_m2" placeholder="" />
+            <span class="input_suffix">m²</span>
           </div>
         </div>
 
@@ -90,9 +89,9 @@
               <img src="./assets/imgs/custo-de-mao-de-obra.png" alt="Ícone Mão de Obra" />
             </div>
             <div class="input_text_group">
-              <label class="input_label" for="inp_obra">Custo anual de mão de obra por estufa (R$)</label>
+              <label class="input_label" for="inp_obra">Custo total anual de mão de obra.</label>
               <p class="input_subtexto">
-                Custo anual de mão de obra por estufa (R$)
+                Custo em real (R$). Não pode exceder 60% do valor total de produção.
               </p>
             </div>
           </div>
@@ -110,14 +109,12 @@
             <div class="input_text_group">
               <label class="input_label" for="inp_preco">Valor do Kg da Baunilha</label>
               <p class="input_subtexto">
-                Informe o preço por quilo e selecione a moeda desejada.
+                O valor médio de venda por quilo é de R$ 1.300,00
               </p>
             </div>
           </div>
           <div class="input_field_box">
             <input type="number" id="inp_preco" placeholder="" />
-            <select id="inp_moeda" class="input_suffix">
-              <option value="dolar">US$</option>
               <option value="real">R$</option>
             </select>
           </div>
@@ -265,44 +262,33 @@
 
 <script>
   function analisar() {
-    let qtdEstufa = Number(inp_estufa.value);
-    let custoPorEstufa = Number(inp_obra.value);
-    let valorPrecoInput = Number(inp_preco.value);
-    let tipoMoeda = inp_moeda.value;
+    let m2 = Number(inp_m2.value);
+    let custoMaoDeObra = Number(inp_obra.value);
+    let valorVenda = Number(inp_preco.value);
+    let valorVendaKgReais = 1300; // Valor mínimo do kg em reais conforme documentação
 
-    // Produção média anual por estufa
-    let producaoPorEstufa = 20;
+    // Produção por m² anualmente (0,4 kg por m²)
+    let totalGeradoM2Kg = 0.4; 
 
-    // Produção total da empresa
-    let producaoTotalKg = qtdEstufa * producaoPorEstufa;
+    let producaoTotalKg = totalGeradoM2Kg * m2;
 
-    // Conversão de moeda
-    let cotacaoDolar = 5.2;
-    let precoReais = 0;
+    let totalGeradoReais = producaoTotalKg * valorVenda;
 
-    if (tipoMoeda === "dolar") {
-      precoReais = valorPrecoInput * cotacaoDolar;
-    } else {
-      precoReais = valorPrecoInput;
-    }
-
-    // Custo total de mão de obra
-    let custoMaodeobra = custoPorEstufa * qtdEstufa;
+    // Teto de referência: mão de obra não deve ultrapassar 60% do faturamento bruto potencial
+    let custoReferenciaMaoDeObra = totalGeradoReais * 0.6; 
 
     // Validação dos dados
-    if (qtdEstufa < 1) {
-      alert("Insira um número de estufas válido.");
-    } else if (custoPorEstufa < 1) {
-      alert("Insira um custo de mão de obra válido por estufa.");
-    } else if (valorPrecoInput <= 0) {
-      alert("Insira um preço de venda por kg válido.");
-    } else if (precoReais < 1300) {
+    if (m2 < 1) {
+      alert("Insira uma área válida em metros quadrados.");
+    } else if (custoMaoDeObra > custoReferenciaMaoDeObra) {
+      alert("O custo de mão de obra informado ultrapassa 60% do faturamento potencial, tornando a operação inviável.");
+    } else if (valorVenda < valorVendaKgReais) {
       alert("O preço mínimo utilizado no projeto é de R$ 1.300,00 por quilo.");
     } else {
 
       let percentualPerda = 0.15;
 
-      // Cálculo das perdas utilizando FOR
+      // Cálculo das perdas utilizando o FOR (simulando a progressão mensal)
       let perdaMensalKg = 0;
       let perdaAnualKg = 0;
 
@@ -312,64 +298,45 @@
         perdaAnualKg += perdaMensalKg;
       }
 
-      // Valor financeiro das perdas
-      let perdaAnualTotal = perdaAnualKg * precoReais;
+      // Valor financeiro das perdas (utilizando valorVenda em Reais)
+      let perdaAnualTotal = perdaAnualKg * valorVenda;
 
       // CENÁRIO SEM LUMINOU6
       let producaoSemLuminou = producaoTotalKg - perdaAnualKg;
-
-      let faturamentoSemLuminou = producaoSemLuminou * precoReais;
-
-      let resultadoSemLuminou = faturamentoSemLuminou - custoMaodeobra;
+      let faturamentoSemLuminou = producaoSemLuminou * valorVenda;
+      let resultadoSemLuminou = faturamentoSemLuminou - custoMaoDeObra;
 
       // CENÁRIO COM LUMINOU6
       let producaoComLuminou = producaoTotalKg;
-
-      let faturamentoComLuminou = producaoComLuminou * precoReais;
-
-      let resultadoComLuminou = faturamentoComLuminou - custoMaodeobra;
+      let faturamentoComLuminou = producaoComLuminou * valorVenda;
+      let resultadoComLuminou = faturamentoComLuminou - custoMaoDeObra;
 
       // GANHO ADICIONAL
       let ganhoAdicional = resultadoComLuminou - resultadoSemLuminou;
 
-      // Validação da rentabilidade
+      // Validação da rentabilidade líquida
       if (resultadoSemLuminou <= 0) {
         alert("Os custos informados são maiores que o lucro projetado. Verifique os dados de produção, venda e mão de obra.");
       } else {
 
-        // EXIBIÇÃO DOS RESULTADOS
-        msg_faturamento.innerHTML =
-          `R$ ${faturamentoComLuminou.toFixed(2)}`;
+        // EXIBIÇÃO DOS RESULTADOS NA INTERFACE
+        msg_faturamento.innerHTML = `R$ ${faturamentoComLuminou.toFixed(2)}`;
+        msg_perda.innerHTML = `R$ ${perdaAnualTotal.toFixed(2)}`;
+        msg_sem_luminou.innerHTML = `R$ ${resultadoSemLuminou.toFixed(2)}`;
+        msg_ganho.innerHTML = `R$ ${resultadoComLuminou.toFixed(2)}`;
 
-        msg_perda.innerHTML =
-          `R$ ${perdaAnualTotal.toFixed(2)}`;
-
-        msg_sem_luminou.innerHTML =
-          `R$ ${resultadoSemLuminou.toFixed(2)}`;
-
-        msg_ganho.innerHTML =
-          `R$ ${resultadoComLuminou.toFixed(2)}`;
-
-        // ALTERAÇÃO DA COR DO CARD SEM LUMINOU6
+        // ALTERAÇÃO DINÂMICA DA COR DO CARD SEM LUMINOU6
         if (resultadoSemLuminou >= 0) {
-          containerSemLum.className =
-            "result_card card_positivo_moderado";
-
-          iconsemLum.className =
-            "icon_box icon_positivo_moderado";
-
-          msg_sem_luminou.className =
-            "result_valor valor_positivo_moderado";
-
+          containerSemLum.className = "result_card card_positivo_moderado";
+          iconsemLum.className = "icon_box icon_positivo_moderado";
+          msg_sem_luminou.className = "result_valor valor_positivo_moderado";
         } else {
           containerSemLum.className = "result_card card_perda";
-
           iconsemLum.className = "icon_box icon_perda";
-
           msg_sem_luminou.className = "result_valor valor_perda";
         }
 
-        // MOSTRAR O GANHO ADICIONAL NO CONSOLE
+        // LOG DO GANHO ADICIONAL NO CONSOLE
         console.log("Ganho adicional com Luminou6: R$ " + ganhoAdicional.toFixed(2));
       }
     }
