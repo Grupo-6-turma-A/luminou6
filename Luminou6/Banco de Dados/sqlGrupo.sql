@@ -51,10 +51,31 @@ CONSTRAINT fk_estufaCliente
 );
 
 INSERT INTO estufa (nome, fase_planta, percentual_sombreamento, cliente_idCliente) VALUES
-('Estufa 01', 'Crescimento', '50', 1),
-('Estufa 02', 'Floração', '60', 1),
-('Estufa Principal', 'Crescimento', '40', 2),
-('Estufa A', 'Floração', '50', 3);
+('Estufa 01', 'crescimento', '50', 1),
+('Estufa 02', 'floracao', '60', 1),
+('Estufa Principal', 'crescimento', '40', 2),
+('Estufa A', 'floracao', '50', 3);
+
+CREATE TABLE configuracao (
+  idconfiguracao INT NOT NULL AUTO_INCREMENT,
+  ppfdMinimo INT NOT NULL,
+  ppfdMaximo INT NOT NULL,
+  ppfdAlvo INT NOT NULL,
+  metaDLI DECIMAL(5,2) NOT NULL,
+  faseDesenvolvimento VARCHAR(45) NOT NULL,
+  CONSTRAINT chk_fase CHECK (faseDesenvolvimento IN ('enraizamento','brotamento','crescimento','floracao')),
+  ESTUFA_idESTUFA INT NOT NULL,
+  PRIMARY KEY (idconfiguracao),
+  FOREIGN KEY (ESTUFA_idESTUFA) REFERENCES ESTUFA (idESTUFA)
+);
+
+
+
+INSERT INTO configuracao(ppfdMinimo, ppfdAlvo, ppfdMaximo, metaDLI, faseDesenvolvimento, ESTUFA_idESTUFA) VALUES
+  (200, 250, 300, 14.40, 'enraizamento', 1),
+  (250, 300, 400, 17.30, 'brotamento', 1),
+  (300, 400, 500, 23.00, 'crescimento', 1),
+  (400, 500, 600, 28.80, 'floracao', 1);
 
 CREATE TABLE sensor (
 idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -87,7 +108,7 @@ CONSTRAINT fk_leituraSensor
     REFERENCES sensor(idSensor)
 );
 
-INSERT INTO leitura (valorADC, data_hora, sensor_idSensor) VALUES
+INSERT INTO leitura (valorPPFD, data_hora, sensor_idSensor) VALUES
 (420, '2026-09-25 08:00:00', 1),
 (580, '2026-09-25 10:00:00', 1),
 (720, '2026-09-25 12:00:00', 1),
@@ -106,8 +127,7 @@ INSERT INTO leitura (valorADC, data_hora, sensor_idSensor) VALUES
 SELECT
     cliente.nome AS cliente,
     usuario.nome AS usuario,
-    usuario.email_cadastro,
-    usuario.cargo
+    usuario.email_cadastro
 FROM cliente
 JOIN usuario
 ON cliente.idCliente = usuario.cliente_idCliente;
@@ -125,7 +145,7 @@ ON estufa.idEstufa = sensor.estufa_idEstufa;
 SELECT
     sensor.nome AS sensor,
     sensor.codigo_sensor,
-    leitura.valorADC,
+    leitura.valorPPFD,
     leitura.data_hora
 FROM sensor
 JOIN leitura
@@ -137,7 +157,7 @@ SELECT
     e.nome AS nome_estufa,
     s.nome AS nome_sensor,
     s.status_sensor,
-    l.valorADC,
+    l.valorPPFD,
     l.data_hora
 FROM usuario AS u
 JOIN cliente AS c
@@ -148,5 +168,30 @@ JOIN sensor AS s
 ON s.estufa_idEstufa = e.idEstufa
 JOIN leitura AS l
 ON l.sensor_idSensor = s.idSensor;
+
+SELECT * FROM configuracao;
+
+SELECT
+    e.nome AS estufa,
+    c.faseDesenvolvimento,
+    c.ppfdMinimo,
+    c.ppfdAlvo,
+    c.ppfdMaximo,
+    c.metaDLI
+FROM configuracao AS c
+JOIN estufa AS e
+ON c.ESTUFA_idESTUFA = e.idEstufa;
+
+SELECT
+    e.nome AS estufa,
+    e.fase_planta,
+    c.ppfdMinimo,
+    c.ppfdAlvo,
+    c.ppfdMaximo,
+    c.metaDLI
+FROM estufa AS e
+JOIN configuracao AS c
+ON c.ESTUFA_idESTUFA = e.idEstufa
+AND c.faseDesenvolvimento = e.fase_planta;
 
 
