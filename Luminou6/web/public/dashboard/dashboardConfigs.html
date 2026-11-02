@@ -79,7 +79,7 @@
             <div class="campo">
               <label for="estufa">Estufa</label>
 
-              <select id="estufa">
+              <select id="estufa" onchange="carregarEstufa()">
                 <option value="1">Estufa 1</option>
                 <option value="2">Estufa 2</option>
                 <option value="3">Estufa 3</option>
@@ -105,13 +105,13 @@
             <div class="campo">
               <label for="ppfdMin"> PPFD mínimo (µmol/m²/s) </label>
 
-              <input type="number" id="ppfdMin" value="ppfdMin" />
+              <input type="number" id="ppfdMin" />
             </div>
 
             <div class="campo">
               <label for="ppfdMax"> PPFD máximo (µmol/m²/s) </label>
 
-              <input type="number" id="ppfdMax" value="ppfdMax" />
+              <input type="number" id="ppfdMax" />
             </div>
           </div>
 
@@ -119,7 +119,7 @@
             <div class="campo">
               <label for="dliMeta"> Meta diária de DLI (mol/m²/dia) </label>
 
-              <input type="number" id="dliMeta" value="dliMeta" />
+              <input type="number" id="dliMeta" />
             </div>
           </div>
 
@@ -186,12 +186,26 @@
 
 </html>
 <script>
+  // uma lista para cada informação; a posição representa a estufa
+  // posição 0 = Estufa 1, posição 1 = Estufa 2, ...
+  let listaFase = [];
+  let listaMin = [];
+  let listaMax = [];
+  let listaDli = [];
+
+  for (let i = 0; i < 6; i++) {
+    listaFase.push("");
+    listaMin.push("");
+    listaMax.push("");
+    listaDli.push("");
+  }
+
   function carregarPadrao() {
     let faseSelecionada = fase.value;
     if (faseSelecionada == "enraizamento") {
       ppfdMin.value = 100;
       ppfdMax.value = 250;
-      dliMeta.value = 5.0
+      dliMeta.value = 5.0;
     } else if (faseSelecionada == "brotamento") {
       ppfdMin.value = 100;
       ppfdMax.value = 250;
@@ -206,7 +220,22 @@
       dliMeta.value = 13.0;
     }
   }
-  carregarPadrao()
+
+  function carregarEstufa() {
+    let i = estufa.value - 1; // Estufa 1 = posição 0
+
+    if (listaFase[i] == "") {
+      // estufa ainda sem nada salvo: volta para a primeira fase e usa o padrão dela
+      fase.value = "enraizamento";
+      carregarPadrao();
+    } else {
+      fase.value = listaFase[i];
+      ppfdMin.value = listaMin[i];
+      ppfdMax.value = listaMax[i];
+      dliMeta.value = listaDli[i];
+    }
+    div.innerHTML = "";
+  }
 
   function salvarParametros() {
     let max = Number(ppfdMax.value);
@@ -220,7 +249,16 @@
     } else if (min >= max) {
       alert("O PPFD mínimo não pode ser maior ou igual ao PPFD máximo.");
     } else {
-      div.innerHTML = `<br><b style="color: green;">Parâmetros salvos!</b>`
+      let i = estufa.value - 1;
+
+      listaFase[i] = fase.value;
+      listaMin[i] = min;
+      listaMax[i] = max;
+      listaDli[i] = dli;
+
+      div.innerHTML = `<br><b style="color: green;">Parâmetros da Estufa ${estufa.value} salvos!</b>`;
     }
   }
+
+  carregarEstufa();
 </script>
