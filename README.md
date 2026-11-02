@@ -1,5 +1,5 @@
 <div align="center">
- <img src="assets/assets/2993ee9c-3191-4d29-95a1-a83fb4136e7f.png" alt="Luminousix Banner" width="50%" height="auto">
+ <img src="web/public/assets/imgs/2993ee9c-3191-4d29-95a1-a83fb4136e7f.png" alt="Luminousix Banner" width="50%" height="auto">
 </div>
 
 # Monitoramento IoT para Cultivo de Vanilla Planifolia 🌿☀️
