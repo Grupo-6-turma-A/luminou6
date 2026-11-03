@@ -186,8 +186,6 @@
 
 </html>
 <script>
-  // uma lista para cada informação; a posição representa a estufa
-  // posição 0 = Estufa 1, posição 1 = Estufa 2, ...
   let listaFase = [];
   let listaMin = [];
   let listaMax = [];
@@ -222,10 +220,9 @@
   }
 
   function carregarEstufa() {
-    let i = estufa.value - 1; // Estufa 1 = posição 0
+    let i = estufa.value - 1; 
 
     if (listaFase[i] == "") {
-      // estufa ainda sem nada salvo: volta para a primeira fase e usa o padrão dela
       fase.value = "enraizamento";
       carregarPadrao();
     } else {

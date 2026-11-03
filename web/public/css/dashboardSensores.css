@@ -1,0 +1,610 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde-sidebar:   #55643e;
+    --verde-escuro:    #3d4a2c;
+    --verde-fundo:     #ebf0e6;
+    --branco:          #ffffff;
+    --cinza-borda:     #e5e7eb;
+    --cinza-fundo:     #f9fafb;
+    --texto-principal: #1f2937;
+    --texto-secundario:#6b7280;
+
+    /* Status */
+    --cor-ok:          #22c55e;
+    --cor-ok-bg:       #dcfce7;
+    --cor-alto:        #ef4444;
+    --cor-alto-bg:     #fee2e2;
+    --cor-baixo-bg:    #fef3c7;
+    --cor-vazio-bg:    #f3f4f6;
+    --cor-vazio:       #9ca3af;
+
+    --sombra-card: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+    --raio-card:   14px;
+}
+
+/* A página inteira ocupa exatamente a tela e não rola */
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--verde-fundo);
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
+}
+
+/* ============================================================
+   BARRA LATERAL
+   ============================================================ */
+.barra-lateral {
+    width: 180px;
+    background-color: var(--verde-sidebar);
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    height: 100%;
+}
+
+.sidebar-topo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.logo {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 140px;
+    height: auto;
+}
+
+.barra-lateral nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.barra-lateral nav a {
+    text-decoration: none;
+    color: #e2e8db;
+    width: 100%;
+}
+
+.barra-lateral nav a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.82);
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.barra-lateral nav a div:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.barra-lateral nav a div img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.75;
+}
+
+/* Item ativo */
+.barra-lateral nav a div.menu-ativo {
+    background-color: #ffffff;
+    color: var(--verde-sidebar);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.barra-lateral nav a div.menu-ativo img {
+    filter: none;
+    opacity: 1;
+}
+
+/* ============================================================
+   ÁREA PRINCIPAL (ocupa a altura da tela, sem scroll)
+   ============================================================ */
+.area-principal {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 20px 28px 20px 32px;
+    background-color: var(--verde-fundo);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.conteudo {
+    width: 100%;
+    max-width: 1500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+}
+
+/* ============================================================
+   CABEÇALHO DA PÁGINA (título à esquerda, select à direita)
+   ============================================================ */
+.cabecalho {
+    flex-shrink: 0;
+}
+
+.cabecalho-com-seletor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.titulo-com-icone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
+}
+
+.titulo-com-icone h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.3px;
+}
+
+.subtitulo-principal {
+    font-size: 13px;
+    color: var(--texto-secundario);
+    font-weight: 400;
+}
+
+/* Select de estufa */
+.seletor-estufa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--branco);
+    padding: 8px 14px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-card);
+}
+
+.seletor-estufa label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+}
+
+.seletor-estufa select {
+    padding: 7px 14px;
+    border: 1px solid var(--cinza-borda);
+    border-radius: 10px;
+    background-color: var(--cinza-fundo);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--verde-sidebar);
+    cursor: pointer;
+    outline: none;
+}
+
+.seletor-estufa select:focus {
+    border-color: var(--verde-sidebar);
+}
+
+/* ============================================================
+   GRID DE KPIs (3 cards)
+   ============================================================ */
+.grid-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.card-kpi {
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    padding: 14px 18px;
+    box-shadow: var(--sombra-card);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.kpi-topo h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kpi-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.kpi-valor-grupo {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.kpi-valor {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.kpi-subtexto {
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+.kpi-subtexto.alerta {
+    color: var(--cor-alto);
+    font-weight: 500;
+}
+
+/* Barra de progresso e meta do DLI */
+.kpi-progresso-container {
+    margin-top: 2px;
+}
+
+.kpi-barra-fundo {
+    width: 100%;
+    height: 6px;
+    background-color: var(--cinza-borda);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.kpi-barra-preenchida {
+    height: 100%;
+    background-color: var(--cor-ok);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+}
+
+.kpi-meta {
+    font-size: 11px;
+    color: var(--texto-secundario);
+    text-align: right;
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.badge-ok {
+    background-color: var(--cor-ok-bg);
+    color: #15803d;
+}
+
+.badge-alto {
+    background-color: var(--cor-alto-bg);
+    color: #b91c1c;
+}
+
+.badge-baixo {
+    background-color: var(--cor-baixo-bg);
+    color: #b45309;
+}
+
+.badge-vazio {
+    background-color: var(--cor-vazio-bg);
+    color: var(--cor-vazio);
+}
+
+/* ============================================================
+   LAYOUT DUAS COLUNAS (tabela à esquerda, gráfico à direita)
+   Ocupa todo o espaço que sobra na tela
+   ============================================================ */
+.layout-duas-colunas {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(520px, 44%) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
+}
+
+/* ============================================================
+   CARDS DE PAINEL
+   ============================================================ */
+.card-painel {
+    background-color: var(--branco);
+    border-radius: var(--raio-card);
+    box-shadow: var(--sombra-card);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+}
+
+.cabecalho-painel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.painel-titulo-icone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.painel-titulo-icone h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.2px;
+}
+
+.subtitulo-painel {
+    font-size: 11px;
+    color: var(--texto-secundario);
+    margin-top: -6px;
+}
+
+/* Card da tabela rola por dentro se precisar */
+.bloco-tabela {
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.bloco-tabela::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.bloco-tabela::-webkit-scrollbar-thumb {
+    background-color: #c9d1c0;
+    border-radius: 99px;
+}
+
+.bloco-tabela::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ============================================================
+   ÁREA DO GRÁFICO (cresce para preencher o card)
+   ============================================================ */
+.container-grafico {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: stretch;
+}
+
+.area-canvas {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* O canvas fica "solto" dentro da área para o gráfico se ajustar
+   ao tamanho dela e não empurrar o layout */
+.area-canvas canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ============================================================
+   TABELA
+   ============================================================ */
+.tabela-dashboard {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+}
+
+.tabela-dashboard thead tr {
+    border-bottom: 1px solid var(--cinza-borda);
+}
+
+.tabela-dashboard th {
+    background-color: var(--branco);
+    box-shadow: inset 0 -1px 0 var(--cinza-borda);
+    text-align: left;
+    padding: 6px 6px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: normal;
+    line-height: 1.25;
+    vertical-align: bottom;
+}
+
+.tabela-dashboard tbody tr {
+    border-bottom: 1px solid var(--cinza-borda);
+    transition: background-color 0.15s;
+}
+
+.tabela-dashboard tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tabela-dashboard tbody tr:hover {
+    background-color: #f8faf6;
+    cursor: pointer;
+}
+
+/* nowrap evita o texto quebrar em duas linhas */
+.tabela-dashboard td {
+    padding: 9px 6px;
+    color: var(--texto-principal);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* Célula com ponto de cor do sensor */
+.celula-estufa {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 500;
+}
+
+.ponto-cor {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+/* Botão link (ex: "Ver todos") */
+.btn-link {
+    background: none;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--verde-sidebar);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.15s;
+}
+
+.btn-link:hover {
+    background-color: rgba(85, 100, 62, 0.08);
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   Em telas pequenas (estreitas ou baixas demais) não dá para caber
+   tudo sem scroll, então a página volta a rolar normalmente.
+   ============================================================ */
+@media (max-width: 1200px), (max-height: 680px) {
+    html,
+    body {
+        height: auto;
+        overflow: auto;
+    }
+
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .barra-lateral {
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .area-principal {
+        height: auto;
+        overflow: visible;
+    }
+
+    .conteudo {
+        height: auto;
+    }
+
+    .layout-duas-colunas {
+        flex: none;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .card-painel {
+        min-height: auto;
+    }
+
+    .container-grafico {
+        flex: none;
+    }
+
+    .area-canvas {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    .area-principal {
+        padding: 20px 18px;
+    }
+
+    .barra-lateral {
+        width: 60px;
+        padding: 16px 8px;
+    }
+
+    .barra-lateral nav a div {
+        font-size: 0;
+        gap: 0;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 36px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-kpis {
+        grid-template-columns: 1fr;
+    }
+}
