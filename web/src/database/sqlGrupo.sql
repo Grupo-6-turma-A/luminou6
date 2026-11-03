@@ -49,7 +49,6 @@ CREATE TABLE sensor (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     status_sensor VARCHAR(45),
-    codigo_sensor VARCHAR(45) NOT NULL UNIQUE,
     fkEstufa INT NOT NULL,
     CONSTRAINT chkStatus CHECK (status_sensor IN ('Ativo','Inativo')),
     CONSTRAINT fk_sensor_estufa
@@ -92,12 +91,12 @@ INSERT INTO estufa (nome, percentual_sombreamento, fkEmpresa, fkParametro) VALUE
 ('Estufa A', '50', 3, 4);
 
 
-INSERT INTO sensor (nome, status_sensor, codigo_sensor, fkEstufa) VALUES
-('Sensor Luminosidade 01', 'Ativo', 'LUM001', 1),
-('Sensor Luminosidade 02', 'Ativo', 'LUM002', 1),
-('Sensor Luminosidade 03', 'Inativo', 'LUM003', 2),
-('Sensor Luminosidade 04', 'Ativo', 'LUM004', 3),
-('Sensor Luminosidade 05', 'Ativo', 'LUM005', 4);
+INSERT INTO sensor (nome, status_sensor, fkEstufa) VALUES
+('Sensor Luminosidade 01', 'Ativo', 1),
+('Sensor Luminosidade 02', 'Ativo', 1),
+('Sensor Luminosidade 03', 'Inativo',  2),
+('Sensor Luminosidade 04', 'Ativo', 3),
+('Sensor Luminosidade 05', 'Ativo', 4);
 
 INSERT INTO leitura (valorPPFD, data_hora, fkSensor) VALUES
 (420, '2026-09-25 08:00:00', 1),
