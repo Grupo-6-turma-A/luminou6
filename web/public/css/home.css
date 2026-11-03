@@ -29,15 +29,18 @@ html {
     width: 850px;
 }
 
-.div-textoHome h3 {
+.div-textoHome h1 {
     font-size: 80px;
     font-weight: 200;
+}
+
+.div-textoHome h1 b {
     color: #7E8863;
 }
 
 .div-textoHome p {
     margin: 30px 0 50px 0;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 200;
 }
 
@@ -220,28 +223,44 @@ html {
 
 .div-quemSomos p {
     margin-bottom: 50px;
+    max-width: 500px;
     text-align: center;
     font-weight: 300;
 }
 
-.div-integrantes {
+.div-quemSomos .intro-projeto {
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.div-projetoCards {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 30px;
     margin-bottom: 50px;
+    padding: 0 80px;
+    width: 100%;
 }
 
-.div-membro {
-    display: flex;
-    flex-direction: column; 
-    text-align: center;
-    gap: 10px;
-}
-
-.div-membro img {
-    width: 200px;
-    height: 250px;
+.card-projeto {
+    flex: 1;
+    background-color: #79855b;
+    color: #FFFFFF;
     border-radius: 20px;
+    padding: 30px;
+}
+
+.card-projeto h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.div-quemSomos .card-projeto p {
+    margin-bottom: 0;
+    max-width: none;
+    text-align: left;
+    font-weight: 300;
+    line-height: 1.5;
 }
 
 /* Parte Objetivo */
