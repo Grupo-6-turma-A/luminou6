@@ -304,6 +304,20 @@ button {
 /* ============================================================
    ABAS, LEGENDA, CHIPS E PERÍODO
    ============================================================ */
+.titulo-grafico h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.2px;
+}
+
+.grafico-subtitulo {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--texto-secundario);
+}
+
 .linha-topo,
 .linha-chips {
     display: flex;

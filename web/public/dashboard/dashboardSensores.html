@@ -30,7 +30,7 @@
         <a href="dashboardVisaoGeral.html">
           <div>
             <img src="../imgs/VectorLupa.svg" />
-            Visão geral
+            Alertas
           </div>
         </a>
 
@@ -56,10 +56,10 @@
       <section class="cabecalho cabecalho-com-seletor">
         <div>
           <div class="titulo-com-icone">
-            <h1>Estufas e sensores</h1>
+            <h1>Monitoramento dos sensores</h1>
           </div>
           <p class="subtitulo-principal">
-            Diagnóstico detalhado e monitoramento individual dos sensores por estufa
+            Leitura, condição e DLI de cada sensor, estufa por estufa
           </p>
         </div>
 
@@ -77,48 +77,46 @@
 
       <!-- 3 KPIs -->
       <section class="grid-kpis">
-        <!-- KPI 1: PPFD da estufa (mínimo e máximo) -->
+        <!-- KPI 1: Picos de PPFD da estufa no dia -->
         <div class="card-kpi">
           <div class="kpi-bloco kpi-bloco-largo">
-            <h3>PPFD da estufa</h3>
+            <h3>Picos de PPFD da estufa</h3>
             <div class="kpi-minis">
-              <div class="kpi-mini">
-                <span class="kpi-subtexto">Mínimo</span>
-                <span class="kpi-linha"><strong class="kpi-mini-valor" id="kpiMin">—</strong><span class="kpi-unidade">µmol/m²/s</span></span>
+              <div class="kpi-mini pico-min">
+                <span class="kpi-linha"><svg class="seta seta-min" viewBox="0 0 24 24" width="20" height="20" role="img" aria-label="Mínimo do dia"><title>Mínimo do dia</title><path d="M3 6h18L12 20z" fill="currentColor"/></svg><strong class="kpi-mini-valor" id="kpiMin">—</strong><span class="kpi-unidade">µmol/m²/s</span></span>
                 <span class="kpi-subtexto" id="kpiMinLocal">—</span>
               </div>
               <div class="kpi-divisor"></div>
-              <div class="kpi-mini">
-                <span class="kpi-subtexto">Máximo</span>
-                <span class="kpi-linha"><strong class="kpi-mini-valor" id="kpiMax">—</strong><span class="kpi-unidade">µmol/m²/s</span></span>
+              <div class="kpi-mini pico-max">
+                <span class="kpi-linha"><svg class="seta seta-max" viewBox="0 0 24 24" width="20" height="20" role="img" aria-label="Máximo do dia"><title>Máximo do dia</title><path d="M12 4l9 14H3z" fill="currentColor"/></svg><strong class="kpi-mini-valor" id="kpiMax">—</strong><span class="kpi-unidade">µmol/m²/s</span></span>
                 <span class="kpi-subtexto" id="kpiMaxLocal">—</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- KPI 2: Alertas dos sensores -->
+        <!-- KPI 2: DLI por região da estufa -->
+        <div class="card-kpi">
+          <div class="kpi-bloco kpi-bloco-largo">
+            <h3>DLI por região da estufa</h3>
+            <p class="kpi-subtexto" id="subtituloRegioes">Meta mínima de — mol/m²/dia</p>
+            <div class="grid-regioes" id="gridRegioes"></div>
+          </div>
+        </div>
+
+        <!-- KPI 3: Sensores em alerta -->
         <div class="card-kpi">
           <div class="kpi-bloco">
-            <h3>Alertas dos sensores</h3>
+            <h3>Sensores em alerta</h3>
             <span class="kpi-valor" id="kpiAlertas">—</span>
             <p class="kpi-subtexto" id="kpiAlertasTexto">—</p>
           </div>
           <div class="lista-alertas" id="listaAlertas"></div>
         </div>
-
-        <!-- KPI 3: Sensores na faixa -->
-        <div class="card-kpi">
-          <div class="kpi-bloco">
-            <h3>Sensores na faixa</h3>
-            <span class="kpi-valor" id="kpiSensores">—</span>
-            <p class="kpi-subtexto" id="kpiSensoresTexto">—</p>
-          </div>
-        </div>
       </section>
 
       <div class="layout-duas-colunas">
-        <!-- Esquerda: tabela de sensores e DLI por região -->
+        <!-- Esquerda: tabela de sensores (ocupa toda a altura) -->
         <div class="coluna-esquerda">
           <section class="card-painel bloco-tabela">
             <div class="cabecalho-painel">
@@ -141,16 +139,6 @@
               </thead>
               <tbody id="tabelaSensoresCorpo"></tbody>
             </table>
-          </section>
-
-          <section class="card-painel bloco-regioes">
-            <div class="cabecalho-painel">
-              <div class="titulo-regioes">
-                <h2>DLI por região da estufa</h2>
-                <p class="subtitulo-painel" id="subtituloRegioes">Meta mínima de — mol/m²/dia</p>
-              </div>
-            </div>
-            <div class="grid-regioes" id="gridRegioes"></div>
           </section>
         </div>
 
@@ -366,12 +354,13 @@
 
       let linhas = '';
       let blocosRegioes = '';
-      let menor = -1;
-      let maior = -1;
-      let localMenor = 0;
-      let localMaior = 0;
-      let naFaixa = 0;
-      let semComunicacao = 0;
+      // picos do dia: menor e maior leitura entre os sensores
+      let picoMin = -1;
+      let picoMax = -1;
+      let sensorPicoMin = 0;
+      let sensorPicoMax = 0;
+      let horaPicoMin = 0;
+      let horaPicoMax = 0;
 
       sensorIsolado = -1;
 
@@ -382,26 +371,28 @@
         let medicao = '—';
         let dliTexto = '—';
 
-        meuGrafico.data.datasets[s].data = criarLeituras(i, s);
+        const leituras = criarLeituras(i, s);
+        meuGrafico.data.datasets[s].data = leituras;
         meuGrafico.data.datasets[s].hidden = false;
+
+        for (let k = 0; k < leituras.length; k++) {
+          if (leituras[k] !== null) {
+            if (picoMin == -1 || leituras[k] < picoMin) {
+              picoMin = leituras[k];
+              sensorPicoMin = s;
+              horaPicoMin = k;
+            }
+            if (leituras[k] > picoMax) {
+              picoMax = leituras[k];
+              sensorPicoMax = s;
+              horaPicoMax = k;
+            }
+          }
+        }
 
         if (online[i][s] == true) {
           medicao = ppfd;
           dliTexto = formatar(dli);
-
-          if (menor == -1 || ppfd < menor) {
-            menor = ppfd;
-            localMenor = s;
-          }
-          if (ppfd > maior) {
-            maior = ppfd;
-            localMaior = s;
-          }
-          if (condicao == 'Ideal') {
-            naFaixa++;
-          }
-        } else {
-          semComunicacao++;
         }
 
         linhas = linhas + `
@@ -431,31 +422,20 @@
       meuGrafico.data.datasets[4].data = repetir(maximo);
       meuGrafico.update();
 
-      // KPI 1: PPFD mínimo e máximo (com unidade na frente do número)
-      if (menor == -1) {
+      // KPI 1: picos de PPFD do dia (com unidade na frente do número)
+      if (picoMin == -1) {
         document.getElementById('kpiMin').innerHTML = '—';
         document.getElementById('kpiMax').innerHTML = '—';
         document.getElementById('kpiMinLocal').innerHTML = '—';
         document.getElementById('kpiMaxLocal').innerHTML = '—';
       } else {
-        document.getElementById('kpiMin').innerHTML = menor;
-        document.getElementById('kpiMax').innerHTML = maior;
-        document.getElementById('kpiMinLocal').innerHTML = nomesSensores[localMenor] + ' · ' + regioes[localMenor];
-        document.getElementById('kpiMaxLocal').innerHTML = nomesSensores[localMaior] + ' · ' + regioes[localMaior];
-
-        let corMin = 'kpi-mini-valor verde';
-        if (menor < minimo || menor > maximo) {
-          corMin = 'kpi-mini-valor vermelho';
-        }
-        let corMax = 'kpi-mini-valor verde';
-        if (maior < minimo || maior > maximo) {
-          corMax = 'kpi-mini-valor vermelho';
-        }
-        document.getElementById('kpiMin').className = corMin;
-        document.getElementById('kpiMax').className = corMax;
+        document.getElementById('kpiMin').innerHTML = picoMin;
+        document.getElementById('kpiMax').innerHTML = picoMax;
+        document.getElementById('kpiMinLocal').innerHTML = nomesSensores[sensorPicoMin] + ' · ' + regioes[sensorPicoMin] + ' às ' + horarios[horaPicoMin];
+        document.getElementById('kpiMaxLocal').innerHTML = nomesSensores[sensorPicoMax] + ' · ' + regioes[sensorPicoMax] + ' às ' + horarios[horaPicoMax];
       }
 
-      // KPI 2: alertas dos sensores (um texto para cada sensor com problema)
+      // KPI 3: sensores em alerta (só os que estão fora da faixa ou sem comunicação)
       let listaTexto = '';
       let totalAlertas = 0;
 
@@ -482,29 +462,17 @@
       }
 
       const textoAlertas = document.getElementById('kpiAlertasTexto');
-      document.getElementById('kpiAlertas').innerHTML = totalAlertas;
+      document.getElementById('kpiAlertas').innerHTML = totalAlertas + ' / 3';
 
       if (totalAlertas == 0) {
         textoAlertas.innerHTML = 'todos os sensores na faixa';
         textoAlertas.className = 'kpi-subtexto';
-        listaTexto = '<p class="alerta-item alerta-ok">Nenhum alerta nesta estufa.</p>';
+        listaTexto = '<p class="alerta-item alerta-ok">Todos os sensores dentro da faixa.</p>';
       } else {
-        textoAlertas.innerHTML = 'sensores com alerta';
+        textoAlertas.innerHTML = 'sensores fora da faixa';
         textoAlertas.className = 'kpi-subtexto alerta';
       }
       document.getElementById('listaAlertas').innerHTML = listaTexto;
-
-      // KPI 3: sensores na faixa
-      const porcentagemFaixa = naFaixa / 3 * 100;
-      const textoSensores = document.getElementById('kpiSensoresTexto');
-      document.getElementById('kpiSensores').innerHTML = naFaixa + ' / 3';
-      textoSensores.innerHTML = formatar(porcentagemFaixa) + '% dos sensores';
-      textoSensores.className = 'kpi-subtexto';
-
-      if (semComunicacao > 0) {
-        textoSensores.innerHTML = textoSensores.innerHTML + ' · ' + semComunicacao + ' sem comunicação';
-        textoSensores.className = 'kpi-subtexto alerta';
-      }
     }
 
     // ================= ISOLAR UM SENSOR NO GRÁFICO =================

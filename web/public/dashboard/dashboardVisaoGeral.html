@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/dashboardVisaoGeral.css" />
   <link rel="shortcut icon" href="../imgs/logo.png" />
-  <title>Visão Geral | Dashboard</title>
+  <title>Radar de alertas | Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -30,7 +30,7 @@
         <a href="dashboardVisaoGeral.html">
           <div class="menu-ativo">
             <img src="../imgs/VectorLupa.svg" />
-            Visão geral
+            Alertas
           </div>
         </a>
 
@@ -55,10 +55,10 @@
     <main class="conteudo">
       <section class="cabecalho">
         <div class="titulo-com-icone">
-          <h1>Visão geral</h1>
+          <h1>Radar de alertas das estufas</h1>
         </div>
         <p class="subtitulo-principal">
-          Monitoramento de luminosidade em estufas de vanilla planifolia
+          Veja quando a luz passa do limite ou fica curta, em qual estufa e em que horário isso se repete, e se a semana está melhor ou pior que a anterior para decidir onde agir primeiro
         </p>
       </section>
 
@@ -112,6 +112,11 @@
       <div class="layout-duas-colunas">
         <!-- Esquerda: abas com os gráficos -->
         <section class="card-painel">
+          <div class="titulo-grafico">
+            <h2 id="graficoTitulo"></h2>
+            <p class="grafico-subtitulo" id="graficoSubtitulo"></p>
+          </div>
+
           <div class="linha-topo">
             <div class="grupo-abas">
               <button class="aba ativa" data-aba="horario">Por horário</button>
@@ -660,7 +665,30 @@
     }
 
     // ----- atualiza o que está visível -----
+    // ----- título e subtítulo do gráfico (mudam com aba, período e estufa) -----
+    function atualizarTituloGrafico() {
+      let onde = 'todas as estufas';
+      if (estufaAtual !== -1) {
+        onde = nomes[estufaAtual];
+      }
+
+      let titulo = 'Mapa do perigo: em que horas a luz sai da faixa';
+      let subtitulo = 'Alertas de máxima e mínima somados por horário nos últimos 7 dias (' + onde + '). Passe o mouse numa barra para ver quais estufas alertaram.';
+
+      if (abaAtual === 'tendencia' && periodo === 'dias') {
+        titulo = 'Pulso da semana: a luz está piorando ou melhorando?';
+        subtitulo = 'Alertas de máxima e mínima por dia, de ' + datasDias[0] + ' a ' + datasDias[datasDias.length - 1] + ' (' + onde + '). Barras subindo pedem ação.';
+      } else if (abaAtual === 'tendencia') {
+        titulo = 'Termômetro do mês: como foram as últimas 4 semanas';
+        subtitulo = 'Alertas de máxima e mínima por semana (' + onde + '). Compare a semana atual com as anteriores.';
+      }
+
+      document.getElementById('graficoTitulo').textContent = titulo;
+      document.getElementById('graficoSubtitulo').textContent = subtitulo;
+    }
+
     function atualizarTudo() {
+      atualizarTituloGrafico();
       atualizarKpis();
       atualizarKpiAlarmante();
       mostrarHistorico();
