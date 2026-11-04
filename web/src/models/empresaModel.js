@@ -1,13 +1,13 @@
 var database = require("../database/config");
 
 function buscarPorId(idCliente) {
-  var instrucaoSql = `SELECT * FROM cliente WHERE idCliente = '${idCliente}'`;
+  var instrucaoSql = `SELECT * FROM empresa WHERE idEmpresa = '${idCliente}'`;
 
   return database.executar(instrucaoSql);
 }
 
 function listar() {
-  var instrucaoSql = `SELECT idCliente, nome, codigo_ativacao FROM cliente`;
+  var instrucaoSql = `SELECT idEmpresa, nome, codigo_ativacao FROM empresa`;
 
   return database.executar(instrucaoSql);
 }
@@ -19,7 +19,7 @@ function listar() {
  }
 
 function cadastrar(nome) {
-  var instrucaoSql = `INSERT INTO cliente (nome) VALUES ('${nome}')`;
+  var instrucaoSql = `INSERT INTO empresa (nome) VALUES ('${nome}')`;
 
   return database.executar(instrucaoSql);
 }

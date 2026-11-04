@@ -202,7 +202,7 @@
     // Verificando se o código de ativação é de alguma empresa cadastrada
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
       if (listaEmpresasCadastradas[i].codigo_ativacao === codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].idCliente;
+        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa;
         break;
       }
     }
