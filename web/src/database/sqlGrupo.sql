@@ -162,3 +162,166 @@ END AS 'PPFD',
 leitura.data_hora AS DataLeitura
 FROM sensor JOIN leitura ON
 sensor.idSensor = leitura.fkSensor;
+
+/* 
+Novo script padronizado para evitar problemas com o linux
+CREATE DATABASE bd_luminousix;
+USE bd_luminousix;
+
+CREATE TABLE empresa (
+    id_empresa INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    identificacao_fiscal VARCHAR(45) NOT NULL,
+    email_contato VARCHAR(100) NOT NULL,
+    CONSTRAINT chk_email_contato CHECK (email_contato LIKE '%@%'),
+    telefone VARCHAR(20) NOT NULL,
+    codigo_ativacao VARCHAR(45)
+);
+
+CREATE TABLE usuario (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    email_cadastro VARCHAR(100) NOT NULL,
+    senha_cadastro VARCHAR(100) NOT NULL,
+    fk_empresa INT NOT NULL,
+    fk_supervisor INT,
+    CONSTRAINT chk_email_cadastro CHECK (email_cadastro LIKE '%@%'),
+    CONSTRAINT fk_usuario_empresa FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa),
+    CONSTRAINT fk_usuario_supervisor FOREIGN KEY (fk_supervisor) REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE parametro (
+    id_parametro INT PRIMARY KEY AUTO_INCREMENT,
+    ppfd_minimo INT NOT NULL,
+    ppfd_maximo INT NOT NULL,
+    meta_dli DECIMAL(5,2) NOT NULL,
+    fase_desenvolvimento VARCHAR(15) NOT NULL,
+    CONSTRAINT chk_fase_desenvolvimento CHECK (fase_desenvolvimento IN ('enraizamento','brotamento','crescimento','floracao'))
+);
+
+CREATE TABLE estufa (
+    id_estufa INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    percentual_sombreamento CHAR(3),
+    fk_empresa INT NOT NULL,
+    fk_parametro INT NOT NULL UNIQUE,
+    CONSTRAINT fk_estufa_empresa
+        FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa),
+    CONSTRAINT fk_estufa_parametro
+        FOREIGN KEY (fk_parametro) REFERENCES parametro(id_parametro)
+);
+
+CREATE TABLE sensor (
+    id_sensor INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    status_sensor VARCHAR(45),
+    fk_estufa INT NOT NULL,
+    CONSTRAINT chk_status CHECK (status_sensor IN ('Ativo','Inativo')),
+    CONSTRAINT fk_sensor_estufa
+        FOREIGN KEY (fk_estufa) REFERENCES estufa(id_estufa)
+);
+
+CREATE TABLE leitura (
+    id_leitura INT PRIMARY KEY AUTO_INCREMENT,
+    valor_ppfd INT NOT NULL,
+    data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fk_sensor INT NOT NULL,
+    CONSTRAINT fk_leitura_sensor
+        FOREIGN KEY (fk_sensor) REFERENCES sensor(id_sensor)
+);
+
+-- INSERTS PADRONIZADOS
+INSERT INTO empresa (nome, identificacao_fiscal, email_contato, telefone, codigo_ativacao) VALUES
+('Baunilha Brasil Ltda', '12345678000190', 'contato@baunilhabrasil.com', '11987654321', 'Urubu100'),
+('Fazenda da Baunilha', '98765432000155', 'contato@fazendabaunilha.com', '11976543210', 'sptech100'),
+('Cultivo Vanilla', '45678912000133', 'contato@cultivovanilla.com', '11965432109', 'Sptech');
+
+INSERT INTO usuario (nome, email_cadastro, senha_cadastro, fk_empresa, fk_supervisor) VALUES
+('Gabriel Silva', 'gabriel@baunilhabrasil.com', '123456', 1, NULL),
+('João Santos', 'joao@baunilhabrasil.com', '123456', 1, NULL),
+('Maria Oliveira', 'maria@fazendabaunilha.com', '123456', 2, NULL),
+('Pedro Souza', 'pedro@cultivovanilla.com', '123456', 3, NULL);
+
+INSERT INTO parametro (ppfd_minimo, ppfd_maximo, meta_dli, fase_desenvolvimento) VALUES
+(300, 500, 23.00, 'crescimento'),
+(400, 600, 28.80, 'floracao'),    
+(300, 500, 23.00, 'crescimento'),  
+(400, 600, 28.80, 'floracao');     
+
+INSERT INTO estufa (nome, percentual_sombreamento, fk_empresa, fk_parametro) VALUES
+('Estufa 01', '50', 1, 1),
+('Estufa 02', '60', 1, 2),
+('Estufa Principal', '40', 2, 3),
+('Estufa A', '50', 3, 4);
+
+INSERT INTO sensor (nome, status_sensor, fk_estufa) VALUES
+('Sensor Luminosidade 01', 'Ativo', 1),
+('Sensor Luminosidade 02', 'Ativo', 1),
+('Sensor Luminosidade 03', 'Inativo', 2),
+('Sensor Luminosidade 04', 'Ativo', 3),
+('Sensor Luminosidade 05', 'Ativo', 4);
+
+INSERT INTO leitura (valor_ppfd, data_hora, fk_sensor) VALUES
+(420, '2026-09-25 08:00:00', 1),
+(580, '2026-09-25 10:00:00', 1),
+(720, '2026-09-25 12:00:00', 1),
+(650, '2026-09-25 14:00:00', 1),
+(500, '2026-09-25 16:00:00', 1),
+(380, '2026-09-25 08:30:00', 2),
+(550, '2026-09-25 10:30:00', 2),
+(690, '2026-09-25 12:30:00', 2),
+(610, '2026-09-25 14:30:00', 2),
+(450, '2026-09-25 16:30:00', 2),
+(460, '2026-09-25 09:00:00', 3),
+(620, '2026-09-25 11:00:00', 4),
+(750, '2026-09-25 13:00:00', 4),
+(570, '2026-09-25 15:00:00', 5);
+
+-- CONSULTAS PADRONIZADAS
+SELECT * FROM empresa 
+JOIN usuario ON 
+empresa.id_empresa = usuario.fk_empresa;
+
+SELECT sensor.nome AS nome_sensor,
+       sensor.status_sensor AS status_sensor,
+       leitura.valor_ppfd AS ppfd,
+       leitura.data_hora AS data_leitura
+FROM sensor JOIN leitura ON
+sensor.id_sensor = leitura.fk_sensor;
+
+SELECT em.nome AS nome_empresa,
+       es.nome AS nome_estufa,
+       s.nome AS nome_sensor,
+       s.status_sensor AS status_sensor
+FROM sensor AS s 
+JOIN estufa AS es ON 
+es.id_estufa = s.fk_estufa
+JOIN empresa AS em ON
+es.fk_empresa = em.id_empresa;
+
+SELECT em.nome AS nome_empresa,
+       es.nome AS nome_estufa,
+       s.nome AS nome_sensor,
+       l.valor_ppfd AS ppfd,
+       l.data_hora AS data_leitura
+FROM leitura AS l
+JOIN sensor AS s ON
+s.id_sensor = l.fk_sensor
+JOIN estufa AS es ON
+es.id_estufa = s.fk_estufa
+JOIN empresa AS em ON
+em.id_empresa = es.fk_empresa
+ORDER BY em.nome, es.nome, l.data_hora;
+
+SELECT sensor.nome AS nome_sensor,
+       sensor.status_sensor AS status_sensor,
+       leitura.valor_ppfd,
+       CASE
+           WHEN valor_ppfd > 600 THEN 'PPFD acima do esperado'
+           WHEN valor_ppfd < 200 THEN 'PPFD abaixo do esperado'
+           ELSE 'Estável'
+       END AS classificacao_ppfd,
+       leitura.data_hora AS data_leitura
+FROM sensor JOIN leitura ON
+sensor.id_sensor = leitura.fk_sensor;
+*/
