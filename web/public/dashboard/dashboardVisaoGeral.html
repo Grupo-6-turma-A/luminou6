@@ -53,344 +53,668 @@
 
   <div class="area-principal">
     <main class="conteudo">
-      <!-- Cabeçalho -->
       <section class="cabecalho">
         <div class="titulo-com-icone">
           <h1>Visão geral</h1>
         </div>
-        <p  class="subtitulo-principal">
+        <p class="subtitulo-principal">
           Monitoramento de luminosidade em estufas de vanilla planifolia
         </p>
       </section>
 
-      <!-- 4 Cards KPI de Topo -->
+      <!-- 3 KPIs -->
       <section class="grid-kpis">
-        <!-- KPI 1: Índice UV Solar -->
         <div class="card-kpi">
           <div class="kpi-topo">
-            <h3>Índice UV Solar</h3>
+            <h3>Alertas de máxima <span class="ponto-kpi ponto-max"></span></h3>
           </div>
           <div class="kpi-corpo">
-            <div class="kpi-valor-grupo">
-              <span class="kpi-valor" id="kpiUv">8,5</span>
-            </div>
-            <span class="badge badge-solido" id="descricaoKPIUV">Muito Alto</span>
+            <span class="kpi-valor" id="kpiMaxValor">1/5</span>
+            <p class="kpi-subtexto" id="kpiMaxSub"></p>
+            <p class="kpi-semana" id="kpiMaxSemana"></p>
           </div>
         </div>
 
-        <!-- KPI 2: Estufas adequadas -->
+        <div class="card-kpi">
+          <div class="kpi-topo">
+            <h3>Alertas de mínima <span class="ponto-kpi ponto-min"></span></h3>
+          </div>
+          <div class="kpi-corpo">
+            <span class="kpi-valor" id="kpiMinValor">1/5</span>
+            <p class="kpi-subtexto" id="kpiMinSub"></p>
+            <p class="kpi-semana" id="kpiMinSemana"></p>
+          </div>
+        </div>
+
         <div class="card-kpi">
           <div class="kpi-topo">
             <h3>Estufas adequadas</h3>
           </div>
           <div class="kpi-corpo">
-            <div class="kpi-valor-grupo">
-              <span class="kpi-valor">5/5</span>
-            </div>
+            <span class="kpi-valor" id="kpiAdeqValor">3/5</span>
             <p class="kpi-subtexto">dentro dos parâmetros</p>
-            <div class="kpi-progresso-container">
-              <!--<div class="kpi-barra-fundo">
-                  <div class="kpi-barra-preenchida" style="width: 83.3%;"></div>
-                </div>
-                 -->
-            </div>
+            <p class="kpi-semana" id="kpiAdeqSemana"></p>
           </div>
         </div>
 
-        <!-- KPI 3: Risco de Estresse -->
         <div class="card-kpi">
           <div class="kpi-topo">
-            <h3>Risco de Estresse</h3>
+            <h3 id="kpiAlarmanteTitulo">Horário mais alarmante</h3>
           </div>
           <div class="kpi-corpo">
-            <div class="kpi-valor-grupo">
-              <span class="kpi-valor kpi-valor-texto" id="kpiRisco">Crítico</span>
-            </div>
-            <p class="kpi-subtexto" id="descricaoKPIRISCO">Alta chance de queima de folhas</p>
-          </div>
-        </div>
-
-        <!-- KPI 4: Alertas ativos -->
-        <div class="card-kpi">
-          <div class="kpi-topo">
-            <h3>Alertas ativos</h3>
-          </div>
-          <div class="kpi-corpo">
-            <div class="kpi-valor-grupo">
-              <span class="kpi-valor" id="alerta">3</span>
-            </div>
-            <p class="kpi-subtexto alerta" id="verificacao-alerta">Verificação pendente</p>
+            <span class="kpi-valor" id="kpiAlarmanteValor">15h</span>
+            <p class="kpi-subtexto" id="kpiAlarmanteSub"></p>
+            <p class="kpi-semana semana-igual" id="kpiAlarmanteSugestao"></p>
           </div>
         </div>
       </section>
 
-      <!-- Layout Principal: Gráfico à esquerda, Tabelas à direita -->
       <div class="layout-duas-colunas">
-        <!-- Coluna Esquerda: Gráfico de Luminosidade por Estufa -->
+        <!-- Esquerda: abas com os gráficos -->
         <section class="card-painel">
-          <div class="cabecalho-painel">
-            <div class="painel-titulo-icone">
-              <h2>Luminosidade por estufa</h2>
+          <div class="linha-topo">
+            <div class="grupo-abas">
+              <button class="aba ativa" data-aba="horario">Por horário</button>
+              <button class="aba" data-aba="tendencia">Tendência</button>
+            </div>
+
+            <div class="legenda">
+              <span class="item-legenda"><span class="ponto-cor ponto-max"></span>Alertas de máxima</span>
+              <span class="item-legenda"><span class="ponto-cor ponto-min"></span>Alertas de mínima</span>
             </div>
           </div>
 
-          <div class="container-grafico">
-            <div class="area-canvas">
-              <canvas id="graficoLuminosidade"></canvas>
+          <div class="linha-chips">
+            <div class="grupo-chips">
+              <button class="chip-estufa ativo" data-estufa="-1">Todas</button>
+              <button class="chip-estufa" data-estufa="0">Estufa 1</button>
+              <button class="chip-estufa" data-estufa="1">Estufa 2</button>
+              <button class="chip-estufa" data-estufa="2">Estufa 3</button>
+              <button class="chip-estufa" data-estufa="3">Estufa 4</button>
+              <button class="chip-estufa" data-estufa="4">Estufa 5</button>
             </div>
+
+            <div class="grupo-periodo" id="grupoPeriodo" hidden>
+              <button class="btn-periodo ativo" data-periodo="dias">7 dias</button>
+              <button class="btn-periodo" data-periodo="semanas">4 semanas</button>
+            </div>
+          </div>
+
+          <div class="area-canvas" id="blocoHorario">
+            <canvas id="graficoHorario"></canvas>
+          </div>
+          <div class="area-canvas" id="blocoTendencia" hidden>
+            <canvas id="graficoTendencia"></canvas>
           </div>
         </section>
 
-        <!-- Coluna Direita: Histórico de Leituras e Estufas Monitoradas -->
-        <div class="coluna-direita">
-          <!-- Histórico de Leituras -->
-          <section class="card-painel">
-            <div class="cabecalho-painel">
-              <div class="painel-titulo-icone">
-                <h2>Histórico de alertas</h2>
-              </div>
+        <!-- Direita: histórico de alertas -->
+        <section class="card-painel">
+          <div class="cabecalho-painel">
+            <div class="painel-titulo-icone">
+              <h2>Histórico de alertas</h2>
             </div>
-            <table class="tabela-dashboard" id="tabelaAlerta">
+          </div>
+          <div class="tabela-scroll">
+            <table class="tabela-dashboard">
               <thead>
                 <tr>
                   <th>Horário</th>
-                  <th>Data</th>
+                  <th>Dia</th>
                   <th>Estufa</th>
                   <th>Status</th>
                   <th>Ação</th>
                 </tr>
               </thead>
-              <tbody id="tabelaHistoricoCorpo">
-                <tr>
-                  <td>13:00</td>
-                  <td>24/03</td>
-                  <td>Estufa 1</td>
-                  <td><span class="badge badge-alto">ALTO</span></td>
-                  <td><button class="btn-acao resolver" onclick="resolverAlerta(this)">Resolver</button></td>
-                </tr>
-                <tr>
-                  <td>10:20</td>
-                  <td>20/05</td>
-                  <td>Estufa 2</td>
-                  <td><span class="badge badge-baixo">BAIXO</span></td>
-                  <td><button class="btn-acao resolver" onclick="resolverAlerta(this)">Resolver</button></td>
-                </tr>
-                <tr>
-                  <td>17:20</td>
-                  <td>12/11</td>
-                  <td>Estufa 4</td>
-                  <td><span class="badge badge-baixo">BAIXO</span></td>
-                  <td><button class="btn-acao resolver" onclick="resolverAlerta(this)">Resolver</button></td>
-                </tr>
-              </tbody>
+              <tbody id="tabelaHistoricoCorpo"></tbody>
             </table>
-          </section>
-
-          <!-- Estufas Monitoradas -->
-          <section class="card-painel">
-            <div class="cabecalho-painel">
-              <div class="painel-titulo-icone">
-                <h2>Estufas monitoradas</h2>
-              </div>
-              <button class="btn-link" onclick="mostrarTodasEstufas()">Ver todas</button>
-            </div>
-            <p class="subtitulo-painel">
-              Clique no nome de uma estufa para isolá-la no gráfico e nos KPIs.
-            </p>
-
-            <table class="tabela-dashboard">
-              <thead>
-                <tr>
-                  <th>Estufa</th>
-                  <th>PPFD atual</th>
-                  <th>Fase</th>
-                  <th>Status</th>
-                  <th>Última leitura</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr onclick="isolarEstufaGrafico('Estufa 1')">
-                  <td>
-                    <div class="celula-estufa">
-                      Estufa 1
-                    </div>
-                  </td>
-                  <td>170</td>
-                  <td>Brotamento</td>
-                  <td><span class="badge badge-ok">OK</span></td>
-                  <td>11:20</td>
-                </tr>
-                <tr onclick="isolarEstufaGrafico('Estufa 2')">
-                  <td>
-                    <div class="celula-estufa">
-                      Estufa 2
-                    </div>
-                  </td>
-                  <td>230</td>
-                  <td>Crescimento</td>
-                  <td><span class="badge badge-ok">OK</span></td>
-                  <td>11:20</td>
-                </tr>
-                <tr onclick="isolarEstufaGrafico('Estufa 3')">
-                  <td>
-                    <div class="celula-estufa">
-                      Estufa 3
-                    </div>
-                  </td>
-                  <td>345</td>
-                  <td>Floração</td>
-                  <td><span class="badge badge-ok">OK</span></td>
-                  <td>11:20</td>
-                </tr>
-                <tr onclick="isolarEstufaGrafico('Estufa 4')">
-                  <td>
-                    <div class="celula-estufa">
-                      Estufa 4
-                    </div>
-                  </td>
-                  <td>240</td>
-                  <td>Crescimento</td>
-                  <td><span class="badge badge-ok">OK</span></td>
-                  <td>11:20</td>
-                </tr>
-                <tr onclick="isolarEstufaGrafico('Estufa 5')">
-                  <td>
-                    <div class="celula-estufa">
-                      Estufa 5
-                    </div>
-                  </td>
-                  <td>190</td>
-                  <td>Brotamento</td>
-                  <td><span class="badge badge-ok">OK</span></td>
-                  <td>11:20</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-        </div>
+          </div>
+        </section>
       </div>
     </main>
   </div>
+
   <script>
-    const ctx = document.getElementById('graficoLuminosidade').getContext('2d');
+    // ================= DADOS SIMULADOS (arrays) =================
+    const nomes = ['Estufa 1', 'Estufa 2', 'Estufa 3', 'Estufa 4', 'Estufa 5'];
+    const ppfdAtual = [170, 230, 345, 240, 190];
+    const ppfdMin = [150, 150, 200, 150, 200];   // vem da tela Configurações
+    const ppfdMax = [250, 300, 400, 235, 300];   // vem da tela Configurações
 
-    const meuGrafico = new Chart(ctx, {
-      type: 'line',
+    const horaAtual = 680;                       // 11:20 em minutos (11 * 60 + 20)
+    const inicioBaixo = [-1, -1, -1, -1, 670];   // -1 = não está abaixo do mínimo
+    const ESPERA = 5;                            // minutos até confirmar alerta de mínima
 
-      data: {
-        labels: ['10:35', '10:40', '10:45', '10:50', '10:55', '11:00', '11:05', '11:10', '11:15', '11:20'],
+    const passadaMax = 2;                        // estufas com alerta de máxima na semana passada
+    const passadaMin = 2;
+    // estufas dentro dos parâmetros na semana passada (1 = adequada, 0 = não), uma por estufa
+    const adequadaPassada = [0, 1, 1, 0, 0];
 
-        datasets: [
-          {
-            label: 'Estufa 1',
-            data: [140, 145, 142, 147, 150, 155, 160, 163, 171, 170],
-            borderColor: 'rgb(255, 44, 44)',
-            tension: 0.3
-          },
-          {
-            label: 'Estufa 2',
-            data: [160, 167, 180, 200, 210, 220, 210, 215, 220, 230],
-            borderColor: 'rgb(0, 100, 50)', tension: 0.3
-          },
-          {
-            label: 'Estufa 3',
-            data: [300, 310, 340, 350, 320, 310, 300, 330, 340, 345],
-            borderColor: 'rgb(180, 160, 0)',
-            tension: 0.3
-          },
-          {
-            label: 'Estufa 4',
-            data: [200, 210, 230, 210, 214, 216, 220, 230, 250, 240],
-            borderColor: 'rgb(0, 0, 255)',
-            tension: 0.3
-          },
-          {
-            label: 'Estufa 5',
-            data: [190, 193, 195, 201, 205, 210, 215, 200, 198, 190],
-            borderColor: 'rgb(128, 0, 128)',
-            tension: 0.3
+    // Gráfico por horário: uma linha por estufa, uma coluna por hora
+    const horas = ['6h', '7h', '8h', '9h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h'];
+    const horaMax = [
+      [0, 0, 0, 0, 0, 0, 0, 2, 4, 7, 3, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
+    const horaMin = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2],
+      [4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+    ];
+
+    // Gráfico de tendência: dias e semanas
+    const rotulosDias = ['Qua', 'Qui', 'Sex', 'Sáb', 'Dom', 'Seg', 'Ter'];
+    const datasDias = ['28/10', '29/10', '30/10', '31/10', '01/11', '02/11', '03/11'];
+    const rotulosSemanas = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4 (atual)'];
+    const diasMax = [
+      [1, 1, 2, 2, 3, 3, 4],
+      [0, 0, 0, 1, 0, 0, 0],
+      [0, 1, 0, 0, 0, 1, 0],
+      [0, 0, 1, 0, 1, 0, 1],
+      [0, 0, 0, 0, 0, 0, 0]
+    ];
+    const diasMin = [
+      [0, 0, 0, 0, 0, 0, 0],
+      [2, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 1, 0, 0],
+      [2, 2, 1, 1, 1, 1, 1]
+    ];
+    const semanasMax = [
+      [4, 6, 9, 16],
+      [1, 1, 2, 1],
+      [2, 1, 1, 2],
+      [1, 2, 3, 3],
+      [0, 0, 0, 0]
+    ];
+    const semanasMin = [
+      [0, 0, 1, 0],
+      [9, 7, 6, 5],
+      [0, 1, 0, 0],
+      [6, 5, 4, 4],
+      [12, 11, 10, 9]
+    ];
+
+    // Lista de alertas da semana, montada a partir das mesmas tabelas dos gráficos
+    // (horas e dias combinam, porque os totais de cada estufa são iguais)
+    const alertas = [];
+
+    function montarAlertas(tipo, matrizHora, matrizDia) {
+      for (let e = 0; e < matrizHora.length; e++) {
+        const listaHoras = [];
+        for (let h = 0; h < horas.length; h++) {
+          for (let k = 0; k < matrizHora[e][h]; k++) {
+            listaHoras.push(h);
           }
+        }
+
+        const listaDias = [];
+        for (let d = matrizDia[e].length - 1; d >= 0; d--) {   // do dia mais recente ao mais antigo
+          for (let k = 0; k < matrizDia[e][d]; k++) {
+            listaDias.push(d);
+          }
+        }
+
+        for (let k = 0; k < listaHoras.length; k++) {
+          alertas.push({
+            estufa: e,
+            tipo: tipo,
+            hora: listaHoras[k],
+            dia: listaDias[k],
+            minuto: (k * 17 + e * 7) % 60,
+            resolvido: true
+          });
+        }
+      }
+    }
+
+    montarAlertas('max', horaMax, diasMax);
+    montarAlertas('min', horaMin, diasMin);
+
+    // mais recentes primeiro; os 3 mais recentes ainda estão pendentes
+    alertas.sort(function (a, b) {
+      if (a.dia !== b.dia) {
+        return b.dia - a.dia;
+      }
+      if (a.hora !== b.hora) {
+        return b.hora - a.hora;
+      }
+      return b.minuto - a.minuto;
+    });
+    for (let k = 0; k < 3; k++) {
+      alertas[k].resolvido = false;
+    }
+
+    // ================= ESTADO =================
+    let estufaAtual = -1;      // -1 = todas
+    let abaAtual = 'horario';
+    let periodo = 'dias';
+
+    // ================= FUNÇÕES =================
+    // soma cada coluna da matriz; isolada = -1 soma todas as estufas
+    function somarColunas(matriz, isolada) {
+      const soma = [];
+      for (let c = 0; c < matriz[0].length; c++) {
+        let total = 0;
+        for (let e = 0; e < matriz.length; e++) {
+          if (isolada === -1 || isolada === e) {
+            total = total + matriz[e][c];
+          }
+        }
+        soma.push(total);
+      }
+      return soma;
+    }
+
+    function registrarEspera() {
+      ppfdAtual.forEach(function (valor, i) {
+        if (valor < ppfdMin[i]) {
+          if (inicioBaixo[i] === -1) {
+            inicioBaixo[i] = horaAtual;
+          }
+        } else {
+          inicioBaixo[i] = -1;
+        }
+      });
+    }
+
+    // mostra se o número subiu, caiu ou ficou igual ao da última semana
+    // sufixo: '/5' na visão geral, '' quando a estufa está isolada
+    // maisEhMelhor: true para estufas adequadas (mais é bom), false para alertas (mais é ruim)
+    function mostrarSemana(idTexto, atual, passada, sufixo, maisEhMelhor) {
+      const campo = document.getElementById(idTexto);
+
+      if (atual > passada) {
+        campo.textContent = 'Mais que na última semana (' + passada + sufixo + ')';
+        campo.className = maisEhMelhor ? 'kpi-semana semana-melhor' : 'kpi-semana semana-pior';
+      } else if (atual < passada) {
+        campo.textContent = 'Menos que na última semana (' + passada + sufixo + ')';
+        campo.className = maisEhMelhor ? 'kpi-semana semana-pior' : 'kpi-semana semana-melhor';
+      } else {
+        campo.textContent = 'Igual à última semana (' + passada + sufixo + ')';
+        campo.className = 'kpi-semana semana-igual';
+      }
+    }
+
+    function atualizarKpis() {
+      let total = 0;
+      let acima = 0;
+      let abaixo = 0;
+      let adequadas = 0;
+
+      registrarEspera();
+
+      nomes.forEach(function (nome, i) {
+        if (estufaAtual === -1 || estufaAtual === i) {
+          total++;
+
+          if (ppfdAtual[i] > ppfdMax[i]) {
+            acima++;
+          } else if (ppfdAtual[i] < ppfdMin[i]) {
+            if (horaAtual - inicioBaixo[i] >= ESPERA) {
+              abaixo++;
+            }
+          } else {
+            adequadas++;
+          }
+        }
+      });
+
+      document.getElementById('kpiAdeqValor').textContent = adequadas + '/' + total;
+
+      if (estufaAtual === -1) {
+        mostrarSemana('kpiAdeqSemana', adequadas, somarLista(adequadaPassada), '/' + total, true);
+      } else {
+        mostrarSemana('kpiAdeqSemana', adequadas, adequadaPassada[estufaAtual], '/1', true);
+      }
+
+      if (estufaAtual === -1) {
+        // visão geral: quantas estufas estão em alerta agora
+        document.getElementById('kpiMaxValor').textContent = acima + '/' + total;
+        document.getElementById('kpiMinValor').textContent = abaixo + '/' + total;
+        document.getElementById('kpiMaxSub').textContent = 'estufas em alerta agora';
+        document.getElementById('kpiMinSub').textContent = 'estufas em alerta agora';
+        mostrarSemana('kpiMaxSemana', acima, passadaMax, '/' + total, false);
+        mostrarSemana('kpiMinSemana', abaixo, passadaMin, '/' + total, false);
+      } else {
+        // estufa isolada: quantos alertas de cada tipo ela teve na semana
+        // (os mesmos números dos gráficos)
+        const semanaMaxAtual = somarLista(diasMax[estufaAtual]);
+        const semanaMinAtual = somarLista(diasMin[estufaAtual]);
+        document.getElementById('kpiMaxValor').textContent = semanaMaxAtual;
+        document.getElementById('kpiMinValor').textContent = semanaMinAtual;
+        document.getElementById('kpiMaxSub').textContent = 'alertas na semana';
+        document.getElementById('kpiMinSub').textContent = 'alertas na semana';
+        mostrarSemana('kpiMaxSemana', semanaMaxAtual, semanasMax[estufaAtual][2], '', false);
+        mostrarSemana('kpiMinSemana', semanaMinAtual, semanasMin[estufaAtual][2], '', false);
+      }
+    }
+
+    // ----- gráfico por horário -----
+    const graficoHorario = new Chart(document.getElementById('graficoHorario'), {
+      type: 'bar',
+      data: {
+        labels: horas,
+        datasets: [
+          { label: 'Alertas de máxima', data: somarColunas(horaMax, -1), backgroundColor: '#B42318' },
+          { label: 'Alertas de mínima', data: somarColunas(horaMin, -1), backgroundColor: '#2563EB' }
         ]
       },
-
       options: {
         responsive: true,
         maintainAspectRatio: false,
-
         plugins: {
-          legend: {
-            position: 'top'
-          },
-
-          title: {
-            display: false
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterBody: function (itens) {
+                const matriz = itens[0].datasetIndex === 0 ? horaMax : horaMin;
+                return listarEstufas(matriz, itens[0].dataIndex);
+              }
+            }
           }
         },
-
+        onHover: function (evento, elementos) {
+          destacarLinhas(elementos);
+        },
         scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'PPFD (µmol/m²/s)'
-            }
-          },
-
-          x: {
-            title: {
-              display: true,
-              text: 'Horário'
-            }
-          }
+          x: { stacked: true, grid: { display: false } },
+          y: { stacked: true, beginAtZero: true, ticks: { stepSize: 2 } }
         }
       }
     });
-    function isolarEstufaGrafico(nomeDoLabel) {
 
-      meuGrafico.data.datasets.forEach((dataset) => {
+    function atualizarGraficoHorario() {
+      graficoHorario.data.datasets[0].data = somarColunas(horaMax, estufaAtual);
+      graficoHorario.data.datasets[1].data = somarColunas(horaMin, estufaAtual);
+      graficoHorario.update();
+    }
 
-        if (dataset.label === nomeDoLabel) {
-          dataset.hidden = false;
-        } else {
-          dataset.hidden = true;
+    // ----- gráfico de tendência -----
+    const graficoTendencia = new Chart(document.getElementById('graficoTendencia'), {
+      type: 'bar',
+      data: {
+        labels: rotulosDias,
+        datasets: [
+          { label: 'Alertas de máxima', data: somarColunas(diasMax, -1), backgroundColor: '#B42318' },
+          { label: 'Alertas de mínima', data: somarColunas(diasMin, -1), backgroundColor: '#2563EB' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterBody: function (itens) {
+                let matrizMax = diasMax;
+                let matrizMin = diasMin;
+                if (periodo === 'semanas') {
+                  matrizMax = semanasMax;
+                  matrizMin = semanasMin;
+                }
+                const matriz = itens[0].datasetIndex === 0 ? matrizMax : matrizMin;
+                return listarEstufas(matriz, itens[0].dataIndex);
+              }
+            }
+          }
+        },
+        onHover: function (evento, elementos) {
+          destacarLinhas(elementos);
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { beginAtZero: true, ticks: { stepSize: 2 } }
+        }
+      }
+    });
+
+    function atualizarGraficoTendencia() {
+      let rotulos;
+      let max;
+      let min;
+
+      if (periodo === 'dias') {
+        rotulos = rotulosDias;
+        max = somarColunas(diasMax, estufaAtual);
+        min = somarColunas(diasMin, estufaAtual);
+      } else {
+        rotulos = rotulosSemanas;
+        max = somarColunas(semanasMax, estufaAtual);
+        min = somarColunas(semanasMin, estufaAtual);
+      }
+
+      graficoTendencia.data.labels = rotulos;
+      graficoTendencia.data.datasets[0].data = max;
+      graficoTendencia.data.datasets[1].data = min;
+      graficoTendencia.update();
+    }
+
+    // ----- histórico de alertas -----
+    function dois(numero) {
+      if (numero < 10) {
+        return '0' + numero;
+      }
+      return '' + numero;
+    }
+
+    function mostrarHistorico() {
+      const corpo = document.getElementById('tabelaHistoricoCorpo');
+      let html = '';
+
+      alertas.forEach(function (alerta, i) {
+        if (estufaAtual === -1 || estufaAtual === alerta.estufa) {
+          let status = '<span class="badge badge-alto">Alerta máximo</span>';
+          if (alerta.tipo === 'min') {
+            status = '<span class="badge badge-min">Alerta mínimo</span>';
+          }
+
+          let acao = '<span class="resolvido">Resolvido</span>';
+          if (alerta.resolvido === false) {
+            acao = '<button class="btn-acao resolver" onclick="resolverAlerta(' + i + ')">Resolver</button>';
+          }
+
+          html = html + '<tr data-tipo="' + alerta.tipo + '" data-hora="' + alerta.hora + '" data-dia="' + alerta.dia + '">' +
+            '<td>' + dois(alerta.hora + 6) + ':' + dois(alerta.minuto) + '</td>' +
+            '<td>' + rotulosDias[alerta.dia] + '</td>' +
+            '<td>' + nomes[alerta.estufa] + '</td>' +
+            '<td>' + status + '</td>' +
+            '<td>' + acao + '</td>' +
+            '</tr>';
+        }
+      });
+
+      if (html === '') {
+        html = '<tr><td colspan="5" class="vazio">Nenhum alerta</td></tr>';
+      }
+
+      corpo.innerHTML = html;
+    }
+
+    function resolverAlerta(indice) {
+      alertas[indice].resolvido = true;
+      mostrarHistorico();
+    }
+
+    // ----- ligação entre o gráfico e a tabela -----
+    // texto do tooltip: quais estufas têm alerta naquela barra
+    function listarEstufas(matriz, coluna) {
+      const linhas = ['Estufas em alerta:'];
+
+      for (let e = 0; e < matriz.length; e++) {
+        if (matriz[e][coluna] > 0 && (estufaAtual === -1 || estufaAtual === e)) {
+          linhas.push(nomes[e] + ': ' + matriz[e][coluna]);
+        }
+      }
+
+      if (linhas.length === 1) {
+        linhas.push('Nenhuma');
+      }
+      return linhas;
+    }
+
+    // ao passar o mouse numa barra, destaca as linhas da tabela daquela barra
+    function destacarLinhas(elementos) {
+      let primeira = null;
+
+      document.querySelectorAll('#tabelaHistoricoCorpo tr').forEach(function (linha) {
+        let combina = false;
+
+        if (elementos.length > 0) {
+          const tipo = elementos[0].datasetIndex === 0 ? 'max' : 'min';
+          const coluna = elementos[0].index;
+
+          if (linha.dataset.tipo === tipo) {
+            if (abaAtual === 'horario') {
+              combina = Number(linha.dataset.hora) === coluna;
+            } else if (periodo === 'dias') {
+              combina = Number(linha.dataset.dia) === coluna;
+            } else {
+              combina = coluna === 3;   // a lista só tem os alertas da semana atual
+            }
+          }
         }
 
+        if (combina) {
+          linha.classList.add('destaque');
+          if (primeira === null) {
+            primeira = linha;
+          }
+        } else {
+          linha.classList.remove('destaque');
+        }
       });
 
-      meuGrafico.update();
-    }
-
-    function mostrarTodasEstufas() {
-
-      meuGrafico.data.datasets.forEach((dataset) => {
-        dataset.hidden = false;
-      });
-
-      meuGrafico.update();
-    }
-
-    function atualizarAlertas() {
-      let quantidade = tabelaHistoricoCorpo.rows.length;
-      alerta.innerHTML = quantidade;
-
-      let texto = document.getElementById("verificacao-alerta");
-
-      if (quantidade == 0) {
-        texto.innerHTML = `<b style="color: green;">Nenhum alerta pendente</b>`;
-      } else {
-        texto.innerHTML = `Verificação pendente`;
+      if (primeira !== null) {
+        document.querySelector('.tabela-scroll').scrollTop = primeira.offsetTop - 40;
       }
     }
 
-    function resolverAlerta(botao) {
-      let linha = botao.closest('tr');
-      linha.remove();
-      atualizarAlertas();
+    // ----- KPI: horário (ou dia, ou semana) mais alarmante -----
+    function somarLista(lista) {
+      let total = 0;
+      lista.forEach(function (valor) {
+        total = total + valor;
+      });
+      return total;
     }
 
-    atualizarAlertas();
+    function atualizarKpiAlarmante() {
+      let titulo = 'Horário mais alarmante';
+      let rotulos = horas;
+      let max = somarColunas(horaMax, estufaAtual);
+      let min = somarColunas(horaMin, estufaAtual);
 
-    
+      if (abaAtual === 'tendencia') {
+        if (periodo === 'dias') {
+          titulo = 'Dia mais alarmante';
+          rotulos = rotulosDias;
+          max = somarColunas(diasMax, estufaAtual);
+          min = somarColunas(diasMin, estufaAtual);
+        } else {
+          titulo = 'Semana mais alarmante';
+          rotulos = rotulosSemanas;
+          max = somarColunas(semanasMax, estufaAtual);
+          min = somarColunas(semanasMin, estufaAtual);
+        }
+      }
+
+      let maior = 0;
+      let posicao = 0;
+      for (let c = 0; c < rotulos.length; c++) {
+        if (max[c] + min[c] > maior) {
+          maior = max[c] + min[c];
+          posicao = c;
+        }
+      }
+
+      document.getElementById('kpiAlarmanteTitulo').textContent = titulo;
+
+      let nomePosicao = rotulos[posicao];
+      if (abaAtual === 'tendencia' && periodo === 'dias') {
+        nomePosicao = rotulosDias[posicao] + ' ' + datasDias[posicao];   // ex.: Ter 03/11
+      }
+
+      if (maior === 0) {
+        document.getElementById('kpiAlarmanteValor').textContent = '--';
+        document.getElementById('kpiAlarmanteSub').textContent = 'Nenhum alerta no período';
+        document.getElementById('kpiAlarmanteSugestao').textContent = '';
+      } else {
+        document.getElementById('kpiAlarmanteValor').textContent = nomePosicao;
+        document.getElementById('kpiAlarmanteSub').textContent = maior + ' alertas (' + max[posicao] + ' de máxima, ' + min[posicao] + ' de mínima)';
+
+        if (abaAtual !== 'horario') {
+          document.getElementById('kpiAlarmanteSugestao').textContent = '';
+        } else if (max[posicao] >= min[posicao]) {
+          document.getElementById('kpiAlarmanteSugestao').textContent = 'Sugestão: sombrear nesse horário.';
+        } else {
+          document.getElementById('kpiAlarmanteSugestao').textContent = 'Sugestão: checar sombra, sujeira no sensor ou luz extra.';
+        }
+      }
+    }
+
+    // ----- atualiza o que está visível -----
+    function atualizarTudo() {
+      atualizarKpis();
+      atualizarKpiAlarmante();
+      mostrarHistorico();
+      if (abaAtual === 'horario') {
+        atualizarGraficoHorario();
+      } else {
+        atualizarGraficoTendencia();
+      }
+    }
+
+    // ----- eventos -----
+    document.querySelectorAll('.chip-estufa').forEach(function (botao) {
+      botao.addEventListener('click', function () {
+        document.querySelectorAll('.chip-estufa').forEach(function (b) {
+          b.classList.remove('ativo');
+        });
+        botao.classList.add('ativo');
+        estufaAtual = Number(botao.dataset.estufa);
+        atualizarTudo();
+      });
+    });
+
+    document.querySelectorAll('.aba').forEach(function (botao) {
+      botao.addEventListener('click', function () {
+        document.querySelectorAll('.aba').forEach(function (b) {
+          b.classList.remove('ativa');
+        });
+        botao.classList.add('ativa');
+        abaAtual = botao.dataset.aba;
+
+        const ehHorario = abaAtual === 'horario';
+        document.getElementById('blocoHorario').hidden = !ehHorario;
+        document.getElementById('blocoTendencia').hidden = ehHorario;
+        document.getElementById('grupoPeriodo').hidden = ehHorario;
+
+        atualizarTudo();
+        graficoHorario.resize();
+        graficoTendencia.resize();
+      });
+    });
+
+    document.querySelectorAll('.btn-periodo').forEach(function (botao) {
+      botao.addEventListener('click', function () {
+        document.querySelectorAll('.btn-periodo').forEach(function (b) {
+          b.classList.remove('ativo');
+        });
+        botao.classList.add('ativo');
+        periodo = botao.dataset.periodo;
+        atualizarTudo();
+      });
+    });
+
+    mostrarHistorico();
+    atualizarTudo();
   </script>
 </body>
 

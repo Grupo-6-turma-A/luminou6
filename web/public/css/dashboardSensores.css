@@ -11,29 +11,28 @@
 }
 
 :root {
-    --verde-sidebar:   #55643e;
-    --verde-escuro:    #3d4a2c;
-    --verde-fundo:     #ebf0e6;
-    --branco:          #ffffff;
-    --cinza-borda:     #e5e7eb;
-    --cinza-fundo:     #f9fafb;
+    --verde-sidebar: #55643e;
+    --verde-fundo: #ebf0e6;
+    --branco: #ffffff;
+    --cinza-borda: #e5e7eb;
+    --cinza-fundo: #f9fafb;
     --texto-principal: #1f2937;
-    --texto-secundario:#6b7280;
+    --texto-secundario: #6b7280;
 
-    /* Status */
-    --cor-ok:          #22c55e;
-    --cor-ok-bg:       #dcfce7;
-    --cor-alto:        #ef4444;
-    --cor-alto-bg:     #fee2e2;
-    --cor-baixo-bg:    #fef3c7;
-    --cor-vazio-bg:    #f3f4f6;
-    --cor-vazio:       #9ca3af;
+    --cor-ok: #22c55e;
+    --cor-ok-bg: #dcfce7;
+    --cor-alto: #ef4444;
+    --cor-alto-bg: #fee2e2;
+    --cor-baixo-bg: #fef3c7;
+    --cor-vazio-bg: #f3f4f6;
+    --cor-vazio: #9ca3af;
+    --verde-texto: #15803d;
+    --vermelho-texto: #b91c1c;
 
     --sombra-card: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
-    --raio-card:   14px;
+    --raio-card: 14px;
 }
 
-/* A página inteira ocupa exatamente a tela e não rola */
 html,
 body {
     height: 100%;
@@ -58,7 +57,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 24px 12px;
-    box-sizing: border-box;
     flex-shrink: 0;
     height: 100%;
 }
@@ -90,7 +88,6 @@ body {
 
 .barra-lateral nav a {
     text-decoration: none;
-    color: #e2e8db;
     width: 100%;
 }
 
@@ -120,7 +117,6 @@ body {
     opacity: 0.75;
 }
 
-/* Item ativo */
 .barra-lateral nav a div.menu-ativo {
     background-color: #ffffff;
     color: var(--verde-sidebar);
@@ -134,16 +130,14 @@ body {
 }
 
 /* ============================================================
-   ÁREA PRINCIPAL (ocupa a altura da tela, sem scroll)
+   ÁREA PRINCIPAL (sem scroll da página)
    ============================================================ */
 .area-principal {
     flex: 1;
     min-width: 0;
     height: 100%;
     padding: 20px 28px 20px 32px;
-    background-color: var(--verde-fundo);
     overflow: hidden;
-    box-sizing: border-box;
 }
 
 .conteudo {
@@ -157,7 +151,7 @@ body {
 }
 
 /* ============================================================
-   CABEÇALHO DA PÁGINA (título à esquerda, select à direita)
+   CABEÇALHO (título à esquerda, select à direita)
    ============================================================ */
 .cabecalho {
     flex-shrink: 0;
@@ -171,13 +165,6 @@ body {
     gap: 12px;
 }
 
-.titulo-com-icone {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 2px;
-}
-
 .titulo-com-icone h1 {
     font-size: 24px;
     font-weight: 700;
@@ -188,10 +175,8 @@ body {
 .subtitulo-principal {
     font-size: 13px;
     color: var(--texto-secundario);
-    font-weight: 400;
 }
 
-/* Select de estufa */
 .seletor-estufa {
     display: flex;
     align-items: center;
@@ -225,7 +210,7 @@ body {
 }
 
 /* ============================================================
-   GRID DE KPIs (3 cards)
+   KPIs (3 cards na horizontal)
    ============================================================ */
 .grid-kpis {
     display: grid;
@@ -240,29 +225,32 @@ body {
     padding: 14px 18px;
     box-shadow: var(--sombra-card);
     display: flex;
-    flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    gap: 14px;
 }
 
-.kpi-topo h3 {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--texto-secundario);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.kpi-icone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eef3ea;
+    color: var(--verde-sidebar);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.kpi-corpo {
+.kpi-bloco {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    flex: 1;
+    gap: 2px;
 }
 
-.kpi-valor-grupo {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
+.kpi-bloco h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--texto-principal);
 }
 
 .kpi-valor {
@@ -271,6 +259,7 @@ body {
     color: var(--texto-principal);
     line-height: 1.1;
     letter-spacing: -1px;
+    white-space: nowrap;
 }
 
 .kpi-subtexto {
@@ -279,18 +268,103 @@ body {
 }
 
 .kpi-subtexto.alerta {
-    color: var(--cor-alto);
+    color: var(--vermelho-texto);
     font-weight: 500;
 }
 
-/* Barra de progresso e meta do DLI */
-.kpi-progresso-container {
+.kpi-divisor {
+    width: 1px;
+    align-self: stretch;
+    background-color: var(--cinza-borda);
+}
+
+.kpi-mini {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.kpi-mini-valor {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.verde { color: var(--verde-texto); }
+.vermelho { color: var(--vermelho-texto); }
+
+/* KPI 1: mínimo e máximo lado a lado */
+.kpi-bloco-largo {
+    flex: 1;
+    min-width: 0;
+}
+
+.kpi-minis {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
     margin-top: 2px;
+}
+
+.kpi-minis .kpi-mini {
+    align-items: flex-start;
+}
+
+.kpi-linha {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.kpi-unidade {
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+/* KPI 2: lista de alertas */
+.lista-alertas {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.alerta-item {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 8px;
+    border-radius: 8px;
+    background-color: var(--cinza-fundo);
+    color: var(--texto-principal);
+}
+
+.alerta-min { background-color: var(--cor-baixo-bg); color: #92400e; }
+.alerta-max { background-color: var(--cor-alto-bg); color: var(--vermelho-texto); }
+.alerta-off { background-color: var(--cor-vazio-bg); color: #4b5563; }
+.alerta-ok { background-color: var(--cor-ok-bg); color: var(--verde-texto); }
+
+/* DLI: barra com meta e selo */
+.kpi-meta-bloco {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.kpi-meta {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-principal);
 }
 
 .kpi-barra-fundo {
     width: 100%;
-    height: 6px;
+    height: 8px;
     background-color: var(--cinza-borda);
     border-radius: 99px;
     overflow: hidden;
@@ -303,10 +377,8 @@ body {
     transition: width 0.4s ease;
 }
 
-.kpi-meta {
-    font-size: 11px;
-    color: var(--texto-secundario);
-    text-align: right;
+.kpi-barra-preenchida.abaixo {
+    background-color: var(--cor-alto);
 }
 
 /* ============================================================
@@ -316,23 +388,22 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 3px 10px;
+    padding: 3px 12px;
     border-radius: 99px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.3px;
     width: fit-content;
     white-space: nowrap;
 }
 
 .badge-ok {
     background-color: var(--cor-ok-bg);
-    color: #15803d;
+    color: var(--verde-texto);
 }
 
 .badge-alto {
     background-color: var(--cor-alto-bg);
-    color: #b91c1c;
+    color: var(--vermelho-texto);
 }
 
 .badge-baixo {
@@ -346,8 +417,7 @@ body {
 }
 
 /* ============================================================
-   LAYOUT DUAS COLUNAS (tabela à esquerda, gráfico à direita)
-   Ocupa todo o espaço que sobra na tela
+   LAYOUT DUAS COLUNAS (esquerda: tabela + DLI | direita: gráfico alto)
    ============================================================ */
 .layout-duas-colunas {
     flex: 1;
@@ -356,12 +426,16 @@ body {
     grid-template-columns: minmax(520px, 44%) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr);
     gap: 14px;
-    align-items: stretch;
 }
 
-/* ============================================================
-   CARDS DE PAINEL
-   ============================================================ */
+.coluna-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+    min-width: 0;
+}
+
 .card-painel {
     background-color: var(--branco);
     border-radius: var(--raio-card);
@@ -381,34 +455,26 @@ body {
     gap: 10px;
 }
 
-.painel-titulo-icone {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.painel-titulo-icone h2 {
+.painel-titulo-icone h2,
+.titulo-regioes h2 {
     font-size: 15px;
     font-weight: 700;
     color: var(--texto-principal);
-    letter-spacing: -0.2px;
 }
 
 .subtitulo-painel {
     font-size: 11px;
     color: var(--texto-secundario);
-    margin-top: -6px;
 }
 
-/* Card da tabela rola por dentro se precisar */
+/* tabela: ocupa o espaço que sobra e rola por dentro */
 .bloco-tabela {
+    flex: 1;
     overflow-y: auto;
-    overflow-x: auto;
 }
 
 .bloco-tabela::-webkit-scrollbar {
     width: 6px;
-    height: 6px;
 }
 
 .bloco-tabela::-webkit-scrollbar-thumb {
@@ -416,13 +482,81 @@ body {
     border-radius: 99px;
 }
 
-.bloco-tabela::-webkit-scrollbar-track {
-    background: transparent;
+/* ============================================================
+   DLI POR REGIÃO (abaixo da tabela, na esquerda)
+   ============================================================ */
+.bloco-regioes {
+    flex-shrink: 0;
+}
+
+.bloco-regioes .cabecalho-painel {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+
+.grid-regioes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.regiao {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 16px;
+    border-left: 1px solid var(--cinza-borda);
+}
+
+.regiao:first-child {
+    padding-left: 0;
+    border-left: none;
+}
+
+.regiao h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--texto-principal);
+}
+
+.regiao-valor {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--verde-texto);
+    line-height: 1.1;
+}
+
+.regiao-valor.abaixo {
+    color: var(--vermelho-texto);
+}
+
+.regiao-valor span {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto-secundario);
+}
+
+.status-regiao {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-secundario);
 }
 
 /* ============================================================
-   ÁREA DO GRÁFICO (cresce para preencher o card)
+   GRÁFICO (ocupa toda a altura da coluna direita)
    ============================================================ */
+.pill-faixa {
+    padding: 5px 12px;
+    border-radius: 99px;
+    background-color: var(--cor-ok-bg);
+    color: var(--verde-texto);
+    font-size: 12px;
+    font-weight: 600;
+}
+
 .container-grafico {
     flex: 1;
     min-height: 0;
@@ -438,8 +572,6 @@ body {
     overflow: hidden;
 }
 
-/* O canvas fica "solto" dentro da área para o gráfico se ajustar
-   ao tamanho dela e não empurrar o layout */
 .area-canvas canvas {
     position: absolute;
     top: 0;
@@ -457,21 +589,16 @@ body {
     font-size: 12.5px;
 }
 
-.tabela-dashboard thead tr {
-    border-bottom: 1px solid var(--cinza-borda);
-}
-
 .tabela-dashboard th {
     background-color: var(--branco);
     box-shadow: inset 0 -1px 0 var(--cinza-borda);
     text-align: left;
-    padding: 6px 6px;
+    padding: 6px;
     font-size: 10.5px;
     font-weight: 600;
     color: var(--texto-secundario);
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    white-space: normal;
     line-height: 1.25;
     vertical-align: bottom;
 }
@@ -490,15 +617,13 @@ body {
     cursor: pointer;
 }
 
-/* nowrap evita o texto quebrar em duas linhas */
 .tabela-dashboard td {
-    padding: 9px 6px;
+    padding: 10px 6px;
     color: var(--texto-principal);
     vertical-align: middle;
     white-space: nowrap;
 }
 
-/* Célula com ponto de cor do sensor */
 .celula-estufa {
     display: flex;
     align-items: center;
@@ -514,7 +639,6 @@ body {
     display: inline-block;
 }
 
-/* Botão link (ex: "Ver todos") */
 .btn-link {
     background: none;
     border: none;
@@ -532,9 +656,7 @@ body {
 }
 
 /* ============================================================
-   RESPONSIVIDADE
-   Em telas pequenas (estreitas ou baixas demais) não dá para caber
-   tudo sem scroll, então a página volta a rolar normalmente.
+   TELAS PEQUENAS: a página volta a rolar
    ============================================================ */
 @media (max-width: 1200px), (max-height: 680px) {
     html,
@@ -544,7 +666,6 @@ body {
     }
 
     body {
-        height: auto;
         min-height: 100vh;
     }
 
@@ -554,13 +675,14 @@ body {
         top: 0;
     }
 
-    .area-principal {
+    .area-principal,
+    .conteudo {
         height: auto;
         overflow: visible;
     }
 
-    .conteudo {
-        height: auto;
+    .grid-kpis {
+        grid-template-columns: 1fr;
     }
 
     .layout-duas-colunas {
@@ -569,8 +691,8 @@ body {
         grid-template-rows: auto;
     }
 
-    .card-painel {
-        min-height: auto;
+    .bloco-tabela {
+        flex: none;
     }
 
     .container-grafico {
@@ -578,33 +700,6 @@ body {
     }
 
     .area-canvas {
-        min-height: 300px;
-    }
-}
-
-@media (max-width: 900px) {
-    .area-principal {
-        padding: 20px 18px;
-    }
-
-    .barra-lateral {
-        width: 60px;
-        padding: 16px 8px;
-    }
-
-    .barra-lateral nav a div {
-        font-size: 0;
-        gap: 0;
-        justify-content: center;
-    }
-
-    .logo img {
-        width: 36px;
-    }
-}
-
-@media (max-width: 600px) {
-    .grid-kpis {
-        grid-template-columns: 1fr;
+        min-height: 320px;
     }
 }
