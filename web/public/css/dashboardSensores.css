@@ -506,6 +506,51 @@ body {
     color: var(--texto-principal);
 }
 
+.painel-titulo-icone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge-fase {
+    padding: 3px 12px;
+    border-radius: 99px;
+    background-color: #eef3ea;
+    color: var(--verde-sidebar);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.parametros-fase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.parametro {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: var(--cinza-fundo);
+    border: 1px solid var(--cinza-borda);
+    font-size: 12px;
+    color: var(--texto-secundario);
+    white-space: nowrap;
+}
+
+.parametro strong {
+    font-size: 13px;
+    color: var(--texto-principal);
+}
+
+.parametro-nome {
+    font-weight: 600;
+}
+
 .subtitulo-painel {
     font-size: 11px;
     color: var(--texto-secundario);
@@ -592,7 +637,27 @@ body {
 /* ============================================================
    GRÁFICO (ocupa toda a altura da coluna direita)
    ============================================================ */
+.titulo-grafico {
+    flex: 1;
+    min-width: 0;
+}
+
+.titulo-grafico h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--texto-principal);
+    letter-spacing: -0.2px;
+}
+
+.grafico-subtitulo {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--texto-secundario);
+}
+
 .pill-faixa {
+    flex-shrink: 0;
     padding: 5px 12px;
     border-radius: 99px;
     background-color: var(--cor-ok-bg);
@@ -746,4 +811,4 @@ body {
     .area-canvas {
         min-height: 320px;
     }
-}
+}   

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/dashboardSensores.css" />
   <link rel="shortcut icon" href="../imgs/logo.png" />
-  <title>Sensores | Dashboard</title>
+  <title>Raio-X dos sensores | Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -56,10 +56,10 @@
       <section class="cabecalho cabecalho-com-seletor">
         <div>
           <div class="titulo-com-icone">
-            <h1>Monitoramento dos sensores</h1>
+            <h1>Raio-X dos sensores de luz</h1>
           </div>
           <p class="subtitulo-principal">
-            Leitura, condição e DLI de cada sensor, estufa por estufa
+            Veja sensor por sensor quanta luz cada ponto da estufa está recebendo: o PPFD ao longo do dia, o DLI acumulado por região e quais sensores saíram da faixa ideal da fase de cultivo
           </p>
         </div>
 
@@ -122,9 +122,11 @@
             <div class="cabecalho-painel">
               <div class="painel-titulo-icone">
                 <h2 id="tituloTabela">Sensores da estufa</h2>
+                <span class="badge-fase" id="badgeFase">Fase</span>
               </div>
               <button class="btn-link" id="btnVerTodos">Ver todos</button>
             </div>
+            <div class="parametros-fase" id="parametrosFase"></div>
             <p class="subtitulo-painel">Clique em um sensor para isolá-lo no gráfico.</p>
 
             <table class="tabela-dashboard">
@@ -145,8 +147,9 @@
         <!-- Direita: gráfico em toda a altura -->
         <section class="card-painel">
           <div class="cabecalho-painel">
-            <div class="painel-titulo-icone">
-              <h2>Curva de luminosidade dos sensores (PPFD)</h2>
+            <div class="titulo-grafico">
+              <h2 id="graficoTitulo"></h2>
+              <p class="grafico-subtitulo" id="graficoSubtitulo"></p>
             </div>
             <span class="pill-faixa" id="faixaIdeal">Faixa ideal: —</span>
           </div>
@@ -415,12 +418,20 @@
       // tabela, regiões, faixa ideal e gráfico
       document.getElementById('tabelaSensoresCorpo').innerHTML = linhas;
       document.getElementById('tituloTabela').innerHTML = 'Sensores · ' + nomesEstufas[i];
+
+      // fase de cultivo e parâmetros da estufa
+      document.getElementById('badgeFase').innerHTML = 'Fase: ' + fase;
+      document.getElementById('parametrosFase').innerHTML =
+        '<span class="parametro"><span class="parametro-nome">PPFD mínimo</span><strong>' + minimo + '</strong> µmol/m²/s</span>' +
+        '<span class="parametro"><span class="parametro-nome">PPFD máximo</span><strong>' + maximo + '</strong> µmol/m²/s</span>' +
+        '<span class="parametro"><span class="parametro-nome">Meta de DLI</span><strong>' + formatar(meta) + '</strong> mol/m²/dia</span>';
       document.getElementById('gridRegioes').innerHTML = blocosRegioes;
       document.getElementById('subtituloRegioes').innerHTML = 'Meta mínima de ' + formatar(meta) + ' mol/m²/dia';
       document.getElementById('faixaIdeal').innerHTML = 'Faixa ideal: ' + minimo + ' - ' + maximo;
       meuGrafico.data.datasets[3].data = repetir(minimo);
       meuGrafico.data.datasets[4].data = repetir(maximo);
       meuGrafico.update();
+      atualizarTituloGrafico();
 
       // KPI 1: picos de PPFD do dia (com unidade na frente do número)
       if (picoMin == -1) {
@@ -475,6 +486,22 @@
       document.getElementById('listaAlertas').innerHTML = listaTexto;
     }
 
+    // ================= TÍTULO DO GRÁFICO (muda com a estufa e com o sensor isolado) =================
+    function atualizarTituloGrafico() {
+      const i = Number(document.getElementById('estufa').value) - 1;
+      const fase = fasesEstufas[i];
+      let titulo = nomesEstufas[i] + ' sensor a sensor: quem está dentro da faixa?';
+      let subtitulo = 'Curva de PPFD dos 3 sensores (frontal, central e posterior) de ' + horarios[0] + ' a ' + horarios[9] + '. A área verde é a faixa ideal da fase ' + fase + ' (' + limiteMin(fase) + ' a ' + limiteMax(fase) + ' µmol/m²/s).';
+
+      if (sensorIsolado != -1) {
+        titulo = nomesSensores[sensorIsolado] + ' (' + regioes[sensorIsolado] + ') sob a lupa: como a luz variou';
+        subtitulo = 'Curva de PPFD só deste sensor na ' + nomesEstufas[i] + '. Clique em "Ver todos" para voltar aos três sensores.';
+      }
+
+      document.getElementById('graficoTitulo').textContent = titulo;
+      document.getElementById('graficoSubtitulo').textContent = subtitulo;
+    }
+
     // ================= ISOLAR UM SENSOR NO GRÁFICO =================
     function isolarSensor(s) {
       if (sensorIsolado == s) {
@@ -494,6 +521,7 @@
         }
 
         meuGrafico.update();
+        atualizarTituloGrafico();
       }
     }
 
@@ -507,6 +535,7 @@
       }
 
       meuGrafico.update();
+      atualizarTituloGrafico();
     }
 
     document.getElementById('estufa').addEventListener('change', carregarEstufa);
