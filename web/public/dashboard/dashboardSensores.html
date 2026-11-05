@@ -30,14 +30,14 @@
         <a href="dashboardVisaoGeral.html">
           <div>
             <img src="../imgs/VectorLupa.svg" />
-            Visão Geral
+            Alertas
           </div>
         </a>
 
         <a href="dashboardSensores.html">
           <div class="menu-ativo">
             <img src="../imgs/plant.png" />
-            Estufas
+            Sensores
           </div>
         </a>
 
@@ -56,10 +56,10 @@
       <section class="cabecalho cabecalho-com-seletor">
         <div>
           <div class="titulo-com-icone">
-            <h1>Luz por estufa: o que cada sensor está vendo</h1>
+            <h1>Monitoramento interno das estufas</h1>
           </div>
           <p class="subtitulo-principal">
-            Veja estufa por estufa, analisando a situação dos sensores, o PPFD minimo, PPFD maximo e DLI.
+            Veja sensor por sensor quanta luz cada ponto da estufa está recebendo: o PPFD ao longo do dia, o DLI acumulado por região e quais sensores saíram da faixa ideal da fase de cultivo
           </p>
         </div>
 
@@ -104,8 +104,8 @@
           </div>
         </div>
 
-        <!-- KPI 3: Sensores em alerta -->
-        <div class="card-kpi">
+        <!-- KPI 3: Sensores em alerta (lista embaixo do número) -->
+        <div class="card-kpi card-kpi-coluna">
           <div class="kpi-bloco">
             <h3>Sensores em alerta</h3>
             <span class="kpi-valor" id="kpiAlertas">—</span>
@@ -347,6 +347,17 @@
         '</div>';
     }
 
+    // cor do pico conforme a faixa ideal da fase
+    function corDoPico(valor, minimo, maximo) {
+      if (valor > maximo) {
+        return 'pico-alto';
+      } else if (valor < minimo) {
+        return 'pico-baixo';
+      } else {
+        return 'pico-ok';
+      }
+    }
+
     // ================= CARREGAR UMA ESTUFA (roda ao trocar o select) =================
     function carregarEstufa() {
       const i = Number(document.getElementById('estufa').value) - 1;
@@ -439,11 +450,17 @@
         document.getElementById('kpiMax').innerHTML = '—';
         document.getElementById('kpiMinLocal').innerHTML = '—';
         document.getElementById('kpiMaxLocal').innerHTML = '—';
+        document.querySelector('.pico-min').className = 'kpi-mini pico-min';
+        document.querySelector('.pico-max').className = 'kpi-mini pico-max';
       } else {
         document.getElementById('kpiMin').innerHTML = picoMin;
         document.getElementById('kpiMax').innerHTML = picoMax;
         document.getElementById('kpiMinLocal').innerHTML = nomesSensores[sensorPicoMin] + ' · ' + regioes[sensorPicoMin] + ' às ' + horarios[horaPicoMin];
         document.getElementById('kpiMaxLocal').innerHTML = nomesSensores[sensorPicoMax] + ' · ' + regioes[sensorPicoMax] + ' às ' + horarios[horaPicoMax];
+
+        // dentro da faixa: verde | acima do máximo: vermelho | abaixo do mínimo: azul
+        document.querySelector('.pico-min').className = 'kpi-mini pico-min ' + corDoPico(picoMin, minimo, maximo);
+        document.querySelector('.pico-max').className = 'kpi-mini pico-max ' + corDoPico(picoMax, minimo, maximo);
       }
 
       // KPI 3: sensores em alerta (só os que estão fora da faixa ou sem comunicação)

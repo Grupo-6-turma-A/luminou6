@@ -323,34 +323,44 @@ body {
     color: var(--texto-secundario);
 }
 
-/* setas dos picos: máximo vermelho, mínimo azul */
+/* setas dos picos: herdam a cor do status */
 .seta {
     display: block;
     align-self: center;
     flex-shrink: 0;
 }
 
-.seta-max { color: #dc2626; }
-.seta-min { color: #2563eb; }
+/* picos: dentro da faixa verde, acima do máximo vermelho, abaixo do mínimo azul */
+.pico-ok,
+.pico-ok .kpi-subtexto,
+.pico-ok .kpi-unidade,
+.pico-ok .kpi-mini-valor {
+    color: var(--verde-texto);
+}
 
-/* informações do pico: máxima em vermelho, mínima em azul */
-.pico-max,
-.pico-max .kpi-subtexto,
-.pico-max .kpi-unidade,
-.pico-max .kpi-mini-valor {
+.pico-alto,
+.pico-alto .kpi-subtexto,
+.pico-alto .kpi-unidade,
+.pico-alto .kpi-mini-valor {
     color: #dc2626;
 }
 
-.pico-min,
-.pico-min .kpi-subtexto,
-.pico-min .kpi-unidade,
-.pico-min .kpi-mini-valor {
+.pico-baixo,
+.pico-baixo .kpi-subtexto,
+.pico-baixo .kpi-unidade,
+.pico-baixo .kpi-mini-valor {
     color: #2563eb;
 }
 
 /* KPI 2: lista de alertas */
+.card-kpi-coluna {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+}
+
 .lista-alertas {
-    flex: 1;
+    flex: none;
     min-width: 0;
     display: flex;
     flex-direction: column;
