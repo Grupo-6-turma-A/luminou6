@@ -138,7 +138,7 @@ html {
 
 .div-comoFunciona {
     width: 100%;
-    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png); */
+    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../assets/imgs/bg2.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -207,7 +207,7 @@ html {
 
 .div-quemSomos {
     width: 100%;
-    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg3.png); */
+    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../assets/imgs/bg3.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -267,7 +267,7 @@ html {
 
 .div-objetivo {
     width: 100%;
-    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../imgs/bg2.png); */
+    /* background-image: linear-gradient(rgba(250, 249, 244, 0.7), rgba(250, 249, 244, 0.7)), url(../assets/imgs/bg2.png); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

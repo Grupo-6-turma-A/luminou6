@@ -10,7 +10,7 @@
 }
 /* Aqui fica os ajustes sobre o fundo da pagina e os itens dentro dela*/
 body{
-    background-image:url(../imgs/fundo.png);
+    background-image:url(../assets/imgs/fundo.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

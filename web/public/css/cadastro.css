@@ -15,7 +15,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background-image: url("../imgs/fundo.png");
+    background-image: url("../assets/imgs/fundo.png");
     background-size: cover;
     background-position: center;
     background-color: gray;
