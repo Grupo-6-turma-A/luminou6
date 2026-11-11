@@ -110,3 +110,13 @@ button:hover {
 div h2 {
     font-size: 29px;
 }
+
+.texto-centralizado{
+    text-align: center;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #7E8863;
+}
