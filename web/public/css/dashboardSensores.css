@@ -162,7 +162,7 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 25px;
 }
 
 .titulo-com-icone h1 {
@@ -173,7 +173,7 @@ body {
 }
 
 .subtitulo-principal {
-    font-size: 13px;
+    font-size: 17px;
     color: var(--texto-secundario);
 }
 
