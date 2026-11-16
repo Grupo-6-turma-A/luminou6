@@ -155,7 +155,6 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -178,7 +177,6 @@
       mensagem_erro.innerHTML =
         "Campos invalidos";
 
-      finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -201,12 +199,12 @@
       mensagem_erro.innerHTML = "As senhas não coincidem!";
       finalizarAguardar();
       return false;
+      // precisa criar uma validaçao para o email deve conter @
     } else {
       mensagem_erro.innerHTML = "";
     }
 
     // Código para realizar o cadastro
-
 
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
@@ -257,10 +255,10 @@
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
-      // .catch(function (resposta) {
-      //   console.log(`#ERRO: ${resposta}`);
-      //   finalizarAguardar();
-      // });
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
 
     return false;
   }
