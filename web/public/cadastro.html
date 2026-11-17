@@ -199,7 +199,11 @@
       mensagem_erro.innerHTML = "As senhas não coincidem!";
       finalizarAguardar();
       return false;
-      // precisa criar uma validaçao para o email deve conter @
+    } else if (!emailVar.includes(`@`)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "O email deve contar @";
+      finalizarAguardar();
+      return false;
     } else {
       mensagem_erro.innerHTML = "";
     }
