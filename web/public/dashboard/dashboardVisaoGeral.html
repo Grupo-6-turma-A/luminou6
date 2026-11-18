@@ -1,323 +1,63 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="../css/dashboardVisaoGeral.css">
-  <link rel="shortcut icon" href="../assets/imgs/logo.png">
+    <link rel="stylesheet" href="../css/dashboardSensores.css">
+    <link rel="shortcut icon" href="../assets/imgs/logo.png">
 
-  <title>Estufa 1 | Luminou6</title>
+    <title>Monitoramento de estufas | Luminou6</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-   <header class="barra-lateral">
-    <div class="sidebar-topo">
-      <a href="../index.html">
-        <div class="logo">
-          <img src="../assets/imgs/LogoLuminouBranca.svg" />
-        </div>
-      </a>
+    <!-- SIDEBAR -->
+    <header class="barra-lateral">
+        <div class="sidebar-topo">
 
-      <nav>
-        <a href="../index.html">
-          <div>
-            <img src="../assets/imgs/VectorCasa.svg" />
-            Home
-          </div>
-        </a>
+            <a href="../index.html">
+                <div class="logo">
+                    <img src="../assets/imgs/LogoLuminouBranca.svg" alt="Luminou6">
+                </div>
+            </a>
+            <nav>
+                <a href="../index.html">
+            <div>
+              <img src="../assets/imgs/VectorCasa.svg" />
+              Home
+            </div>
+          </a>
+                <a href="../dashboard/dashboardVisaoGeral.html">
+                    <div class="menu-ativo">
+                        <img src="../assets/imgs/VectorCasa.svg" alt="">
+                        Visão geral
+                    </div>
+                </a>
 
-        <a href="dashboardVisaoGeral.html">
-          <div class="menu-ativo">
-            <img src="../assets/imgs/VectorLupa.svg" />
-            Visão geral
-          </div>
-        </a>
+                <a href="dashboardSensores.html">
+                    <div>
+                        <img src="../assets/imgs/plant.png" alt="">
+                        Estufas e sensores
+                    </div>
+                </a>
 
-        <a href="dashboardSensores.html">
-          <div>
-            <img src="../assets/imgs/plant.png" />
-            Sensores
-          </div>
-        </a>
+                <a href="dashboardHistorico.html">
+                    <div>
+                        <img src="../assets/imgs/VectorLupa.svg" alt="">
+                        Histórico
+                    </div>
+                </a>
 
-        <a href="dashboardConfigs.html">
-          <div>
-            <img src="../assets/imgs/VectorConfig.svg" />
-            Configurações
-          </div>
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ÁREA PRINCIPAL -->
-  <div class="area-principal">
-    <main class="conteudo">
-
-      <!-- TOPO -->
-      <div class="topo-pagina">
-
-        <div class="topo-titulo">
-          <button class="btn-voltar" onclick="history.back()">
-            ← Voltar
-          </button>
-
-          <h1 id="tituloEstufa">Estufa 1</h1>
-        </div>
-
-        <div class="filtros-topo">
-
-          <label>
-            Estufa
-            <select id="filtroEstufa">
-              <option value="1">Estufa 1</option>
-              <option value="2">Estufa 2</option>
-              <option value="3">Estufa 3</option>
-            </select>
-          </label>
-
-          <label>
-            Zona
-            <select id="filtroZona">
-              <option value="todas">Todas as zonas</option>
-              <option value="frontal">Frontal</option>
-              <option value="central">Central</option>
-              <option value="posterior">Posterior</option>
-            </select>
-          </label>
+                <a href="dashboardConfigs.html">
+                    <div>
+                        <img src="../assets/imgs/VectorConfig.svg" alt="">
+                        Configurações
+                    </div>
+                </a>
+            </nav>
 
         </div>
-      </div>
-
-      <!-- ETIQUETAS -->
-      <div class="etiquetas">
-        <span class="tag">Fase da planta: Floração</span>
-        <span class="tag">Faixa ideal: 150 a 250 µmol/m²/s (PPFD)</span>
-      </div>
-
-      <!-- PRIMEIRA LINHA -->
-      <section class="grid-indicadores">
-
-        <!-- DESVIO -->
-        <article class="card indicador-card">
-
-          <h3>DESVIO DE LUMINOSIDADE</h3>
-
-          <div class="valor-grande" id="desvioValor">
-            35 min
-          </div>
-
-          <p class="texto-muted" id="desvioSub">
-            fora da faixa hoje
-          </p>
-
-          <p class="texto-pequeno" id="desvioResumo">
-            Ideal 150 a 250 · 4,9% do período · todas as zonas
-          </p>
-
-          <div class="linha-tempo">
-            <span>06:00</span>
-            <span>12:00</span>
-            <span>18:00</span>
-          </div>
-
-          <div class="barra-tempo">
-            <span class="marcador-desvio"></span>
-          </div>
-
-          <div class="rodape-indicador">
-            <span id="desvioZona">
-              Frontal · 09:08 → 09:43
-            </span>
-
-            <strong class="alerta-texto">
-              luz alta · 35 min
-            </strong>
-          </div>
-
-        </article>
-
-        <!-- PROBLEMA AGORA -->
-        <article class="card indicador-card">
-
-          <h3>ZONA COM PROBLEMA AGORA</h3>
-
-          <div class="valor-grande valor-verde" id="zonaProblema">
-            Nenhuma
-          </div>
-
-          <p class="texto-muted">
-            Todas as zonas desta estufa estão dentro da faixa agora.
-          </p>
-
-          <div class="status-atual">
-            <span class="status-bolinha"></span>
-            <span>Sensores operando normalmente</span>
-          </div>
-
-        </article>
-
-        <!-- DLI -->
-        <article class="card indicador-card card-dli">
-
-          <h3>DLI POR REGIÃO</h3>
-
-          <p class="texto-pequeno">
-            Meta: média dos sensores da zona ≥ 8,0 mol/m²/dia.
-          </p>
-
-          <div class="dli-regiao">
-
-            <div class="dli-info">
-              <span>Frontal</span>
-              <strong>8,9 · Meta atingida</strong>
-            </div>
-
-            <div class="dli-barra">
-              <div class="dli-preenchimento frontal"></div>
-              <span class="dli-marcador"></span>
-            </div>
-
-          </div>
-
-          <div class="dli-regiao">
-
-            <div class="dli-info">
-              <span>Central</span>
-              <strong>8,6 · Meta atingida</strong>
-            </div>
-
-            <div class="dli-barra">
-              <div class="dli-preenchimento central"></div>
-              <span class="dli-marcador"></span>
-            </div>
-
-          </div>
-
-          <div class="dli-regiao">
-
-            <div class="dli-info">
-              <span>Posterior</span>
-              <strong class="texto-amarelo">7,7 · Dentro da margem</strong>
-            </div>
-
-            <div class="dli-barra">
-              <div class="dli-preenchimento posterior"></div>
-              <span class="dli-marcador"></span>
-            </div>
-
-          </div>
-
-          <div class="dli-escala">
-            <span>0</span>
-            <span>meta 8,0</span>
-            <span>12</span>
-          </div>
-
-        </article>
-
-      </section>
-
-      <!-- SEGUNDA LINHA -->
-      <section class="grid-monitoramento">
-
-        <!-- SENSORES -->
-        <article class="card card-sensores">
-
-          <div class="card-titulo">
-            <h2>Sensores com problema na estufa</h2>
-
-            <p>
-              Todas as zonas estão em atenção até 10% além do limite,
-              crítico acima disso ou sem dados.
-            </p>
-          </div>
-
-          <div class="estado-sensores">
-
-            <div class="icone-status">
-              <span>✓</span>
-            </div>
-
-            <h3>Nenhum problema nesta estufa</h3>
-
-            <p>
-              Todos os sensores estão lendo dentro da faixa.
-            </p>
-
-          </div>
-
-        </article>
-
-        <!-- GRÁFICO -->
-        <article class="card card-grafico">
-
-          <div class="card-titulo">
-            <h2>Luz (PPFD) por sensor · todas as zonas</h2>
-
-            <p>Faixa verde = ideal da fase</p>
-          </div>
-
-          <div class="grafico-container">
-            <canvas id="graficoPPFD"></canvas>
-          </div>
-
-          <div class="legenda-grafico">
-
-            <span class="legenda-item">
-              <i class="linha frontal-legenda"></i>
-              Sensor 1 · Frontal
-            </span>
-
-            <span class="legenda-item">
-              <i class="linha central-legenda"></i>
-              Sensor 2 · Central
-            </span>
-
-            <span class="legenda-item">
-              <i class="linha posterior-legenda"></i>
-              Sensor 3 · Posterior
-            </span>
-
-          </div>
-
-          <div class="legenda-limites">
-
-            <span>
-              <i class="simbolo-maximo">▲</i>
-              Máxima do dia
-            </span>
-
-            <span>
-              <i class="simbolo-minimo">▼</i>
-              Mínima do dia
-            </span>
-
-            <span>
-              <i class="linha-limite"></i>
-              Limite máximo
-            </span>
-
-            <span>
-              <i class="linha-limite-min"></i>
-              Limite mínimo
-            </span>
-
-          </div>
-
-        </article>
-
-      </section>
-
-    </main>
-  </div>
-
-  <script src="../js/dashboardEstufa1.js"></script>
-
-</body>
-</html>
+    </header>
