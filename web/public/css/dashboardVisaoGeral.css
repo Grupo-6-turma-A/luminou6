@@ -105,3 +105,148 @@ body {
   filter: none;
   opacity: 1;
 }
+
+/* ÁREA PRINCIPAL */
+
+.area-principal {
+  flex: 1;
+  min-width: 0;
+  padding: 22px 26px 30px;
+}
+
+.conteudo {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* TOPO */
+
+.topo-pagina {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.topo-titulo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topo-titulo h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.btn-voltar {
+  background: #fff;
+  border: 1px solid #d9d1bf;
+  color: #526341;
+  border-radius: 22px;
+  padding: 9px 16px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-voltar:hover {
+  background: #f4f0e6;
+}
+
+.filtros-topo {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.filtros-topo label {
+  font-size: 11px;
+  color: #6d725f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filtros-topo select {
+  background: #fff;
+  border: 1px solid #e9dfcc;
+  border-radius: 7px;
+  padding: 8px 11px;
+  font-size: 12px;
+  color: #333;
+  min-width: 110px;
+}
+
+/* ETIQUETAS */
+
+.etiquetas {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 14px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #e5f1df;
+  color: #49723c;
+  border: 1px solid #d3e7cb;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* CARDS */
+
+.grid-indicadores {
+  display: grid;
+  grid-template-columns: 1.05fr 1.05fr 1fr;
+  gap: 12px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+
+.indicador-card {
+  min-height: 166px;
+}
+
+.card h3 {
+  font-size: 10px;
+  color: #68715f;
+  margin: 0 0 8px;
+  font-weight: 800;
+  letter-spacing: .35px;
+}
+
+.valor-grande {
+  font-size: 27px;
+  font-weight: 750;
+  line-height: 1.1;
+  margin: 4px 0;
+}
+
+.valor-verde {
+  color: var(--verde-escuro);
+}
+
+.texto-muted {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+  margin: 5px 0;
+}
+
+.texto-pequeno {
+  color: #747969;
+  font-size: 9px;
+  line-height: 1.35;
+  margin: 8px 0;
+}

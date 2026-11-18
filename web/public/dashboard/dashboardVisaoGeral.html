@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="../css/dashboardVisaoGeral.css" />
-  <link rel="shortcut icon" href="../assets/imgs/logo.png" />
+    <link rel="stylesheet" href="../css/dashboardVisaoGeral.css" />
 
-  <title>Estufa 1 | Luminou6</title>
+    <link rel="shortcut icon" href="../assets/imgs/logo.png" />
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+    <title>Estufa 1 | Luminou6</title>
 
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
 
-  <!-- MENU LATERAL -->
-  <header class="barra-lateral">
+  <body>
+    
+    <header class="barra-lateral">
   <div class="sidebar-topo">
     <a href="../index.html">
       <div class="logo">
@@ -44,7 +44,13 @@
           Estufas
         </div>
       </a>
-
+      
+      <a href= "../dashboard/dashboardHistorico.html">
+         <div>
+          <img src="../assets/imgs/VectorConfig.svg"/>
+          Histórico
+        </div>
+      </a>
       <a href="dashboardConfigs.html">
         <div>
           <img src="../assets/imgs/VectorConfig.svg"/>
@@ -55,5 +61,74 @@
   </div>
 </header>
 
-</body>
+    <!-- ÁREA PRINCIPAL -->
+    <div class="area-principal">
+      <main class="conteudo">
+        <!-- TOPO -->
+        <div class="topo-pagina">
+          <div class="topo-titulo">
+            <button class="btn-voltar" onclick="history.back()">
+              ← Voltar
+            </button>
+            <h1>Estufa 1</h1>
+          </div>
+
+          <div class="filtros-topo">
+            <label>
+              Estufa
+              <select id="filtroEstufa">
+                <option value="1">Estufa 1</option>
+                <option value="2">Estufa 2</option>
+                <option value="3">Estufa 3</option>
+              </select>
+            </label>
+
+            <label>
+              Zona
+              <select id="filtroZona">
+                <option value="todas">Todas as zonas</option>
+                <option value="frontal">Frontal</option>
+                <option value="central">Central</option>
+                <option value="posterior">Posterior</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="etiquetas">
+          <span class="tag">Fase da planta: Floração</span>
+          <span class="tag">Faixa ideal: 150 a 250 µmol/m²/s (PPFD)</span>
+        </div>
+
+        <section class="grid-indicadores">
+          <article class="card indicador-card">
+            <h3>DESVIO DE LUMINOSIDADE</h3>
+
+            <div class="valor-grande" id="desvioValor">35 min</div>
+
+            <p class="texto-muted" id="desvioSub">fora da faixa hoje</p>
+
+            <p class="texto-pequeno" id="desvioResumo">
+              Ideal 150 a 250 · 4,9% do período · todas as zonas
+            </p>
+
+            <div class="linha-tempo">
+              <span>06:00</span>
+              <span>12:00</span>
+              <span>18:00</span>
+            </div>
+
+            <div class="barra-tempo">
+              <span class="marcador-desvio"></span>
+            </div>
+
+            <div class="rodape-indicador">
+              <span id="desvioZona">Frontal · 09:08 → 09:43</span>
+              <strong class="alerta-texto">luz alta · 35 min</strong>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
 </html>
