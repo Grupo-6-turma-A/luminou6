@@ -3,92 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="../css/dashboardSensores.css">
     <link rel="shortcut icon" href="../assets/imgs/logo.png">
-
-    <title>Monitoramento de estufas | Luminou6</title>
-
+    <title>Estufa | Luminou6</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
-
-    <!-- SIDEBAR -->
     <header class="barra-lateral">
         <div class="sidebar-topo">
-
             <a href="../index.html">
                 <div class="logo">
                     <img src="../assets/imgs/LogoLuminouBranca.svg" alt="Luminou6">
                 </div>
             </a>
             <nav>
-                <a href="../index.html">
-            <div>
-              <img src="../assets/imgs/VectorCasa.svg" />
-              Home
-            </div>
-          </a>
-                <a href="../dashboard/dashboardVisaoGeral.html">
-                    <div>
-                        <img src="../assets/imgs/VectorCasa.svg" alt="">
-                        Visão geral
-                    </div>
-                </a>
-
-                <a href="dashboardSensores.html">
-                    <div class="menu-ativo">
-                        <img src="../assets/imgs/plant.png" alt="">
-                        Estufas e sensores
-                    </div>
-                </a>
-
-                <a href="dashboardHistorico.html">
-                    <div>
-                        <img src="../assets/imgs/VectorLupa.svg" alt="">
-                        Histórico
-                    </div>
-                </a>
-
-                <a href="dashboardConfigs.html">
-                    <div>
-                        <img src="../assets/imgs/VectorConfig.svg" alt="">
-                        Configurações
-                    </div>
-                </a>
+                <a href="../index.html"><div><img src="../assets/imgs/VectorCasa.svg" alt="">Home</div></a>
+                <a href="../dashboard/dashboardVisaoGeral.html"><div><img src="../assets/imgs/VectorCasa.svg" alt="">Visão geral</div></a>
+                <a href="dashboardSensores.html"><div class="menu-ativo"><img src="../assets/imgs/plant.png" alt="">Estufas e sensores</div></a>
+                <a href="dashboardHistorico.html"><div><img src="../assets/imgs/VectorLupa.svg" alt="">Histórico</div></a>
+                <a href="dashboardConfigs.html"><div><img src="../assets/imgs/VectorConfig.svg" alt="">Configurações</div></a>
             </nav>
-
         </div>
     </header>
 
-    <!-- ÁREA PRINCIPAL -->
     <div class="area-principal">
-
         <main class="conteudo">
-
-            <!-- CABEÇALHO -->
             <div class="topo-pagina">
-
                 <div class="topo-titulo">
-
-                    <button class="btn-voltar" onclick="history.back()">
-                        ← Voltar
-                    </button>
-
+                    <button class="btn-voltar" onclick="history.back()">← Voltar</button>
                     <h1 id="tituloEstufa">Estufa 1</h1>
-
-                    <span id="statusEstufa" class="badge-status normal">
-                        Dentro da faixa
-                    </span>
-
+                    <span id="statusEstufa" class="badge-status normal">✓ Dentro da faixa</span>
                 </div>
 
                 <div class="filtros-topo">
+                    <span class="ultima-leitura">
+                        <i class="status-bolinha"></i>
+                        <span id="ultimaLeitura">Última leitura 18:00</span>
+                    </span>
 
-                    <label>
-                        Estufa
-
+                    <label>Estufa
                         <select id="filtroEstufa">
                             <option value="1">Estufa 1</option>
                             <option value="2">Estufa 2</option>
@@ -96,174 +49,127 @@
                         </select>
                     </label>
 
-                    <label>
-                        Zona
-
-                        <select id="filtroZona">
-                            <option value="todas">Todas as zonas</option>
-                            <option value="frontal">Frontal</option>
-                            <option value="central">Central</option>
-                            <option value="posterior">Posterior</option>
+                    <label>Período
+                        <select id="filtroPeriodo">
+                            <option value="hoje">Hoje (17/11)</option>
+                            <option value="ontem">Ontem (16/11)</option>
                         </select>
                     </label>
-
                 </div>
-
             </div>
 
-            <!-- ETIQUETAS -->
             <div class="etiquetas">
                 <span class="tag">Fase da planta: Floração</span>
-                <span class="tag">Faixa ideal: 150 a 250 µmol/m²/s (PPFD)</span>
+                <span class="tag tag-neutra">Faixa ideal: 150 a 250 µmol/m²/s (PPFD)</span>
             </div>
 
-            <!-- INDICADORES -->
             <section class="grid-indicadores">
 
-                <!-- DESVIO -->
                 <article class="card indicador-card">
-
-                    <h3>DESVIO DE LUMINOSIDADE</h3>
-
-                    <div class="valor-grande" id="desvioValor">
-                        --
+                    <div class="card-cabecalho">
+                        <h3>DESVIO DE LUMINOSIDADE</h3>
+                        <span id="periodoDesvio" class="badge-status alto">▲ 09:08–09:43</span>
                     </div>
 
-                    <p class="texto-muted" id="desvioSub">
-                        --
+                    <div class="valor-linha">
+                        <strong class="valor-grande" id="desvioValor">35</strong>
+                        <span class="unidade-grande">min fora da faixa</span>
+                    </div>
+
+                    <p class="texto-muted" id="desvioResumo">
+                        Ideal 150 a 250 · 4,9% do período
                     </p>
 
-                    <p class="texto-pequeno" id="desvioResumo">
-                        --
-                    </p>
+                    <div class="barra-tempo">
+                        <span class="marcador-desvio" id="marcadorDesvio"></span>
+                    </div>
 
                     <div class="linha-tempo">
                         <span>06:00</span>
                         <span>12:00</span>
                         <span>18:00</span>
                     </div>
-
-                    <div class="barra-tempo" id="barraTempo">
-                        <span class="marcador-desvio" id="marcadorDesvio"></span>
-                    </div>
-
-                    <div class="rodape-indicador">
-                        <span id="desvioZona">
-                            --
-                        </span>
-
-                        <strong id="desvioAlerta" class="alerta-texto">
-                            --
-                        </strong>
-                    </div>
-
                 </article>
 
-                <!-- SENSORES EM ALERTA -->
                 <article class="card indicador-card">
-
                     <h3>SENSORES EM ALERTA</h3>
 
-                    <div class="valor-grande" id="zonaProblema">
-                        --
+                    <div class="valor-linha">
+                        <strong class="valor-grande" id="zonaProblema">0</strong>
+                        <span class="unidade-grande">de 3 sensores</span>
                     </div>
 
-                    <p class="texto-muted" id="zonaResumo">
-                        --
+                    <p class="texto-muted destaque-verde" id="zonaResumo">
+                        Todos os sensores dentro da faixa.
                     </p>
 
                     <div class="status-atual">
                         <span class="status-bolinha" id="statusBolinha"></span>
-                        <span id="statusAtualTexto">--</span>
+                        <span id="statusAtualTexto">Sensores operando normalmente</span>
                     </div>
-
                 </article>
 
-                <!-- DLI -->
                 <article class="card indicador-card card-dli">
-
                     <h3>DLI POR REGIÃO</h3>
 
-                    <p class="texto-pequeno">
+                    <p class="texto-muted texto-meta">
                         Meta mínima: 8,0 mol/m²/dia
                     </p>
 
                     <div class="dli-regiao">
                         <div class="dli-info">
                             <span>Frontal</span>
-                            <strong id="dliFrontal">--</strong>
+                            <strong id="dliFrontal">8,9 · Meta atingida</strong>
                         </div>
-
                         <div class="dli-barra">
-                            <div class="dli-preenchimento frontal" id="barraDliFrontal"></div>
+                            <div class="dli-preenchimento" id="barraDliFrontal"></div>
                         </div>
                     </div>
 
                     <div class="dli-regiao">
                         <div class="dli-info">
                             <span>Central</span>
-                            <strong id="dliCentral">--</strong>
+                            <strong id="dliCentral">8,6 · Meta atingida</strong>
                         </div>
-
                         <div class="dli-barra">
-                            <div class="dli-preenchimento central" id="barraDliCentral"></div>
+                            <div class="dli-preenchimento" id="barraDliCentral"></div>
                         </div>
                     </div>
 
                     <div class="dli-regiao">
                         <div class="dli-info">
                             <span>Posterior</span>
-                            <strong id="dliPosterior">--</strong>
+                            <strong id="dliPosterior">7,6 · Abaixo da meta</strong>
                         </div>
-
                         <div class="dli-barra">
-                            <div class="dli-preenchimento posterior" id="barraDliPosterior"></div>
+                            <div class="dli-preenchimento" id="barraDliPosterior"></div>
                         </div>
                     </div>
-
-                    <div class="dli-escala">
-                        <span>0</span>
-                        <span>Meta 8,0</span>
-                        <span>12</span>
-                    </div>
-
                 </article>
 
             </section>
 
-            <!-- MONITORAMENTO -->
             <section class="grid-monitoramento">
 
-                <!-- SENSORES -->
                 <article class="card card-sensores">
-
                     <div class="card-titulo">
-
-                        <h2 id="tituloSensores">Sensores da estufa</h2>
-
+                        <h2>Sensores da estufa</h2>
                         <p id="resumoFaixa">
-                            Floração · PPFD mínimo 150 · máximo 250
+                            Floração · PPFD mín. 150 · máx. 250 · meta de DLI 8,0
                         </p>
-
                     </div>
 
-                    <div class="tabela-sensores" id="tabelaSensores">
-                        <!-- JavaScript monta o conteúdo aqui -->
+                    <div class="tabela-scroll">
+                        <div class="tabela-sensores" id="tabelaSensores"></div>
                     </div>
-
                 </article>
 
-                <!-- GRÁFICO -->
                 <article class="card card-grafico">
-
                     <div class="card-titulo">
-
                         <h2>Luz (PPFD) em relação ao tempo</h2>
-
-                        <p id="subtituloGrafico">
-                            Média dos 3 sensores · faixa verde = ideal da fase
+                        <p>
+                            Medições individuais dos 3 sensores · faixa verde = ideal da fase
                         </p>
-
                     </div>
 
                     <div class="grafico-container">
@@ -271,50 +177,30 @@
                     </div>
 
                     <div class="legenda-grafico">
-
                         <span class="legenda-item">
-                            <i class="linha frontal-legenda"></i>
-                            Frontal
+                            <i class="linha frontal-legenda"></i>Frontal
                         </span>
-
                         <span class="legenda-item">
-                            <i class="linha central-legenda"></i>
-                            Central
+                            <i class="linha central-legenda"></i>Central
                         </span>
-
                         <span class="legenda-item">
-                            <i class="linha posterior-legenda"></i>
-                            Posterior
+                            <i class="linha posterior-legenda"></i>Posterior
                         </span>
-
                     </div>
 
                     <div class="legenda-limites">
-
-                        <span>
-                            <i class="linha-limite"></i>
-                            Limite máximo
-                        </span>
-
-                        <span>
-                            <i class="linha-limite-min"></i>
-                            Limite mínimo
-                        </span>
-
+                        <span><i class="linha-limite"></i>Limite máximo</span>
+                        <span><i class="linha-limite-min"></i>Limite mínimo</span>
                     </div>
-
                 </article>
 
             </section>
-
         </main>
-
     </div>
 
 <script>
 const filtroEstufa = document.getElementById("filtroEstufa");
-const filtroZona = document.getElementById("filtroZona");
-const tituloEstufa = document.getElementById("tituloEstufa");
+const filtroPeriodo = document.getElementById("filtroPeriodo");
 
 const limiteMinimo = 150;
 const limiteMaximo = 250;
@@ -325,32 +211,27 @@ const horarios = [
     "12:00", "13:30", "15:00", "16:30", "18:00"
 ];
 
-// =====================================================
-// DADOS DAS ESTUFAS
-// =====================================================
-
 const estufas = {
-
     1: {
         nome: "Estufa 1",
-        situacao: "normal",
-        desvioMinutos: 0,
+        desvioMinutos: 35,
+        periodoDesvio: "09:08–09:43",
 
-        frontal: [160, 170, 180, 190, 230, 220, 210, 200, 196],
-        central: [155, 165, 175, 185, 205, 200, 195, 190, 188],
-        posterior: [150, 160, 170, 175, 190, 185, 180, 182, 181],
+        frontal: [174, 185, 280, 230, 218, 205, 220, 205, 196],
+        central: [169, 178, 245, 225, 215, 208, 218, 200, 188],
+        posterior: [164, 172, 260, 220, 210, 200, 212, 195, 181],
 
         dli: {
             frontal: 8.9,
             central: 8.6,
-            posterior: 7.7
+            posterior: 7.6
         }
     },
 
     2: {
         nome: "Estufa 2",
-        situacao: "alto",
         desvioMinutos: 124,
+        periodoDesvio: "10:10–12:14",
 
         frontal: [170, 190, 220, 245, 260, 275, 290, 285, 280],
         central: [180, 210, 240, 275, 300, 320, 330, 325, 318],
@@ -365,8 +246,8 @@ const estufas = {
 
     3: {
         nome: "Estufa 3",
-        situacao: "baixo",
         desvioMinutos: 186,
+        periodoDesvio: "08:20–11:26",
 
         frontal: [100, 105, 110, 115, 120, 118, 114, 110, 112],
         central: [120, 125, 130, 140, 145, 142, 140, 138, 138],
@@ -380,72 +261,29 @@ const estufas = {
     }
 };
 
-// =====================================================
-// SENSORES
-// =====================================================
-
 const sensores = [
-    {
-        chave: "frontal",
-        nome: "Sensor 1",
-        zona: "Frontal"
-    },
-    {
-        chave: "central",
-        nome: "Sensor 2",
-        zona: "Central"
-    },
-    {
-        chave: "posterior",
-        nome: "Sensor 3",
-        zona: "Posterior"
-    }
+    { chave: "frontal", nome: "Sensor 1", zona: "Frontal" },
+    { chave: "central", nome: "Sensor 2", zona: "Central" },
+    { chave: "posterior", nome: "Sensor 3", zona: "Posterior" }
 ];
 
-// =====================================================
-// VERIFICAÇÃO DE PPFD
-// =====================================================
-
-function obterLeituraAtual(dados, sensor) {
-    const valores = dados[sensor];
-    return valores[valores.length - 1];
-}
-
 function verificarSituacao(valor) {
-
-    if (valor > limiteMaximo) {
-        return "alto";
-    }
-
-    if (valor < limiteMinimo) {
-        return "baixo";
-    }
+    if (valor > limiteMaximo) return "alto";
+    if (valor < limiteMinimo) return "baixo";
 
     return "normal";
 }
 
-function calcularDiferenca(valor) {
+function obterLeituraAtual(dados, sensor) {
+    const valores = dados[sensor];
 
-    if (valor > limiteMaximo) {
-        return valor - limiteMaximo;
-    }
-
-    if (valor < limiteMinimo) {
-        return limiteMinimo - valor;
-    }
-
-    return 0;
+    return valores[valores.length - 1];
 }
-
-// =====================================================
-// FAIXA IDEAL DO GRÁFICO
-// =====================================================
 
 const faixaPPFD = {
     id: "faixaPPFD",
 
     beforeDraw(chart) {
-
         const { ctx, chartArea, scales } = chart;
 
         if (!chartArea || !scales.y) return;
@@ -457,7 +295,6 @@ const faixaPPFD = {
 
         ctx.save();
 
-        // Abaixo da faixa
         ctx.fillStyle = "rgba(65, 110, 190, 0.14)";
         ctx.fillRect(
             chartArea.left,
@@ -466,346 +303,176 @@ const faixaPPFD = {
             chartArea.bottom - pixelMin
         );
 
-        // Faixa ideal
         ctx.fillStyle = "rgba(100, 160, 85, 0.17)";
         ctx.fillRect(
             chartArea.left,
-            pixelMin,
+            pixelMax,
             chartArea.width,
-            pixelMax - pixelMin
+            pixelMin - pixelMax
         );
 
-        // Acima da faixa
         ctx.fillStyle = "rgba(220, 70, 70, 0.13)";
         ctx.fillRect(
             chartArea.left,
             chartArea.top,
             chartArea.width,
-            pixelMin - chartArea.top
+            pixelMax - chartArea.top
         );
 
         ctx.restore();
     }
 };
 
-// =====================================================
-// GRÁFICO CHART.JS
-// =====================================================
+const graficoPPFD = new Chart(document.getElementById("graficoPPFD"), {
+    type: "line",
 
-const graficoPPFD = new Chart(
-    document.getElementById("graficoPPFD"),
-    {
-        type: "line",
+    data: {
+        labels: horarios,
 
-        data: {
-            labels: horarios,
-
-            datasets: [
-                {
-                    label: "Sensor 1 · Frontal",
-                    data: estufas[1].frontal,
-                    borderColor: "#c29221",
-                    backgroundColor: "#c29221",
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    tension: 0.35
-                },
-
-                {
-                    label: "Sensor 2 · Central",
-                    data: estufas[1].central,
-                    borderColor: "#526b43",
-                    backgroundColor: "#526b43",
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    tension: 0.35
-                },
-
-                {
-                    label: "Sensor 3 · Posterior",
-                    data: estufas[1].posterior,
-                    borderColor: "#8b6caa",
-                    backgroundColor: "#8b6caa",
-                    borderWidth: 2,
-                    pointRadius: 3,
-                    tension: 0.35
-                },
-
-                {
-                    label: "Limite máximo",
-                    data: horarios.map(() => limiteMaximo),
-                    borderColor: "#d94b43",
-                    borderDash: [6, 4],
-                    borderWidth: 1.5,
-                    pointRadius: 0
-                },
-
-                {
-                    label: "Limite mínimo",
-                    data: horarios.map(() => limiteMinimo),
-                    borderColor: "#4d7dc4",
-                    borderDash: [6, 4],
-                    borderWidth: 1.5,
-                    pointRadius: 0
-                }
-            ]
-        },
-
-        plugins: [faixaPPFD],
-
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-
-            interaction: {
-                intersect: false,
-                mode: "index"
+        datasets: [
+            {
+                label: "Frontal",
+                data: estufas[1].frontal,
+                borderColor: "#c29221",
+                backgroundColor: "#c29221",
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointHoverRadius: 5,
+                tension: 0.35
             },
 
-            plugins: {
-                legend: {
+            {
+                label: "Central",
+                data: estufas[1].central,
+                borderColor: "#526b43",
+                backgroundColor: "#526b43",
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointHoverRadius: 5,
+                tension: 0.35
+            },
+
+            {
+                label: "Posterior",
+                data: estufas[1].posterior,
+                borderColor: "#8b6caa",
+                backgroundColor: "#8b6caa",
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointHoverRadius: 5,
+                tension: 0.35
+            },
+
+            {
+                label: "Limite máximo",
+                data: horarios.map(() => limiteMaximo),
+                borderColor: "#d94b43",
+                borderDash: [6, 4],
+                borderWidth: 1.5,
+                pointRadius: 0
+            },
+
+            {
+                label: "Limite mínimo",
+                data: horarios.map(() => limiteMinimo),
+                borderColor: "#4d7dc4",
+                borderDash: [6, 4],
+                borderWidth: 1.5,
+                pointRadius: 0
+            }
+        ]
+    },
+
+    plugins: [faixaPPFD],
+
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        interaction: {
+            intersect: false,
+            mode: "index"
+        },
+
+        plugins: {
+            legend: {
+                display: false
+            },
+
+            tooltip: {
+                callbacks: {
+                    label(context) {
+                        if (context.datasetIndex > 2) return null;
+
+                        const valor = context.parsed.y;
+
+                        if (valor > limiteMaximo) {
+                            return `${context.dataset.label}: ${valor} PPFD (${valor - limiteMaximo} acima do limite)`;
+                        }
+
+                        if (valor < limiteMinimo) {
+                            return `${context.dataset.label}: ${valor} PPFD (${limiteMinimo - valor} abaixo do limite)`;
+                        }
+
+                        return `${context.dataset.label}: ${valor} PPFD (dentro da faixa)`;
+                    }
+                }
+            }
+        },
+
+        scales: {
+            x: {
+                grid: {
                     display: false
                 },
 
-                tooltip: {
-                    callbacks: {
-                        label(context) {
-
-                            if (context.datasetIndex > 2) return null;
-
-                            const valor = context.parsed.y;
-
-                            if (valor > limiteMaximo) {
-                                return `${context.dataset.label}: ${valor} PPFD (${valor - limiteMaximo} acima do limite)`;
-                            }
-
-                            if (valor < limiteMinimo) {
-                                return `${context.dataset.label}: ${valor} PPFD (${limiteMinimo - valor} abaixo do limite)`;
-                            }
-
-                            return `${context.dataset.label}: ${valor} PPFD (dentro da faixa)`;
-                        }
+                ticks: {
+                    color: "#777c6c",
+                    font: {
+                        size: 10
                     }
                 }
             },
 
-            scales: {
-                x: {
-                    grid: {
-                        display: false
+            y: {
+                min: 0,
+                max: 350,
+
+                ticks: {
+                    stepSize: 50,
+                    color: "#777c6c",
+                    font: {
+                        size: 10
                     }
                 },
 
-                y: {
-                    min: 0,
-                    max: 350,
-
-                    ticks: {
-                        stepSize: 50
-                    }
+                grid: {
+                    color: "rgba(120,120,100,0.12)"
                 }
             }
         }
     }
-);
-
-// =====================================================
-// STATUS DA ESTUFA
-// =====================================================
-
-function atualizarStatusEstufa(dados) {
-
-    const badge = document.getElementById("statusEstufa");
-
-    badge.className = "badge-status";
-
-    if (dados.situacao === "normal") {
-        badge.textContent = "Dentro da faixa";
-        badge.classList.add("normal");
-    }
-
-    else if (dados.situacao === "alto") {
-        badge.textContent = "PPFD elevado";
-        badge.classList.add("alto");
-    }
-
-    else {
-        badge.textContent = "PPFD insuficiente";
-        badge.classList.add("baixo");
-    }
-}
-
-// =====================================================
-// DESVIO DE LUMINOSIDADE
-// =====================================================
-
-function atualizarDesvio(dados, leituras) {
-
-    const valor = document.getElementById("desvioValor");
-    const sub = document.getElementById("desvioSub");
-    const resumo = document.getElementById("desvioResumo");
-    const zona = document.getElementById("desvioZona");
-    const alerta = document.getElementById("desvioAlerta");
-    const marcador = document.getElementById("marcadorDesvio");
-
-    const problemas = sensores.filter(sensor =>
-        verificarSituacao(leituras[sensor.chave]) !== "normal"
-    );
-
-    if (problemas.length === 0) {
-
-        valor.textContent = "0 min";
-        sub.textContent = "dentro da faixa hoje";
-        resumo.textContent = "Nenhum período fora da faixa ideal.";
-
-        zona.textContent = "Todas as zonas";
-        alerta.textContent = "Sem desvio";
-        alerta.style.color = "#47763b";
-
-        marcador.style.display = "none";
-
-        return;
-    }
-
-    marcador.style.display = "block";
-
-    valor.textContent = `${dados.desvioMinutos} min`;
-    sub.textContent = "fora da faixa hoje";
-    resumo.textContent = `${problemas.length} sensor(es) fora do ideal`;
-
-    const sensor = problemas[0];
-    const leitura = leituras[sensor.chave];
-    const situacao = verificarSituacao(leitura);
-
-    zona.textContent = `${sensor.zona} · ${leitura} PPFD`;
-
-    if (situacao === "alto") {
-
-        alerta.textContent = `${leitura - limiteMaximo} PPFD acima do limite`;
-        alerta.style.color = "#b42318";
-        marcador.style.background = "#b42318";
-
-    } else {
-
-        alerta.textContent = `${limiteMinimo - leitura} PPFD abaixo do limite`;
-        alerta.style.color = "#3569b2";
-        marcador.style.background = "#3569b2";
-    }
-
-    marcador.style.left = "65%";
-}
-
-// =====================================================
-// SENSORES EM ALERTA
-// =====================================================
-
-function atualizarCardProblemas(leituras) {
-
-    const quantidade = document.getElementById("zonaProblema");
-    const resumo = document.getElementById("zonaResumo");
-    const bolinha = document.getElementById("statusBolinha");
-    const textoStatus = document.getElementById("statusAtualTexto");
-
-    const problemas = sensores.filter(sensor =>
-        verificarSituacao(leituras[sensor.chave]) !== "normal"
-    );
-
-    if (problemas.length === 0) {
-
-        quantidade.textContent = "Nenhum";
-        quantidade.style.color = "#315b2e";
-
-        resumo.textContent = "Todos os sensores estão dentro da faixa.";
-
-        bolinha.classList.remove("alerta");
-        textoStatus.textContent = "Sensores operando normalmente";
-
-    } else {
-
-        quantidade.textContent = `${problemas.length} de 3 sensores`;
-        quantidade.style.color = "#b42318";
-
-        resumo.textContent = problemas.map(sensor => sensor.zona).join(", ");
-
-        bolinha.classList.add("alerta");
-        textoStatus.textContent = "Atenção à luminosidade";
-    }
-}
-
-// =====================================================
-// DLI
-// =====================================================
-
-function atualizarDLI(dados) {
-
-    const regioes = [
-        {
-            chave: "frontal",
-            texto: "dliFrontal",
-            barra: "barraDliFrontal"
-        },
-        {
-            chave: "central",
-            texto: "dliCentral",
-            barra: "barraDliCentral"
-        },
-        {
-            chave: "posterior",
-            texto: "dliPosterior",
-            barra: "barraDliPosterior"
-        }
-    ];
-
-    regioes.forEach(regiao => {
-
-        const valor = dados.dli[regiao.chave];
-
-        const elemento = document.getElementById(regiao.texto);
-        const barra = document.getElementById(regiao.barra);
-
-        if (valor >= metaDLI) {
-
-            elemento.textContent = `${valor.toFixed(1)} · Meta atingida`;
-            elemento.style.color = "#47763b";
-            barra.style.background = "#47763b";
-
-        } else {
-
-            elemento.textContent = `${valor.toFixed(1)} · Abaixo da meta`;
-            elemento.style.color = "#b42318";
-            barra.style.background = "#c29221";
-        }
-
-        barra.style.width = `${Math.min((valor / 12) * 100, 100)}%`;
-    });
-}
-
-// =====================================================
-// MONTAR LINHAS DOS SENSORES
-// =====================================================
+});
 
 function montarSensor(sensor, valor) {
-
     const situacao = verificarSituacao(valor);
-    const diferenca = calcularDiferenca(valor);
-
-    let textoDiferenca = "Dentro da faixa ideal";
-    let textoStatus = "Na faixa";
-
-    if (situacao === "alto") {
-        textoDiferenca = `${diferenca} PPFD acima do máximo`;
-        textoStatus = "ALTO";
-    }
-
-    if (situacao === "baixo") {
-        textoDiferenca = `${diferenca} PPFD abaixo do mínimo`;
-        textoStatus = "BAIXO";
-    }
 
     const escalaMax = 350;
     const posicao = Math.min((valor / escalaMax) * 100, 100);
+
     const pctMin = (limiteMinimo / escalaMax) * 100;
     const pctMax = (limiteMaximo / escalaMax) * 100;
+
+    let texto = "Na faixa";
+    let diferenca = "Dentro da faixa ideal";
+
+    if (situacao === "alto") {
+        texto = "Alto";
+        diferenca = `▲ ${valor} · acima de ${limiteMaximo}`;
+    } else if (situacao === "baixo") {
+        texto = "Baixo";
+        diferenca = `▼ ${valor} · abaixo de ${limiteMinimo}`;
+    }
 
     return `
         <div class="sensor-linha">
@@ -829,139 +496,69 @@ function montarSensor(sensor, valor) {
                         <span class="area-alta" style="width:${100 - pctMax}%"></span>
                     </div>
 
-                    <span class="sensor-marcador"
-                        style="left:${posicao}%"></span>
+                    <span class="sensor-marcador" style="left:${posicao}%"></span>
                 </div>
 
                 <div class="sensor-legenda-faixa">
-                    <span style="left:0%">0</span>
                     <span style="left:${pctMin}%">${limiteMinimo}</span>
                     <span style="left:${pctMax}%">${limiteMaximo}</span>
-                    <span style="left:100%">${escalaMax}</span>
                 </div>
 
                 <div class="sensor-diferenca ${situacao}">
-                    ${textoDiferenca}
+                    ${diferenca}
                 </div>
 
             </div>
 
             <span class="sensor-status ${situacao}">
-                ${textoStatus}
+                ${situacao === "normal" ? "✓ Na faixa" : texto}
             </span>
 
-        </div>
-    `;
+        </div>`;
 }
 
-// =====================================================
-// ATUALIZAR CARD DE SENSORES
-// (tudo ok = círculo verificado | problema = tabela)
-// =====================================================
+function atualizarDLI(dados) {
+    const regioes = [
+        {
+            chave: "frontal",
+            texto: "dliFrontal",
+            barra: "barraDliFrontal"
+        },
 
-function atualizarSensores(dados, leituras) {
+        {
+            chave: "central",
+            texto: "dliCentral",
+            barra: "barraDliCentral"
+        },
 
-    const tabela = document.getElementById("tabelaSensores");
-    const titulo = document.getElementById("tituloSensores");
-    const resumoFaixa = document.getElementById("resumoFaixa");
+        {
+            chave: "posterior",
+            texto: "dliPosterior",
+            barra: "barraDliPosterior"
+        }
+    ];
 
-    const zona = filtroZona.value;
+    regioes.forEach(regiao => {
+        const valor = dados.dli[regiao.chave];
 
-    const visiveis = sensores.filter(sensor =>
-        zona === "todas" || sensor.chave === zona
-    );
+        const elemento = document.getElementById(regiao.texto);
+        const barra = document.getElementById(regiao.barra);
 
-    const problemas = visiveis.filter(sensor =>
-        verificarSituacao(leituras[sensor.chave]) !== "normal"
-    );
+        const atingiu = valor >= metaDLI;
 
-    const nomeZona = zona === "todas" ? "Todas as zonas" : visiveis[0].zona;
+        elemento.textContent =
+            `${valor.toFixed(1).replace(".", ",")} · ${atingiu ? "Meta atingida" : "Abaixo da meta"}`;
 
-    // ===== TUDO OK =====
-    if (problemas.length === 0) {
+        elemento.style.color = atingiu ? "#47763b" : "#244fa8";
 
-        titulo.textContent = "Sensores com problema na estufa";
-        resumoFaixa.textContent =
-            `${nomeZona} · atenção além do limite, crítico acima disso ou sem dados`;
+        barra.style.background = atingiu ? "#47763b" : "#244fa8";
 
-        tabela.innerHTML = `
-            <div class="estado-ok">
-                <div class="estado-ok-icone">✓</div>
-                <strong>Nenhum problema nesta estufa</strong>
-                <p>Todos os sensores estão lendo e dentro da faixa.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-    // ===== SÓ OS SENSORES FORA DA FAIXA =====
-    titulo.textContent = "Sensores fora da faixa";
-    resumoFaixa.textContent =
-        `${nomeZona} · Floração · PPFD mínimo ${limiteMinimo} · máximo ${limiteMaximo}`;
-
-    let html = `
-        <div class="sensor-cabecalho">
-            <span>Sensor</span>
-            <span>PPFD</span>
-            <span>Faixa ideal</span>
-            <span>Situação</span>
-        </div>
-    `;
-
-    problemas.forEach(sensor => {
-        html += montarSensor(sensor, leituras[sensor.chave]);
+        barra.style.width = `${Math.min((valor / 12) * 100, 100)}%`;
     });
-
-    tabela.innerHTML = html;
 }
-
-// =====================================================
-// FILTRO DE ZONA NO GRÁFICO
-// =====================================================
-
-function atualizarFiltroZona() {
-
-    const zona = filtroZona.value;
-
-    graficoPPFD.data.datasets[0].hidden =
-        zona !== "todas" && zona !== "frontal";
-
-    graficoPPFD.data.datasets[1].hidden =
-        zona !== "todas" && zona !== "central";
-
-    graficoPPFD.data.datasets[2].hidden =
-        zona !== "todas" && zona !== "posterior";
-
-    graficoPPFD.data.datasets[3].hidden = false;
-    graficoPPFD.data.datasets[4].hidden = false;
-}
-
-// =====================================================
-// ATUALIZAR GRÁFICO
-// =====================================================
-
-function atualizarGrafico(dados) {
-
-    graficoPPFD.data.datasets[0].data = dados.frontal;
-    graficoPPFD.data.datasets[1].data = dados.central;
-    graficoPPFD.data.datasets[2].data = dados.posterior;
-
-    atualizarFiltroZona();
-
-    graficoPPFD.update();
-}
-
-// =====================================================
-// ATUALIZA TODA A DASHBOARD
-// =====================================================
 
 function atualizarDashboard() {
-
-    const numeroEstufa = filtroEstufa.value;
-    const dados = estufas[numeroEstufa];
-
-    tituloEstufa.textContent = dados.nome;
+    const dados = estufas[filtroEstufa.value];
 
     const leituras = {
         frontal: obterLeituraAtual(dados, "frontal"),
@@ -969,25 +566,91 @@ function atualizarDashboard() {
         posterior: obterLeituraAtual(dados, "posterior")
     };
 
-    atualizarStatusEstufa(dados);
-    atualizarDesvio(dados, leituras);
-    atualizarCardProblemas(leituras);
+    const valores = Object.values(leituras);
+
+    const problemas = sensores.filter(sensor =>
+        verificarSituacao(leituras[sensor.chave]) !== "normal"
+    );
+
+    const status = problemas.length === 0
+        ? "normal"
+        : (problemas.some(sensor =>
+            verificarSituacao(leituras[sensor.chave]) === "alto"
+        ) ? "alto" : "baixo");
+
+    document.getElementById("tituloEstufa").textContent = dados.nome;
+
+    const badge = document.getElementById("statusEstufa");
+
+    badge.className = `badge-status ${status}`;
+
+    badge.textContent = status === "normal"
+        ? "✓ Dentro da faixa"
+        : status === "alto"
+            ? "▲ PPFD elevado"
+            : "▼ PPFD insuficiente";
+
+    document.getElementById("desvioValor").textContent = dados.desvioMinutos;
+
+    document.getElementById("periodoDesvio").textContent =
+        dados.desvioMinutos ? `▲ ${dados.periodoDesvio}` : "Sem desvios";
+
+    document.getElementById("periodoDesvio").className =
+        `badge-status ${dados.desvioMinutos ? "alto" : "normal"}`;
+
+    document.getElementById("desvioResumo").textContent =
+        `Ideal ${limiteMinimo} a ${limiteMaximo} · ${((dados.desvioMinutos / 720) * 100).toFixed(1).replace(".", ",")}% do período`;
+
+    document.getElementById("marcadorDesvio").style.display =
+        dados.desvioMinutos ? "block" : "none";
+
+    document.getElementById("marcadorDesvio").style.left =
+        `${Math.min((dados.desvioMinutos / 240) * 100, 95)}%`;
+
+    document.getElementById("zonaProblema").textContent = problemas.length;
+
+    document.getElementById("zonaResumo").textContent =
+        problemas.length
+            ? problemas.map(sensor => sensor.zona).join(", ") + " fora da faixa."
+            : "Todos os sensores dentro da faixa.";
+
+    document.getElementById("zonaProblema").style.color =
+        problemas.length ? "#b42318" : "#10180f";
+
+    document.getElementById("statusBolinha").className =
+        problemas.length ? "status-bolinha alerta" : "status-bolinha";
+
+    document.getElementById("statusAtualTexto").textContent =
+        problemas.length
+            ? "Atenção à luminosidade"
+            : "Sensores operando normalmente";
+
+    document.getElementById("tabelaSensores").innerHTML = `
+        <div class="sensor-cabecalho">
+            <span>Sensor</span>
+            <span>PPFD agora</span>
+            <span>Onde está na faixa</span>
+            <span>Situação</span>
+        </div>
+
+        ${sensores.map(sensor =>
+            montarSensor(sensor, leituras[sensor.chave])
+        ).join("")}
+    `;
+
     atualizarDLI(dados);
-    atualizarSensores(dados, leituras);
-    atualizarGrafico(dados);
+
+    graficoPPFD.data.datasets[0].data = dados.frontal;
+    graficoPPFD.data.datasets[1].data = dados.central;
+    graficoPPFD.data.datasets[2].data = dados.posterior;
+
+    graficoPPFD.update();
 }
 
-// =====================================================
-// EVENTOS
-// =====================================================
-
 filtroEstufa.addEventListener("change", atualizarDashboard);
+filtroPeriodo.addEventListener("change", atualizarDashboard);
 
-filtroZona.addEventListener("change", atualizarDashboard);
-
-// INICIALIZAÇÃO
 atualizarDashboard();
 </script>
-
 </body>
 </html>

@@ -1,60 +1,685 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/dashboardHistorico.css" />
-    <link rel="shortcut icon" href="../assets/imgs/logo.png" />
-    <title>Estufa 1 | Luminou6</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/dashboardHistorico.css">
+
+    <title>Histórico de Alertas | Luminou6</title>
+</head>
+
+<body>
+
     <header class="barra-lateral">
-      <div class="sidebar-topo">
-        <a href="../index.html">
-          <div class="logo">
-            <img src="../assets/imgs/LogoLuminouBranca.svg" />
-          </div>
-        </a>
 
-        <nav>
-          <a href="../index.html">
-            <div>
-              <img src="../assets/imgs/VectorCasa.svg" />
-              Home
-            </div>
-          </a>
+        <div class="sidebar-topo">
 
-          <a href="dashboardVisaoGeral.html">
-            <div>
-              <img src="../assets/imgs/VectorLupa.svg" />
-              Visão geral
-            </div>
-          </a>
+            <a href="../index.html">
+                <div class="logo">
+                    <img src="../assets/imgs/LogoLuminouBranca.svg" alt="Luminou6">
+                </div>
+            </a>
 
-          <a href="dashboardSensores.html">
-            <div>
-              <img src="../assets/imgs/plant.png" />
-              Estufas
-            </div>
-          </a>
+            <nav>
+                <a href="../index.html">
+                    <div>
+                        <img src="../assets/imgs/VectorCasa.svg" alt="">
+                        Visão geral
+                    </div>
+                </a>
 
-          <a href="../dashboard/dashboardHistorico.html">
-            <div class="menu-ativo">
-              <img src="../assets/imgs/VectorConfig.svg" />
-              Histórico
-            </div>
-          </a>
+                <a href="dashboardSensores.html">
+                    <div>
+                        <img src="../assets/imgs/plant.png" alt="">
+                        Estufas e sensores
+                    </div>
+                </a>
 
-          <a href="dashboardConfigs.html">
-            <div>
-              <img src="../assets/imgs/VectorConfig.svg" />
-              Configurações
-            </div>
-          </a>
-        </nav>
-      </div>
+                <a href="dashboardHistorico.html">
+                    <div class="menu-ativo">
+                        <img src="../assets/imgs/VectorLupa.svg" alt="">
+                        Histórico
+                    </div>
+                </a>
+
+                <a href="dashboardConfigs.html">
+                    <div>
+                        <img src="../assets/imgs/VectorConfig.svg" alt="">
+                        Configurações
+                    </div>
+                </a>
+            </nav>
+
+        </div>
+
     </header>
-  </body>
+
+
+    <div class="area-principal">
+
+        <main class="conteudo">
+
+            <!-- CABEÇALHO -->
+
+            <section class="topo-pagina">
+
+                <div>
+                    <h1>Histórico de alertas</h1>
+
+                    <p>
+                        Todos os alertas das 5 estufas. Escolha o período no calendário
+                        e os filtros, depois clique em Filtrar.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- FILTROS -->
+
+            <section class="card card-filtros">
+
+                <div class="filtros-container">
+
+                    <div class="campo-filtro campo-periodo">
+
+                        <label>Período</label>
+
+                        <div class="periodo-inputs">
+
+                            <input
+                                type="date"
+                                id="dataInicio"
+                                value="2026-11-11"
+                            >
+
+                            <span>até</span>
+
+                            <input
+                                type="date"
+                                id="dataFim"
+                                value="2026-11-17"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="campo-filtro">
+
+                        <label for="filtroEstufa">Estufa</label>
+
+                        <select id="filtroEstufa">
+
+                            <option value="todas">Todas as estufas</option>
+                            <option value="Estufa 1">Estufa 1</option>
+                            <option value="Estufa 2">Estufa 2</option>
+                            <option value="Estufa 3">Estufa 3</option>
+                            <option value="Estufa 4">Estufa 4</option>
+                            <option value="Estufa 5">Estufa 5</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-filtro">
+
+                        <label for="filtroZona">Zona</label>
+
+                        <select id="filtroZona">
+
+                            <option value="todas">Todas as zonas</option>
+                            <option value="Frontal">Frontal</option>
+                            <option value="Central">Central</option>
+                            <option value="Posterior">Posterior</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo-filtro">
+
+                        <label for="filtroTipo">Tipo de alerta</label>
+
+                        <select id="filtroTipo">
+
+                            <option value="todos">Todos os tipos</option>
+                            <option value="alto">Luz alta</option>
+                            <option value="baixo">Luz baixa</option>
+                            <option value="sem dados">Sem dados</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="botoes-filtro">
+
+                    <button class="btn-filtrar" onclick="filtrarAlertas()">
+                        Filtrar
+                    </button>
+
+                    <button class="btn-limpar" onclick="limparFiltros()">
+                        Limpar filtros
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- HISTÓRICO -->
+
+            <section class="card card-historico">
+
+                <div class="historico-topo">
+
+                    <div class="historico-titulo">
+
+                        <h2>Alertas</h2>
+
+                        <p id="resumoPeriodo">
+                            11/11/2026 a 17/11/2026 · todas as estufas · todas as zonas · 15 alertas
+                        </p>
+
+                    </div>
+
+
+                    <div class="indicadores-alertas">
+
+                        <span class="indicador alerta-alto">
+                            ▲ Luz alta: <strong id="totalAlto">8</strong>
+                        </span>
+
+                        <span class="indicador alerta-baixo">
+                            ▼ Luz baixa: <strong id="totalBaixo">5</strong>
+                        </span>
+
+                        <span class="indicador alerta-problema">
+                            Problema no sensor: <strong id="totalProblema">2</strong>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABELA -->
+
+                <div class="tabela-container">
+
+                    <table class="tabela-alertas">
+
+                        <thead>
+
+                            <tr>
+                                <th>Data</th>
+                                <th>Início</th>
+                                <th>Estufa</th>
+                                <th>Zona</th>
+                                <th>Sensor</th>
+                                <th>Tipo</th>
+                                <th>Valor (PPFD)</th>
+                                <th>Duração</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="listaAlertas">
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="sem-resultados" id="semResultados" style="display: none;">
+
+                        <span>!</span>
+
+                        <strong>Nenhum alerta encontrado</strong>
+
+                        <p>
+                            Não existem registros para os filtros selecionados.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        const alertas = [
+
+            {
+                data: "2026-11-17",
+                inicio: "17:50",
+                estufa: "Estufa 5",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "alto",
+                valor: 262,
+                duracao: "10 min",
+                status: "Ativo"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "17:10",
+                estufa: "Estufa 5",
+                zona: "Central",
+                sensor: "Sensor 2",
+                tipo: "sem dados",
+                valor: null,
+                duracao: "50 min",
+                status: "Ativo"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "16:42",
+                estufa: "Estufa 4",
+                zona: "Posterior",
+                sensor: "Sensor 3",
+                tipo: "sem dados",
+                valor: null,
+                duracao: "1 h 18 min",
+                status: "Ativo"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "16:40",
+                estufa: "Estufa 2",
+                zona: "Posterior",
+                sensor: "Sensor 3",
+                tipo: "alto",
+                valor: 292,
+                duracao: "1 h 20 min",
+                status: "Ativo"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "15:55",
+                estufa: "Estufa 4",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "baixo",
+                valor: 110,
+                duracao: "2 h 05 min",
+                status: "Ativo"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "10:55",
+                estufa: "Estufa 2",
+                zona: "Posterior",
+                sensor: "Sensor 3",
+                tipo: "alto",
+                valor: 262,
+                duracao: "1 h 15 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "09:08",
+                estufa: "Estufa 1",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "alto",
+                valor: 268,
+                duracao: "35 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-17",
+                inicio: "06:20",
+                estufa: "Estufa 4",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "baixo",
+                valor: 128,
+                duracao: "1 h 05 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-16",
+                inicio: "13:12",
+                estufa: "Estufa 2",
+                zona: "Posterior",
+                sensor: "Sensor 3",
+                tipo: "alto",
+                valor: 271,
+                duracao: "48 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-16",
+                inicio: "07:05",
+                estufa: "Estufa 4",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "baixo",
+                valor: 132,
+                duracao: "1 h 30 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-15",
+                inicio: "14:02",
+                estufa: "Estufa 2",
+                zona: "Central",
+                sensor: "Sensor 2",
+                tipo: "alto",
+                valor: 268,
+                duracao: "55 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-14",
+                inicio: "11:20",
+                estufa: "Estufa 5",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "alto",
+                valor: 258,
+                duracao: "15 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-13",
+                inicio: "07:10",
+                estufa: "Estufa 4",
+                zona: "Frontal",
+                sensor: "Sensor 1",
+                tipo: "baixo",
+                valor: 120,
+                duracao: "2 h 10 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-12",
+                inicio: "14:30",
+                estufa: "Estufa 2",
+                zona: "Posterior",
+                sensor: "Sensor 3",
+                tipo: "alto",
+                valor: 274,
+                duracao: "1 h 05 min",
+                status: "Resolvido"
+            },
+
+            {
+                data: "2026-11-11",
+                inicio: "08:00",
+                estufa: "Estufa 3",
+                zona: "Central",
+                sensor: "Sensor 2",
+                tipo: "baixo",
+                valor: 141,
+                duracao: "25 min",
+                status: "Resolvido"
+            }
+
+        ];
+
+
+        function formatarData(data) {
+
+            const partes = data.split("-");
+
+            return `${partes[2]}/${partes[1]}`;
+
+        }
+
+
+        function montarTabela(lista) {
+
+            const tabela = document.getElementById("listaAlertas");
+
+            tabela.innerHTML = "";
+
+            lista.forEach(alerta => {
+
+                let tipoTexto = "";
+                let classeTipo = "";
+
+                if (alerta.tipo === "alto") {
+
+                    tipoTexto = "▲ Luz alta";
+                    classeTipo = "tipo-alto";
+
+                } else if (alerta.tipo === "baixo") {
+
+                    tipoTexto = "▼ Luz baixa";
+                    classeTipo = "tipo-baixo";
+
+                } else {
+
+                    tipoTexto = "Sem dados";
+                    classeTipo = "tipo-sem-dados";
+
+                }
+
+
+                const valor = alerta.valor === null
+                    ? "sem dados"
+                    : alerta.valor;
+
+
+                const classeStatus = alerta.status === "Ativo"
+                    ? "status-ativo"
+                    : "status-resolvido";
+
+
+                tabela.innerHTML += `
+
+                    <tr>
+
+                        <td>${formatarData(alerta.data)}</td>
+
+                        <td>${alerta.inicio}</td>
+
+                        <td class="coluna-estufa">
+                            ${alerta.estufa}
+                        </td>
+
+                        <td>${alerta.zona}</td>
+
+                        <td>${alerta.sensor}</td>
+
+                        <td>
+                            <span class="tipo-alerta ${classeTipo}">
+                                ${tipoTexto}
+                            </span>
+                        </td>
+
+                        <td class="valor-ppfd ${classeTipo}">
+                            ${valor}
+                        </td>
+
+                        <td>${alerta.duracao}</td>
+
+                        <td>
+                            <span class="status-alerta ${classeStatus}">
+                                ${alerta.status}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                `;
+
+            });
+
+
+            document.getElementById("semResultados").style.display =
+                lista.length === 0 ? "flex" : "none";
+
+        }
+
+
+        function filtrarAlertas() {
+
+            const inicio = document.getElementById("dataInicio").value;
+            const fim = document.getElementById("dataFim").value;
+
+            const estufa = document.getElementById("filtroEstufa").value;
+            const zona = document.getElementById("filtroZona").value;
+            const tipo = document.getElementById("filtroTipo").value;
+
+
+            if (inicio && fim && inicio > fim) {
+
+                alert("A data inicial não pode ser maior que a data final.");
+
+                return;
+
+            }
+
+
+            const filtrados = alertas.filter(alerta => {
+
+                const dentroPeriodo =
+                    (!inicio || alerta.data >= inicio) &&
+                    (!fim || alerta.data <= fim);
+
+                const mesmaEstufa =
+                    estufa === "todas" || alerta.estufa === estufa;
+
+                const mesmaZona =
+                    zona === "todas" || alerta.zona === zona;
+
+                const mesmoTipo =
+                    tipo === "todos" || alerta.tipo === tipo;
+
+
+                return dentroPeriodo &&
+                    mesmaEstufa &&
+                    mesmaZona &&
+                    mesmoTipo;
+
+            });
+
+
+            montarTabela(filtrados);
+
+            atualizarIndicadores(filtrados);
+
+            atualizarResumo(filtrados.length);
+
+        }
+
+
+        function atualizarIndicadores(lista) {
+
+            let alto = 0;
+            let baixo = 0;
+            let problema = 0;
+
+
+            lista.forEach(alerta => {
+
+                if (alerta.tipo === "alto") {
+
+                    alto++;
+
+                } else if (alerta.tipo === "baixo") {
+
+                    baixo++;
+
+                } else if (alerta.tipo === "sem dados") {
+
+                    problema++;
+
+                }
+
+            });
+
+
+            document.getElementById("totalAlto").textContent = alto;
+
+            document.getElementById("totalBaixo").textContent = baixo;
+
+            document.getElementById("totalProblema").textContent = problema;
+
+        }
+
+
+        function atualizarResumo(total) {
+
+            const inicio = document.getElementById("dataInicio").value;
+            const fim = document.getElementById("dataFim").value;
+
+            const estufa = document.getElementById("filtroEstufa").value;
+            const zona = document.getElementById("filtroZona").value;
+
+
+            const textoInicio = inicio ? formatarData(inicio) : "Todas as datas";
+
+            const textoFim = fim ? formatarData(fim) : "Todas as datas";
+
+            const textoEstufa = estufa === "todas" ? "todas as estufas" : estufa;
+
+            const textoZona = zona === "todas" ? "todas as zonas" : zona;
+
+
+            document.getElementById("resumoPeriodo").textContent =
+
+                `${textoInicio} a ${textoFim} · ${textoEstufa} · ${textoZona} · ${total} alertas`;
+
+        }
+
+
+        function limparFiltros() {
+
+            document.getElementById("dataInicio").value = "2026-11-11";
+
+            document.getElementById("dataFim").value = "2026-11-17";
+
+            document.getElementById("filtroEstufa").value = "todas";
+
+            document.getElementById("filtroZona").value = "todas";
+
+            document.getElementById("filtroTipo").value = "todos";
+
+
+            filtrarAlertas();
+
+        }
+
+
+        montarTabela(alertas);
+
+        atualizarIndicadores(alertas);
+
+        atualizarResumo(alertas.length);
+
+    </script>
+
+</body>
+
 </html>
