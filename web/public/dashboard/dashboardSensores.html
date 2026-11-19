@@ -1,565 +1,656 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/dashboardSensores.css" />
-  <link rel="shortcut icon" href="../imgs/logo.png" />
-  <title>Raio-X dos sensores | Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dashboardSensores.css">
+    <link rel="shortcut icon" href="../assets/imgs/logo.png">
+    <title>Estufa | Luminou6</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
-  <header class="barra-lateral">
-    <div class="sidebar-topo">
-      <a href="../index.html">
-        <div class="logo">
-          <img src="../imgs/LogoLuminouBranca.svg" />
+    <header class="barra-lateral">
+        <div class="sidebar-topo">
+            <a href="../index.html">
+                <div class="logo">
+                    <img src="../assets/imgs/LogoLuminouBranca.svg" alt="Luminou6">
+                </div>
+            </a>
+            <nav>
+                <a href="../index.html"><div><img src="../assets/imgs/VectorCasa.svg" alt="">Home</div></a>
+                <a href="../dashboard/dashboardVisaoGeral.html"><div><img src="../assets/imgs/VectorCasa.svg" alt="">Visão geral</div></a>
+                <a href="dashboardSensores.html"><div class="menu-ativo"><img src="../assets/imgs/plant.png" alt="">Estufas e sensores</div></a>
+                <a href="dashboardHistorico.html"><div><img src="../assets/imgs/VectorLupa.svg" alt="">Histórico</div></a>
+                <a href="dashboardConfigs.html"><div><img src="../assets/imgs/VectorConfig.svg" alt="">Configurações</div></a>
+            </nav>
         </div>
-      </a>
+    </header>
 
-      <nav>
-        <a href="../index.html">
-          <div>
-            <img src="../imgs/VectorCasa.svg" />
-            Home
-          </div>
-        </a>
+    <div class="area-principal">
+        <main class="conteudo">
+            <div class="topo-pagina">
+                <div class="topo-titulo">
+                    <button class="btn-voltar" onclick="history.back()">← Voltar</button>
+                    <h1 id="tituloEstufa">Estufa 1</h1>
+                    <span id="statusEstufa" class="badge-status normal">✓ Dentro da faixa</span>
+                </div>
 
-        <a href="dashboardVisaoGeral.html">
-          <div>
-            <img src="../imgs/VectorLupa.svg" />
-            Alertas
-          </div>
-        </a>
+                <div class="filtros-topo">
+                    <span class="ultima-leitura">
+                        <i class="status-bolinha"></i>
+                        <span id="ultimaLeitura">Última leitura 18:00</span>
+                    </span>
 
-        <a href="dashboardSensores.html">
-          <div class="menu-ativo">
-            <img src="../imgs/plant.png" />
-            Sensores
-          </div>
-        </a>
+                    <label>Estufa
+                        <select id="filtroEstufa">
+                            <option value="1">Estufa 1</option>
+                            <option value="2">Estufa 2</option>
+                            <option value="3">Estufa 3</option>
+                        </select>
+                    </label>
 
-        <a href="dashboardConfigs.html">
-          <div>
-            <img src="../imgs/VectorConfig.svg" />
-            Configurações
-          </div>
-        </a>
-      </nav>
+                    <label>Período
+                        <select id="filtroPeriodo">
+                            <option value="hoje">Hoje (17/11)</option>
+                            <option value="ontem">Ontem (16/11)</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="etiquetas">
+                <span class="tag">Fase da planta: Floração</span>
+                <span class="tag tag-neutra">Faixa ideal: 150 a 250 µmol/m²/s (PPFD)</span>
+            </div>
+
+            <section class="grid-indicadores">
+
+                <article class="card indicador-card">
+                    <div class="card-cabecalho">
+                        <h3>DESVIO DE LUMINOSIDADE</h3>
+                        <span id="periodoDesvio" class="badge-status alto">▲ 09:08–09:43</span>
+                    </div>
+
+                    <div class="valor-linha">
+                        <strong class="valor-grande" id="desvioValor">35</strong>
+                        <span class="unidade-grande">min fora da faixa</span>
+                    </div>
+
+                    <p class="texto-muted" id="desvioResumo">
+                        Ideal 150 a 250 · 4,9% do período
+                    </p>
+
+                    <div class="barra-tempo">
+                        <span class="marcador-desvio" id="marcadorDesvio"></span>
+                    </div>
+
+                    <div class="linha-tempo">
+                        <span>06:00</span>
+                        <span>12:00</span>
+                        <span>18:00</span>
+                    </div>
+                </article>
+
+                <article class="card indicador-card">
+                    <h3>SENSORES EM ALERTA</h3>
+
+                    <div class="valor-linha">
+                        <strong class="valor-grande" id="zonaProblema">0</strong>
+                        <span class="unidade-grande">de 3 sensores</span>
+                    </div>
+
+                    <p class="texto-muted destaque-verde" id="zonaResumo">
+                        Todos os sensores dentro da faixa.
+                    </p>
+
+                    <div class="status-atual">
+                        <span class="status-bolinha" id="statusBolinha"></span>
+                        <span id="statusAtualTexto">Sensores operando normalmente</span>
+                    </div>
+                </article>
+
+                <article class="card indicador-card card-dli">
+                    <h3>DLI POR REGIÃO</h3>
+
+                    <p class="texto-muted texto-meta">
+                        Meta mínima: 8,0 mol/m²/dia
+                    </p>
+
+                    <div class="dli-regiao">
+                        <div class="dli-info">
+                            <span>Frontal</span>
+                            <strong id="dliFrontal">8,9 · Meta atingida</strong>
+                        </div>
+                        <div class="dli-barra">
+                            <div class="dli-preenchimento" id="barraDliFrontal"></div>
+                        </div>
+                    </div>
+
+                    <div class="dli-regiao">
+                        <div class="dli-info">
+                            <span>Central</span>
+                            <strong id="dliCentral">8,6 · Meta atingida</strong>
+                        </div>
+                        <div class="dli-barra">
+                            <div class="dli-preenchimento" id="barraDliCentral"></div>
+                        </div>
+                    </div>
+
+                    <div class="dli-regiao">
+                        <div class="dli-info">
+                            <span>Posterior</span>
+                            <strong id="dliPosterior">7,6 · Abaixo da meta</strong>
+                        </div>
+                        <div class="dli-barra">
+                            <div class="dli-preenchimento" id="barraDliPosterior"></div>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="grid-monitoramento">
+
+                <article class="card card-sensores">
+                    <div class="card-titulo">
+                        <h2>Sensores da estufa</h2>
+                        <p id="resumoFaixa">
+                            Floração · PPFD mín. 150 · máx. 250 · meta de DLI 8,0
+                        </p>
+                    </div>
+
+                    <div class="tabela-scroll">
+                        <div class="tabela-sensores" id="tabelaSensores"></div>
+                    </div>
+                </article>
+
+                <article class="card card-grafico">
+                    <div class="card-titulo">
+                        <h2>Luz (PPFD) em relação ao tempo</h2>
+                        <p>
+                            Medições individuais dos 3 sensores · faixa verde = ideal da fase
+                        </p>
+                    </div>
+
+                    <div class="grafico-container">
+                        <canvas id="graficoPPFD"></canvas>
+                    </div>
+
+                    <div class="legenda-grafico">
+                        <span class="legenda-item">
+                            <i class="linha frontal-legenda"></i>Frontal
+                        </span>
+                        <span class="legenda-item">
+                            <i class="linha central-legenda"></i>Central
+                        </span>
+                        <span class="legenda-item">
+                            <i class="linha posterior-legenda"></i>Posterior
+                        </span>
+                    </div>
+
+                    <div class="legenda-limites">
+                        <span><i class="linha-limite"></i>Limite máximo</span>
+                        <span><i class="linha-limite-min"></i>Limite mínimo</span>
+                    </div>
+                </article>
+
+            </section>
+        </main>
     </div>
-  </header>
 
-  <div class="area-principal">
-    <main class="conteudo">
-      <section class="cabecalho cabecalho-com-seletor">
-        <div>
-          <div class="titulo-com-icone">
-            <h1>Monitoramento interno das estufas</h1>
-          </div>
-          <p class="subtitulo-principal">
-            Veja sensor por sensor quanta luz cada ponto da estufa está recebendo: o PPFD ao longo do dia, o DLI acumulado por região e quais sensores saíram da faixa ideal da fase de cultivo
-          </p>
-        </div>
+<script>
+const filtroEstufa = document.getElementById("filtroEstufa");
+const filtroPeriodo = document.getElementById("filtroPeriodo");
 
-        <div class="seletor-estufa">
-          <label for="estufa">Estufa selecionada:</label>
-          <select id="estufa">
-            <option value="1">Estufa 1</option>
-            <option value="2">Estufa 2</option>
-            <option value="3">Estufa 3</option>
-            <option value="4">Estufa 4</option>
-            <option value="5">Estufa 5</option>
-          </select>
-        </div>
-      </section>
+const limiteMinimo = 150;
+const limiteMaximo = 250;
+const metaDLI = 8.0;
 
-      <!-- 3 KPIs -->
-      <section class="grid-kpis">
-        <!-- KPI 1: Picos de PPFD da estufa no dia -->
-        <div class="card-kpi">
-          <div class="kpi-bloco kpi-bloco-largo">
-            <h3>Picos de PPFD da estufa</h3>
-            <div class="kpi-minis">
-              <div class="kpi-mini pico-min">
-                <span class="kpi-linha"><svg class="seta seta-min" viewBox="0 0 24 24" width="20" height="20" role="img" aria-label="Mínimo do dia"><title>Mínimo do dia</title><path d="M3 6h18L12 20z" fill="currentColor"/></svg><strong class="kpi-mini-valor" id="kpiMin">—</strong><span class="kpi-unidade">µmol/m²/s</span></span>
-                <span class="kpi-subtexto" id="kpiMinLocal">—</span>
-              </div>
-              <div class="kpi-divisor"></div>
-              <div class="kpi-mini pico-max">
-                <span class="kpi-linha"><svg class="seta seta-max" viewBox="0 0 24 24" width="20" height="20" role="img" aria-label="Máximo do dia"><title>Máximo do dia</title><path d="M12 4l9 14H3z" fill="currentColor"/></svg><strong class="kpi-mini-valor" id="kpiMax">—</strong><span class="kpi-unidade">µmol/m²/s</span></span>
-                <span class="kpi-subtexto" id="kpiMaxLocal">—</span>
-              </div>
-            </div>
-          </div>
-        </div>
+const horarios = [
+    "06:00", "07:30", "09:00", "10:30",
+    "12:00", "13:30", "15:00", "16:30", "18:00"
+];
 
-        <!-- KPI 2: DLI por região da estufa -->
-        <div class="card-kpi">
-          <div class="kpi-bloco kpi-bloco-largo">
-            <h3>DLI por região da estufa</h3>
-            <p class="kpi-subtexto" id="subtituloRegioes">Meta mínima de — mol/m²/dia</p>
-            <div class="grid-regioes" id="gridRegioes"></div>
-          </div>
-        </div>
+const estufas = {
+    1: {
+        nome: "Estufa 1",
+        desvioMinutos: 35,
+        periodoDesvio: "09:08–09:43",
 
-        <!-- KPI 3: Sensores em alerta (lista embaixo do número) -->
-        <div class="card-kpi card-kpi-coluna">
-          <div class="kpi-bloco">
-            <h3>Sensores em alerta</h3>
-            <span class="kpi-valor" id="kpiAlertas">—</span>
-            <p class="kpi-subtexto" id="kpiAlertasTexto">—</p>
-          </div>
-          <div class="lista-alertas" id="listaAlertas"></div>
-        </div>
-      </section>
+        frontal: [174, 185, 280, 230, 218, 205, 220, 205, 196],
+        central: [169, 178, 245, 225, 215, 208, 218, 200, 188],
+        posterior: [164, 172, 260, 220, 210, 200, 212, 195, 181],
 
-      <div class="layout-duas-colunas">
-        <!-- Esquerda: tabela de sensores (ocupa toda a altura) -->
-        <div class="coluna-esquerda">
-          <section class="card-painel bloco-tabela">
-            <div class="cabecalho-painel">
-              <div class="painel-titulo-icone">
-                <h2 id="tituloTabela">Sensores da estufa</h2>
-                <span class="badge-fase" id="badgeFase">Fase</span>
-              </div>
-              <button class="btn-link" id="btnVerTodos">Ver todos</button>
-            </div>
-            <div class="parametros-fase" id="parametrosFase"></div>
-            <p class="subtitulo-painel">Clique em um sensor para isolá-lo no gráfico.</p>
+        dli: {
+            frontal: 8.9,
+            central: 8.6,
+            posterior: 7.6
+        }
+    },
 
-            <table class="tabela-dashboard">
-              <thead>
-                <tr>
-                  <th>Sensor</th>
-                  <th>Localização</th>
-                  <th>PPFD (µmol/m²/s)</th>
-                  <th>Condição</th>
-                  <th>DLI (mol/m²/dia)</th>
-                </tr>
-              </thead>
-              <tbody id="tabelaSensoresCorpo"></tbody>
-            </table>
-          </section>
-        </div>
+    2: {
+        nome: "Estufa 2",
+        desvioMinutos: 124,
+        periodoDesvio: "10:10–12:14",
 
-        <!-- Direita: gráfico em toda a altura -->
-        <section class="card-painel">
-          <div class="cabecalho-painel">
-            <div class="titulo-grafico">
-              <h2 id="graficoTitulo"></h2>
-              <p class="grafico-subtitulo" id="graficoSubtitulo"></p>
-            </div>
-            <span class="pill-faixa" id="faixaIdeal">Faixa ideal: —</span>
-          </div>
+        frontal: [170, 190, 220, 245, 260, 275, 290, 285, 280],
+        central: [180, 210, 240, 275, 300, 320, 330, 325, 318],
+        posterior: [155, 165, 180, 195, 210, 220, 230, 228, 225],
 
-          <div class="container-grafico">
-            <div class="area-canvas">
-              <canvas id="graficoSensores"></canvas>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
+        dli: {
+            frontal: 10.2,
+            central: 12.4,
+            posterior: 8.5
+        }
+    },
 
-  <script>
-    // ================= DADOS SIMULADOS (arrays) =================
-    const horarios = ['10:35', '10:40', '10:45', '10:50', '10:55', '11:00', '11:05', '11:10', '11:15', '11:20'];
-    const nomesEstufas = ['Estufa 1', 'Estufa 2', 'Estufa 3', 'Estufa 4', 'Estufa 5'];
-    const fasesEstufas = ['Brotamento', 'Crescimento', 'Floração', 'Crescimento', 'Brotamento'];
-    const nomesSensores = ['Sensor 1', 'Sensor 2', 'Sensor 3'];
-    const regioes = ['Frontal', 'Central', 'Posterior'];
-    const localizacoes = ['Frontal (Canteiro A)', 'Central (Canteiro B)', 'Posterior (Canteiro C)'];
-    const coresSensores = ['rgb(0, 100, 50)', 'rgb(0, 0, 255)', 'rgb(230, 97, 1)'];
-    const ultimos = [
-      [80, 175, 180],
-      [120, 260, 310],
-      [330, 345, 360],
-      [230, 240, 250],
-      [190, 190, 190]
-    ];
-    const online = [
-      [true, true, true],
-      [true, true, true],
-      [true, true, true],
-      [true, true, true],
-      [true, true, false]
-    ];
-    const variacao = [
-      [20, 24, 18, 15, 12, 9, 6, 4, 2, 0],
-      [28, 22, 25, 18, 14, 10, 7, 3, 1, 0],
-      [15, 18, 22, 14, 16, 8, 9, 5, 2, 0]
-    ];
+    3: {
+        nome: "Estufa 3",
+        desvioMinutos: 186,
+        periodoDesvio: "08:20–11:26",
 
-    const horasDeLuz = 12;
-    let sensorIsolado = -1;   // -1 = todos os sensores
+        frontal: [100, 105, 110, 115, 120, 118, 114, 110, 112],
+        central: [120, 125, 130, 140, 145, 142, 140, 138, 138],
+        posterior: [155, 160, 165, 175, 180, 185, 180, 170, 165],
 
+        dli: {
+            frontal: 4.2,
+            central: 5.8,
+            posterior: 8.1
+        }
+    }
+};
 
-    // ================= GRÁFICO =================
-    const meuGrafico = new Chart(document.getElementById('graficoSensores').getContext('2d'), {
-      type: 'line',
-      data: {
+const sensores = [
+    { chave: "frontal", nome: "Sensor 1", zona: "Frontal" },
+    { chave: "central", nome: "Sensor 2", zona: "Central" },
+    { chave: "posterior", nome: "Sensor 3", zona: "Posterior" }
+];
+
+function verificarSituacao(valor) {
+    if (valor > limiteMaximo) return "alto";
+    if (valor < limiteMinimo) return "baixo";
+
+    return "normal";
+}
+
+function obterLeituraAtual(dados, sensor) {
+    const valores = dados[sensor];
+
+    return valores[valores.length - 1];
+}
+
+const faixaPPFD = {
+    id: "faixaPPFD",
+
+    beforeDraw(chart) {
+        const { ctx, chartArea, scales } = chart;
+
+        if (!chartArea || !scales.y) return;
+
+        const y = scales.y;
+
+        const pixelMin = y.getPixelForValue(limiteMinimo);
+        const pixelMax = y.getPixelForValue(limiteMaximo);
+
+        ctx.save();
+
+        ctx.fillStyle = "rgba(65, 110, 190, 0.14)";
+        ctx.fillRect(
+            chartArea.left,
+            pixelMin,
+            chartArea.width,
+            chartArea.bottom - pixelMin
+        );
+
+        ctx.fillStyle = "rgba(100, 160, 85, 0.17)";
+        ctx.fillRect(
+            chartArea.left,
+            pixelMax,
+            chartArea.width,
+            pixelMin - pixelMax
+        );
+
+        ctx.fillStyle = "rgba(220, 70, 70, 0.13)";
+        ctx.fillRect(
+            chartArea.left,
+            chartArea.top,
+            chartArea.width,
+            pixelMax - chartArea.top
+        );
+
+        ctx.restore();
+    }
+};
+
+const graficoPPFD = new Chart(document.getElementById("graficoPPFD"), {
+    type: "line",
+
+    data: {
         labels: horarios,
+
         datasets: [
-          { label: 'Sensor 1 (Frontal)', data: [], borderColor: coresSensores[0], backgroundColor: coresSensores[0], tension: 0.3 },
-          { label: 'Sensor 2 (Central)', data: [], borderColor: coresSensores[1], backgroundColor: coresSensores[1], tension: 0.3 },
-          { label: 'Sensor 3 (Posterior)', data: [], borderColor: coresSensores[2], backgroundColor: coresSensores[2], tension: 0.3 },
-          // faixa ideal: linha de mínimo e linha de máximo com área verde entre elas
-          { label: 'Mínimo da faixa', data: [], borderColor: '#22c55e', borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, fill: false },
-          { label: 'Máximo da faixa', data: [], borderColor: '#22c55e', borderDash: [6, 4], borderWidth: 1.5, pointRadius: 0, fill: '-1', backgroundColor: 'rgba(34, 197, 94, 0.10)' }
+            {
+                label: "Frontal",
+                data: estufas[1].frontal,
+                borderColor: "#c29221",
+                backgroundColor: "#c29221",
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointHoverRadius: 5,
+                tension: 0.35
+            },
+
+            {
+                label: "Central",
+                data: estufas[1].central,
+                borderColor: "#526b43",
+                backgroundColor: "#526b43",
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointHoverRadius: 5,
+                tension: 0.35
+            },
+
+            {
+                label: "Posterior",
+                data: estufas[1].posterior,
+                borderColor: "#8b6caa",
+                backgroundColor: "#8b6caa",
+                borderWidth: 2,
+                pointRadius: 2.5,
+                pointHoverRadius: 5,
+                tension: 0.35
+            },
+
+            {
+                label: "Limite máximo",
+                data: horarios.map(() => limiteMaximo),
+                borderColor: "#d94b43",
+                borderDash: [6, 4],
+                borderWidth: 1.5,
+                pointRadius: 0
+            },
+
+            {
+                label: "Limite mínimo",
+                data: horarios.map(() => limiteMinimo),
+                borderColor: "#4d7dc4",
+                borderDash: [6, 4],
+                borderWidth: 1.5,
+                pointRadius: 0
+            }
         ]
-      },
-      options: {
+    },
+
+    plugins: [faixaPPFD],
+
+    options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'top',
-            labels: {
-              filter: function (item) {
-                return item.datasetIndex < 3;   // legenda só dos 3 sensores
-              }
-            }
-          }
+
+        interaction: {
+            intersect: false,
+            mode: "index"
         },
+
+        plugins: {
+            legend: {
+                display: false
+            },
+
+            tooltip: {
+                callbacks: {
+                    label(context) {
+                        if (context.datasetIndex > 2) return null;
+
+                        const valor = context.parsed.y;
+
+                        if (valor > limiteMaximo) {
+                            return `${context.dataset.label}: ${valor} PPFD (${valor - limiteMaximo} acima do limite)`;
+                        }
+
+                        if (valor < limiteMinimo) {
+                            return `${context.dataset.label}: ${valor} PPFD (${limiteMinimo - valor} abaixo do limite)`;
+                        }
+
+                        return `${context.dataset.label}: ${valor} PPFD (dentro da faixa)`;
+                    }
+                }
+            }
+        },
+
         scales: {
-          y: { beginAtZero: true, title: { display: true, text: 'PPFD (µmol/m²/s)' } },
-          x: { title: { display: true, text: 'Horário' } }
+            x: {
+                grid: {
+                    display: false
+                },
+
+                ticks: {
+                    color: "#777c6c",
+                    font: {
+                        size: 10
+                    }
+                }
+            },
+
+            y: {
+                min: 0,
+                max: 350,
+
+                ticks: {
+                    stepSize: 50,
+                    color: "#777c6c",
+                    font: {
+                        size: 10
+                    }
+                },
+
+                grid: {
+                    color: "rgba(120,120,100,0.12)"
+                }
+            }
         }
-      }
+    }
+});
+
+function montarSensor(sensor, valor) {
+    const situacao = verificarSituacao(valor);
+
+    const escalaMax = 350;
+    const posicao = Math.min((valor / escalaMax) * 100, 100);
+
+    const pctMin = (limiteMinimo / escalaMax) * 100;
+    const pctMax = (limiteMaximo / escalaMax) * 100;
+
+    let texto = "Na faixa";
+    let diferenca = "Dentro da faixa ideal";
+
+    if (situacao === "alto") {
+        texto = "Alto";
+        diferenca = `▲ ${valor} · acima de ${limiteMaximo}`;
+    } else if (situacao === "baixo") {
+        texto = "Baixo";
+        diferenca = `▼ ${valor} · abaixo de ${limiteMinimo}`;
+    }
+
+    return `
+        <div class="sensor-linha">
+
+            <div class="sensor-nome">
+                ${sensor.nome}
+                <small>${sensor.zona}</small>
+            </div>
+
+            <div class="sensor-valor ${situacao}">
+                ${valor}
+                <small>µmol/m²/s</small>
+            </div>
+
+            <div class="sensor-faixa">
+
+                <div class="sensor-escala">
+                    <div class="sensor-trilho">
+                        <span class="area-baixa" style="width:${pctMin}%"></span>
+                        <span class="area-ideal" style="width:${pctMax - pctMin}%"></span>
+                        <span class="area-alta" style="width:${100 - pctMax}%"></span>
+                    </div>
+
+                    <span class="sensor-marcador" style="left:${posicao}%"></span>
+                </div>
+
+                <div class="sensor-legenda-faixa">
+                    <span style="left:${pctMin}%">${limiteMinimo}</span>
+                    <span style="left:${pctMax}%">${limiteMaximo}</span>
+                </div>
+
+                <div class="sensor-diferenca ${situacao}">
+                    ${diferenca}
+                </div>
+
+            </div>
+
+            <span class="sensor-status ${situacao}">
+                ${situacao === "normal" ? "✓ Na faixa" : texto}
+            </span>
+
+        </div>`;
+}
+
+function atualizarDLI(dados) {
+    const regioes = [
+        {
+            chave: "frontal",
+            texto: "dliFrontal",
+            barra: "barraDliFrontal"
+        },
+
+        {
+            chave: "central",
+            texto: "dliCentral",
+            barra: "barraDliCentral"
+        },
+
+        {
+            chave: "posterior",
+            texto: "dliPosterior",
+            barra: "barraDliPosterior"
+        }
+    ];
+
+    regioes.forEach(regiao => {
+        const valor = dados.dli[regiao.chave];
+
+        const elemento = document.getElementById(regiao.texto);
+        const barra = document.getElementById(regiao.barra);
+
+        const atingiu = valor >= metaDLI;
+
+        elemento.textContent =
+            `${valor.toFixed(1).replace(".", ",")} · ${atingiu ? "Meta atingida" : "Abaixo da meta"}`;
+
+        elemento.style.color = atingiu ? "#47763b" : "#244fa8";
+
+        barra.style.background = atingiu ? "#47763b" : "#244fa8";
+
+        barra.style.width = `${Math.min((valor / 12) * 100, 100)}%`;
     });
+}
 
-    // ================= FUNÇÕES AUXILIARES =================
-    function limiteMin(fase) {
-      if (fase == 'Enraizamento' || fase == 'Brotamento') {
-        return 100;
-      } else if (fase == 'Crescimento') {
-        return 150;
-      } else {
-        return 200;
-      }
-    }
+function atualizarDashboard() {
+    const dados = estufas[filtroEstufa.value];
 
-    function limiteMax(fase) {
-      if (fase == 'Enraizamento' || fase == 'Brotamento') {
-        return 250;
-      } else if (fase == 'Crescimento') {
-        return 400;
-      } else {
-        return 550;
-      }
-    }
+    const leituras = {
+        frontal: obterLeituraAtual(dados, "frontal"),
+        central: obterLeituraAtual(dados, "central"),
+        posterior: obterLeituraAtual(dados, "posterior")
+    };
 
-    // meta diária de DLI de cada fase (mesmos valores da tela Configurações)
-    function calcularMetaDli(fase) {
-      if (fase == 'Enraizamento' || fase == 'Brotamento') {
-        return 5.0;
-      } else if (fase == 'Crescimento') {
-        return 8.5;
-      } else {
-        return 13.0;
-      }
-    }
+    const valores = Object.values(leituras);
 
-    // DLI estimado: PPFD x horas de luz x 3600 segundos / 1.000.000
-    function calcularDli(ppfd) {
-      return ppfd * horasDeLuz * 3600 / 1000000;
-    }
+    const problemas = sensores.filter(sensor =>
+        verificarSituacao(leituras[sensor.chave]) !== "normal"
+    );
 
-    function formatar(numero) {
-      return numero.toFixed(1).replace('.', ',');
-    }
+    const status = problemas.length === 0
+        ? "normal"
+        : (problemas.some(sensor =>
+            verificarSituacao(leituras[sensor.chave]) === "alto"
+        ) ? "alto" : "baixo");
 
-    function calcularCondicao(ppfd, fase, estaOnline) {
-      if (estaOnline == false) {
-        return 'Sem dados';
-      } else if (ppfd < limiteMin(fase)) {
-        return 'Baixo';
-      } else if (ppfd > limiteMax(fase)) {
-        return 'Alto';
-      } else {
-        return 'Ideal';
-      }
-    }
+    document.getElementById("tituloEstufa").textContent = dados.nome;
 
-    function criarBadge(condicao) {
-      if (condicao == 'Ideal') {
-        return '<span class="badge badge-ok">Ideal</span>';
-      } else if (condicao == 'Baixo') {
-        return '<span class="badge badge-baixo">Baixo</span>';
-      } else if (condicao == 'Alto') {
-        return '<span class="badge badge-alto">Alto</span>';
-      } else {
-        return '<span class="badge badge-vazio">Sem dados</span>';
-      }
-    }
+    const badge = document.getElementById("statusEstufa");
 
-    // lista de 10 leituras de um sensor (sensor sem comunicação para de medir no fim)
-    function criarLeituras(i, s) {
-      const lista = [];
-      for (let k = 0; k < 10; k++) {
-        if (online[i][s] == false && k > 6) {
-          lista.push(null);
-        } else {
-          lista.push(ultimos[i][s] - variacao[s][k]);
-        }
-      }
-      return lista;
-    }
+    badge.className = `badge-status ${status}`;
 
-    // lista com 10 vezes o mesmo valor (linhas da faixa ideal)
-    function repetir(valor) {
-      const lista = [];
-      for (let k = 0; k < 10; k++) {
-        lista.push(valor);
-      }
-      return lista;
-    }
+    badge.textContent = status === "normal"
+        ? "✓ Dentro da faixa"
+        : status === "alto"
+            ? "▲ PPFD elevado"
+            : "▼ PPFD insuficiente";
 
-    // bloco de DLI de uma região (Frontal, Central, Posterior)
-    function montarRegiao(s, dli, meta, estaOnline) {
-      let valor = '—';
-      let classe = '';
-      let largura = 0;
-      let status = '<span class="status-regiao">Sem dados</span>';
+    document.getElementById("desvioValor").textContent = dados.desvioMinutos;
 
-      if (estaOnline == true) {
-        valor = formatar(dli);
-        largura = dli / meta * 100;
-        if (largura > 100) {
-          largura = 100;
-        }
-        if (dli < meta) {
-          classe = 'abaixo';
-          status = '<span class="status-regiao vermelho">Abaixo da meta</span>';
-        } else {
-          status = '<span class="status-regiao verde">Meta atingida</span>';
-        }
-      }
+    document.getElementById("periodoDesvio").textContent =
+        dados.desvioMinutos ? `▲ ${dados.periodoDesvio}` : "Sem desvios";
 
-      return '<div class="regiao">' +
-        '<h3>' + regioes[s] + '</h3>' +
-        '<p class="regiao-valor ' + classe + '">' + valor + ' <span>mol/m²/dia</span></p>' +
-        '<div class="kpi-barra-fundo"><div class="kpi-barra-preenchida ' + classe + '" style="width: ' + largura + '%;"></div></div>' +
-        status +
-        '</div>';
-    }
+    document.getElementById("periodoDesvio").className =
+        `badge-status ${dados.desvioMinutos ? "alto" : "normal"}`;
 
-    // cor do pico conforme a faixa ideal da fase
-    function corDoPico(valor, minimo, maximo) {
-      if (valor > maximo) {
-        return 'pico-alto';
-      } else if (valor < minimo) {
-        return 'pico-baixo';
-      } else {
-        return 'pico-ok';
-      }
-    }
+    document.getElementById("desvioResumo").textContent =
+        `Ideal ${limiteMinimo} a ${limiteMaximo} · ${((dados.desvioMinutos / 720) * 100).toFixed(1).replace(".", ",")}% do período`;
 
-    // ================= CARREGAR UMA ESTUFA (roda ao trocar o select) =================
-    function carregarEstufa() {
-      const i = Number(document.getElementById('estufa').value) - 1;
-      const fase = fasesEstufas[i];
-      const minimo = limiteMin(fase);
-      const maximo = limiteMax(fase);
-      const meta = calcularMetaDli(fase);
+    document.getElementById("marcadorDesvio").style.display =
+        dados.desvioMinutos ? "block" : "none";
 
-      let linhas = '';
-      let blocosRegioes = '';
-      // picos do dia: menor e maior leitura entre os sensores
-      let picoMin = -1;
-      let picoMax = -1;
-      let sensorPicoMin = 0;
-      let sensorPicoMax = 0;
-      let horaPicoMin = 0;
-      let horaPicoMax = 0;
+    document.getElementById("marcadorDesvio").style.left =
+        `${Math.min((dados.desvioMinutos / 240) * 100, 95)}%`;
 
-      sensorIsolado = -1;
+    document.getElementById("zonaProblema").textContent = problemas.length;
 
-      for (let s = 0; s < 3; s++) {
-        const ppfd = ultimos[i][s];
-        const dli = calcularDli(ppfd);
-        const condicao = calcularCondicao(ppfd, fase, online[i][s]);
-        let medicao = '—';
-        let dliTexto = '—';
+    document.getElementById("zonaResumo").textContent =
+        problemas.length
+            ? problemas.map(sensor => sensor.zona).join(", ") + " fora da faixa."
+            : "Todos os sensores dentro da faixa.";
 
-        const leituras = criarLeituras(i, s);
-        meuGrafico.data.datasets[s].data = leituras;
-        meuGrafico.data.datasets[s].hidden = false;
+    document.getElementById("zonaProblema").style.color =
+        problemas.length ? "#b42318" : "#10180f";
 
-        for (let k = 0; k < leituras.length; k++) {
-          if (leituras[k] !== null) {
-            if (picoMin == -1 || leituras[k] < picoMin) {
-              picoMin = leituras[k];
-              sensorPicoMin = s;
-              horaPicoMin = k;
-            }
-            if (leituras[k] > picoMax) {
-              picoMax = leituras[k];
-              sensorPicoMax = s;
-              horaPicoMax = k;
-            }
-          }
-        }
+    document.getElementById("statusBolinha").className =
+        problemas.length ? "status-bolinha alerta" : "status-bolinha";
 
-        if (online[i][s] == true) {
-          medicao = ppfd;
-          dliTexto = formatar(dli);
-        }
+    document.getElementById("statusAtualTexto").textContent =
+        problemas.length
+            ? "Atenção à luminosidade"
+            : "Sensores operando normalmente";
 
-        linhas = linhas + `
-          <tr onclick="isolarSensor(${s})">
-            <td>
-              <div class="celula-estufa">
-                <span class="ponto-cor" style="background-color: ${coresSensores[s]};"></span>
-                ${nomesSensores[s]}
-              </div>
-            </td>
-            <td>${localizacoes[s]}</td>
-            <td>${medicao}</td>
-            <td>${criarBadge(condicao)}</td>
-            <td>${dliTexto}</td>
-          </tr>`;
+    document.getElementById("tabelaSensores").innerHTML = `
+        <div class="sensor-cabecalho">
+            <span>Sensor</span>
+            <span>PPFD agora</span>
+            <span>Onde está na faixa</span>
+            <span>Situação</span>
+        </div>
 
-        blocosRegioes = blocosRegioes + montarRegiao(s, dli, meta, online[i][s]);
-      }
+        ${sensores.map(sensor =>
+            montarSensor(sensor, leituras[sensor.chave])
+        ).join("")}
+    `;
 
-      // tabela, regiões, faixa ideal e gráfico
-      document.getElementById('tabelaSensoresCorpo').innerHTML = linhas;
-      document.getElementById('tituloTabela').innerHTML = 'Sensores · ' + nomesEstufas[i];
+    atualizarDLI(dados);
 
-      // fase de cultivo e parâmetros da estufa
-      document.getElementById('badgeFase').innerHTML = 'Fase: ' + fase;
-      document.getElementById('parametrosFase').innerHTML =
-        '<span class="parametro"><span class="parametro-nome">PPFD mínimo</span><strong>' + minimo + '</strong> µmol/m²/s</span>' +
-        '<span class="parametro"><span class="parametro-nome">PPFD máximo</span><strong>' + maximo + '</strong> µmol/m²/s</span>' +
-        '<span class="parametro"><span class="parametro-nome">Meta de DLI</span><strong>' + formatar(meta) + '</strong> mol/m²/dia</span>';
-      document.getElementById('gridRegioes').innerHTML = blocosRegioes;
-      document.getElementById('subtituloRegioes').innerHTML = 'Meta mínima de ' + formatar(meta) + ' mol/m²/dia';
-      document.getElementById('faixaIdeal').innerHTML = 'Faixa ideal: ' + minimo + ' - ' + maximo;
-      meuGrafico.data.datasets[3].data = repetir(minimo);
-      meuGrafico.data.datasets[4].data = repetir(maximo);
-      meuGrafico.update();
-      atualizarTituloGrafico();
+    graficoPPFD.data.datasets[0].data = dados.frontal;
+    graficoPPFD.data.datasets[1].data = dados.central;
+    graficoPPFD.data.datasets[2].data = dados.posterior;
 
-      // KPI 1: picos de PPFD do dia (com unidade na frente do número)
-      if (picoMin == -1) {
-        document.getElementById('kpiMin').innerHTML = '—';
-        document.getElementById('kpiMax').innerHTML = '—';
-        document.getElementById('kpiMinLocal').innerHTML = '—';
-        document.getElementById('kpiMaxLocal').innerHTML = '—';
-        document.querySelector('.pico-min').className = 'kpi-mini pico-min';
-        document.querySelector('.pico-max').className = 'kpi-mini pico-max';
-      } else {
-        document.getElementById('kpiMin').innerHTML = picoMin;
-        document.getElementById('kpiMax').innerHTML = picoMax;
-        document.getElementById('kpiMinLocal').innerHTML = nomesSensores[sensorPicoMin] + ' · ' + regioes[sensorPicoMin] + ' às ' + horarios[horaPicoMin];
-        document.getElementById('kpiMaxLocal').innerHTML = nomesSensores[sensorPicoMax] + ' · ' + regioes[sensorPicoMax] + ' às ' + horarios[horaPicoMax];
+    graficoPPFD.update();
+}
 
-        // dentro da faixa: verde | acima do máximo: vermelho | abaixo do mínimo: azul
-        document.querySelector('.pico-min').className = 'kpi-mini pico-min ' + corDoPico(picoMin, minimo, maximo);
-        document.querySelector('.pico-max').className = 'kpi-mini pico-max ' + corDoPico(picoMax, minimo, maximo);
-      }
+filtroEstufa.addEventListener("change", atualizarDashboard);
+filtroPeriodo.addEventListener("change", atualizarDashboard);
 
-      // KPI 3: sensores em alerta (só os que estão fora da faixa ou sem comunicação)
-      let listaTexto = '';
-      let totalAlertas = 0;
-
-      for (let s = 0; s < 3; s++) {
-        const condicao = calcularCondicao(ultimos[i][s], fase, online[i][s]);
-        let mensagem = '';
-        let classe = 'alerta-item';
-
-        if (condicao == 'Baixo') {
-          mensagem = 'abaixo da faixa (' + ultimos[i][s] + ' µmol/m²/s, mínimo ' + minimo + ')';
-          classe = 'alerta-item alerta-min';
-        } else if (condicao == 'Alto') {
-          mensagem = 'acima da faixa (' + ultimos[i][s] + ' µmol/m²/s, máximo ' + maximo + ')';
-          classe = 'alerta-item alerta-max';
-        } else if (condicao == 'Sem dados') {
-          mensagem = 'sem comunicação, sem leituras recentes';
-          classe = 'alerta-item alerta-off';
-        }
-
-        if (mensagem != '') {
-          totalAlertas++;
-          listaTexto = listaTexto + '<p class="' + classe + '"><strong>' + nomesSensores[s] + ' (' + regioes[s] + '):</strong> ' + mensagem + '</p>';
-        }
-      }
-
-      const textoAlertas = document.getElementById('kpiAlertasTexto');
-      document.getElementById('kpiAlertas').innerHTML = totalAlertas + ' / 3';
-
-      if (totalAlertas == 0) {
-        textoAlertas.innerHTML = 'todos os sensores na faixa';
-        textoAlertas.className = 'kpi-subtexto';
-        listaTexto = '<p class="alerta-item alerta-ok">Todos os sensores dentro da faixa.</p>';
-      } else {
-        textoAlertas.innerHTML = 'sensores fora da faixa';
-        textoAlertas.className = 'kpi-subtexto alerta';
-      }
-      document.getElementById('listaAlertas').innerHTML = listaTexto;
-    }
-
-    // ================= TÍTULO DO GRÁFICO (muda com a estufa e com o sensor isolado) =================
-    function atualizarTituloGrafico() {
-      const i = Number(document.getElementById('estufa').value) - 1;
-      const fase = fasesEstufas[i];
-      let titulo = nomesEstufas[i] + ' sensor a sensor: quem está dentro da faixa?';
-      let subtitulo = 'Curva de PPFD dos 3 sensores (frontal, central e posterior) de ' + horarios[0] + ' a ' + horarios[9] + '. A área verde é a faixa ideal da fase ' + fase + ' (' + limiteMin(fase) + ' a ' + limiteMax(fase) + ' µmol/m²/s).';
-
-      if (sensorIsolado != -1) {
-        titulo = nomesSensores[sensorIsolado] + ' (' + regioes[sensorIsolado] + ') sob a lupa: como a luz variou';
-        subtitulo = 'Curva de PPFD só deste sensor na ' + nomesEstufas[i] + '. Clique em "Ver todos" para voltar aos três sensores.';
-      }
-
-      document.getElementById('graficoTitulo').textContent = titulo;
-      document.getElementById('graficoSubtitulo').textContent = subtitulo;
-    }
-
-    // ================= ISOLAR UM SENSOR NO GRÁFICO =================
-    function isolarSensor(s) {
-      if (sensorIsolado == s) {
-        mostrarTodosSensores();
-      } else {
-        sensorIsolado = s;
-        const linhas = document.getElementById('tabelaSensoresCorpo').rows;
-
-        for (let k = 0; k < 3; k++) {
-          if (k == s) {
-            meuGrafico.data.datasets[k].hidden = false;
-            linhas[k].style.backgroundColor = '#eef5ea';
-          } else {
-            meuGrafico.data.datasets[k].hidden = true;
-            linhas[k].style.backgroundColor = '';
-          }
-        }
-
-        meuGrafico.update();
-        atualizarTituloGrafico();
-      }
-    }
-
-    function mostrarTodosSensores() {
-      sensorIsolado = -1;
-      const linhas = document.getElementById('tabelaSensoresCorpo').rows;
-
-      for (let k = 0; k < 3; k++) {
-        meuGrafico.data.datasets[k].hidden = false;
-        linhas[k].style.backgroundColor = '';
-      }
-
-      meuGrafico.update();
-      atualizarTituloGrafico();
-    }
-
-    document.getElementById('estufa').addEventListener('change', carregarEstufa);
-    document.getElementById('btnVerTodos').addEventListener('click', mostrarTodosSensores);
-
-    carregarEstufa();
-  </script>
+atualizarDashboard();
+</script>
 </body>
-
 </html>

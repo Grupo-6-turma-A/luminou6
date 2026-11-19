@@ -2,7 +2,7 @@
  
 
 body {
-    background-image: url("../web/public/imgs/fundo.png");
+    background-image: url("../web/public/assets/imgs/fundo.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -47,4 +47,3 @@ body {
     width: 100%;
    min-width: 0;
 }
-

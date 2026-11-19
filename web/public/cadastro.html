@@ -82,9 +82,14 @@
             <span id="mensagem_erro"></span>
             <span id="mensagem_login"></span>
           </div>
-        <div>
+          <div>
             <button class="botao" onclick="cadastrar()">Cadastrar</button>
-        </div>
+          </div>
+          <div class="texto-centralizado">
+              <span>
+                  Já é nosso cliente? <a href="login.html">Faça login!</a>
+              </span>
+          </div>
 
         <div id="div_erros_login"></div>
         </div>
@@ -150,7 +155,6 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -173,30 +177,38 @@
       mensagem_erro.innerHTML =
         "Campos invalidos";
 
-      finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
     }
 
-   
- if (senhaVar.length < 8) {
-    mensagem_erro.innerHTML = "A senha deve conter pelo menos 8 caracteres!";
+    var temEspecial = /[!@#$%*&?]/.test(senhaVar);
 
-} else if (senhaVar != confirmacaoSenhaVar) {
-    mensagem_erro.innerHTML = "As senhas não coincidem!";
-
-} else if (
-    senhaVar.includes("!") || senhaVar.includes("@") || senhaVar.includes("#") || senhaVar.includes("*") || senhaVar.includes("%") || senhaVar.includes("$") ){
-      mensagem_erro.innerHTML = "A senha deve conter pelo menos um caractere especial!";}
-
-
- else {
-    mensagem_erro.innerHTML = "";
- }
+    if (senhaVar.length < 8) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "A senha deve conter pelo menos 8 caracteres!";
+      finalizarAguardar();
+      return false;
+    } else if (!temEspecial) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "A senha deve conter pelo menos um caractere especial!";
+      finalizarAguardar();
+      return false;
+    } else if (senhaVar != confirmacaoSenhaVar) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "As senhas não coincidem!";
+      finalizarAguardar();
+      return false;
+    } else if (!emailVar.includes(`@`)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "O email deve contar @";
+      finalizarAguardar();
+      return false;
+    } else {
+      mensagem_erro.innerHTML = "";
+    }
 
     // Código para realizar o cadastro
-
 
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
@@ -247,10 +259,10 @@
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
-      // .catch(function (resposta) {
-      //   console.log(`#ERRO: ${resposta}`);
-      //   finalizarAguardar();
-      // });
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
 
     return false;
   }

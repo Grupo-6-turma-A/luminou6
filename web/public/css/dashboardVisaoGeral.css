@@ -1,71 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
-* {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
     --verde-sidebar: #55643e;
-    --verde-fundo: #ebf0e6;
-    --branco: #ffffff;
-    --cinza-borda: #e5e7eb;
-    --cinza-fundo: #f3f5f0;
-    --texto-principal: #1f2937;
-    --texto-secundario: #6b7280;
+    --verde: #47763b;
+    --verde-escuro: #315b2e;
+    --verde-claro: #e4f0dc;
 
-    --cor-alto: #b42318;
-    --cor-alto-bg: #fee4e2;
-    --cor-baixo: #b54708;
-    --cor-min: #2563eb;
-    --cor-min-bg: #dbeafe;
-    --cor-baixo-bg: #fef0c7;
-    --cor-melhor: #1b6b3a;
+    --fundo: #fff8e8;
+    --card: #ffffff;
+    --borda: #eee5d1;
 
-    --sombra-card: 0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
-    --raio-card: 14px;
+    --texto: #222b1e;
+    --muted: #777c6c;
+
+    --vermelho: #b42318;
+    --vermelho-bg: #fde8e6;
+
+    --azul: #3569b2;
+    --azul-bg: #e7effb;
+
+    --amarelo: #c99a22;
+    --amarelo-bg: #fff3d5;
 }
 
-[hidden] {
-    display: none !important;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
-html,
 body {
-    height: 100%;
-    overflow: hidden;
-}
-
-body {
-    background-color: var(--verde-fundo);
+    min-height: 100vh;
     display: flex;
-    height: 100vh;
-    height: 100dvh;
+    background: var(--fundo);
+    color: var(--texto);
 }
 
-button {
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-}
+/* SIDEBAR */
 
-/* ============================================================
-   BARRA LATERAL
-   ============================================================ */
 .barra-lateral {
     width: 180px;
-    background-color: var(--verde-sidebar);
-    border-radius: 0 20px 20px 0;
+    min-width: 180px;
+    min-height: 100vh;
+    background: var(--verde-sidebar);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 24px 12px;
+    padding: 22px 12px;
     flex-shrink: 0;
-    height: 100%;
 }
 
 .sidebar-topo {
@@ -75,10 +57,10 @@ button {
 }
 
 .logo {
-    margin-bottom: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 28px;
 }
 
 .logo img {
@@ -102,458 +84,33 @@ button {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 14px;
-    font-size: 13px;
+    padding: 10px 12px;
+    font-size: 12px;
     font-weight: 500;
-    border-radius: 10px;
-    color: rgba(255,255,255,0.82);
-    transition: background-color 0.2s, color 0.2s;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.85);
+    transition: 0.2s;
 }
 
 .barra-lateral nav a div:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    background: rgba(255,255,255,0.12);
 }
 
 .barra-lateral nav a div img {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
     filter: brightness(0) invert(1);
-    opacity: 0.75;
+    opacity: 0.8;
 }
 
 .barra-lateral nav a div.menu-ativo {
-    background-color: #ffffff;
+    background: #ffffff;
     color: var(--verde-sidebar);
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
 }
 
 .barra-lateral nav a div.menu-ativo img {
     filter: none;
     opacity: 1;
-}
-
-/* ============================================================
-   ÁREA PRINCIPAL (sem scroll da página)
-   ============================================================ */
-.area-principal {
-    flex: 1;
-    min-width: 0;
-    height: 100%;
-    padding: 20px 28px 20px 32px;
-    overflow: hidden;
-}
-
-.conteudo {
-    width: 100%;
-    max-width: 1500px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    min-height: 0;
-}
-
-.cabecalho {
-    flex-shrink: 0;
-}
-
-.titulo-com-icone h1 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--texto-principal);
-    letter-spacing: -0.3px;
-}
-
-.subtitulo-principal {
-    font-size: 13px;
-    color: var(--texto-secundario);
-}
-
-/* ============================================================
-   KPIs (4 cards)
-   ============================================================ */
-.grid-kpis {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    flex-shrink: 0;
-}
-
-.card-kpi {
-    background-color: var(--branco);
-    border-radius: var(--raio-card);
-    padding: 14px 18px;
-    box-shadow: var(--sombra-card);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.kpi-topo h3 {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.ponto-kpi {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.kpi-topo h3 {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--texto-secundario);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.kpi-corpo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.kpi-valor {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--texto-principal);
-    line-height: 1.1;
-    letter-spacing: -1px;
-}
-
-.kpi-subtexto,
-.kpi-semana {
-    font-size: 12px;
-    color: var(--texto-secundario);
-}
-
-.kpi-semana {
-    font-weight: 600;
-    min-height: 15px;
-}
-
-.semana-melhor { color: var(--cor-melhor); }
-.semana-pior { color: var(--cor-alto); }
-.semana-igual { color: var(--texto-secundario); }
-
-/* ============================================================
-   BADGES
-   ============================================================ */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px 10px;
-    border-radius: 99px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-}
-
-.badge-alto {
-    background-color: var(--cor-alto-bg);
-    color: var(--cor-alto);
-}
-
-.badge-min {
-    background-color: var(--cor-min-bg);
-    color: #1d4ed8;
-}
-
-.badge-baixo {
-    background-color: var(--cor-baixo-bg);
-    color: #93370d;
-}
-
-/* ============================================================
-   LAYOUT DUAS COLUNAS
-   ============================================================ */
-.layout-duas-colunas {
-    flex: 1;
-    min-height: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1fr);
-    gap: 14px;
-}
-
-.card-painel {
-    background-color: var(--branco);
-    border-radius: var(--raio-card);
-    box-shadow: var(--sombra-card);
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-height: 0;
-}
-
-.painel-titulo-icone h2 {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--texto-principal);
-}
-
-/* ============================================================
-   ABAS, LEGENDA, CHIPS E PERÍODO
-   ============================================================ */
-.titulo-grafico h2 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--texto-principal);
-    letter-spacing: -0.2px;
-}
-
-.grafico-subtitulo {
-    margin-top: 2px;
-    font-size: 12px;
-    line-height: 1.4;
-    color: var(--texto-secundario);
-}
-
-.linha-topo,
-.linha-chips {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.grupo-abas,
-.grupo-chips,
-.grupo-periodo {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.aba {
-    padding: 7px 14px;
-    border: none;
-    border-radius: 99px;
-    background-color: var(--cinza-fundo);
-    color: var(--texto-principal);
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.aba.ativa {
-    background-color: var(--verde-sidebar);
-    color: #ffffff;
-}
-
-.legenda {
-    display: flex;
-    gap: 16px;
-}
-
-.item-legenda {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--texto-secundario);
-}
-
-.ponto-cor {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    display: inline-block;
-}
-
-.ponto-max { background-color: var(--cor-alto); }
-.ponto-min { background-color: var(--cor-min); }
-
-.chip-estufa {
-    padding: 5px 12px;
-    border: 1px solid #cbd3c0;
-    border-radius: 99px;
-    background-color: var(--branco);
-    color: var(--texto-principal);
-    font-size: 13px;
-}
-
-.chip-estufa:hover {
-    background-color: var(--cinza-fundo);
-}
-
-.chip-estufa.ativo {
-    background-color: var(--verde-sidebar);
-    border-color: var(--verde-sidebar);
-    color: #ffffff;
-}
-
-.btn-periodo {
-    padding: 5px 12px;
-    border: none;
-    border-radius: 6px;
-    background-color: var(--cinza-fundo);
-    color: var(--texto-principal);
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.btn-periodo.ativo {
-    background-color: var(--verde-sidebar);
-    color: #ffffff;
-}
-
-/* ============================================================
-   GRÁFICO E HORÁRIO MAIS ALARMANTE
-   ============================================================ */
-.area-canvas {
-    flex: 1;
-    min-height: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.area-canvas canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-}
-
-/* ============================================================
-   HISTÓRICO DE ALERTAS (rola por dentro do card)
-   ============================================================ */
-.tabela-scroll {
-    position: relative;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-}
-
-.tabela-scroll::-webkit-scrollbar {
-    width: 6px;
-}
-
-.tabela-scroll::-webkit-scrollbar-thumb {
-    background-color: #c9d1c0;
-    border-radius: 99px;
-}
-
-.tabela-dashboard {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-}
-
-.tabela-dashboard th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--branco);
-    box-shadow: inset 0 -1px 0 var(--cinza-borda);
-    text-align: left;
-    padding: 6px;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: var(--texto-secundario);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-
-.tabela-dashboard tbody tr {
-    border-bottom: 1px solid var(--cinza-borda);
-}
-
-.tabela-dashboard tbody tr:last-child {
-    border-bottom: none;
-}
-
-.tabela-dashboard td {
-    padding: 9px 6px;
-    color: var(--texto-principal);
-    vertical-align: middle;
-    white-space: nowrap;
-}
-
-.tabela-dashboard tbody tr.destaque {
-    background-color: #e3efd9;
-}
-
-.resolvido {
-    font-size: 12px;
-    color: var(--texto-secundario);
-}
-
-.tabela-dashboard td.vazio {
-    text-align: center;
-    color: var(--texto-secundario);
-    padding: 24px 6px;
-}
-
-.btn-acao {
-    padding: 4px 12px;
-    border-radius: 6px;
-    border: none;
-    font-size: 11px;
-    font-weight: 600;
-    transition: opacity 0.15s;
-}
-
-.btn-acao:hover {
-    opacity: 0.85;
-}
-
-.btn-acao.resolver {
-    background-color: var(--verde-sidebar);
-    color: #ffffff;
-}
-
-/* ============================================================
-   TELAS PEQUENAS: a página volta a rolar
-   ============================================================ */
-@media (max-width: 1200px), (max-height: 680px) {
-    html,
-    body {
-        height: auto;
-        overflow: auto;
-    }
-
-    body {
-        min-height: 100vh;
-    }
-
-    .barra-lateral {
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
-    .area-principal,
-    .conteudo {
-        height: auto;
-        overflow: visible;
-    }
-
-    .grid-kpis {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .layout-duas-colunas {
-        flex: none;
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto;
-    }
-
-    .area-canvas {
-        min-height: 280px;
-    }
-
-    .tabela-scroll {
-        max-height: 300px;
-    }
 }

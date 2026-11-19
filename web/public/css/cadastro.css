@@ -15,7 +15,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background-image: url("../imgs/fundo.png");
+    background-image: url("../assets/imgs/fundo.png");
     background-size: cover;
     background-position: center;
     background-color: gray;
@@ -109,4 +109,14 @@ button:hover {
 
 div h2 {
     font-size: 29px;
+}
+
+.texto-centralizado{
+    text-align: center;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #7E8863;
 }
