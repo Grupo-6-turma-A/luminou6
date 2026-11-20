@@ -6,7 +6,7 @@
     --verde-escuro: #315b2e;
     --verde-claro: #e4f0dc;
 
-    --fundo: #fff8e8;
+    --fundo: #ebf0e6;;
     --card: #ffffff;
     --borda: #eee5d1;
 
@@ -223,9 +223,9 @@ body {
 }
 
 .badge-status.normal {
-    background: #e5f1df;
+    background: #ceebc0;
     color: #47763b;
-    border: 1px solid #cfe2c5;
+    border: 1px solid #9ed981;
 }
 
 .badge-status.alto {
@@ -250,9 +250,9 @@ body {
 }
 
 .tag {
-    background: #e5f1df;
-    color: #49723c;
-    border: 1px solid #d3e7cb;
+    background: #cdf1bb;
+    color: #324d29;
+    border: 1px solid #a8d796;
     border-radius: 20px;
     padding: 7px 12px;
     font-size: 12px;
@@ -260,9 +260,9 @@ body {
 }
 
 .tag-neutra {
-    background: #f4f0e4;
-    color: #656957;
-    border-color: #e6dfce;
+    background: #f0e6c7;
+    color: #3c3e34;
+    border-color: #d1b87c;
 }
 
 /* CARDS */

@@ -6,7 +6,7 @@
     --verde-escuro: #315b2e;
     --verde-claro: #e4f0dc;
 
-    --fundo: #fff8e8;
+    --fundo: #ebf0e6;;
     --card: #ffffff;
     --borda: #eee5d1;
 
@@ -39,81 +39,84 @@ body {
 
 /* SIDEBAR */
 
-.barra-lateral {
-    width: 180px;
-    min-width: 180px;
-    min-height: 100vh;
-    background: var(--verde-sidebar);
-    display: flex;
-    flex-direction: column;
-    padding: 22px 12px;
-    flex-shrink: 0;
-}
 
-.sidebar-topo {
+/* SIDEBAR */
+
+.barra-lateral {
+    width: 240px;
+    min-width: 240px;
+    height: 100vh;
+    height: 100dvh;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    overflow-y: auto;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    padding: 28px 20px;
+    background: var(--verde-sidebar);
 }
 
 .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 36px;
 }
 
 .logo img {
-    width: 140px;
+    width: 160px;
     height: auto;
 }
 
 .barra-lateral nav {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    width: 100%;
+    gap: 7px;
 }
 
-.barra-lateral nav a {
-    text-decoration: none;
-    width: 100%;
-}
-
-.barra-lateral nav a div {
+.menu-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    font-size: 12px;
+    gap: 12px;
+    padding: 13px 14px;
+    font-size: 14px;
     font-weight: 500;
-    border-radius: 8px;
-    color: rgba(255,255,255,0.85);
-    transition: 0.2s;
+    color: rgba(255,255,255,.88);
+    text-decoration: none;
+    border-radius: 9px;
+    transition: background .2s;
 }
 
-.barra-lateral nav a div:hover {
-    background: rgba(255,255,255,0.12);
-}
-
-.barra-lateral nav a div img {
-    width: 16px;
-    height: 16px;
+.menu-item img {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
     object-fit: contain;
     filter: brightness(0) invert(1);
-    opacity: 0.8;
+    opacity: .85;
 }
 
-.barra-lateral nav a div.menu-ativo {
-    background: #ffffff;
-    color: var(--verde-sidebar);
+.menu-item:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.menu-item:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.menu-item.menu-ativo {
+    background: rgba(255,255,255,.18);
+    color: #fff;
     font-weight: 700;
 }
 
-.barra-lateral nav a div.menu-ativo img {
-    filter: none;
+.menu-item.menu-ativo img {
     opacity: 1;
 }
+
 
 /* CONTEÚDO */
 
