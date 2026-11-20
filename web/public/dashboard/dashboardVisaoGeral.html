@@ -1,63 +1,182 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="../css/dashboardSensores.css">
-    <link rel="shortcut icon" href="../assets/imgs/logo.png">
-
-    <title>Monitoramento de estufas | Luminou6</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Luminous – Visão geral das estufas</title>
+    <link rel="stylesheet" href="../css/dashboardVisaoGeral.css" />
+    <link rel="shortcut icon" href="../assets/imgs/logo.png" type="image/x-icon" />
 </head>
-
 <body>
 
-    <!-- SIDEBAR -->
-    <header class="barra-lateral">
+    <aside class="barra-lateral">
         <div class="sidebar-topo">
-
-            <a href="../index.html">
-                <div class="logo">
-                    <img src="../assets/imgs/LogoLuminouBranca.svg" alt="Luminou6">
-                </div>
-            </a>
-            <nav>
-                <a href="../index.html">
-            <div>
-              <img src="../assets/imgs/VectorCasa.svg" />
-              Home
+            <div class="logo">
+                <img src="../assets/imgs/logo.png" alt="Luminous">
             </div>
-          </a>
-                <a href="../dashboard/dashboardVisaoGeral.html">
+
+            <nav>
+                <a href="dashboardVisaoGeral.html">
                     <div class="menu-ativo">
-                        <img src="../assets/imgs/VectorCasa.svg" alt="">
+                        <img src="../assets/imgs/icone-visao-geral.png" alt="">
                         Visão geral
                     </div>
                 </a>
-
                 <a href="dashboardSensores.html">
                     <div>
-                        <img src="../assets/imgs/plant.png" alt="">
+                        <img src="../assets/imgs/icone-estufas.png" alt="">
                         Estufas e sensores
                     </div>
                 </a>
-
-                <a href="dashboardHistorico.html">
+                <a href=" dashboardHistorico.html">
                     <div>
-                        <img src="../assets/imgs/VectorLupa.svg" alt="">
+                        <img src="../assets/imgs/icone-historico.png" alt="">
                         Histórico
                     </div>
                 </a>
-
                 <a href="dashboardConfigs.html">
                     <div>
-                        <img src="../assets/imgs/VectorConfig.svg" alt="">
+                        <img src="../assets/imgs/icone-configuracoes.png" alt="">
                         Configurações
                     </div>
                 </a>
             </nav>
-
         </div>
-    </header>
+    </aside>
+
+    <main class="conteudo">
+        <header class="topo">
+            <h1>Visão geral das estufas</h1>
+            <div class="data">17/11/2026</div>
+        </header>
+
+        <section class="alerta" role="alert">
+            <div class="alerta-icone">
+                <svg viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+            </div>
+            <div class="alerta-texto">
+                <h2>3 de 5 estufas com problema. 2 precisam de ação agora: comece pela Estufa 4.</h2>
+                <p>Estufa 4: sensor frontal com luz abaixo do mínimo há 2 h 05 min. Depois, Estufa 2: sensor posterior com luz acima do máximo há 1 h 20 min.</p>
+            </div>
+            <button class="btn-alerta" data-ir="Estufa 4">Ir para a Estufa 4</button>
+        </section>
+
+        <section class="resumo">
+            <div class="cartao resumo-card">
+                <div class="resumo-titulo">Estufas em atenção</div>
+                <div class="resumo-numero vermelho">3 <small>de 5 estufas</small></div>
+                <span class="tendencia">▼ 10% a menos que na semana passada</span>
+            </div>
+
+            <div class="cartao resumo-card">
+                <div class="resumo-titulo">Sensores com problema</div>
+                <div class="resumo-numero">2 <small>de 15 sensores</small></div>
+                <button class="btn-sensores" aria-expanded="false" aria-controls="sensores">
+                    Clique para ver quais sensores
+                    <svg viewBox="0 0 12 12"><path d="m2 4 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <ul class="lista-sensores" id="sensores">
+                    <li><b>Sensor 3</b> · Estufa 4, zona Posterior · sem dados desde 16:42</li>
+                    <li><b>Sensor 2</b> · Estufa 5, zona Central · sem dados desde 17:10</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cartao legenda">
+            <strong>Legenda de cores</strong>
+            <span class="leg-verde"><i class="ponto"></i><b>Verde:</b> dentro da faixa</span>
+            <span class="leg-vermelho"><i class="ponto"></i><b>Vermelho:</b> luz alta</span>
+            <span class="leg-azul"><i class="ponto"></i><b>Azul:</b> luz baixa</span>
+        </section>
+
+        <section class="cartao painel">
+            <div class="painel-topo">
+                <div>
+                    <h3>Estufas com problemas agora</h3>
+                    <p>Da mais crítica para a menos crítica. Empate: quem está há mais tempo com problema vem primeiro.</p>
+                </div>
+                <span class="contador">3 de 5 estufas</span>
+            </div>
+
+            <div class="tabela-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ordem</th>
+                            <th>Estufa</th>
+                            <th>Zona</th>
+                            <th>Situação</th>
+                            <th>Prioridade</th>
+                            <th>Fora da faixa hoje</th>
+                            <th>Última leitura</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="linhas"></tbody>
+                </table>
+            </div>
+
+            <div class="rodape-tabela">
+                <span><b>Em atenção:</b> passou do limite em até 10% (250 a 275 ou 135 a 150)</span>
+                <span><b>Crítico:</b> passou mais de 10% do limite (acima de 275 ou abaixo de 135) ou sensor sem dados</span>
+            </div>
+        </section>
+    </main>
+
+    <div class="aviso" id="aviso" role="status"></div>
+
+    <script>
+        const dados = [
+            { estufa: 'Estufa 4', zona: 'Frontal',   tipo: 'baixa',    rotulo: '↓ Luz baixa', detalhe: '110 µmol/m²/s · 27% abaixo do mínimo', prioridade: 'Crítico',    fora: '3 h 10 min', leitura: '18:00' },
+            { estufa: 'Estufa 2', zona: 'Posterior', tipo: 'alta',     rotulo: '↑ Luz alta',  detalhe: '292 µmol/m²/s · 17% acima do máximo', prioridade: 'Crítico',    fora: '2 h 35 min', leitura: '18:00' },
+            { estufa: 'Estufa 4', zona: 'Posterior', tipo: 'semdados', rotulo: 'Sem dados desde 16:42', detalhe: 'Sensor 3 parou de enviar leituras', prioridade: 'Crítico', fora: 'sem dados', leitura: '16:42' },
+            { estufa: 'Estufa 5', zona: 'Central',   tipo: 'semdados', rotulo: 'Sem dados desde 17:10', detalhe: 'Sensor 2 parou de enviar leituras', prioridade: 'Crítico', fora: 'sem dados', leitura: '17:10' },
+            { estufa: 'Estufa 5', zona: 'Frontal',   tipo: 'alta',     rotulo: '↑ Luz alta',  detalhe: '262 µmol/m²/s · 5% acima do máximo',  prioridade: 'Em atenção', fora: '10 min',     leitura: '18:00' }
+        ];
+
+        const tbody = document.getElementById('linhas');
+
+        dados.forEach((d, i) => {
+            const atencao = d.prioridade !== 'Crítico' ? 'atencao' : '';
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><span class="ordem ${atencao}">${i + 1}</span></td>
+                <td class="estufa">${d.estufa}</td>
+                <td>${d.zona}</td>
+                <td>
+                    <div class="situacao">
+                        <span class="tag ${d.tipo}">${d.rotulo}</span>
+                        <span class="detalhe">${d.detalhe}</span>
+                    </div>
+                </td>
+                <td><span class="prioridade ${atencao}">${d.prioridade}</span></td>
+                <td class="fora">${d.fora}</td>
+                <td>${d.leitura}</td>
+                <td><button class="btn-ver" data-ir="${d.estufa} – ${d.zona}">Ver estufa</button></td>`;
+            tbody.appendChild(tr);
+        });
+
+        const aviso = document.getElementById('aviso');
+        let timer;
+
+        document.addEventListener('click', e => {
+            const btn = e.target.closest('[data-ir]');
+            if (!btn) return;
+            aviso.textContent = 'Abrindo ' + btn.dataset.ir + '…';
+            aviso.classList.add('visivel');
+            clearTimeout(timer);
+            timer = setTimeout(() => aviso.classList.remove('visivel'), 2200);
+        });
+
+        const btnSensores = document.querySelector('.btn-sensores');
+        const listaSensores = document.getElementById('sensores');
+
+        btnSensores.addEventListener('click', () => {
+            const aberto = btnSensores.getAttribute('aria-expanded') === 'true';
+            btnSensores.setAttribute('aria-expanded', String(!aberto));
+            listaSensores.classList.toggle('aberta', !aberto);
+        });
+    </script>
+</body>
+</html>

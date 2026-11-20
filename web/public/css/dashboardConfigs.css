@@ -37,19 +37,17 @@ body {
 }
 
 /* ============================================================
-   BARRA LATERAL (igual à Visão geral)
+   BARRA LATERAL (igual à Visão geral e Estufas)
    ============================================================ */
 .barra-lateral {
     width: 180px;
-    background-color: var(--verde-sidebar);
-    border-radius: 0 20px 20px 0;
+    min-width: 180px;
+    min-height: 100vh;
+    background: var(--verde-sidebar);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 24px 12px;
-    box-sizing: border-box;
+    padding: 22px 12px;
     flex-shrink: 0;
-    height: 100%;
 }
 
 .sidebar-topo {
@@ -58,26 +56,11 @@ body {
     width: 100%;
 }
 
-.sidebar-rodape {
-    padding-top: 16px;
-}
-
-.sidebar-rodape p {
-    font-size: 10px;
-    color: #cad7c0;
-    line-height: 1.4;
-}
-
-.sidebar-rodape strong {
-    color: #ffffff;
-    font-weight: 600;
-}
-
 .logo {
-    margin-bottom: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 28px;
 }
 
 .logo img {
@@ -94,7 +77,6 @@ body {
 
 .barra-lateral nav a {
     text-decoration: none;
-    color: #e2e8db;
     width: 100%;
 }
 
@@ -102,34 +84,30 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 14px;
-    font-size: 13px;
+    padding: 10px 12px;
+    font-size: 12px;
     font-weight: 500;
-    border-radius: 10px;
-    color: rgba(255,255,255,0.82);
-    transition: background-color 0.2s, color 0.2s;
-    cursor: pointer;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.85);
+    transition: 0.2s;
 }
 
 .barra-lateral nav a div:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+    background: rgba(255,255,255,0.12);
 }
 
 .barra-lateral nav a div img {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
     filter: brightness(0) invert(1);
-    opacity: 0.75;
+    opacity: 0.8;
 }
 
-/* Item do menu ativo */
 .barra-lateral nav a div.menu-ativo {
-    background-color: #ffffff;
+    background: #ffffff;
     color: var(--verde-sidebar);
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
 }
 
 .barra-lateral nav a div.menu-ativo img {
@@ -440,12 +418,6 @@ body {
         min-height: 100vh;
     }
 
-    .barra-lateral {
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
     .area-principal {
         height: auto;
         overflow: visible;
@@ -467,24 +439,49 @@ body {
     }
 }
 
+@media (max-width: 1200px) {
+    .barra-lateral {
+        width: 205px;
+        min-width: 205px;
+    }
+}
+
 @media (max-width: 900px) {
-    .area-principal {
-        padding: 20px 18px;
+    body {
+        flex-direction: column;
     }
 
     .barra-lateral {
-        width: 60px;
-        padding: 16px 8px;
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 14px 18px;
     }
 
-    .barra-lateral nav a div {
-        font-size: 0;
-        gap: 0;
-        justify-content: center;
+    .logo {
+        margin-bottom: 12px;
     }
 
     .logo img {
-        width: 36px;
+        width: 130px;
+    }
+
+    .barra-lateral nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .barra-lateral nav a {
+        width: auto;
+    }
+
+    .barra-lateral nav a div {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .area-principal {
+        padding: 20px 18px;
     }
 
     .campos-linha {
