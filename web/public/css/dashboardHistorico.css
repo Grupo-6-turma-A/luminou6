@@ -121,6 +121,10 @@ body {
 .area-principal {
     flex: 1;
     min-width: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     padding: 28px 44px;
 }
 
@@ -128,6 +132,10 @@ body {
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 /* CABEÇALHO */
@@ -265,6 +273,10 @@ body {
 
 .card-historico {
     padding: 17px 20px 20px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .historico-topo {
@@ -332,7 +344,32 @@ body {
 
 .tabela-container {
     width: 100%;
-    overflow-x: auto;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+}
+
+/* barra de rolagem da lista de alertas */
+.tabela-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.tabela-container::-webkit-scrollbar-thumb {
+    background: #d6d1c4;
+    border-radius: 10px;
+}
+
+.tabela-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* cabeçalho da tabela fica fixo enquanto rola */
+.tabela-alertas th {
+    position: sticky;
+    top: 0;
+    background: var(--card);
+    z-index: 1;
 }
 
 .tabela-alertas {
@@ -557,6 +594,13 @@ body {
 
     .area-principal {
         padding: 22px;
+        height: auto;
+        overflow: visible;
+    }
+
+    /* no celular a página rola normalmente e a lista tem altura limitada */
+    .tabela-container {
+        max-height: 60vh;
     }
 
 }
