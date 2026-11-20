@@ -34,16 +34,16 @@ body {
     color: var(--texto);
 }
 
-/* SIDEBAR */
+/* SIDEBAR (igual à Visão geral e Estufas) */
 
 .barra-lateral {
-    width: 240px;
-    min-width: 240px;
+    width: 180px;
+    min-width: 180px;
     min-height: 100vh;
     background: var(--verde-sidebar);
     display: flex;
     flex-direction: column;
-    padding: 28px 20px;
+    padding: 22px 12px;
     flex-shrink: 0;
 }
 
@@ -57,18 +57,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 36px;
+    margin-bottom: 28px;
 }
 
 .logo img {
-    width: 160px;
+    width: 140px;
     height: auto;
 }
 
 .barra-lateral nav {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
     width: 100%;
 }
 
@@ -80,35 +80,35 @@ body {
 .barra-lateral nav a div {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 13px 14px;
-    font-size: 14px;
+    gap: 10px;
+    padding: 10px 12px;
+    font-size: 12px;
     font-weight: 500;
-    border-radius: 9px;
-    color: rgba(255,255,255,.88);
-    transition: .2s;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.85);
+    transition: 0.2s;
 }
 
 .barra-lateral nav a div:hover {
-    background: rgba(255,255,255,.12);
+    background: rgba(255,255,255,0.12);
 }
 
 .barra-lateral nav a div img {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
     filter: brightness(0) invert(1);
-    opacity: .85;
+    opacity: 0.8;
 }
 
 .barra-lateral nav a div.menu-ativo {
-    background: rgba(255,255,255,.18);
-    color: white;
+    background: #ffffff;
+    color: var(--verde-sidebar);
     font-weight: 700;
 }
 
 .barra-lateral nav a div.menu-ativo img {
-    filter: brightness(0) invert(1);
+    filter: none;
     opacity: 1;
 }
 
